@@ -17,13 +17,4 @@ public class OfficeStaff extends Account {
   public OfficeStaff(String theUsername, String thePhone, String theRealName) {
     super(theUsername, thePhone, theRealName);
   }
-  
-  public String viewVolunteerList() {
-    return null; //TODO implement after API meeting.
-  }
-
-  public String viewParkManagersList() {
-    return null; //TODO implement after API meeting.
-  }
-  
 }

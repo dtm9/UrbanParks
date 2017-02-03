@@ -1,27 +1,40 @@
+import java.util.regex.Pattern;
+
 /**
  * Abstract account object for users of the UrbanParks system.
  * @author Dylan Miller
  * @author Ethan Young
  */
-public class Account {
+public abstract class Account {
+  /**Regular expression for phone number format.*/
+  private static final String PHONE_REGEX = "[a-zA-Z]+";
+
+  /**Regular expression for email address format.*/
+  private static final String EMAIL_REGEX = 
+      "^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$";
+  
   /**The email address of the user that is used to log in.*/
   private String myUsername;
+  
   /**Phone number of the user.*/
   private String myPhone;
+  
   /**Legal name of the user.*/
   private String myRealName;
 
-/**
- * @author Dylan Miller
- * @param theUsername email address of the user that is used to log into the system.
- * @param thePhone phone number of the user.
- * @param theRealName legal name of the user.
- */
+  /**
+  * Constructor for the generic Account user. All other constructors will call this one
+  * on the final step.
+  * @author Dylan Miller
+  * @param theUsername email address of the user that is used to log into the system.
+  * @param thePhone phone number of the user.
+  * @param theRealName legal name of the user.
+  */
   public Account(String theUsername, String thePhone, String theRealName) {
     super();
-    this.myUsername = theUsername;
-    this.myPhone = thePhone;
-    this.myRealName = theRealName;
+    this.setUsername(theUsername);
+    this.setPhoneNumber(thePhone);
+    this.setRealName(theRealName);
   }
   
   /**
@@ -41,20 +54,6 @@ public class Account {
    */
   public Account(String theUsername) {
     this(theUsername, null, null);
-  }
-  
-  /**
-   * Method to view all pending jobs this user is attached to by iterating over the collection of current jobs.
-   */
-  public void viewPendingJobs() {
-	//TODO to be implemented after next meeting re: API.
-  }
-  
-  /**
-   *  Method to iterate over the datastore for old jobs this user was attached to and return a collection of those jobs.
-   */
-  public void viewPastJobs() {
-	//TODO to be implemented after next meeting re: API.
   }
   
   /**
@@ -85,22 +84,47 @@ public class Account {
   }
   
   /**
-   * Change the phone number for this user.
-   * @param thePhoneNumber 10 digit phone number
+   * Method to set the username. Checks for valid email address format.
+   * @param theUsername email address of the user used to log in.
    * @author Dylan Miller
+   * @throws IllegalArgumentException if the email address is invalid.
+   */
+  private void setUsername(String theUsername) {
+    if (Pattern.matches(EMAIL_REGEX, theUsername)) {
+      this.myUsername = theUsername;
+    } else {
+      throw new IllegalArgumentException("Must be a valid email address.");
+    }
+  }
+  
+  /**
+   * Change the phone number for this user.
+   * @param thePhoneNumber 10 digit phone number.
+   *                       No spaces, parenthesis, or hyphens.
+   * @author Dylan Miller
+   * @throws IllegalArgumentException if phone number is not
+   *         10 digits long or contains characters, spaces, and symbols.
    */
   public void setPhoneNumber(String thePhoneNumber) {
-    //TODO data validation (ten digits, numbers ONLY).
-    this.myPhone = thePhoneNumber;
+    if (Pattern.matches(PHONE_REGEX, thePhoneNumber) == false && thePhoneNumber.length() == 10) {
+      this.myPhone = thePhoneNumber;
+    } else {
+      throw new IllegalArgumentException("Phone number must be 10 digits long and "
+                                         + "only contain number characters.");
+    }
   }
   
   /**
    * Change the real name on record for this user.
    * @param theName first and last name
    * @author Dylan Miller
+   * @throws IllegalArgumentException if the string is empty.
    */
   public void setRealName(String theName) {
-    this.myRealName = theName;
+    if (theName.isEmpty()) {
+      throw new IllegalArgumentException("Name cannot be blank.");
+    } else {
+      this.myRealName = theName;
+    }
   }
-
 }

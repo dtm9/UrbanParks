@@ -2,58 +2,58 @@ package backend;
 
 import java.util.ArrayList;
 /**
- * 
+ *
  * @author VG Gnome
  * @version 1.0
  * Date 2/1/2017
  * Job Class for Urban Parks
  */
 public class Job {
-	/**
-	 * Date for a Job
-	 */
-	private String myDate;
-	/**
-	 * Time for a Job
-	 */
-	private String myTime;
-	/**
-	 * Park the Job is at
-	 */
-	private String myLocation;
-	/**
-	 * Description of the Job
-	 */
-	private String myDescription;
-	/**
-	 * Max Volunteers for the Job
-	 */
-	private int myMaxVolunteers;
-	/**
-	 * M<inimum number of volunteers for light work grade
-	 */
-	private int myMinLight;
-	/**
-	 * M<inimum number of volunteers for medium work grade
-	 */
-	private int myMinMedium;
-	/**
-	 * M<inimum number of volunteers for heavy work grade
-	 */
-	private int myMinHeavy;
-	/**
-	 * List of Volunteers signed up for the Job
-	 */
-	private ArrayList<String/*Volunteer*/> myVolunteers;
-	/**
-	 * Notes about the Job from the Manager or Office
-	 */
-	private String myNotes;
-	
-	/**
-	 * Constructor for a Job object
-	 */
-	public Job() {
+    /**
+     * Date for a Job.
+     */
+    private String myDate;
+    /**
+     * Time for a Job.
+     */
+    private String myTime;
+    /**
+     * Park the Job is at.
+     */
+    private String myLocation;
+    /**
+     * Description of the Job.
+     */
+    private String myDescription;
+    /**
+     * Max Volunteers for the Job.
+     */
+    private int myMaxVolunteers;
+    /**
+     * Minimum number of volunteers for light work grade.
+     */
+    private int myMinLight;
+    /**
+     * Minimum number of volunteers for medium work grade.
+     */
+    private int myMinMedium;
+    /**
+     * Minimum number of volunteers for heavy work grade.
+     */
+    private int myMinHeavy;
+    /**
+     * List of Volunteers signed up for the Job.
+     */
+    private ArrayList<String/*Volunteer*/> myVolunteers;
+    /**
+     * Notes about the Job from the Manager or Office.
+     */
+    private String myNotes;
+
+    /**
+     * Constructor for a Job object.
+     */
+    public Job() {
 		setMyDate("");
 		setMyTime("");
 		setMyLocation("");
@@ -64,34 +64,34 @@ public class Job {
 		setMyMinHeavy(0);
 		setMyNotes("");
 		myVolunteers = new ArrayList<String>();
-		
+
 	}
-	/**
-	 * Getter for myDate
+    /**
+	 * Getter for myDate.
 	 * @return myDate
 	 */
 	public String getMyDate() {
 		return myDate;
 	}
-	/**
-	 * Setter for myDate
-	 * @param myDate
+    /**
+	 * Setter for myDate.
+	 * @param theDate
 	 */
-	public void setMyDate(String theDate) {
+	public void setMyDate(final String theDate) {
 		this.myDate = theDate;
 	}
-	/**
-	 * Getter for myTime
+    /**
+	 * Getter for myTime.
 	 * @return myTime
 	 */
 	public String getMyTime() {
 		return myTime;
 	}
-	/**
-	 * Setter for myTime
-	 * @param myTime
+    /**
+	 * Setter for myTime.
+	 * @param theTime
 	 */
-	public void setMyTime(String theTime) {
+	public void setMyTime(final String theTime) {
 		this.myTime = theTime;
 	}
 	/**
@@ -101,110 +101,110 @@ public class Job {
 	public String getMyLocation() {
 		return myLocation;
 	}
-	/**
-	 * Setter for myLocation
+    /**
+	 * Setter for myLocation.
 	 * @param myLocation
 	 */
-	public void setMyLocation(String theLocation/*Park thePark */) {
+	public void setMyLocation(final String theLocation/*Park thePark */) {
 		this.myLocation = theLocation;
 	}
-	/**
-	 * Getter for myDescription
+    /**
+	 * Getter for myDescription.
 	 * @return
 	 */
 	public String getMyDescription() {
 		return myDescription;
 	}
-	/**
-	 * Setter for myDescription
+    /**
+	 * Setter for myDescription.
 	 * @param myDescription
 	 */
-	public void setMyDescription(String theDescription) {
+	public void setMyDescription(final String theDescription) {
 		this.myDescription = theDescription;
 	}
-	/**
-	 * Getter for myMaxVolunteers
+    /**
+	 * Getter for myMaxVolunteers.
 	 * @return myMaxVolunteers
 	 */
 	public int getMyMaxVolunteers() {
 		return myMaxVolunteers;
 	}
-	/**
-	 * Setter for myMaxVolunteers
+    /**
+	 * Setter for myMaxVolunteers.
 	 * @param myMaxVolunteers
 	 */
-	public void setMyMaxVolunteers(int theMaxVolunteers) {
+	public void setMyMaxVolunteers(final int theMaxVolunteers) {
 		this.myMaxVolunteers = theMaxVolunteers;
 	}
-	/**
-	 * Getter for myMinLight
+    /**
+	 * Getter for myMinLight.
 	 * @return myMinLight
 	 */
 	public int getMyMinLight() {
 		return myMinLight;
 	}
-	/**
-	 * Setter for myMinLight
+    /**
+	 * Setter for myMinLight.
 	 * @param myMinLight
 	 */
-	public void setMyMinLight(int theMinLight) {
+	public void setMyMinLight(final int theMinLight) {
 		this.myMinLight = theMinLight;
 	}
-	/**
-	 * Getter for myMinMedium
+    /**
+	 * Getter for myMinMedium.
 	 * @return myMinMedium
 	 */
 	public int getMyMinMedium() {
 		return myMinMedium;
 	}
-	/**
-	 * Setter for myMinMedium
+    /**
+	 * Setter for myMinMedium.
 	 * @param myMinMedium
 	 */
-	public void setMyMinMedium(int theMinMedium) {
+	public void setMyMinMedium(final int theMinMedium) {
 		this.myMinMedium = theMinMedium;
 	}
-	/**
-	 * Getter for myMinHeavy
+    /**
+	 * Getter for myMinHeavy.
 	 * @return myMinHeavy
 	 */
 	public int getMyMinHeavy() {
 		return myMinHeavy;
 	}
-	/**
-	 * Setter for MyMinHeavy
+    /**
+	 * Setter for MyMinHeavy.
 	 * @param myMinHeavy
 	 */
-	public void setMyMinHeavy(int theMinHeavy) {
+	public void setMyMinHeavy(final int theMinHeavy) {
 		this.myMinHeavy = theMinHeavy;
 	}
-	/**
-	 * Getter for myVolunteers
+    /**
+	 * Getter for myVolunteers.
 	 * @return myVolunteers
 	 */
 	public ArrayList<String> getMyVolunteers() {
 		return myVolunteers;
 	}
-	/**
-	 * Add a Volunteer
+    /**
+	 * Add a Volunteer.
 	 * @param myVolunteers
 	 */
-	public void setMyVolunteers(String theVolunteer) {
+	public void setMyVolunteers(final String theVolunteer) {
 		this.myVolunteers.add(theVolunteer);
 	}
-	/**
-	 * Getter for myNotes
+    /**
+	 * Getter for myNotes.
 	 * @return myNotes
 	 */
 	public String getMyNotes() {
 		return myNotes;
 	}
-	/**
-	 * Setter for myNotes
-	 * @param myNotes
+    /**
+	 * Setter for myNotes.
+	 * @param theNotes
 	 */
-	public void setMyNotes(String theNotes) {
+	public void setMyNotes(final String theNotes) {
 		this.myNotes = theNotes;
 	}
-	
+
 }

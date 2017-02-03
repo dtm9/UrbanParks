@@ -1,3 +1,4 @@
+package backend;
 /**
  * Park Manager User. Other classes will check instance of account 
  * and grant this user appropriate view and permissions in the application.

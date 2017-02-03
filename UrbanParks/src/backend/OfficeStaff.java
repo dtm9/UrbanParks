@@ -1,3 +1,4 @@
+package backend;
 /**
  * Urban Parks Office Staff User. Other classes will check instancof account 
  * and grant this user appropriate view and permissions in the application.

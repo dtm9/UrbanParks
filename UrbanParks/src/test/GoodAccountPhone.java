@@ -19,7 +19,7 @@ public class GoodAccountPhone implements TestConstants {
    * @author Dylan Miller
    */
   @Test
-  public final void phoneNumTooLongByOne() {
+  public final void sunnyDayScenario() {
 
     OfficeStaff goodUser = new OfficeStaff(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
   }

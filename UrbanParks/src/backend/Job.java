@@ -48,7 +48,7 @@ public class Job {
     /**
      * List of Volunteers signed up for the Job.
      */
-    private ArrayList<String/*Volunteer*/> myVolunteers;
+    private ArrayList<String> myVolunteers;
     /**
      * Notes about the Job from the Manager or Office.
      */
@@ -124,7 +124,7 @@ public class Job {
      * @throws IllegalArgumentException Parameter if not of type Park.
      * @author Gardner Gomes
      */
-    public void setMyLocation(Park thePark ) {
+    public void setMyParkName(Park thePark ) {
     	if(thePark instanceof Park) {
     		this.myParkName = thePark.getName();
     	} else {

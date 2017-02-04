@@ -18,22 +18,24 @@ public class Park {
     private String name;
     
     /*
-     * Address of the park.
+     * City that the park is in.
      */
-    private String address;
+    private String city;
     
     /*
-    private String city;
+     * Zipcode of the park.
+     */
     private String zipcode;
-    */
+    
 
     /*
      * Constructor for a Park object.
      */
-    public Park(final ParkManager theManager, final String theName, final String theAddress) {
+    public Park(final ParkManager theManager, final String theName, final String theCity, final String theZipcode) {
         manager = theManager;
         name = theName;
-        address = theAddress;
+        city = theCity;
+        zipcode = theZipcode;
     }
 	
     /*
@@ -65,17 +67,31 @@ public class Park {
 	}
 	
 	/*
-	 * Setter for the Park's address
+	 * Setter for the Park's city
 	 */
-    public void setAddress(String theAddress) {
-		address = theAddress;
+    public void setCity(String theCity) {
+		city = theCity;
     }
 	
     /*
-     * Getter for the Park's address
+     * Getter for the Park's city
      */
-	public String getAddress() {
-		return address;
+	public String getCity() {
+		return city;
+	}
+	
+	/*
+	 * Setter for the Park's zipcode
+	 */
+    public void setZipcode(String theZipcode) {
+		zipcode = theZipcode;
+    }
+	
+    /*
+     * Getter for the Park's zipcode
+     */
+	public String getZipcode() {
+		return zipcode;
 	}
 	
 	/*

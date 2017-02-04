@@ -53,10 +53,11 @@ public class Job {
     /**
      * Constructor for a Job object.
      */
-    public Job() {
+    public Job(Park thePark) {
         setMyDate("");
         setMyTime("");
         setMyLocation("");
+        myLocation = thePark.getName();
         setMyDescription("");
         setMyMaxVolunteers(0);
         setMyMinLight(0);

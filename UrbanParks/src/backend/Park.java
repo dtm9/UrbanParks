@@ -4,6 +4,7 @@
  * Date 2/3/2017
  * Park Class for Urban Parks
  */
+package backend;
 public class Park {
 
 	/*

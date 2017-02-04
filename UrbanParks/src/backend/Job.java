@@ -9,6 +9,10 @@ import java.util.ArrayList;
  * Job Class for Urban Parks
  */
 public class Job {
+	/**
+	 * Zero the Minimum for several fields
+	 */
+	private static final int ZERO = 0;
     /**
      * Date for a Job.
      */
@@ -53,11 +57,9 @@ public class Job {
     /**
      * Constructor for a Job object.
      */
-    public Job(Park thePark) {
+    public Job() {
         setMyDate("");
         setMyTime("");
-        setMyLocation("");
-        myLocation = thePark.getName();
         setMyDescription("");
         setMyMaxVolunteers(0);
         setMyMinLight(0);
@@ -77,10 +79,15 @@ public class Job {
     /**
      * Setter for myDate.
      * @param theDate
+     * @throws IllegalArgumentException Paramater not of type String
      * @author Gardner Gomes
      */
     public void setMyDate(final String theDate) {
-        this.myDate = theDate;
+        if(theDate instanceof String) {
+            this.myDate = theDate;
+        } else {
+        	throw new IllegalArgumentException("Parameter is not of type String");
+        }
     }
     /**
      * Getter for myTime.
@@ -93,10 +100,15 @@ public class Job {
     /**
      * Setter for myTime.
      * @param theTime
+     * @throws IllegalArgumentException Incompatible information for myTime
      * @author Gardner Gomes
      */
     public void setMyTime(final String theTime) {
-        this.myTime = theTime;
+    	if (theTime instanceof String) {
+            this.myTime = theTime;
+    	} else {
+    		throw new IllegalArgumentException("Parameter is not of type String");
+    	}
     }
 	/**
      * Getter for Location.
@@ -109,10 +121,17 @@ public class Job {
     /**
      * Setter for myLocation.
      * @param myLocation
+     * @throws IllegalArgumentException Parameter if not of type Park.
      * @author Gardner Gomes
      */
-    public void setMyLocation(final String theLocation/*Park thePark */) {
-        this.myLocation = theLocation;
+    public void setMyLocation(Park thePark ) {
+    	if(thePark instanceof Park) {
+    		this.myLocation = thePark.getName();
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type Park");
+    	}
+    	/*TODO J-UnitTest*/
+    	
     }
     /**
      * Getter for myDescription.
@@ -128,7 +147,12 @@ public class Job {
      * @author Gardner Gomes
 	 */
     public void setMyDescription(final String theDescription) {
-        this.myDescription = theDescription;
+    	if(theDescription instanceof String) {
+    		this.myDescription = theDescription;
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type String");
+    	}
+        
     }
     /**
 	 * Getter for myMaxVolunteers.
@@ -144,7 +168,12 @@ public class Job {
 	 * @author Gardner Gomes
 	 */
     public void setMyMaxVolunteers(final int theMaxVolunteers) {
-        this.myMaxVolunteers = theMaxVolunteers;
+    	if (theMaxVolunteers >= ZERO) {
+    		this.myMaxVolunteers = theMaxVolunteers;
+    	} else {
+    		throw new IllegalArgumentException("Size too ");
+    	}
+        
     }
     /**
 	 * Getter for myMinLight.
@@ -160,7 +189,11 @@ public class Job {
 	 * @author Gardner Gomes
 	 */
     public void setMyMinLight(final int theMinLight) {
-        this.myMinLight = theMinLight;
+    	if (theMinLight >= ZERO) {
+            this.myMinLight = theMinLight;
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type Integer");
+    	}
     }
     /**
      * Getter for myMinMedium.
@@ -176,7 +209,11 @@ public class Job {
      * @author Gardner Gomes
      */
     public void setMyMinMedium(final int theMinMedium) {
-        this.myMinMedium = theMinMedium;
+        if (theMinMedium >= ZERO) {
+        	this.myMinMedium = theMinMedium;
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type Integer");
+    	}
     }
     /**
      * Getter for myMinHeavy.
@@ -192,7 +229,11 @@ public class Job {
      * @author Gardner Gomes
      */
     public void setMyMinHeavy(final int theMinHeavy) {
-        this.myMinHeavy = theMinHeavy;
+        if (theMinHeavy >= ZERO) {
+        	this.myMinHeavy = theMinHeavy;
+        } else {
+    		throw new IllegalArgumentException("Paramater is not of type Integer");
+    	}
     }
     /**
      * Getter for myVolunteers.
@@ -208,7 +249,11 @@ public class Job {
      * @author Gardner Gomes
      */
     public void setMyVolunteers(final String theVolunteer) {
-        this.myVolunteers.add(theVolunteer);
+        if(theVolunteer instanceof String) {
+        	this.myVolunteers.add(theVolunteer);
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type String");
+    	}
     }
     /**
      * Getter for myNotes.
@@ -224,7 +269,11 @@ public class Job {
      * @author Gardner Gomes
      */
     public void setMyNotes(final String theNotes) {
-        this.myNotes = theNotes;
+        if(theNotes instanceof String) {
+        	this.myNotes = theNotes;
+    	} else {
+    		throw new IllegalArgumentException("Paramater is not of type String");
+    	}
     }
 
 }

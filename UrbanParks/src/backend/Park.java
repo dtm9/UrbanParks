@@ -97,7 +97,8 @@ public class Park {
 	/*
 	 * Compares two Park objects
 	 */
-	public boolean compareTo(Park park1, Park park2) {
-		return park1.name.equals(park2.name);
+	public boolean equals(Park thePark) {
+		return name.equals(thePark.name) && city.equals(thePark.city) &&
+				zipcode.equals(thePark.zipcode);
 	}
 }

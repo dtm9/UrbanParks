@@ -2,9 +2,16 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class JobRainyDay {
+import backend.Job;
+
+public class JobRainyDay extends Job {
+
+	@Before
+	public void setUp() throws Exception {
+	}
 
 	@Test
 	public void test() {

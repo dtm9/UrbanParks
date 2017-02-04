@@ -6,6 +6,8 @@
 
 package test;
 
+import backend.Park;
+
 /**
  * The constants for the test cases.
  * @author Dylan Miller
@@ -20,4 +22,20 @@ interface TestConstants {
 
   /**There is no REGEX for real names, it just needs to not be blank.*/
   String GOOD_NAME = "Jim Bob";
+  
+  /** int for testing good values in Job. */
+  int GOOD_INT = 5;
+  
+  /** int for testing bad values in Job. */
+  int BAD_INT = -5;
+  
+  /** String null value to test for catching cast errors */
+  String BAD_STRING = null;
+  
+  /** String value to test for sunny day string */
+  String GOOD_STRING = "STRING";
+  
+  /** Park null value to test for catching cast errors */
+  Park P_NULL = null;
+  
 }

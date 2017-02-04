@@ -143,7 +143,7 @@ public class Job {
     }
     /**
      * Setter for myDescription.
-     * @param myDescription
+     * @param myDescriptionJob myJo
      * @author Gardner Gomes
 	 */
     public void setMyDescription(final String theDescription) {

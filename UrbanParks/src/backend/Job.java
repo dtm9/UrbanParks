@@ -88,6 +88,7 @@ public class Job {
         } else {
         	throw new IllegalArgumentException("Parameter is not of type String");
         }
+    	  
     }
     /**
      * Getter for myTime.
@@ -248,9 +249,9 @@ public class Job {
      * @param myVolunteers
      * @author Gardner Gomes
      */
-    public void setMyVolunteers(final String theVolunteer) {
-        if(theVolunteer instanceof String) {
-        	this.myVolunteers.add(theVolunteer);
+    public void setMyVolunteers(final String theVolunteerName) {
+        if(theVolunteerName instanceof String) {
+        	this.myVolunteers.add(theVolunteerName);
     	} else {
     		throw new IllegalArgumentException("Paramater is not of type String");
     	}

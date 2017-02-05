@@ -8,28 +8,28 @@ package backend;
 public class Park {
 
 	/*
-	 * Park manager for the park.
+	 * The park manager object for the park
 	 */
    private ParkManager manager;
     
     /*
-     * Name of the park.
+     * The name of the park
      */
     private String name;
     
     /*
-     * City that the park is in.
+     * The city of the park
      */
     private String city;
     
     /*
-     * Zipcode of the park.
+     * The zipcode of the park
      */
     private String zipcode;
     
 
     /*
-     * Constructor for a Park object.
+     * The constructor for the Park object
      */
     public Park(final ParkManager theManager, final String theName, final String theCity, final String theZipcode) {
         manager = theManager;
@@ -39,63 +39,79 @@ public class Park {
     }
 	
     /*
-     * Setter for the Park's Manager
+     * Setter for the park manager
      */
 	public void setManager(ParkManager theManager) {
-		manager = theManager;
+    	if (theManager instanceof ParkManager) {
+            manager = theManager;
+    	} else {
+    		throw new IllegalArgumentException("Parameter is not of type ParkManager");
+    	}
     }
 	
 	/*
-	 * Getter for the Park's Manager.
+	 * Getter for the park manager
 	 */
 	public ParkManager getManager() {
 		return manager;
 	}
 	
 	/*
-	 * Setter for the Park's name
+	 * Setter for the park's name
 	 */
 	public void setName (String theName) {
-		name = theName;
+    	if (theName instanceof String) {
+            name = theName;
+    	} else {
+    		throw new IllegalArgumentException("Parameter is not of type String");
+    	}
 	}
 	
 	/*
-	 * Getter for the Park's name
+	 * Getter for the park's name
 	 */
 	public String getName() {
 		return name;
 	}
 	
 	/*
-	 * Setter for the Park's city
+	 * Setter for the park's city
 	 */
     public void setCity(String theCity) {
-		city = theCity;
+    	if (theCity instanceof String) {
+            city = theCity;
+    	} else {
+    		throw new IllegalArgumentException("Parameter is not of type String");
+    	}
     }
 	
     /*
-     * Getter for the Park's city
+     * Getter for the park's city
      */
 	public String getCity() {
 		return city;
 	}
 	
 	/*
-	 * Setter for the Park's zipcode
+	 * Setter for the park's zipcode
 	 */
     public void setZipcode(String theZipcode) {
-		zipcode = theZipcode;
+    	if (theZipcode instanceof String) {
+            zipcode = theZipcode;
+    	} else {
+    		throw new IllegalArgumentException("Parameter is not of type String");
+    	}
     }
 	
     /*
-     * Getter for the Park's zipcode
+     * Getter for the park's zipcode
      */
 	public String getZipcode() {
 		return zipcode;
 	}
 	
 	/*
-	 * Compares two Park objects
+	 * Compares two park objects for equivalence
 	 */
 	public boolean equals(Park thePark) {
 		return name.equals(thePark.name) && city.equals(thePark.city) &&

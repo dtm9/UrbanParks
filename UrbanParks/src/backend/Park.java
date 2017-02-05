@@ -7,9 +7,9 @@
 package backend;
 public class Park {
 
-	/*
-	 * The park manager object for the park
-	 */
+    /*
+     * The park manager object for the park
+     */
    private ParkManager manager;
     
     /*
@@ -41,42 +41,42 @@ public class Park {
     /*
      * Setter for the park manager
      */
-	public void setManager(ParkManager theManager) {
+    public void setManager(ParkManager theManager) {
     	if (theManager instanceof ParkManager) {
             manager = theManager;
     	} else {
-    		throw new IllegalArgumentException("Parameter is not of type ParkManager");
+    	    throw new IllegalArgumentException("Parameter is not of type ParkManager");
     	}
     }
 	
-	/*
-	 * Getter for the park manager
-	 */
-	public ParkManager getManager() {
-		return manager;
-	}
+    /*
+     * Getter for the park manager
+     */
+    public ParkManager getManager() {
+        return manager;
+    }
 	
-	/*
-	 * Setter for the park's name
-	 */
-	public void setName (String theName) {
+    /*
+     * Setter for the park's name
+     */
+    public void setName (String theName) {
     	if (theName instanceof String) {
             name = theName;
     	} else {
-    		throw new IllegalArgumentException("Parameter is not of type String");
+    	    throw new IllegalArgumentException("Parameter is not of type String");
     	}
     }
 	
-	/*
-	 * Getter for the park's name
-	 */
-	public String getName() {
-		return name;
-	}
+    /*
+     * Getter for the park's name
+     */
+    public String getName() {
+        return name;
+    }
 	
-	/*
-	 * Setter for the park's city
-	 */
+    /*
+     * Setter for the park's city
+     */
     public void setCity(String theCity) {
     	if (theCity instanceof String) {
             city = theCity;
@@ -88,13 +88,13 @@ public class Park {
     /*
      * Getter for the park's city
      */
-	public String getCity() {
-		return city;
-	}
+    public String getCity() {
+	return city;
+    }
 	
-	/*
-	 * Setter for the park's zipcode
-	 */
+    /*
+     * Setter for the park's zipcode
+     */
     public void setZipcode(String theZipcode) {
     	if (theZipcode instanceof String) {
             zipcode = theZipcode;
@@ -106,15 +106,15 @@ public class Park {
     /*
      * Getter for the park's zipcode
      */
-	public String getZipcode() {
-		return zipcode;
-	}
+    public String getZipcode() {
+        return zipcode;
+    }
 	
-	/*
-	 * Compares two park objects for equivalence
-	 */
-	public boolean equals(Park thePark) {
-		return name.equals(thePark.name) && city.equals(thePark.city) &&
-				zipcode.equals(thePark.zipcode);
-	}
+    /*
+     * Compares two park objects for equivalence
+     */
+    public boolean equals(Park thePark) {
+        return name.equals(thePark.name) && city.equals(thePark.city) &&
+	               zipcode.equals(thePark.zipcode);
+    }
 }

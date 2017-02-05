@@ -32,10 +32,15 @@ public class Park {
      * The constructor for the Park object
      */
     public Park(final ParkManager theManager, final String theName, final String theCity, final String theZipcode) {
-        manager = theManager;
-        name = theName;
-        city = theCity;
-        zipcode = theZipcode;
+//    	if ((theManager instanceof ParkManager) && (theName instanceof String) &&
+//    			(theCity instanceof String) && (theZipcode instanceof String)) {
+            manager = theManager;
+            name = theName;
+            city = theCity;
+            zipcode = theZipcode;
+//    	} else {
+//            throw new IllegalArgumentException("Parameters hold an incorrect class");
+//    	}
     }
 	
     /*

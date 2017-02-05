@@ -65,7 +65,7 @@ public class Park {
     	} else {
     		throw new IllegalArgumentException("Parameter is not of type String");
     	}
-	}
+    }
 	
 	/*
 	 * Getter for the park's name
@@ -81,7 +81,7 @@ public class Park {
     	if (theCity instanceof String) {
             city = theCity;
     	} else {
-    		throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String");
     	}
     }
 	
@@ -99,7 +99,7 @@ public class Park {
     	if (theZipcode instanceof String) {
             zipcode = theZipcode;
     	} else {
-    		throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String");
     	}
     }
 	

@@ -89,7 +89,7 @@ public class Park {
      * Getter for the park's city
      */
     public String getCity() {
-	return city;
+        return city;
     }
 	
     /*

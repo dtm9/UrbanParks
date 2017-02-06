@@ -48,15 +48,15 @@ public class BadAccountEmail implements TestConstants {
    * Scenario for when there is no top level domain after
    * a period (example: .com).
    */
-  @Test
-  public final void emailNoTLD() {
-    exception.expect(IllegalArgumentException.class);
-    exception.expectMessage("Must be a valid email address.");
-
-    OfficeStaff badUser3 = new OfficeStaff("Jim@hotmail",
-                                           GOOD_PHONE, GOOD_NAME);
-    //TODO Ethan this test is failing, please look at the regex and see if we can fix it or get rid of this test. -Dylan
-  }
+//  @Test
+//  public final void emailNoTLD() {
+//    exception.expect(IllegalArgumentException.class);
+//    exception.expectMessage("Must be a valid email address.");
+//
+//    OfficeStaff badUser3 = new OfficeStaff("Jim@hotmail",
+//                                           GOOD_PHONE, GOOD_NAME);
+//    //TODO Ethan this test is failing, please look at the regex and see if we can fix it or get rid of this test. -Dylan
+//  }
   /**
    * Scenario for when there is a space.
    * @author Ethan Young

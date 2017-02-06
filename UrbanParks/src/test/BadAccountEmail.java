@@ -57,4 +57,158 @@ public class BadAccountEmail implements TestConstants {
                                            GOOD_PHONE, GOOD_NAME);
     //TODO Ethan this test is failing, please look at the regex and see if we can fix it or get rid of this test. -Dylan
   }
+  /**
+   * Scenario for when there is a space.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithSpace(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser4 = new OfficeStaff("Jim Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there are multiple @.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailMultipleAts(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser5 = new OfficeStaff("Jim@Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there are two dots.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithDoubleDot(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser6 = new OfficeStaff("Jim..Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a Quote.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithQuote(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser7 = new OfficeStaff("Jim\"Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a comma.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithComma(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser8 = new OfficeStaff("Jim,Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a backslash.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithBackslash(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser9 = new OfficeStaff("Jim\\Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a colon.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithColon(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser10 = new OfficeStaff("Jim:Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a semi-colon.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithSemiColon(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser11 = new OfficeStaff("Jim;Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a paranethesis.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithParen(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser12 = new OfficeStaff("Jim)Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  /**
+   * Scenario for when there is a inequality symbol.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithInequ(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser13 = new OfficeStaff("Jim<>Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  /**
+   * Scenario for when there is a brackets.
+   * @author Ethan Young
+   */
+  @Test
+  public final void emailWithBrackets(){
+	  exception.expect(IllegalArgumentException.class);
+	  exception.expectMessage("Must be a valid email address.");
+	  
+	  OfficeStaff badUser14 = new OfficeStaff("[Jim]Jim@hotmail.com",
+			  									GOOD_PHONE, GOOD_NAME);
+	  
+  }
+  
+  
 }

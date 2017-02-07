@@ -158,7 +158,7 @@ public class Volunteer extends Account {
   * @author Dylan Miller
   */
   public void setBadCancellationCount(final int theBadCancellationCount) {
-	  if (theBadCancellationCount<=0){
+	  if (theBadCancellationCount<0){
 		  throw new IllegalArgumentException("Parameter can't be less than 0");
 	  } else {
 		  this.myBadCancellationCount = theBadCancellationCount;

@@ -11,6 +11,8 @@ import backend.Park;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Basic unit tests for the Job class for sunny-day scenarios, i.e., good/proper data.
@@ -153,5 +155,30 @@ public class JobSunnyDay implements TestConstants {
 		testJob.setMyNotes(GOOD_STRING);
 		assertEquals(GOOD_STRING, testJob.getMyNotes());
 	}
+
+	/**
+	 * Tests two separate Job objects for equality.
+	 *
+	 * @author Walter Weeks (ww3@uw.edu)
+	 */
+	@Test
+	public void testEquality() {
+		Job job1 = new Job("Wapato Park", "2017/03/01", "1200", "Rake leaves");
+		Job job2 = new Job("Wapato Park", "2017/03/01", "1200", "Rake leaves");
+		assertTrue(job1.equals(job2));
+	}
+
+	/**
+	 * Tests two separate Job objects for inequality.
+	 *
+	 * @author Walter Weeks (ww3@uw.edu)
+	 */
+	@Test
+	public void testInequality() {
+		Job job1 = new Job("Wapato Park", "2017/03/01", "1200", "Rake leaves");
+		Job job2 = new Job("Jefferson Park", "2017/03/01", "1200", "Rake leaves");
+		assertFalse(job1.equals(job2));
+	}
+
 
 }

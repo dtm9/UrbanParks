@@ -124,7 +124,7 @@ public class Park {
     /**
      * Setter for the park's state.
      *
-     * @param theState the park's city.
+     * @param theState the park's state.
      */
     public void setState(String theState) {
     	if (theState instanceof String) {

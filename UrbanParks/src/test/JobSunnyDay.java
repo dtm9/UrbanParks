@@ -8,13 +8,33 @@ import backend.ParkManager;
 import backend.Volunteer;
 import backend.Park;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Basic unit tests for the Job class for sunny-day scenarios, i.e., good/proper data.
+ *
+ * @author Gardner Gomes
+ */
 public class JobSunnyDay implements TestConstants {
+
+	/** The park manager test fixture. */
 	private ParkManager testManager;
+
+	/** The park test fixture. */
 	private Park testPark;
+
+	/** The job test fixture. */
 	private Job testJob;
+
+	/** The volunteer test fixture. */
 	private Volunteer testVolunteer;
+
 	/**
-	 * @author VG Gnome
+	 * Sets up the test fixtures used by the unit tests.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Before
 	public void setUp() {
@@ -22,88 +42,116 @@ public class JobSunnyDay implements TestConstants {
 		testPark = new Park(testManager, "Test Name", "Test City", "Test State", "Test ZIP");
 		testVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME,Volunteer.WorkGrade.LIGHT);
 		testJob = new Job();
-		
 	}
+
 	/**
-	 * 
-	 * @author VG Gnome
+	 * Tests for setting a job with a proper date.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setDateTest() {
-	    testJob.setMyDate(GOOD_STRING);
-	    testJob.getMyDate();
+	    testJob.setMyDate("2017/03/05");
+	    assertEquals("2017/03/05", testJob.getMyDate());
 	}
+
 	/**
 	 * 
-	 * @author VG Gnome
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyTimeTest() {
-		testJob.setMyTime(GOOD_STRING);
+		testJob.setMyTime("1130");
+		assertEquals("1130", testJob.getMyTime());
 	}
+
 	/**
+	 * Tests for proper setting of park name.
 	 * 
-	 * @author VG Gnome
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyParkNameTest() {
 		testJob.setMyParkName(testPark);
+		assertEquals(testPark.getName(), testJob.getMyParkName());
 	}
+
 	/**
+	 * Tests for proper setting of the job description.
 	 * 
-	 * @author VG Gnome
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyDescriptionTest() {
 		testJob.setMyDescription(GOOD_STRING);
+		assertEquals(GOOD_STRING, testJob.getMyDescription());
 	}
+
 	/**
-	 * 
-	 * @author VG Gnome
+	 * Test for proper setting of maximum number of volunteers.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyMaxVolunteersTest() {
 		testJob.setMyMaxVolunteers(GOOD_INT);
+		assertEquals(GOOD_INT, testJob.getMyMaxVolunteers());
 	}
+
 	/**
+	 * Test for proper setting of minimum light workers.
 	 * 
-	 * @author VG Gnome
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyMinLightTest() {
 		testJob.setMyMinLight(GOOD_INT);
+		assertEquals(GOOD_INT, testJob.getMyMinLight());
 	}
+
 	/**
+	 * Test for proper setting of minimum medium workers.
 	 * 
-	 * @author VG Gnome
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyMinMediumTest() {
 		testJob.setMyMinMedium(GOOD_INT);
+		assertEquals(GOOD_INT, testJob.getMyMinMedium());
 	}
+
 	/**
-	 * 
-	 * @author VG Gnome
+	 * Test for proper setting of minimum heavy workers.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyMinHeavyTest() {
 		testJob.setMyMinHeavy(GOOD_INT);
+		assertEquals(GOOD_INT, testJob.getMyMinHeavy());
 	}
+
 	/**
-	 * 
-	 * @author VG Gnome
+	 * Test for proper setting of the volunteer list.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyVolunteersTest() {
-		testJob.setMyVolunteers(testVolunteer.getRealName());
+		testJob.setMyVolunteers(testVolunteer.getUsername());
+		List<String> vList = testJob.getMyVolunteers();
+		assertEquals(testVolunteer.getUsername(), vList.get(0));
 	}
+
 	/**
-	 * 
-	 * @author VG Gnome
+	 * Tests for proper setting of the job notes.
+	 *
+	 * @author Gardner Gomes
 	 */
 	@Test
 	public void setMyNotesTest() {
 		testJob.setMyNotes(GOOD_STRING);
+		assertEquals(GOOD_STRING, testJob.getMyNotes());
 	}
 
 }

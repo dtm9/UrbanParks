@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The volunteer Job object for Urban Parks.
@@ -15,42 +16,52 @@ public class Job {
      * Zero the Minimum for several fields
      */
     private static final int ZERO = 0;
+
     /**
      * Date for a Job.
      */
     private String myDate;
+
     /**
      * Time for a Job.
      */
     private String myTime;
+
     /**
      * Park the Job is at.
      */
     private String myParkName;
+
     /**
      * Description of the Job.
      */
     private String myDescription;
+
     /**
      * Max Volunteers for the Job.
      */
     private int myMaxVolunteers;
+
     /**
      * Minimum number of volunteers for light work grade.
      */
     private int myMinLight;
+
     /**
      * Minimum number of volunteers for medium work grade.
      */
     private int myMinMedium;
+
     /**
      * Minimum number of volunteers for heavy work grade.
      */
     private int myMinHeavy;
+
     /**
      * List of Volunteers signed up for the Job.
      */
-    private ArrayList<String> myVolunteers;
+    private List<String> myVolunteers;
+
     /**
      * Notes about the Job from the Manager or Office.
      */
@@ -306,10 +317,10 @@ public class Job {
     /**
      * Getter for myVolunteers.
      *
-     * @return myVolunteers
+     * @return myVolunteers list
      * @author Gardner Gomes
      */
-    public ArrayList<String> getMyVolunteers() {
+    public List<String> getMyVolunteers() {
         return myVolunteers;
     }
 

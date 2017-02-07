@@ -19,7 +19,7 @@ public final class Datastore {
 
     //***** Field(s) ***************************************************************************************************
 
-    /** The user accounts, i.e., OfficeStaff, Volunteer, ParkManager. */
+    /** The user accounts on the system, i.e, Volunteer, OfficeStaff, and ParkManager. */
     private List<Account> myAccounts;
 
     /** The parks list. */
@@ -51,7 +51,7 @@ public final class Datastore {
     //**** Accessor/Mutator Method(s) **********************************************************************************
 
     /**
-     * Getter method for the list of pending jobs at a given park.
+     * Gets the list of pending jobs at a given park.
      *
      * @author Walter Weeks (ww3@uw.edu)
      * @param thePark the park we want the jobs from.
@@ -65,7 +65,7 @@ public final class Datastore {
 
         List<Job> result = new ArrayList<>();
 
-        // Iterator over the entire pending jobs list to compile the list of job @ a given park
+        // Iterate over the entire pending jobs list to compile the list of job @ a given park
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
@@ -78,7 +78,70 @@ public final class Datastore {
     }
 
     /**
-     * Getter method for the list of pending jobs within a given city and state.
+     * Gets a list of jobs of a given volunteer.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @param theVolunteer The volunteer.
+     * @return The list of jobs of a given volunteer.
+     * @throws NullPointerException if theVolunteer is null.
+     */
+    public final List<Job> getJobsByVolunteer(final Volunteer theVolunteer) {
+        if (theVolunteer == null) {
+            throw new NullPointerException("theVolunteer cannot be null.");
+        }
+
+        List<Job> result = new ArrayList<>();
+
+        // Iterate over the entire pending jobs list to compile the list of job @ a given park
+        Iterator<Job> itr = myPendingJobs.iterator();
+        while (itr.hasNext()) {
+            Job currentJob = itr.next();
+            if (currentJob.getMyVolunteers().contains(theVolunteer.getUsername())) {
+                result.add(currentJob);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Gets a list of pending jobs given a particular park manager.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @param theParkManager The park manager.
+     * @return The list of pending jobs that the park manager has.
+     */
+    public final List<Job> getJobsByParkManager(final ParkManager theParkManager) {
+        if (theParkManager == null) {
+            throw new NullPointerException("theParkManager cannot be null.");
+        }
+
+        // Compile the list of Parks within a given city and ZIP Code
+        List<String> managedParks = new ArrayList<>();
+        for (int i = 0; i < myParks.size(); i++) {
+            if (myParks.get(i).getManager().equals(theParkManager)) {
+                managedParks.add(myParks.get(i).getName());
+                //System.out.println("Added Park: " + myParks.get(i).getName());
+            }
+        }
+
+        List<Job> result = new ArrayList<>();
+
+        // Iterate over the entire pending jobs list to compile the list of job @ a given city
+        Iterator<Job> itr = myPendingJobs.iterator();
+        while (itr.hasNext()) {
+            Job currentJob = itr.next();
+            if (managedParks.contains(currentJob.getMyParkName())) {
+                result.add(currentJob);
+                //System.out.println("Added Job: " + currentJob.getMyDescription());
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Gets the list of pending jobs within a given city and state.
      *
      * Note that the ZIP Code is useful city name conflict resolution, i.e., cities
      * with the same name but are in different places.
@@ -91,7 +154,6 @@ public final class Datastore {
      * @throws IllegalArgumentException if theCity is less than 1 character.
      * @throws IllegalArgumentException if theState is less than 2 characters.
      * @return the list of jobs given a city.
-     *
      */
     public final List<Job> getJobsByCity(final String theCity, final String theState) {
         if (theCity == null) {
@@ -107,22 +169,24 @@ public final class Datastore {
             throw new IllegalArgumentException("The state must be at least 2 characters");
         }
 
-        List<Job> result = new ArrayList<>();
-
         // Compile the list of Parks within a given city and ZIP Code
         List<String> parkNames = new ArrayList<>();
         for (int i = 0; i < myParks.size(); i++) {
             if (myParks.get(i).getCity().equals(theCity) && myParks.get(i).getState().equals(theState)) {
                 parkNames.add(myParks.get(i).getName());
+                //System.out.println("Added Park: " + myParks.get(i).getName());
             }
         }
 
-        // Iterator over the entire pending jobs list to compile the list of job @ a given city
+        List<Job> result = new ArrayList<>();
+
+        // Iterate over the entire pending jobs list to compile the list of job @ a given city
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
-            if (myParks.contains(currentJob.getMyParkName())) {
+            if (parkNames.contains(currentJob.getMyParkName())) {
                 result.add(currentJob);
+                //System.out.println("Added Job: " + currentJob.getMyDescription());
             }
         }
 
@@ -147,7 +211,7 @@ public final class Datastore {
     }
 
     /**
-     * This method moves a currently pending job to the previous jobs list, if it exists. Otherwise this
+     * Moves a currently pending job to the previous jobs list, if it exists. Otherwise this
      * method does nothing.
      *
      * @author Walter Weeks (ww3@uw.edu)
@@ -158,7 +222,7 @@ public final class Datastore {
             throw new NullPointerException("theJob cannot be null.");
         }
 
-        // Iterator over the entire pending jobs list
+        // Iterate over the entire pending jobs list in search of the job in question: O(n) runtime.
         Iterator<Job> itr = myPendingJobs.iterator();
         boolean found = false;
         while (itr.hasNext() && !found) {
@@ -205,5 +269,49 @@ public final class Datastore {
      */
     public int getNumberOfPreviousJobs() {
         return myPreviousJobs.size();
+    }
+
+    /**
+     * Adds an account to the list of accounts.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @param theAccount The account.
+     */
+    public void addAccount(final Account theAccount) {
+        if (theAccount == null) {
+            throw new NullPointerException("theAccount cannot be null.");
+        }
+        if (!myAccounts.contains(theAccount)) {
+            myAccounts.add(theAccount);
+        }
+    }
+
+    /**
+     * Get the number of accounts in the Urban Parks system.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @return The number of accounts.
+     */
+    public int getNumberOfAccounts() {
+        return myAccounts.size();
+    }
+
+    /**
+     * Get the number of parks in the Urban Parks system.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @return The number of parks.
+     */
+    public int getNumberOfParks() {
+        return myParks.size();
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    public List<Job> getPendingJobs() {
+        return myPendingJobs;
     }
 }

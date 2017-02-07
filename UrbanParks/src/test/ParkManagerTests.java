@@ -8,13 +8,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Simple unit tests for the OfficeStaff class.
+ * Simple unit tests for the ParkManager class.
  *
  * @author Walter Weeks (ww3@uw.edu)
  */
 public class ParkManagerTests {
 
-    /** Office staff account test fixture. */
+    /** Park manager account test fixture. */
     private ParkManager myParkManager;
 
     /**

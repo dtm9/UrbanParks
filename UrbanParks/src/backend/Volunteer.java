@@ -171,10 +171,10 @@ public class Volunteer extends Account {
   * @author Dylan Miller
   */
   public void addAccountNote(final String theNewNote) {
-	  if (theNewNote instanceof String){
+	  if ((theNewNote instanceof String) && theNewNote.length() > 0) {
 		  this.myAccountNotes.add(theNewNote);
 	  } else {
-		  throw new IllegalArgumentException("Parameter is not a string");
+		  throw new IllegalArgumentException("Parameter is not a string or is the empty string");
 	  }
     
   }

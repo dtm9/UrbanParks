@@ -133,7 +133,11 @@ public class Volunteer extends Account {
   * @author Dylan Miller
   */
   public void setAbsenceCount(final int theAbsenceCount) {
-    this.myAbsenceCount = theAbsenceCount;
+	  if (theAbsenceCount<0){
+		  throw new IllegalArgumentException("Parameter can't be less than 0");
+	  } else {
+		  this.myAbsenceCount = theAbsenceCount;
+	  }
   }
 
   /**
@@ -154,7 +158,11 @@ public class Volunteer extends Account {
   * @author Dylan Miller
   */
   public void setBadCancellationCount(final int theBadCancellationCount) {
-    this.myBadCancellationCount = theBadCancellationCount;
+	  if (theBadCancellationCount<0){
+		  throw new IllegalArgumentException("Parameter can't be less than 0");
+	  } else {
+		  this.myBadCancellationCount = theBadCancellationCount;
+	  }
   }
 
   /**
@@ -163,6 +171,11 @@ public class Volunteer extends Account {
   * @author Dylan Miller
   */
   public void addAccountNote(final String theNewNote) {
-    this.myAccountNotes.add(theNewNote);
+	  if (theNewNote instanceof String){
+		  this.myAccountNotes.add(theNewNote);
+	  } else {
+		  throw new IllegalArgumentException("Parameter is not a string");
+	  }
+    
   }
 }

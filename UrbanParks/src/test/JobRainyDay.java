@@ -25,7 +25,7 @@ public class JobRainyDay implements TestConstants{
 	@Before
 	public void setUp() {
 		testManager = new ParkManager(GOOD_EMAIL,GOOD_PHONE,GOOD_NAME);
-		testPark = new Park(testManager, "Test Name", "Test City", "Test Zip");
+		testPark = new Park(testManager, "Test Name", "Test City", "Test State", "Test ZIP");
 		testVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME,Volunteer.WorkGrade.LIGHT);
 		testJob = new Job();
 		

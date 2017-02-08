@@ -17,7 +17,7 @@ public class OfficeStaffView extends View {
 
   private StringBuilder sb;
   
-  public OfficeStaffView() { //TODO consider having a OfficeStaff object be a param for the constructor.
+  public OfficeStaffView() { //TODO consider having a OfficeStaff object be a param for the constructor..
 	  super();
 	  sb = new StringBuilder();
   }

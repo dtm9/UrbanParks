@@ -45,11 +45,11 @@ public class Park {
                 final String theState, final String theZipcode) {
 //    	if ((theManager instanceof ParkManager) && (theName instanceof String) &&
 //    			(theCity instanceof String) && (theZipcode instanceof String)) {
-            manager = theManager;
-            name = theName;
-            city = theCity;
-            state = theState;
-            zipcode = theZipcode;
+            setManager(theManager);
+            setName(theName);
+            setCity(theCity);
+            setState(theState);
+            setZipcode(theZipcode);
 //    	} else {
 //            throw new IllegalArgumentException("Parameters hold an incorrect class");
 //    	}
@@ -60,7 +60,7 @@ public class Park {
      *
      * @param theManager the park's manager.
      */
-    public void setManager(ParkManager theManager) {
+    private void setManager(ParkManager theManager) {
     	if (theManager instanceof ParkManager) {
             manager = theManager;
     	} else {
@@ -82,7 +82,7 @@ public class Park {
      *
      * @param theName park's name.
      */
-    public void setName (String theName) {
+    private void setName (String theName) {
     	if (theName instanceof String) {
             name = theName;
     	} else {
@@ -104,7 +104,7 @@ public class Park {
      *
      * @param theCity the park's city.
      */
-    public void setCity(String theCity) {
+    private void setCity(String theCity) {
     	if (theCity instanceof String) {
             city = theCity;
     	} else {
@@ -126,7 +126,7 @@ public class Park {
      *
      * @param theState the park's state.
      */
-    public void setState(String theState) {
+    private void setState(String theState) {
     	if (theState instanceof String) {
             state = theState;
     	} else {
@@ -149,7 +149,7 @@ public class Park {
      *
      * @param theZipcode The ZIP Code for the park.
      */
-    public void setZipcode(String theZipcode) {
+    private void setZipcode(String theZipcode) {
     	if (theZipcode instanceof String) {
             zipcode = theZipcode;
     	} else {

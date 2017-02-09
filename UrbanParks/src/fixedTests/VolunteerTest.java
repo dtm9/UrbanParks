@@ -85,8 +85,8 @@ public class VolunteerTest {
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser = new OfficeStaff("Jim Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser = new Volunteer("Jim Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -99,8 +99,8 @@ public class VolunteerTest {
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser = new OfficeStaff("Jim@Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser = new Volunteer("Jim@Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -109,12 +109,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithDoubleDot(){
+    public final void volunteerConstructor_multipleConsecutiveDots_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser6 = new OfficeStaff("Jim..Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser6 = new Volunteer("Jim..Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -123,12 +123,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithQuote(){
+    public final void volunteerConstructor_emailContainsQuotes_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser7 = new OfficeStaff("Jim\"Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser7 = new Volunteer("Jim\"Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -137,12 +137,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithComma(){
+    public final void volunteerConstructor_emailContainsComma_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser8 = new OfficeStaff("Jim,Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser8 = new Volunteer("Jim,Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -151,12 +151,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithBackslash(){
+    public final void volunteerConstructor_emailContainsBackslash_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser9 = new OfficeStaff("Jim\\Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser9 = new Volunteer("Jim\\Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -165,12 +165,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithColon(){
+    public final void volunteerConstructor_emailContainsColon_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser10 = new OfficeStaff("Jim:Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser10 = new Volunteer("Jim:Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -179,12 +179,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithSemiColon(){
+    public final void volunteerConstructor_emailContainsSemiColon_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser11 = new OfficeStaff("Jim;Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser11 = new Volunteer("Jim;Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -193,12 +193,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithParen(){
+    public final void volunteerConstructor_emailContainsParenthesis_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser12 = new OfficeStaff("Jim)Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser12 = new Volunteer("Jim)(Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     
@@ -207,12 +207,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithInequ(){
+    public final void volunteerConstructor_emailWithInequality_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser13 = new OfficeStaff("Jim<>Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	Volunteer badUser13 = new Volunteer("Jim<>Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
     /**
@@ -220,12 +220,12 @@ public class VolunteerTest {
      * @author Ethan Young
      */
     @Test
-    public final void emailWithBrackets(){
+    public final void volunteerConstructor_emailWithBrackets_ShouldThrowException(){
   	  exception.expect(IllegalArgumentException.class);
   	  exception.expectMessage("Must be a valid email address.");
   	  
-  	  OfficeStaff badUser14 = new OfficeStaff("[Jim]Jim@hotmail.com",
-  			  									GOOD_PHONE, GOOD_NAME);
+  	  Volunteer badUser14 = new Volunteer("[Jim]Jim@hotmail.com",
+  			  									GOOD_PHONE, GOOD_NAME, GRADE);
   	  
     }
 

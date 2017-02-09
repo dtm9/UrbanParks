@@ -131,6 +131,7 @@ public class Volunteer extends Account {
   * Updates the absent count for this volunteer.
   * @param theAbsenceCount number of times abandoning jobs to set.
   * @author Dylan Miller
+  * @author Ethan Young
   */
   public void setAbsenceCount(final int theAbsenceCount) {
 	  if (theAbsenceCount<0){
@@ -156,6 +157,7 @@ public class Volunteer extends Account {
   * @param theBadCancellationCount number of of times cancelled
   * too close to the job date to set.
   * @author Dylan Miller
+  * @author Ethan Young
   */
   public void setBadCancellationCount(final int theBadCancellationCount) {
 	  if (theBadCancellationCount<0){
@@ -169,12 +171,13 @@ public class Volunteer extends Account {
   * Adds a new note onto the volunteer.
   * @param theNewNote any string to be added to the account notes.
   * @author Dylan Miller
+  * @author Ethan Young
   */
   public void addAccountNote(final String theNewNote) {
-	  if ((theNewNote instanceof String) && theNewNote.length() > 0) {
+	  if (theNewNote instanceof String){
 		  this.myAccountNotes.add(theNewNote);
 	  } else {
-		  throw new IllegalArgumentException("Parameter is not a string or is the empty string");
+		  throw new IllegalArgumentException("Parameter is not a string");
 	  }
     
   }

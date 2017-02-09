@@ -30,7 +30,7 @@ public class Job {
     /**
      * Park the Job is at.
      */
-    private String myParkName;
+    private Park myPark;
 
     /**
      * Description of the Job.
@@ -171,8 +171,8 @@ public class Job {
      * @return myLocation
      * @author Gardner Gomes
      */
-    public String getMyLocation() {
-        return myParkName;
+    public String getMyPark() {
+        return myPark;
     }
 
     /**
@@ -184,7 +184,7 @@ public class Job {
      */
     public void setMyParkName(Park thePark) {
         if (thePark instanceof Park) {
-            this.myParkName = thePark.getName();
+            this.myPark = thePark;
         } else {
             throw new IllegalArgumentException("Parameter is not of type Park");
         }

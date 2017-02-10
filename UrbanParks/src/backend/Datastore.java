@@ -153,11 +153,11 @@ public final class Datastore implements Serializable {
      *
      * @author Walter Weeks (ww3@uw.edu)
      * @param theCity city string.
-     * @param theState state string.
+     * @param theState state abbreviation two-character string.
      * @throws NullPointerException if theCity is null.
      * @throws NullPointerException if theState is null.
      * @throws IllegalArgumentException if theCity is less than 1 character.
-     * @throws IllegalArgumentException if theState is less than 2 characters.
+     * @throws IllegalArgumentException if theState is not exactly 2 characters.
      * @return the list of jobs given a city.
      */
     public final List<Job> getJobsByCity(final String theCity, final String theState) {
@@ -170,14 +170,14 @@ public final class Datastore implements Serializable {
         if (theState == null) {
             throw new NullPointerException("theState cannot be null.");
         }
-        if (theState.length() < 2) {
-            throw new IllegalArgumentException("The state must be at least 2 characters");
+        if (theState.length() != 2) {
+            throw new IllegalArgumentException("theState must be exactly 2 characters, i.e., state abbreviation.");
         }
 
         // Compile the list of Parks within a given city and ZIP Code
         List<Park> parks = new ArrayList<>();
         for (int i = 0; i < myParks.size(); i++) {
-            if (myParks.get(i).getCity().equals(theCity) && myParks.get(i).getState().equals(theState)) {
+            if (myParks.get(i).getCity().equals(theCity) && myParks.get(i).getState() == US.parse(theState)) {
                 parks.add(myParks.get(i));
                 //System.out.println("Added Park: " + myParks.get(i).getName());
             }

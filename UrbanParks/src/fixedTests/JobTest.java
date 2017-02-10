@@ -43,7 +43,7 @@ public class JobTest implements TestConstants  {
 	@Before
 	public void setUp() throws Exception{
 		theManager = new ParkManager(GOOD_EMAIL,GOOD_PHONE,GOOD_NAME);
-		thePark = new Park(theManager, "Test Name", "123 E St","Test City", "Test State", "Test ZIP");
+		thePark = new Park(theManager, "Test Name", "123 E St","Test City", "WA", "Test ZIP");
 		theVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME,Volunteer.WorkGrade.LIGHT);
 		myJob = new Job();
 	}

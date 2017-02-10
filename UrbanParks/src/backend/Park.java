@@ -9,6 +9,9 @@ package backend;
  */
 public final class Park {
 
+    /** Enumeration of all 50 state abbreviations. */
+
+
     //***** Field(s) ***************************************************************************************************
 
     /** The park manager object for the park. */
@@ -23,8 +26,8 @@ public final class Park {
     /** The city of the park. */
     private final String myCity;
 
-    /** The state of the park. */
-    private final String myState;
+    /** The state abbreviation enumeration of the park. */
+    private final US myState;
 
     /** The ZIP Code of the park. */
     private final String myZipcode;
@@ -40,7 +43,7 @@ public final class Park {
      * @param theName The park name.
      * @param theStreet The park's street address.
      * @param theCity The park's city
-     * @param theState The park's state.
+     * @param theState The park's state abbreviation two-character string.
      * @param theZipcode The park's ZIP Code.
      */
     public Park(final ParkManager theManager, final String theName, final String theStreet,
@@ -50,7 +53,7 @@ public final class Park {
         myName    = theName;
         myStreet  = theStreet;
         myCity    = theCity;
-        myState   = theState;
+        myState   = US.parse(theState); // Convert state string into an enum
         myZipcode = theZipcode;
     }
 
@@ -87,12 +90,12 @@ public final class Park {
     }
 
     /**
-     * Getter for the park's state.
+     * Getter for the park's state abbreviation enumeration.
      *
      * @author Peter Park
      * @return the state of the park.
      */
-    public String getState() {
+    public US getState() {
         return myState;
     }
 	
@@ -139,10 +142,11 @@ public final class Park {
      * @param theName The park name.
      * @param theStreet The park's street address.
      * @param theCity The park's city
-     * @param theState The park's state.
+     * @param theState The park's state abbreviation two-character string.
      * @param theZipcode The park's ZIP Code.
      * @throws NullPointerException if any argument is null.
-     * @throws IllegalArgumentException if any String value is empty.
+     * @throws IllegalArgumentException if any String value is empty except theState value, which must be exactly
+     * two characters.
      */
     private void validateData(final ParkManager theManager, final String theName, final String theStreet,
                               final String theCity, final String theState, final String theZipcode) {
@@ -153,8 +157,12 @@ public final class Park {
         }
         // Check for empty Strings
         if (theName.length() == 0 || theStreet.length()  == 0 ||  theCity.length() == 0 ||
-                theState.length() == 0 || theZipcode.length() == 0) {
+                theZipcode.length() == 0) {
             throw new IllegalArgumentException("No String argument can be empty.");
+        }
+        // The state must be exactly two chars
+        if (theState.length() != 2) {
+            throw new IllegalArgumentException("The state must be exactly 2 characters.");
         }
     }
 }

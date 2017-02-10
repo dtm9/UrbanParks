@@ -168,17 +168,21 @@ public class Volunteer extends Account {
   }
 
   /**
-  * Adds a new note onto the volunteer.
-  * @param theNewNote any string to be added to the account notes.
-  * @author Dylan Miller
-  * @author Ethan Young
-  */
+   * Adds a new note onto the volunteer.
+   *
+   * @param theNewNote any string to be added to the account notes.
+   * @author Dylan Miller
+   * @author Ethan Young
+   * @author Walter Weeks
+   */
   public void addAccountNote(final String theNewNote) {
-	  if (theNewNote instanceof String){
-		  this.myAccountNotes.add(theNewNote);
-	  } else {
-		  throw new IllegalArgumentException("Parameter is not a string");
-	  }
-    
+      if (theNewNote == null ) {
+        throw new NullPointerException("theNewNote cannot be null.");
+      }
+      if (theNewNote.equals("")) {
+        throw new IllegalArgumentException("theNewNote cannot be empty.");
+      }
+
+      this.myAccountNotes.add(theNewNote);
   }
 }

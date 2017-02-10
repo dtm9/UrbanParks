@@ -403,9 +403,9 @@ public class VolunteerTest {
     }
 
     /**
-     * Tests to see if an IllegalArgumentException is thrown when passing null as an account note.
+     * Tests to see if an NullPointerException is thrown when passing null as an account note.
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = NullPointerException.class)
     public void addAccountNote_NullNote_ShouldThrowException() {
         validVolunteerAccount.addAccountNote(null);
     }

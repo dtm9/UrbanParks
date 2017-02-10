@@ -1,5 +1,8 @@
 package backend;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,9 +16,15 @@ import java.util.List;
  */
 public final class Datastore implements Serializable {
 
-    //***** Constant(s) ************************************************************************************************
 
-    /** The maximum number of pending jobs default value. */
+	//***** Constant(s) ************************************************************************************************
+
+    /**
+	 * Default serialVersionUID. This should not change.
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The maximum number of pending jobs default value. */
     public static final int MAX_PENDING_JOBS_DEFAULT = 30;
 
     //***** Field(s) ***************************************************************************************************
@@ -35,7 +44,7 @@ public final class Datastore implements Serializable {
      */
     private List<Job> myPreviousJobs;
 
-    /** The maxixum number of pending jobs. */
+    /** The maximum number of pending jobs. */
     private int myMaxPendingJobs;
 
     //**** Constructor(s) **********************************************************************************************
@@ -334,5 +343,23 @@ public final class Datastore implements Serializable {
         }
 
         myMaxPendingJobs = theMaxPendingJobs;
+    }
+    
+    /**
+     * Get a list of all Parks in the system.
+     * @author Dylan Miller
+     * @return parks list from fields.
+     */
+    public List<Park> getAllParks() {
+      return this.myParks;
+    }
+    
+    /**
+     * Get a list of all accounts in the system.
+     * @author Dylan Miller
+     * @return account list from fields.
+     */
+    public List<Account> getAllAccounts() {
+      return this.myAccounts;
     }
 }

@@ -1,13 +1,19 @@
 package backend;
+
+import java.io.Serializable;
+
 /**
  * Park Manager User. Other classes will check instance of account
  * and grant this user appropriate view and permissions in the application.
  * @author Ethan Young
  * @author Dylan Miller
  */
-public class ParkManager extends Account {
+public class ParkManager extends Account implements Serializable {
 
-  /**
+  /** Default serialVersionUID for serialization. */
+  private static final long serialVersionUID = 1L;
+
+/**
    * Creates an Park Manager user. Moderate permissions
    * @param theUsername email address used for login.
    * @param thePhone phone number of the user.

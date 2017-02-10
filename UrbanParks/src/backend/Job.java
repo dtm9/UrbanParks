@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,14 @@ import java.util.List;
  * @author Walter Weeks
  * @version 2017 Feb 9
  */
-public class Job {
+public class Job implements Serializable{
 
     //***** Field(s) ***************************************************************************************************
 
-    /** Date for a Job. */
+    /** Default serialVersionUID for serialization. */
+	private static final long serialVersionUID = 1L;
+
+	/** Date for a Job. */
     private String myDate;
 
     /** Time for a Job. */

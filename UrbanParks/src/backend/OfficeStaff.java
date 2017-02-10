@@ -1,4 +1,7 @@
 package backend;
+
+import java.io.Serializable;
+
 /**
  * Urban Parks Office Staff User. Other classes will check instancof account
  * and grant this user appropriate view and permissions in the application.
@@ -6,9 +9,12 @@ package backend;
  * @author Dylan Miller
  *
  */
-public class OfficeStaff extends Account {
+public class OfficeStaff extends Account implements Serializable {
 
-  /**
+  /** Default serialVersionUID for serialization. */
+  private static final long serialVersionUID = 1L;
+
+/**
    * Creates an Urban Parks office staff user. High permissions
    * @param theUsername email address of the user that is used
    * to log into the system.

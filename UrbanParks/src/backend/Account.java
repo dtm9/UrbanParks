@@ -1,4 +1,5 @@
 package backend;
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
@@ -6,7 +7,11 @@ import java.util.regex.Pattern;
  * @author Dylan Miller
  * @author Ethan Young
  */
-public abstract class Account {
+public abstract class Account implements Serializable {
+	
+  /**Default serialVersionUID for serialization.*/
+  private static final long serialVersionUID = 1L;
+
   /**Regular expression for phone number format.*/
   private static final String PHONE_REGEX = "[a-zA-Z]+";
 
@@ -139,5 +144,14 @@ public abstract class Account {
     } else {
       this.myRealName = theName;
     }
+  }
+  
+  @Override
+  public boolean equals(Object obj) {
+    boolean result = false;
+    if (obj instanceof Account && myUsername.equals(((Account)obj).myUsername)) {
+      result = true;
+    }
+    return result;
   }
 }

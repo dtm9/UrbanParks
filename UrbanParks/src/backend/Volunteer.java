@@ -1,4 +1,5 @@
 package backend;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -7,8 +8,12 @@ import java.util.LinkedList;
  * @author Ethan Young
  * @author Dylan Miller
  */
-public class Volunteer extends Account {
-  /**
+public class Volunteer extends Account implements Serializable {
+
+  /** Default serialVersionUID for serialization. */
+  private static final long serialVersionUID = 1L;
+
+/**
    * Level at which a volunteer can perform a job.
    * @author Dylan Miller
    */

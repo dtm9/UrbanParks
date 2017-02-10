@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * Immutable Park class for Urban Parks.
  *
@@ -7,14 +9,17 @@ package backend;
  * @author Walter Weeks
  * @version 2017 Feb 9
  */
-public final class Park {
+public final class Park implements Serializable {
 
     /** Enumeration of all 50 state abbreviations. */
 
 
     //***** Field(s) ***************************************************************************************************
 
-    /** The park manager object for the park. */
+    /** Default serialVersionUID for serialization. */
+	private static final long serialVersionUID = 1L;
+
+	/** The park manager object for the park. */
     private final ParkManager myManager;
 
     /** The name of the park. */

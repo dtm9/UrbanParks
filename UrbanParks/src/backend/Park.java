@@ -129,23 +129,23 @@ public final class Park implements Serializable {
      * Compares two park objects for equivalence.
      *
      * @author Walter Weeks
-     * @param obj The other object we are comparing.
+     * @param theObj The other object we are comparing.
      * @return True if the parks are equal, i.e., park name, street address, city, and
      * ZIP Codes are the same. False otherwise.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object theObj) {
+        if (theObj == null) {
             return false;
         }
-        if (obj == this) { // the identity
+        if (theObj == this) { // the identity
             return true;
         }
-        if (!(obj instanceof Park)) { // not the same object types
+        if (!(theObj instanceof Park)) { // not the same object types
             return false;
         }
 
-        Park otherPark = (Park) obj;
+        Park otherPark = (Park) theObj;
 
         return myName.equals(otherPark.myName) && myStreet.equals(otherPark.myStreet) &&
                 myCity.equals(otherPark.myCity) &&  myZipcode.equals(otherPark.myZipcode);

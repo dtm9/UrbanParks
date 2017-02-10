@@ -47,21 +47,21 @@ public class ParkManager extends Account implements Serializable {
    * system must be unique.
    *
    * @author Walter Weeks
-   * @param obj The other object we are comparing.
+   * @param theObj The other object we are comparing.
    * @return True if the ParkManager objects are equal, i.e., unique username, false otherwise.
    */
   @Override
-  public boolean equals(Object obj) {
-    if (obj == null) {
+  public boolean equals(Object theObj) {
+    if (theObj == null) {
       return false;
     }
-    if (obj == this) { // the identity
+    if (theObj == this) { // the identity
       return true;
     }
-    if (!(obj instanceof ParkManager)) { // not the same object types
+    if (!(theObj instanceof ParkManager)) { // not the same object types
       return false;
     }
-    ParkManager otherManager = (ParkManager) obj;
+    ParkManager otherManager = (ParkManager) theObj;
 
     return otherManager.getUsername().equals(getUsername());
   }

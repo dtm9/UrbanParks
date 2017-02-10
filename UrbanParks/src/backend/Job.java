@@ -355,25 +355,25 @@ public class Job implements Serializable{
      * Equals operation for comparing Job objects for equality. We consider Job objects to be equal
      * if both Jobs have the same park name, date, and time fields.
      *
-     * TODO: This might have to changed if we decide to use the Calendar class for date & time representation.
+     * TODO: This might have to be changed if we decide to use the Calendar class for date & time representation.
      *
      * @author Walter Weeks
-     * @param obj the other object we are comparing to.
+     * @param theObj the other object we are comparing to.
      * @return true if the Job objects are considered the same, i.e., park name, date, and time.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object theObj) {
+        if (theObj == null) {
             return false;
         }
-        if (obj == this) { // the identity
+        if (theObj == this) { // the identity
             return true;
         }
-        if (!(obj instanceof Job)) { // not the same object types
+        if (!(theObj instanceof Job)) { // not the same object types
             return false;
         }
 
-        Job otherJob = (Job) obj;
+        Job otherJob = (Job) theObj;
         return myPark.equals(otherJob.myPark) && myDate.equals(otherJob.myDate) &&
                 myTime.equals(otherJob.myTime);
     }

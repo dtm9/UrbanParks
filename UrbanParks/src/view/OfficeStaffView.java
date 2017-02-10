@@ -27,6 +27,7 @@ public class OfficeStaffView extends View {
    * this module.
    * @author Dylan Miller
    */
+  @Override
   public void launchGUI() {
   //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
 	  

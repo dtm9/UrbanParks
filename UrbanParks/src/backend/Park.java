@@ -1,18 +1,16 @@
 package backend;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Immutable Park class for Urban Parks.
  *
  * @author Peter Park
  * @author Walter Weeks
- * @version 2017 Feb 9
+ * @version 2017 Feb 10
  */
 public final class Park implements Serializable {
-
-    /** Enumeration of all 50 state abbreviations. */
-
 
     //***** Field(s) ***************************************************************************************************
 
@@ -48,7 +46,7 @@ public final class Park implements Serializable {
      * @param theName The park name.
      * @param theStreet The park's street address.
      * @param theCity The park's city
-     * @param theState The park's state abbreviation two-character string.
+     * @param theState The park's state ANSI abbreviation two-character string.
      * @param theZipcode The park's ZIP Code.
      */
     public Park(final ParkManager theManager, final String theName, final String theStreet,
@@ -113,7 +111,20 @@ public final class Park implements Serializable {
     public String getZipcode() {
         return myZipcode;
     }
-	
+
+    //***** Overridden method(s) ***************************************************************************************
+
+    /**
+     * Computes the hash code for this method. Remember, this method is required to maintain Java's equals
+     * "contract."
+     *
+     * @return The hash code representing this object.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(myName, myStreet, myCity, myZipcode);
+    }
+
     /**
      * Compares two park objects for equivalence.
      *
@@ -127,7 +138,10 @@ public final class Park implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Park)) {
+        if (obj == this) { // the identity
+            return true;
+        }
+        if (!(obj instanceof Park)) { // not the same object types
             return false;
         }
 
@@ -146,8 +160,8 @@ public final class Park implements Serializable {
      * @param theManager The park manager.
      * @param theName The park name.
      * @param theStreet The park's street address.
-     * @param theCity The park's city
-     * @param theState The park's state abbreviation two-character string.
+     * @param theCity The park's city.
+     * @param theState The park's state ANSI abbreviation two-character string.
      * @param theZipcode The park's ZIP Code.
      * @throws NullPointerException if any argument is null.
      * @throws IllegalArgumentException if any String value is empty except theState value, which must be exactly

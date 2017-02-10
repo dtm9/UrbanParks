@@ -67,10 +67,10 @@ public enum US {
     PUERTO_RICO("Puerto Rico","PR");
 
     /** The full-length state name. */
-    String unnabreviated;
+    String myUnabreviated;
 
     /** The ANSI two-letter abbreviation for the state. */
-    String ANSIabbreviation;
+    String myANSIabbreviation;
 
     /**
      * State enum constructor.
@@ -81,26 +81,26 @@ public enum US {
      * @param ANSIabbreviation Two character ANSI abbreviation.
      */
     US(String unnabreviated, String ANSIabbreviation) {
-        this.unnabreviated = unnabreviated;
-        this.ANSIabbreviation = ANSIabbreviation;
+        this.myUnabreviated = unnabreviated;
+        this.myANSIabbreviation = ANSIabbreviation;
     }
 
     /**
      * Parse string input to enum. Accepts unabbreviated and abbreviated forms.
      * Case insensitive.
      *
-     * @author AustinC via https://github.com/AustinC/UnitedStates/blob/master/src/main/java/unitedstates/US.java
-     * @param input String to parse.
+     * @author AustinC via github.com
+     * @param theInput String to parse.
      * @return The parsed US state, or null on failure.
      */
-    public static US parse(final String input) {
-        if (null == input) {
+    public static US parse(final String theInput) {
+        if (null == theInput) {
             return null;
         }
-        String inputTrim = input.trim();
+        String inputTrim = theInput.trim();
         for (US state : values()) {
-            if (state.unnabreviated.equalsIgnoreCase(inputTrim) ||
-                    state.ANSIabbreviation.equalsIgnoreCase(inputTrim)) {
+            if (state.myUnabreviated.equalsIgnoreCase(inputTrim) ||
+                    state.myANSIabbreviation.equalsIgnoreCase(inputTrim)) {
                 return state;
             }
         }
@@ -112,19 +112,19 @@ public enum US {
      * is not necessary for the Urban Parks implementation.
      *
      * @param theState Enumeration type.
-     * @return Unabbreviated String of state.
+     * @return myUnabbreviated String of state.
      */
-    public static String getUnabbreviated(US theState) {
-        return theState.unnabreviated;
+    public static String getUnabbreviated(final US theState) {
+        return theState.myUnabreviated;
     }
 
     /**
      * The string representation of the two-character ANSI abbreviation of the state.
      *
-     * @return ANSIabbreviation String value.
+     * @return myANSIabbreviation String value.
      */
     @Override
     public String toString(){
-        return ANSIabbreviation;
+        return myANSIabbreviation;
     }
 }

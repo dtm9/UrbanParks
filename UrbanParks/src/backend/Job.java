@@ -3,13 +3,14 @@ package backend;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The volunteer Job object for Urban Parks.
  *
  * @author Gardner Gomes
  * @author Walter Weeks
- * @version 2017 Feb 9
+ * @version 2017 Feb 10
  */
 public class Job implements Serializable{
 
@@ -337,7 +338,18 @@ public class Job implements Serializable{
         }
     }
 
-    //***** Overridden method(s) ************************************************************************************
+    //***** Overridden method(s) ***************************************************************************************
+
+    /**
+     * Computes the hash code for this method. Remember, this method is required to maintain Java's equals
+     * "contract."
+     *
+     * @author Walter Weeks
+     * @return  The hash code representing this object.
+     */
+    public int hashCode() {
+        return Objects.hash(myPark, myDate, myTime);
+    }
 
     /**
      * Equals operation for comparing Job objects for equality. We consider Job objects to be equal
@@ -345,7 +357,7 @@ public class Job implements Serializable{
      *
      * TODO: This might have to changed if we decide to use the Calendar class for date & time representation.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @param obj the other object we are comparing to.
      * @return true if the Job objects are considered the same, i.e., park name, date, and time.
      */
@@ -354,7 +366,10 @@ public class Job implements Serializable{
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Job)) {
+        if (obj == this) { // the identity
+            return true;
+        }
+        if (!(obj instanceof Job)) { // not the same object types
             return false;
         }
 

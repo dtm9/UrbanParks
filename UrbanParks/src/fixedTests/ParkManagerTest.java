@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fixedTests;
 
 import static org.junit.Assert.*;
@@ -11,19 +8,25 @@ import org.junit.Test;
 import backend.ParkManager;
 
 /**
- * @author dylan
+ * Basic unit tests for the ParkManager class.
  *
+ * @author Dylan Miller
+ * @author Walter Weeks
  */
 public class ParkManagerTest {
 
-	/**Address that passes the email REGEX validation.*/
+    //***** Constant(s) ************************************************************************************************
+
+	/** Address that passes the email REGEX validation. */
 	String GOOD_EMAIL = "john@tacomaparks.com";
 
-	/**10 digit phone number that meets our phone REGEX validation.*/
+	/** 10 digit phone number that meets our phone REGEX validation. */
 	String GOOD_PHONE = "2535551234";
 
-	/**There is no REGEX for real names, it just needs to not be blank.*/
+	/** There is no REGEX for real names, it just needs to not be blank. */
 	String GOOD_NAME = "John Doe";
+
+	//***** Test fixture(s), setUp(), etc. *****************************************************************************
 
 	/** Park manager account test fixture. */
     private ParkManager validParkManagerAccount;
@@ -37,6 +40,8 @@ public class ParkManagerTest {
     public void setUp() {
         validParkManagerAccount = new ParkManager(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
     }
+
+    //***** Unit test(s) ***********************************************************************************************
 
     /**
      * Tests for equality comparing two separate objects with the same data.

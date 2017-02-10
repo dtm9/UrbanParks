@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,12 +11,12 @@ import java.util.List;
  * @author Walter Weeks (ww3@uw.edu)
  * @version 1.0 (2017 Feb 3)
  */
-public final class Datastore {
+public final class Datastore implements Serializable {
 
     //***** Constant(s) ************************************************************************************************
 
-    /** The maximum number of pending jobs the Urban Parks allowed. */
-    public static final int MAX_PENDING_JOBS = 30;
+    /** The maximum number of pending jobs default value. */
+    public static final int MAX_PENDING_JOBS_DEFAULT = 30;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -34,6 +35,9 @@ public final class Datastore {
      */
     private List<Job> myPreviousJobs;
 
+    /** The maxixum number of pending jobs. */
+    private int myMaxPendingJobs;
+
     //**** Constructor(s) **********************************************************************************************
 
     /**
@@ -46,6 +50,7 @@ public final class Datastore {
         myParks = new ArrayList<>();
         myPendingJobs = new ArrayList<>();
         myPreviousJobs = new ArrayList<>();
+        myMaxPendingJobs = MAX_PENDING_JOBS_DEFAULT;
     }
 
     //**** Accessor/Mutator Method(s) **********************************************************************************
@@ -69,7 +74,7 @@ public final class Datastore {
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
-            if (thePark.getName().equals(currentJob.getMyParkName())) {
+            if (thePark.equals(currentJob.getPark())) {
                 result.add(currentJob);
             }
         }
@@ -96,7 +101,7 @@ public final class Datastore {
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
-            if (currentJob.getMyVolunteers().contains(theVolunteer.getUsername())) {
+            if (currentJob.getVolunteers().contains(theVolunteer.getUsername())) {
                 result.add(currentJob);
             }
         }
@@ -117,10 +122,10 @@ public final class Datastore {
         }
 
         // Compile the list of Parks within a given city and ZIP Code
-        List<String> managedParks = new ArrayList<>();
+        List<Park> managedParks = new ArrayList<>();
         for (int i = 0; i < myParks.size(); i++) {
             if (myParks.get(i).getManager().equals(theParkManager)) {
-                managedParks.add(myParks.get(i).getName());
+                managedParks.add(myParks.get(i));
                 //System.out.println("Added Park: " + myParks.get(i).getName());
             }
         }
@@ -131,7 +136,7 @@ public final class Datastore {
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
-            if (managedParks.contains(currentJob.getMyParkName())) {
+            if (managedParks.contains(currentJob.getPark())) {
                 result.add(currentJob);
                 //System.out.println("Added Job: " + currentJob.getMyDescription());
             }
@@ -170,10 +175,10 @@ public final class Datastore {
         }
 
         // Compile the list of Parks within a given city and ZIP Code
-        List<String> parkNames = new ArrayList<>();
+        List<Park> parks = new ArrayList<>();
         for (int i = 0; i < myParks.size(); i++) {
             if (myParks.get(i).getCity().equals(theCity) && myParks.get(i).getState().equals(theState)) {
-                parkNames.add(myParks.get(i).getName());
+                parks.add(myParks.get(i));
                 //System.out.println("Added Park: " + myParks.get(i).getName());
             }
         }
@@ -184,7 +189,7 @@ public final class Datastore {
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
-            if (parkNames.contains(currentJob.getMyParkName())) {
+            if (parks.contains(currentJob.getPark())) {
                 result.add(currentJob);
                 //System.out.println("Added Job: " + currentJob.getMyDescription());
             }
@@ -205,7 +210,7 @@ public final class Datastore {
         if (theJob == null) {
             throw new NullPointerException("theJob cannot be null.");
         }
-        if (myPendingJobs.size() < MAX_PENDING_JOBS && !myPendingJobs.contains(theJob)) {
+        if (myPendingJobs.size() < myMaxPendingJobs && !myPendingJobs.contains(theJob)) {
             myPendingJobs.add(theJob);
         }
     }
@@ -214,7 +219,7 @@ public final class Datastore {
      * Moves a currently pending job to the previous jobs list, if it exists. Otherwise this
      * method does nothing.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @param theJob the job to move to previous jobs list.
      */
     public void removeJob(final Job theJob) {
@@ -238,7 +243,7 @@ public final class Datastore {
     /**
      * Adds a park to the list of parks.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @param thePark The park to add to the list.
      * @throws NullPointerException if thePark is null.
      */
@@ -254,7 +259,7 @@ public final class Datastore {
     /**
      * Getter for the current number of pending jobs in the list.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @return The number of pending jobs currently in the system.
      */
     public int getNumberOfJobs() {
@@ -264,7 +269,7 @@ public final class Datastore {
     /**
      * Getter for the current number of previous jobs.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @return The number of previous jobs in the system.
      */
     public int getNumberOfPreviousJobs() {
@@ -274,7 +279,7 @@ public final class Datastore {
     /**
      * Adds an account to the list of accounts.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @param theAccount The account.
      */
     public void addAccount(final Account theAccount) {
@@ -289,7 +294,7 @@ public final class Datastore {
     /**
      * Get the number of accounts in the Urban Parks system.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @return The number of accounts.
      */
     public int getNumberOfAccounts() {
@@ -299,7 +304,7 @@ public final class Datastore {
     /**
      * Get the number of parks in the Urban Parks system.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @return The number of parks.
      */
     public int getNumberOfParks() {
@@ -307,11 +312,27 @@ public final class Datastore {
     }
 
     /**
+     * Get the pending jobs list.
      *
-     *
-     * @return
+     * @author Walter Weeks
+     * @return The pending job list.
      */
     public List<Job> getPendingJobs() {
         return myPendingJobs;
+    }
+
+    /**
+     * Set the maximum number of pending jobs.
+     *
+     * @author Walter Weeks
+     * @param theMaxPendingJobs The new maximum number of pending jobs.
+     * @throws IllegalArgumentException if theMaxPendingJobs is less than 1.
+     */
+    public void setMaxPendingJobs(final int theMaxPendingJobs) {
+        if (theMaxPendingJobs < 1) {
+            throw new IllegalArgumentException("theMaxPendingJobs value must be at least 1.");
+        }
+
+        myMaxPendingJobs = theMaxPendingJobs;
     }
 }

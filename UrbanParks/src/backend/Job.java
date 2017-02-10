@@ -7,133 +7,103 @@ import java.util.List;
  * The volunteer Job object for Urban Parks.
  *
  * @author Gardner Gomes
- * @version 1.0
- * Date 2/1/2017
- * Job Class for Urban Parks
+ * @author Walter Weeks
+ * @version 2017 Feb 9
  */
 public class Job {
-    /**
-     * Zero the Minimum for several fields
-     */
-    private static final int ZERO = 0;
 
-    /**
-     * Date for a Job.
-     */
+    //***** Field(s) ***************************************************************************************************
+
+    /** Date for a Job. */
     private String myDate;
 
-    /**
-     * Time for a Job.
-     */
+    /** Time for a Job. */
     private String myTime;
 
-    /**
-     * Park the Job is at.
-     * 
-     */
+    /** Park the Job is at. */
     private Park myPark;
 
-    /**
-     * Description of the Job.
-     */
+    /** Description of the Job. */
     private String myDescription;
 
-    /**
-     * Max Volunteers for the Job.
-     */
+    /** Max Volunteers for the Job. */
     private int myMaxVolunteers;
 
-    /**
-     * Minimum number of volunteers for light work grade.
-     */
+    /** Minimum number of volunteers for light work grade. */
     private int myMinLight;
 
-    /**
-     * Minimum number of volunteers for medium work grade.
-     */
+    /** Minimum number of volunteers for medium work grade. */
     private int myMinMedium;
 
-    /**
-     * Minimum number of volunteers for heavy work grade.
-     */
+    /** Minimum number of volunteers for heavy work grade. */
     private int myMinHeavy;
 
-    /**
-     * List of Volunteers signed up for the Job.
-     */
+    /** List of Volunteers signed up for the Job. */
     private List<String> myVolunteers;
 
-    /**
-     * Notes about the Job from the Manager or Office.
-     */
+    /** Notes about the Job from the Manager or Office. */
     private String myNotes;
+
+    //**** Constructor(s) **********************************************************************************************
 
     /**
      * No-argument constructor for a Job object.
      */
     public Job() {
-        setMyDate("");
-        setMyTime("");
-        myParkName = "";
-        setMyDescription("");
-        setMyMaxVolunteers(0);
-        setMyMinLight(0);
-        setMyMinMedium(0);
-        setMyMinHeavy(0);
-        setMyNotes("");
+        setDate("");
+        setTime("");
+        myPark = null;
+        setDescription("");
+        setMaxVolunteers(0);
+        setMinLight(0);
+        setMinMedium(0);
+        setMinHeavy(0);
+        setNotes("");
         myVolunteers = new ArrayList<String>();
     }
 
     /**
      * A four-argument constructor that takes the park name, time, date and description of a job.
      *
-     * @param theParkName The park name.
+     * @param thePark The park.
      * @param theDate The date.
      * @param theTime The time.
      * @param theDescription The description.
      * @throws NullPointerException if any value is null.
      */
-    public Job(final String theParkName, final String theDate, final String theTime, final String theDescription) {
-        this();
+    public Job(final Park thePark, final String theDate, final String theTime, final String theDescription) {
+        this(); // call no-arg constructor to init missing arguments
 
-        if (theParkName == null || theDate == null || theTime == null || theDescription == null) {
+        if (thePark == null || theDate == null || theTime == null || theDescription == null) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
-        myParkName = theParkName;
-        setMyDate(theDate);
-        setMyTime(theTime);
-        setMyDescription(theDescription);
+        myPark = thePark;
+        setDate(theDate);
+        setTime(theTime);
+        setDescription(theDescription);
     }
 
-    /**
-     * Getter for myParkName.
-     *
-     * @return myParkName
-     * @author Gardner Gomes
-     */
-    public String getMyParkName() {
-        return myParkName;
-    }
+    //**** Accessor/Mutator Method(s) **********************************************************************************
 
     /**
-     * Getter for myDate.
+     * Getter for the date of this Job.
      *
-     * @return myDate
+     * @return The date of the Job.
      * @author Gardner Gomes
      */
-    public String getMyDate() {
+    public String getDate() {
         return myDate;
     }
 
     /**
-     * Setter for myDate.
+     * Setter for date of this job.
      *
-     * @param theDate
+     * @param theDate The date of the Job.
      * @throws IllegalArgumentException Parameter not of type String
      * @author Gardner Gomes
      */
-    public void setMyDate(final String theDate) {
+    public void setDate(final String theDate) {
         if (theDate instanceof String) {
             this.myDate = theDate;
         } else {
@@ -142,23 +112,23 @@ public class Job {
     }
 
     /**
-     * Getter for myTime.
+     * Getter for the time of this Job.
      *
-     * @return myTime
+     * @return The time of Job.
      * @author Gardner Gomes
      */
-    public String getMyTime() {
+    public String getTime() {
         return myTime;
     }
 
     /**
-     * Setter for myTime.
+     * Setter for time of this Job.
      *
-     * @param theTime
+     * @param theTime The time of the Job.
      * @throws IllegalArgumentException Incompatible information for myTime
      * @author Gardner Gomes
      */
-    public void setMyTime(final String theTime) {
+    public void setTime(final String theTime) {
         if (theTime instanceof String) {
             this.myTime = theTime;
         } else {
@@ -167,23 +137,23 @@ public class Job {
     }
 
     /**
-     * Getter for Location.
+     * Getter for park location of this Job.
      *
-     * @return myLocation
+     * @return The Park location.
      * @author Gardner Gomes
      */
-    public String getMyPark() {
+    public Park getPark() {
         return myPark;
     }
 
     /**
-     * Setter for myParkName.
+     * Setter for park of this Job.
      *
-     * @param myLocation
+     * @param thePark The park.
      * @throws IllegalArgumentException Parameter if not of type Park.
      * @author Gardner Gomes
      */
-    public void setMyParkName(Park thePark) {
+    public void setPark(Park thePark) {
         if (thePark instanceof Park) {
             this.myPark = thePark;
         } else {
@@ -194,22 +164,22 @@ public class Job {
     }
 
     /**
-     * Getter for myDescription.
+     * Getter for the description of this Job.
      *
-     * @return myDescription
+     * @return The description of the Job.
      * @author Gardner Gomes
      */
-    public String getMyDescription() {
+    public String getDescription() {
         return myDescription;
     }
 
     /**
      * Setter for myDescription.
      *
-     * @param myDescriptionJob myJo
+     * @param theDescription The description of the Job.
      * @author Gardner Gomes
      */
-    public void setMyDescription(final String theDescription) {
+    public void setDescription(final String theDescription) {
         if (theDescription instanceof String) {
             this.myDescription = theDescription;
         } else {
@@ -219,23 +189,23 @@ public class Job {
     }
 
     /**
-     * Getter for myMaxVolunteers.
+     * Getter for the maximum required Volunteers for this Job.
      *
-     * @return myMaxVolunteers
+     * @return The maximum required Volunteers for the Job.
      * @author Gardner Gomes
      */
-    public int getMyMaxVolunteers() {
+    public int getMaxVolunteers() {
         return myMaxVolunteers;
     }
 
     /**
-     * Setter for myMaxVolunteers.
+     * Setter for the maximum required Volunteers for this Job.
      *
-     * @param myMaxVolunteers
+     * @param theMaxVolunteers The maximum Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public void setMyMaxVolunteers(final int theMaxVolunteers) {
-        if (theMaxVolunteers >= ZERO) {
+    public void setMaxVolunteers(final int theMaxVolunteers) {
+        if (theMaxVolunteers >= 0) {
             this.myMaxVolunteers = theMaxVolunteers;
         } else {
             throw new IllegalArgumentException("Size too ");
@@ -244,23 +214,23 @@ public class Job {
     }
 
     /**
-     * Getter for myMinLight.
+     * Getter for the minimum light-grade Volunteers required for this Job..
      *
-     * @return myMinLight
+     * @return The minimum light-grade Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public int getMyMinLight() {
+    public int getMinLight() {
         return myMinLight;
     }
 
     /**
-     * Setter for myMinLight.
+     * Setter for the minimum light-grade Volunteers required for this Job..
      *
-     * @param myMinLight
+     * @param theMinLight The minimum light-grade Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public void setMyMinLight(final int theMinLight) {
-        if (theMinLight >= ZERO) {
+    public void setMinLight(final int theMinLight) {
+        if (theMinLight >= 0) {
             this.myMinLight = theMinLight;
         } else {
             throw new IllegalArgumentException("Parameter is not of type Integer");
@@ -270,21 +240,21 @@ public class Job {
     /**
      * Getter for myMinMedium.
      *
-     * @return myMinMedium
+     * @return The minimum medium-grade Volunteers for this Job.
      * @author Gardner Gomes
      */
-    public int getMyMinMedium() {
+    public int getMinMedium() {
         return myMinMedium;
     }
 
     /**
      * Setter for myMinMedium.
      *
-     * @param myMinMedium
+     * @param theMinMedium The minimum medium-grade Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public void setMyMinMedium(final int theMinMedium) {
-        if (theMinMedium >= ZERO) {
+    public void setMinMedium(final int theMinMedium) {
+        if (theMinMedium >= 0) {
             this.myMinMedium = theMinMedium;
         } else {
             throw new IllegalArgumentException("Parameter is not of type Integer");
@@ -292,23 +262,23 @@ public class Job {
     }
 
     /**
-     * Getter for myMinHeavy.
+     * Getter for the minimum heavy-grade Volunteers required for this Job..
      *
-     * @return myMinHeavy
+     * @return myMinHeavy The minimum heavy-grade Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public int getMyMinHeavy() {
+    public int getMinHeavy() {
         return myMinHeavy;
     }
 
     /**
-     * Setter for MyMinHeavy.
+     * Setter for the minimum heavy-grade Volunteers required for this Job..
      *
-     * @param myMinHeavy
+     * @param theMinHeavy The minimum heavy-grade Volunteers required for this Job.
      * @author Gardner Gomes
      */
-    public void setMyMinHeavy(final int theMinHeavy) {
-        if (theMinHeavy >= ZERO) {
+    public void setMinHeavy(final int theMinHeavy) {
+        if (theMinHeavy >= 0) {
             this.myMinHeavy = theMinHeavy;
         } else {
             throw new IllegalArgumentException("Paramater is not of type Integer");
@@ -316,46 +286,46 @@ public class Job {
     }
 
     /**
-     * Getter for myVolunteers.
+     * Getter for the list of Volunteers signed up for this Job..
      *
-     * @return myVolunteers list
+     * @return The list of Volunteers signed up for this Job.
      * @author Gardner Gomes
      */
-    public List<String> getMyVolunteers() {
+    public List<String> getVolunteers() {
         return myVolunteers;
     }
 
     /**
-     * Add a Volunteer.
+     * Add a Volunteer for this Job.
      *
-     * @param myVolunteers
+     * @param theVolunteerUsername The unique username of the Volunteer.
      * @author Gardner Gomes
      */
-    public void setMyVolunteers(final String theVolunteerName) {
-        if (theVolunteerName instanceof String) {
-            this.myVolunteers.add(theVolunteerName);
+    public void setVolunteers(final String theVolunteerUsername) {
+        if (theVolunteerUsername instanceof String) {
+            this.myVolunteers.add(theVolunteerUsername);
         } else {
             throw new IllegalArgumentException("Parameter is not of type String");
         }
     }
 
     /**
-     * Getter for myNotes.
+     * Getter for the notes about this Job..
      *
-     * @return myNotes
+     * @return The notes about this Job.
      * @author Gardner Gomes
      */
-    public String getMyNotes() {
+    public String getNotes() {
         return myNotes;
     }
 
     /**
-     * Setter for myNotes.
+     * Setter for the field notes for this Job.
      *
-     * @param theNotes
+     * @param theNotes The field notes for this Job.
      * @author Gardner Gomes
      */
-    public void setMyNotes(final String theNotes) {
+    public void setNotes(final String theNotes) {
         if (theNotes instanceof String) {
             this.myNotes = theNotes;
         } else {
@@ -363,11 +333,13 @@ public class Job {
         }
     }
 
+    //***** Overridden method(s) ************************************************************************************
+
     /**
      * Equals operation for comparing Job objects for equality. We consider Job objects to be equal
      * if both Jobs have the same park name, date, and time fields.
      *
-     * TODO: This might have to changed if we decided to use the Calendar class for date & time representation.
+     * TODO: This might have to changed if we decide to use the Calendar class for date & time representation.
      *
      * @author Walter Weeks (ww3@uw.edu)
      * @param obj the other object we are comparing to.
@@ -383,7 +355,7 @@ public class Job {
         }
 
         Job otherJob = (Job) obj;
-        return myParkName.equals(otherJob.myParkName) && myDate.equals(otherJob.myDate) &&
+        return myPark.equals(otherJob.myPark) && myDate.equals(otherJob.myDate) &&
                 myTime.equals(otherJob.myTime);
     }
 }

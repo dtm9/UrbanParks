@@ -32,7 +32,9 @@ public class ParkManagerView extends View {
 	@Override
 	public void launchGUI() {
 		// TODO Auto-generated method stub
-		mySB.append("Welcome to Urban Parks\n\n");
+		mySB.append("\nWelcome to Urban Parks\nPark Manager: ");
+		mySB.append(myManager.getRealName());
+		mySB.append("\n----------------------------------------------------------\n\n");
 		mySB.append("1.Submit Job\n");
 		mySB.append("2.View Jobs\n");
 		mySB.append("\n\nPlease Select a number followed by the enter key: ");
@@ -75,6 +77,8 @@ public class ParkManagerView extends View {
 				myJob.setPark(tempPark);
 			}
 		}
+		System.out.println("\nSubmit a Job for " + myManager.getRealName());
+		System.out.print("----------------------------------------------------------\n\n");
 		System.out.print("Please set the Name of the Job: ");
 		myScanner.nextLine();
 		myJob.setName(myScanner.nextLine());
@@ -107,7 +111,9 @@ public class ParkManagerView extends View {
 	 * View Jobs elemt for UI
 	 */
 	private void ViewJobs() {
-		mySB.append("View Jobs\n\n");
+		mySB.append("\nView Jobs for ");
+		mySB.append(myManager.getRealName());
+		mySB.append("\n----------------------------------------------------------\n\n");
 		int count = 1;
 		for(int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
 			if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
@@ -164,12 +170,12 @@ public class ParkManagerView extends View {
 				}
 			}
 		}
-		// TODO Auto-generated method stub
 		
 	}
 	private void showJob(Job theJob) {
-		mySB.append("\n\nView of the selected Job.\n ----------------------------------------------------------\n");
-		System.out.println(mySB.toString());
+		mySB.append("\n\nView of the Job.");
+		mySB.append("\n----------------------------------------------------------\n\n");
+		System.out.print(mySB.toString());
 		mySB.delete(0, mySB.capacity());
 		showJobInformation(theJob);
 		showVolunteers(theJob);
@@ -182,19 +188,19 @@ public class ParkManagerView extends View {
 		mySB.append(theJob.getName());
 		mySB.append("\nDescription: ");
 		mySB.append(theJob.getDescription());
-		mySB.append("\nDate(Day/Month: ");
+		mySB.append("\nDate(Day/Month): ");
 		mySB.append(theJob.getDay());
 		mySB.append("/");
 		mySB.append(theJob.getMonth());
 		mySB.append("\nTime: ");
 		mySB.append(theJob.getTime());
-		mySB.append("\nMinumum Light Grade Volunteers: ");
+		mySB.append("\nMinumum Light Grade Volunteers(0 or More): ");
 		mySB.append(theJob.getMinLight());
-		mySB.append("\nMinumum Medium Grade Volunteers: ");
+		mySB.append("\nMinumum Medium Grade Volunteers(0 or More): ");
 		mySB.append(theJob.getMinMedium());
-		mySB.append("\nMinumum Heavy Grade Volunteers: ");
+		mySB.append("\nMinumum Heavy Grade Volunteers(0 or More): ");
 		mySB.append(theJob.getMinHeavy());
-		mySB.append("\nMaximum Volunteers: ");
+		mySB.append("\nMaximum Volunteers(0 or More): ");
 		mySB.append(theJob.getMaxVolunteers());
 		mySB.append("\nAdditional Notes: ");
 		mySB.append(theJob.getNotes());
@@ -205,7 +211,7 @@ public class ParkManagerView extends View {
 		
 	}
 	private void showVolunteers(Job theJob) {
-		System.out.println("Volunteers for this Job.\n");
+		System.out.print("\nVolunteers for this Job.\n");
 		List<String> myVolunteers = theJob.getVolunteers();
 		Iterator itr = myVolunteers.iterator();
 		int count = 1;

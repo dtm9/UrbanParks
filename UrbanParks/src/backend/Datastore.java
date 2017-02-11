@@ -340,6 +340,16 @@ public final class Datastore implements Serializable {
     }
 
     /**
+     * Get the maximum number of pending jobs.
+     *
+     * @author Walter Weeks
+     * @return The maximum number of pending jobs.
+     */
+    public int getMaxPendingJobs() {
+        return myMaxPendingJobs;
+    }
+
+    /**
      * Set the maximum number of pending jobs.
      *
      * @author Walter Weeks

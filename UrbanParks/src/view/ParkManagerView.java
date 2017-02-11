@@ -79,14 +79,19 @@ public class ParkManagerView extends View {
 				mySB.append(count++);
 				mySB.append(". ");
 				mySB.append(myDatastore.getPendingJobs().get(i).getName());
+				mySB.append(", ");
+				mySB.append(myDatastore.getPendingJobs().get(i).getDate());
 				mySB.append("\n");
 			}
 		}
+		mySB.append("\nPast Jobs Below this Point\n");
 		for(int i = myDatastore.getNumberOfJobs(); i < myDatastore.getNumberOfJobs() + myDatastore.getNumberOfPreviousJobs(); i++) {
 			if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
 				mySB.append(count++);
 				mySB.append(". ");
 				mySB.append(myDatastore.getPreviousJobs().get(i).getName());
+				mySB.append(", ");
+				mySB.append(myDatastore.getPreviousJobs().get(i).getDate());
 				mySB.append("\n");
 			}
 		}
@@ -95,7 +100,36 @@ public class ParkManagerView extends View {
 		mySB.delete(0, mySB.capacity());
 		int theChoice = myScanner.nextInt();
 		// TODO get choice to show the job details
+		count = 0;
+		boolean flag = false;
+		for(int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
+			if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
+				count++;
+				if (count == theChoice) {
+					OpenJob(myDatastore.getPendingJobs().get(i));
+				}
+			}
+			if (i == myDatastore.getNumberOfJobs()) {
+				flag = true;
+				theChoice = theChoice - count;
+				count = 0;
+			}
+		}
+		if (flag) {
+			for(int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
+				if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
+					count++;
+					if (count == theChoice) {
+						OpenJob(myDatastore.getPreviousJobs().get(i));
+					}
+				}
+			}
+		}
+		// TODO Auto-generated method stub
 		
+	}
+	private void OpenJob(Job job) {
+		System.out.println("It Worked");
 		// TODO Auto-generated method stub
 		
 	}

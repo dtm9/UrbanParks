@@ -33,7 +33,7 @@ public class OfficeStaffView extends View {
   private StringBuilder sb;
   private OfficeStaff myOfficeStaff;
   private Datastore myDataStore;
-  private Scanner myScanner = new Scanner(System.in);
+  private Scanner myScanner = new Scanner(System.in); 
   private StringBuilder mySB = new StringBuilder();
 
   

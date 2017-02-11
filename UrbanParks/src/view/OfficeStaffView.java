@@ -77,6 +77,14 @@ public class OfficeStaffView extends View {
 		switch (theChoice) {
 		case 1:
 		    System.out.println(printCalendar(theDatastore));
+		    System.out.println();
+		    System.out.println("What would you like to do?");
+		    System.out.println("1. Go back to prior menu");
+		    System.out.println("2. Exit eUrbanParks");
+			int newChoice = myScanner.nextInt();
+			if (newChoice == 1) {
+				mainMenu();
+			}
 			break;
 		case 2:
 		    System.out.println(printCalendar(theDatastore));
@@ -94,6 +102,7 @@ public class OfficeStaffView extends View {
 		List<Job> allJobs = theDatastore.getPendingJobs();
 		
 		// Still have to add total number of jobs to the first line
+		calendarString.append(System.getProperty("line.separator"));
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));
 		calendarString.append(" " + today.getDayOfMonth() + ", ");
 		calendarString.append(today.getYear() + ". ");

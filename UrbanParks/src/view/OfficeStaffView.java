@@ -6,6 +6,8 @@
  */
 package view;
 
+import java.util.Calendar;
+
 /**
  * @author Dylan Miller
  *
@@ -49,5 +51,31 @@ public class OfficeStaffView extends View {
         	//some other method that will run a public method from model code, print that, and then show a menu
         	break;
       }
+  }
+  
+  public String viewCalendar() { // Need to get data from Datastore for jobs
+	Calendar calendar = Calendar.getInstance();
+	StringBuilder calendarString = new StringBuilder();
+	int theMonth = Calendar.MONTH;
+	switch(theMonth) {
+	  case 1: calendarString.append("January "); break;
+	  case 2: calendarString.append("February "); break;
+	  case 3: calendarString.append("March "); break;
+	  case 4: calendarString.append("April "); break;
+	  case 5: calendarString.append("May "); break;
+	  case 6: calendarString.append("June "); break;
+	  case 7: calendarString.append("July "); break;
+	  case 8: calendarString.append("August "); break;
+	  case 9: calendarString.append("September "); break;
+	  case 10: calendarString.append("October "); break;
+	  case 11: calendarString.append("November "); break;
+	  default: calendarString.append("December "); break;
+	}
+	calendarString.append(calendar.get(Calendar.DAY_OF_MONTH) + ", ");
+	calendarString.append(calendar.get(Calendar.YEAR) + ".");
+	calendarString.append(System.getProperty("line.separator"));
+	calendarString.append(System.getProperty("line.separator"));
+
+	return calendarString.toString();
   }
 }

@@ -89,7 +89,7 @@ public class Job implements Serializable{
     		   final String theDescription,final String theName, final int theDay, final int theMonth) {
         this(); // call no-arg constructor to init missing arguments
 
-        if (thePark == null || theDay > 0 || theTime == null || theDescription == null || theName == null || theMonth > 0) {
+        if (thePark == null || theDay <= 0 || theTime == null || theDescription == null || theName == null || theMonth <= 0) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
@@ -134,7 +134,7 @@ public class Job implements Serializable{
      * @author Gardner Gomes
      */
     public int getMonth() {
-        return myDay;
+        return myMonth;
     }
 
     /**
@@ -146,7 +146,7 @@ public class Job implements Serializable{
      */
     public void setMonth(final int theMonth) {
         if (theMonth > 0 && theMonth <= 12) {
-            this.myDay = theMonth;
+            this.myMonth = theMonth;
         } else {
             throw new IllegalArgumentException("Parameter is out of Bounds for Month");
         }

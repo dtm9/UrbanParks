@@ -82,7 +82,7 @@ public enum Month {
      * @return The full-length month representation.
      */
     @Override
-    String toString() {
+    public String toString() {
         return myFullMonthName;
     }
 }

@@ -61,6 +61,7 @@ public class Job implements Serializable{
      * No-argument constructor for a Job object.
      */
     public Job() {
+    	setName("");
         setDay(1);
         setMonth(1);
         setTime("");

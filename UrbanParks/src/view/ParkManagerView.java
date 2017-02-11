@@ -64,7 +64,29 @@ public class ParkManagerView extends View {
 	 */
 	private void SubmitJob() {
 		Job myJob = new Job();
-		
+		System.out.print("Please set the Name of the Job: ");
+		myJob.setName(myScanner.nextLine());
+		System.out.print("Please type out a description of the Job: ");
+		myJob.setDescription(myScanner.nextLine());
+		System.out.print("Please set the Month of this Job(1-12): ");
+		myJob.setMonth(myScanner.nextInt());
+		System.out.print("Please set the Day of this Job(1-31): ");
+		myJob.setDay(myScanner.nextInt());
+		System.out.print("Please set the Time of this Job(ie. 12:30): ");
+		myJob.setTime(myScanner.nextLine());
+		System.out.print("Please set the minumum Light Grade Workers: ");
+		myJob.setMinLight(myScanner.nextInt());
+		System.out.print("Please set the minumum Medium Grade Workers: ");
+		myJob.setMinMedium(myScanner.nextInt());
+		System.out.print("Please set the minumum Heavy Grade Workers: ");
+		myJob.setMinHeavy(myScanner.nextInt());
+		System.out.print("Please set the maximum number of Volunteers: ");
+		myJob.setMaxVolunteers(myScanner.nextInt());
+		System.out.print("Please add any aditional notes here: ");
+		myJob.setNotes(myScanner.nextLine());
+		// TODO add park to the Job somehow?
+		myDatastore.addJob(myJob);
+		showJob(myJob);
 		// TODO Auto-generated method stub
 		
 	}
@@ -111,7 +133,7 @@ public class ParkManagerView extends View {
 			if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
 				count++;
 				if (count == theChoice) {
-					OpenJob(myDatastore.getPendingJobs().get(i));
+					showJob(myDatastore.getPendingJobs().get(i));
 				}
 			}
 			if (i == myDatastore.getNumberOfJobs()) {
@@ -125,7 +147,7 @@ public class ParkManagerView extends View {
 				if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
 					count++;
 					if (count == theChoice) {
-						OpenJob(myDatastore.getPreviousJobs().get(i));
+						showJob(myDatastore.getPreviousJobs().get(i));
 					}
 				}
 			}
@@ -133,7 +155,7 @@ public class ParkManagerView extends View {
 		// TODO Auto-generated method stub
 		
 	}
-	private void OpenJob(Job job) {
+	private void showJob(Job job) {
 		System.out.println("It Worked");
 		
 		// TODO Auto-generated method stub

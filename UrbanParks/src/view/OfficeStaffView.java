@@ -60,6 +60,7 @@ public class OfficeStaffView extends View {
 	  //TODO print somethign with SB and listen for input option on console	  
 	  Datastore theDatastore = myDataStore;
 	  int choice;
+	  int newChoice;
 	  choice = 0; //temp to clear annoying error for temp code
 
 		// TODO Auto-generated method stub
@@ -81,13 +82,29 @@ public class OfficeStaffView extends View {
 		    System.out.println("What would you like to do?");
 		    System.out.println("1. Go back to prior menu");
 		    System.out.println("2. Exit eUrbanParks");
-			int newChoice = myScanner.nextInt();
+			newChoice = myScanner.nextInt();
 			if (newChoice == 1) {
 				mainMenu();
 			}
 			break;
 		case 2:
-		    System.out.println(printCalendar(theDatastore));
+		    System.out.println("What would you like to do?");
+		    System.out.println("1. Change max pending jobs");
+		    System.out.println("2. Go back to main menu");
+		    System.out.println("3. Exit eUrbanParks");
+			newChoice = myScanner.nextInt();
+			if (newChoice == 1) {
+				System.out.println("Please enter the new maximum number of pending jobs");
+				newChoice = myScanner.nextInt();
+				myDataStore.setMaxPendingJobs(newChoice);
+				System.out.println("The new maximum number of pending jobs is " + newChoice);
+				mainMenu();
+			} else if (newChoice == 2) {
+				mainMenu();
+			} else {
+				break;
+			}
+		case 3: // exit Urban Parks
 			break;
 		}
   }

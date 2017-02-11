@@ -73,6 +73,7 @@ public class ParkManagerView extends View {
 		System.out.print("Please set the Day of this Job(1-31): ");
 		myJob.setDay(myScanner.nextInt());
 		System.out.print("Please set the Time of this Job(ie. 12:30): ");
+		myScanner.nextLine();
 		myJob.setTime(myScanner.nextLine());
 		System.out.print("Please set the minumum Light Grade Workers: ");
 		myJob.setMinLight(myScanner.nextInt());

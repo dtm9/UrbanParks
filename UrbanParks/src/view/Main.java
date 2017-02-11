@@ -44,7 +44,7 @@ public class Main {
 
     //get the username
     mySB.append("Username: ");
-    System.out.println(mySB.toString());
+    System.out.print(mySB.toString());
     String username = myScanner.nextLine();
     
     //get the list of accounts

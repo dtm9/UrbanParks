@@ -40,6 +40,8 @@ public class IOTest {
     Park testPark3;
     Job testJob1;
     Job testJob2;
+    Job testJob3;
+    Job testJob4;
     Volunteer testVolunteer1;
     OfficeStaff testStaff1;
 	
@@ -73,6 +75,12 @@ public class IOTest {
 	
 	testJob2 = new Job(testPark2, "02/19/2017", "09:00", "Paint over graphiti.","Painting", 19, 2);
 	testDatastore.addJob(testJob2);
+	
+	testJob3 = new Job(testPark3, "02/28/2017", "11:00", "Feed the ducks.","Feeding", 28, 2);
+	testDatastore.addJob(testJob3);
+	
+	testJob4 = new Job(testPark3, "02/28/2017", "14:00", "Mow grass.","Mowing", 28, 2);
+	testDatastore.addJob(testJob4);
 	
 	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);
 	testDatastore.addAccount(testVolunteer1);

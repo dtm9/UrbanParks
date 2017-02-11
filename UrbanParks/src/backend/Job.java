@@ -89,7 +89,7 @@ public class Job implements Serializable{
     		   final String theDescription,final String theName, final int theDay, final int theMonth) {
         this(); // call no-arg constructor to init missing arguments
 
-        if (thePark == null || theDay >= 0 || theTime == null || theDescription == null || theName == null || theMonth >= 0) {
+        if (thePark == null || theDay > 0 || theTime == null || theDescription == null || theName == null || theMonth > 0) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
@@ -405,7 +405,7 @@ public class Job implements Serializable{
      * @return  The hash code representing this object.
      */
     public int hashCode() {
-        return Objects.hash(myPark, myDate, myTime);
+        return Objects.hash(myPark, myTime);
     }
 
     /**
@@ -431,7 +431,7 @@ public class Job implements Serializable{
         }
 
         Job otherJob = (Job) theObj;
-        return myPark.equals(otherJob.myPark) && myDate.equals(otherJob.myDate) &&
+        return myPark.equals(otherJob.myPark) && //myDate.equals(otherJob.myDate) &&
                 myTime.equals(otherJob.myTime);
     }
 

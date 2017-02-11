@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 import backend.Account;
 import backend.Datastore;
@@ -32,6 +33,9 @@ public class OfficeStaffView extends View {
   private StringBuilder sb;
   private OfficeStaff myOfficeStaff;
   private Datastore myDataStore;
+  private Scanner myScanner = new Scanner(System.in);
+  private StringBuilder mySB = new StringBuilder();
+
   
 	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
 		super();
@@ -49,25 +53,35 @@ public class OfficeStaffView extends View {
   public void launchGUI() {
     //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
     //TODO some kind of exit/cleanup method after the call stack pops back here at the end.
-    Datastore theDatastore = myDataStore;
-    System.out.println(printCalendar(theDatastore));
+	  mainMenu();
   }
   
   private void mainMenu() {
-	  //TODO print somethign with SB and listen for input option on console
-	  
-	  //TODO catch console input
+	  //TODO print somethign with SB and listen for input option on console	  
+	  Datastore theDatastore = myDataStore;
 	  int choice;
 	  choice = 0; //temp to clear annoying error for temp code
-	  
-      switch (choice) {
-        case 0:
-        	//return (back to the main menu)
-        	break;
-        case 1:
-        	//some other method that will run a public method from model code, print that, and then show a menu
-        	break;
-      }
+
+		// TODO Auto-generated method stub
+		mySB.append("\nWelcome to Urban Parks Office Staff: ");
+		mySB.append(myOfficeStaff.getRealName());
+		mySB.append("\n----------------------------------------------------------\n\n");
+		mySB.append("What would you like to do?\n");
+		mySB.append("1. View calendar of upcoming jobs\n");
+		mySB.append("2. Administrative functions\n");
+		mySB.append("3. Exit eUrban Parks\n");
+		System.out.print(mySB.toString());
+		mySB.delete(0, mySB.capacity());
+		int theChoice = myScanner.nextInt();
+		 
+		switch (theChoice) {
+		case 1:
+		    System.out.println(printCalendar(theDatastore));
+			break;
+		case 2:
+		    System.out.println(printCalendar(theDatastore));
+			break;
+		}
   }
   
 	private String printCalendar(Datastore theDatastore) {

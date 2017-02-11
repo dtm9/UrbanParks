@@ -19,8 +19,11 @@ public class Job implements Serializable{
     /** Default serialVersionUID for serialization. */
 	private static final long serialVersionUID = 1L;
 
-	/** Date for a Job. */
-    private String myDate;
+	/** Day for a Job. */
+    private int myDay;
+    
+    /** Month for a Job. */
+    private int myMonth;
 
     /** Time for a Job. */
     private String myTime;
@@ -58,7 +61,8 @@ public class Job implements Serializable{
      * No-argument constructor for a Job object.
      */
     public Job() {
-        setDate("");
+        setDay(1);
+        setMonth(1);
         setTime("");
         myPark = null;
         setDescription("");
@@ -77,17 +81,21 @@ public class Job implements Serializable{
      * @param theDate The date.
      * @param theTime The time.
      * @param theDescription The description.
+     * @param theDay 
+     * @param theMonth 
      * @throws NullPointerException if any value is null.
      */
-    public Job(final Park thePark, final String theDate, final String theTime, final String theDescription,final String theName) {
+    public Job(final Park thePark, final String theDate, final String theTime, 
+    		   final String theDescription,final String theName, final int theDay, final int theMonth) {
         this(); // call no-arg constructor to init missing arguments
 
-        if (thePark == null || theDate == null || theTime == null || theDescription == null || theName == null) {
+        if (thePark == null || theDay >= 0 || theTime == null || theDescription == null || theName == null || theMonth >= 0) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
         myPark = thePark;
-        setDate(theDate);
+        setDay(theDay);
+        setMonth(theMonth);
         setTime(theTime);
         setDescription(theDescription);
         setName(theName);
@@ -96,27 +104,51 @@ public class Job implements Serializable{
     //**** Accessor/Mutator Method(s) **********************************************************************************
 
     /**
-     * Getter for the date of this Job.
+     * Getter for the day of this Job.
      *
-     * @return The date of the Job.
+     * @return The day of the Job.
      * @author Gardner Gomes
      */
-    public String getDate() {
-        return myDate;
+    public int getDay() {
+        return myDay;
     }
 
     /**
-     * Setter for date of this job.
+     * Setter for day of this job.
      *
-     * @param theDate The date of the Job.
+     * @param theDate The day of the Job.
      * @throws IllegalArgumentException Parameter not of type String
      * @author Gardner Gomes
      */
-    public void setDate(final String theDate) {
-        if (theDate instanceof String) {
-            this.myDate = theDate;
+    public void setDay(final int theDay) {
+        if (theDay > 0 && theDay <= 31) {
+            this.myDay = theDay;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is out of bounds for Day");
+        }
+    }
+    /**
+     * Getter for the Month of this Job.
+     *
+     * @return The Month of the Job.
+     * @author Gardner Gomes
+     */
+    public int getMonth() {
+        return myDay;
+    }
+
+    /**
+     * Setter for day of this job.
+     *
+     * @param theDate The day of the Job.
+     * @throws IllegalArgumentException Parameter not of type String
+     * @author Gardner Gomes
+     */
+    public void setMonth(final int theMonth) {
+        if (theMonth > 0 && theMonth <= 12) {
+            this.myDay = theMonth;
+        } else {
+            throw new IllegalArgumentException("Parameter is out of Bounds for Month");
         }
     }
 

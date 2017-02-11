@@ -51,24 +51,44 @@ public class JobTest implements TestConstants  {
 	//***** Unit test(s) *********************************************************************************************
 
 	/**
-	 * Test for Good date on setDate().
+	 * Test for Good day on setDay().
      *
 	 * @author Gardner Gomes
 	 */
 	@Test
-	public final void setDate_goodDate_dateSet() {
-		myJob.setDate("2017/03/05");
-	    assertEquals("2017/03/05", myJob.getDate());
+	public final void setDay_goodDay_daySet() {
+		myJob.setDay(GOOD_INT);
+	    assertEquals(GOOD_INT, myJob.getDay());
 	}
 
 	/**
-	 * Test for bad date setting.
+	 * Test for bad day setting.
      *
 	 * @author Gardner Gomes
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void setDate_badDate_exceptionThrown() {
-	    myJob.setDate(BAD_STRING);
+	public void setDay_badDay_exceptionThrown() {
+	    myJob.setDay(BAD_INT);
+	}
+	/**
+	 * Test for Good Month on setMonth().
+     *
+	 * @author Gardner Gomes
+	 */
+	@Test
+	public final void setMonth_goodMonth_MonthSet() {
+		myJob.setMonth(GOOD_INT);
+	    assertEquals(GOOD_INT, myJob.getMonth());
+	}
+
+	/**
+	 * Test for bad Month setting.
+     *
+	 * @author Gardner Gomes
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void setMonth_badMonth_exceptionThrown() {
+	    myJob.setDay(BAD_INT);
 	}
 
 	/**
@@ -268,8 +288,8 @@ public class JobTest implements TestConstants  {
 	@Test
 	public void testEquality_EqualJobs_True() {
 		Park park = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
-		Job job1 = new Job(park, "2017/03/01", "1200", "Rake leaves", "Raking");
-		Job job2 = new Job(park, "2017/03/01", "1200", "Rake leaves","Raking");
+		Job job1 = new Job(park, "2017/03/01", "1200", "Rake leaves", "Raking", 2, 10);
+		Job job2 = new Job(park, "2017/03/01", "1200", "Rake leaves", "Raking", 2, 10);
 		assertTrue(job1.equals(job2));
 	}
 
@@ -282,8 +302,8 @@ public class JobTest implements TestConstants  {
 	public void testInequality_DifferentJobs_False() {
         Park park1 = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
 		Park park2 = new Park(theManager, "Jefferson Park","801 N Mason Ave","Tacoma", "WA", "98406");
-        Job job1 = new Job(park1, "2017/03/01", "1200", "Rake leaves", "Raking");
-		Job job2 = new Job(park2, "2017/03/01", "1200", "Rake leaves", "Raking");
+        Job job1 = new Job(park1, "2017/03/01", "1200", "Rake leaves", "Raking", 2, 10);
+		Job job2 = new Job(park2, "2017/03/01", "1200", "Rake leaves", "Raking",2 ,10);
 		assertFalse(job1.equals(job2));
 	}
 }

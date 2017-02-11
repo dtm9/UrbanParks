@@ -68,10 +68,10 @@ public class IOTest {
     testPark3 = new Park(testPM3, "Wright Park", "501 S I St", "Tacoma", "WA", "98408");
     testDatastore.addPark(testPark3);
 
-	testJob1 = new Job(testPark1, "02/18/2017", "10:00", "Empty all trash and recycling bins.","Raking");
+	testJob1 = new Job(testPark1, "02/18/2017", "10:00", "Empty all trash and recycling bins.","Raking", 2, 10);
 	testDatastore.addJob(testJob1);
 	
-	testJob2 = new Job(testPark2, "02/19/2017", "09:00", "Paint over graphiti.","Painting");
+	testJob2 = new Job(testPark2, "02/19/2017", "09:00", "Paint over graphiti.","Painting",2 ,13 );
 	testDatastore.addJob(testJob2);
 	
 	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);

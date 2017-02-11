@@ -64,6 +64,7 @@ public class ParkManagerView extends View {
 	 */
 	private void SubmitJob() {
 		Job myJob = new Job();
+		
 		// TODO Auto-generated method stub
 		
 	}
@@ -80,7 +81,9 @@ public class ParkManagerView extends View {
 				mySB.append(". ");
 				mySB.append(myDatastore.getPendingJobs().get(i).getName());
 				mySB.append(", ");
-				mySB.append(myDatastore.getPendingJobs().get(i).getDate());
+				mySB.append(myDatastore.getPendingJobs().get(i).getDay());
+				mySB.append("/");
+				mySB.append(myDatastore.getPendingJobs().get(i).getMonth());
 				mySB.append("\n");
 			}
 		}
@@ -91,7 +94,9 @@ public class ParkManagerView extends View {
 				mySB.append(". ");
 				mySB.append(myDatastore.getPreviousJobs().get(i).getName());
 				mySB.append(", ");
-				mySB.append(myDatastore.getPreviousJobs().get(i).getDate());
+				mySB.append(myDatastore.getPendingJobs().get(i).getDay());
+				mySB.append("/");
+				mySB.append(myDatastore.getPendingJobs().get(i).getMonth());
 				mySB.append("\n");
 			}
 		}

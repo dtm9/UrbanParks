@@ -3,11 +3,14 @@
  */
 package view;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import backend.Account;
 import backend.Datastore;
 import backend.Job;
+import backend.Park;
 import backend.ParkManager;
 
 /**
@@ -64,6 +67,14 @@ public class ParkManagerView extends View {
 	 */
 	private void SubmitJob() {
 		Job myJob = new Job();
+		List<Park> theParks = myDatastore.getAllParks();
+		Iterator itr = theParks.iterator();
+		while(myJob.getPark() == null ) {
+			Park tempPark = (Park) itr.next();
+			if(tempPark.getManager().equals(myManager)) {
+				myJob.setPark(tempPark);
+			}
+		}
 		System.out.print("Please set the Name of the Job: ");
 		myScanner.nextLine();
 		myJob.setName(myScanner.nextLine());

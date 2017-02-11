@@ -18,8 +18,6 @@ import backend.Volunteer;
 
 public class Main {
 
-  private Account user;
-  private View view;
   static Datastore datastore;
   private static StringBuilder mySB = new StringBuilder();
   private static Scanner myScanner = new Scanner(System.in);
@@ -33,35 +31,70 @@ public class Main {
   public static void main(final String[] args) {
     
     load();
+    //debug_init();
     init();
     save();
   }
-
+  
+  /**
+   * Helper method to log in and start the GUI.
+   * @author Dylan Miller 
+   */
   private static void init() {
-	  
-    //TODO print a login screen and listen for input
-    //note: eclipse will stop complaining once the code for these TODO statements is done. Complaining of no initialization - Dylan
-	  System.out.print(mySB.append("please enter your email(anything works this is a test): "));
-	  String myUsername = myScanner.nextLine();//scanner to get the username for checking acounts, not used yet.
-	  List<Account> myAccounts = datastore.getAllAccounts();
-	  //Just using the IOtest and Hard coding to load a View
-	  View theView = new ParkManagerView(myAccounts.get(0),datastore);
-//	  View theView = new OfficeStaffView(myAccounts.get(4),datastore);
-//	  View theView = new VolunteerView(myAccounts.get(4),datastore);
-	  theView.launchGUI();
-    //TODO capture user's input and match account name
 
-//    if (theUser instanceof Volunteer) {
-//      theView = new VolunteerView();
-//    } else if (theUser instanceof ParkManager) {
-//      theView = new ParkManagerView();
-//    } else if (theUser instanceof OfficeStaff) {
-//      theView = new OfficeStaffView();
-//    } else {
-//      //TODO throw some kind of exception. We should never each this code block.
-//    }
-//    
-//    theView.launchGUI();
+    //get the username
+    mySB.append("Username: ");
+    System.out.println(mySB.toString());
+    String username = myScanner.nextLine();
+    
+    //get the list of accounts
+    List<Account> users = datastore.getAllAccounts();
+    boolean found = false;
+    Account userAccount = null;
+    View theView = null;
+    
+    //seek the list for the entered username
+    for (Account user : users) {
+      if (!found && user.getUsername().equals(username)) {
+        userAccount = user;
+        found = true;
+      }
+    }
+    
+  theView = generateView(userAccount, theView);
+  theView.launchGUI();
+    
+  }
+
+/**
+ * @param userAccount
+ * @param theView
+ * @return
+ */
+private static View generateView(Account userAccount, View theView) {
+	if (userAccount instanceof Volunteer) {
+      theView = new VolunteerView();
+    } else if (userAccount instanceof ParkManager) {
+      theView = new ParkManagerView(userAccount, datastore);
+    } else if (userAccount instanceof OfficeStaff) {
+      theView = new OfficeStaffView(userAccount, datastore);
+    } else {
+      throw new NullPointerException("Account not found.");
+    }
+	return theView;
+}
+  private static void debug_init() {
+
+    System.out.print(mySB.append("please enter your email(anything works this is a test): "));
+	String myUsername = myScanner.nextLine();//scanner to get the username for checking acounts, not used yet.
+	List<Account> myAccounts = datastore.getAllAccounts();
+
+    //Just using the IOtest and Hard coding to load a View
+	View theView = new ParkManagerView(myAccounts.get(0),datastore);
+    //View theView = new OfficeStaffView(myAccounts.get(4),datastore);
+    //View theView = new VolunteerView(myAccounts.get(4),datastore);
+	theView.launchGUI();
+
   }
   
   public static void save() { //consider private or package

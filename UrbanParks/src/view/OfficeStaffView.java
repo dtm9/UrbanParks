@@ -16,6 +16,7 @@ import java.util.Locale;
 import backend.Account;
 import backend.Datastore;
 import backend.ParkManager;
+import backend.OfficeStaff;
 
 /**
  * @author Dylan Miller
@@ -27,12 +28,12 @@ public class OfficeStaffView extends View {
   private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
   private StringBuilder sb;
-  private ParkManager myManager;
+  private OfficeStaff myManager;
   private Datastore myDataStore;
   
 	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
 		super();
-		myManager = (ParkManager) theAccount;
+		myManager = (OfficeStaff) theAccount;
 		myDataStore = theDatastore;
 		sb = new StringBuilder();
 	}

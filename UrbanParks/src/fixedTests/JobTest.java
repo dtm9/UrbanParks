@@ -98,7 +98,7 @@ public class JobTest implements TestConstants  {
 	 * @author Gardner Gomes
 	 */
 	@Test
-	public void setPark_goodPark_parkNameSet() {
+	public void setPark_goodPark_parkSet() {
 		myJob.setPark(thePark);
 		assertEquals(thePark, myJob.getPark());
 	}
@@ -109,7 +109,7 @@ public class JobTest implements TestConstants  {
 	 * @author Gardner Gomes
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void setParkName_badName_ExceptionThrown() {
+	public void setPark_badName_ExceptionThrown() {
 		myJob.setPark(P_NULL);
 	}
 

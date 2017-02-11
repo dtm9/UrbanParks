@@ -24,6 +24,9 @@ public class Job implements Serializable{
 
     /** Time for a Job. */
     private String myTime;
+    
+    /** Name of Job. */
+    private String myName;
 
     /** Park the Job is at. */
     private Park myPark;
@@ -337,6 +340,27 @@ public class Job implements Serializable{
             throw new IllegalArgumentException("Parameter is not of type String");
         }
     }
+    /**
+     * Getter for myName.
+     * @author VG Gnome
+     * @return the Name of the Job.
+     */
+    public String getMyName() {
+		return myName;
+	}
+    /**
+     * Setter for the name of the Job.
+     * @author VG Gnome
+     * @param theName
+     */
+	public void setMyName(String theName) {
+		if (theName instanceof String) {
+			this.myName = theName;
+		} else {
+            throw new IllegalArgumentException("Parameter is not of type String");
+        }
+			
+	}
 
     //***** Overridden method(s) ***************************************************************************************
 
@@ -377,4 +401,5 @@ public class Job implements Serializable{
         return myPark.equals(otherJob.myPark) && myDate.equals(otherJob.myDate) &&
                 myTime.equals(otherJob.myTime);
     }
+
 }

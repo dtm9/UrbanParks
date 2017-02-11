@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.Scanner;
 
 import backend.Account;
 import backend.Datastore;
@@ -19,6 +21,8 @@ public class Main {
   private Account user;
   private View view;
   static Datastore datastore;
+  private static StringBuilder mySB = new StringBuilder();
+  private static Scanner myScanner = new Scanner(System.in);
   
   /**
    * Empty package-level constructor for testing purposes only.
@@ -27,17 +31,22 @@ public class Main {
   Main() {}
   
   public static void main(final String[] args) {
-    //init();
-    load();
     
+    load();
+    init();
     save();
   }
 
   private static void init() {
-    
+	  
     //TODO print a login screen and listen for input
     //note: eclipse will stop complaining once the code for these TODO statements is done. Complaining of no initialization - Dylan
-
+	  System.out.print(mySB.append("please enter your email(anything works this is a test): "));
+	  String myUsername = myScanner.nextLine();//scanner to get the username for checking acounts, not used yet.
+	  List<Account> myAccounts = datastore.getAllAccounts();
+	  //Just using the IOtest and Hard coding to load a Manager.
+	  View theView = new ParkManagerView(myAccounts.get(1),datastore);
+	  theView.launchGUI();
     //TODO capture user's input and match account name
 
 //    if (theUser instanceof Volunteer) {

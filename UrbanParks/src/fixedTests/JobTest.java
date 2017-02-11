@@ -268,8 +268,8 @@ public class JobTest implements TestConstants  {
 	@Test
 	public void testEquality_EqualJobs_True() {
 		Park park = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
-		Job job1 = new Job(park, "2017/03/01", "1200", "Rake leaves");
-		Job job2 = new Job(park, "2017/03/01", "1200", "Rake leaves");
+		Job job1 = new Job(park, "2017/03/01", "1200", "Rake leaves", "Raking");
+		Job job2 = new Job(park, "2017/03/01", "1200", "Rake leaves","Raking");
 		assertTrue(job1.equals(job2));
 	}
 
@@ -282,8 +282,8 @@ public class JobTest implements TestConstants  {
 	public void testInequality_DifferentJobs_False() {
         Park park1 = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
 		Park park2 = new Park(theManager, "Jefferson Park","801 N Mason Ave","Tacoma", "WA", "98406");
-        Job job1 = new Job(park1, "2017/03/01", "1200", "Rake leaves");
-		Job job2 = new Job(park2, "2017/03/01", "1200", "Rake leaves");
+        Job job1 = new Job(park1, "2017/03/01", "1200", "Rake leaves", "Raking");
+		Job job2 = new Job(park2, "2017/03/01", "1200", "Rake leaves", "Raking");
 		assertFalse(job1.equals(job2));
 	}
 }

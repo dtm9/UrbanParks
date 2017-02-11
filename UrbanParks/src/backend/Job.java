@@ -79,10 +79,10 @@ public class Job implements Serializable{
      * @param theDescription The description.
      * @throws NullPointerException if any value is null.
      */
-    public Job(final Park thePark, final String theDate, final String theTime, final String theDescription) {
+    public Job(final Park thePark, final String theDate, final String theTime, final String theDescription,final String theName) {
         this(); // call no-arg constructor to init missing arguments
 
-        if (thePark == null || theDate == null || theTime == null || theDescription == null) {
+        if (thePark == null || theDate == null || theTime == null || theDescription == null || theName == null) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
@@ -90,6 +90,7 @@ public class Job implements Serializable{
         setDate(theDate);
         setTime(theTime);
         setDescription(theDescription);
+        setName(theName);
     }
 
     //**** Accessor/Mutator Method(s) **********************************************************************************
@@ -345,7 +346,7 @@ public class Job implements Serializable{
      * @author VG Gnome
      * @return the Name of the Job.
      */
-    public String getMyName() {
+    public String getName() {
 		return myName;
 	}
     /**
@@ -353,7 +354,7 @@ public class Job implements Serializable{
      * @author VG Gnome
      * @param theName
      */
-	public void setMyName(String theName) {
+	public void setName(String theName) {
 		if (theName instanceof String) {
 			this.myName = theName;
 		} else {

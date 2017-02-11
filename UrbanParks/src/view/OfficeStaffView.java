@@ -64,7 +64,8 @@ public class OfficeStaffView extends View {
 		StringBuilder calendarString = new StringBuilder();
 		int startDay = 0;
 		int monthCheck = today.getDayOfMonth();
-				
+		
+		// Still have to add total number of jobs to the first line
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));
 		calendarString.append(" " + today.getDayOfMonth() + ", ");
 		calendarString.append(today.getYear());
@@ -107,7 +108,7 @@ public class OfficeStaffView extends View {
 			if (today.getDayOfMonth() < 10) {
 				calendarString.append(" ");
 			}
-			calendarString.append(" " + today.getDayOfMonth() + ":" + "  |");
+			calendarString.append(" " + today.getDayOfMonth() + ":" + "0" + " |");
 			today = today.plusDays(1); 
 		}
 		
@@ -146,7 +147,7 @@ public class OfficeStaffView extends View {
 			if (today.getDayOfMonth() < 10) {
 				calendarString.append(" ");
 			}
-			calendarString.append(" " + today.getDayOfMonth() + ":" + "  |");
+			calendarString.append(" " + today.getDayOfMonth() + ":" + "0" + " |");
 			today = today.plusDays(1); 
 		}
 		

@@ -73,7 +73,7 @@ public class OfficeStaffView extends View {
 		LocalDate today = LocalDate.now(z);		
 		StringBuilder calendarString = new StringBuilder();
 		int startDay = 0;
-		int monthCheck = today.getDayOfMonth();
+		int monthCheck = today.getDayOfMonth(); 
 		
 		// Still have to add total number of jobs to the first line
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));

@@ -6,7 +6,12 @@
  */
 package view;
 
-import java.util.Calendar;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * @author Dylan Miller
@@ -53,43 +58,103 @@ public class OfficeStaffView extends View {
       }
   }
   
-  public String viewCalendar() { // Need to get data from Datastore for jobs
-	  StringBuilder calendarString = new StringBuilder();
-	  Calendar calendar = Calendar.getInstance();
-	  String month;
-	  int theMonth = Calendar.MONTH;
-	  
-	  switch(theMonth) {
-	  	case 1: month = "January"; break;
-	  	case 2: month = "February"; break;
-	  	case 3: month = "March"; break;
-	  	case 4: month = "April"; break;
-	  	case 5: month = "May"; break;
-	  	case 6: month = "June"; break;
-	  	case 7: month = "July"; break;
-	  	case 8: month = "August"; break;
-	  	case 9: month = "September"; break;
-	  	case 10: month = "October"; break;
-	  	case 11: month = "November"; break;
-	  	default: month = "December"; break;
-	  }
-	  calendarString.append(month + " " + calendar.get(Calendar.DAY_OF_MONTH) + ", ");
-	  calendarString.append(calendar.get(Calendar.YEAR) + "."); // First line ends here (Add Jobs this month)
-	  calendarString.append(System.getProperty("line.separator"));
-	  calendarString.append(System.getProperty("line.separator"));
-	  calendarString.append("   Su  ");
-	  calendarString.append("    M  ");
-	  calendarString.append("    T  ");
-	  calendarString.append("    E  ");
-	  calendarString.append("    T  ");
-	  calendarString.append("    F  ");
-	  calendarString.append("    S  ");
-	  calendarString.append(System.getProperty("line.separator"));
-	  calendarString.append("               [" + month + "]");
-	  calendarString.append(System.getProperty("line.separator"));
-	  
+	private static String printCalendar() {
+		ZoneId z = ZoneId.of( "America/Los_Angeles" );
+		LocalDate today = LocalDate.now(z);		
+		StringBuilder calendarString = new StringBuilder();
+		int startDay = 0;
+		int monthCheck = today.getDayOfMonth();
+				
+		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));
+		calendarString.append(" " + today.getDayOfMonth() + ", ");
+		calendarString.append(today.getYear());
+		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append("   Su  ");
+		calendarString.append("    M  ");
+		calendarString.append("    T  ");
+		calendarString.append("    W  ");
+		calendarString.append("    T  ");
+		calendarString.append("    F  ");
+		calendarString.append("    S  ");
+		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append("               [");
+		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US) + "]");
+		calendarString.append(System.getProperty("line.separator"));
+		
+		switch(today.getDayOfWeek()) {
+			case SUNDAY: startDay = 0; break;
+			case MONDAY: startDay = 1; break;
+			case TUESDAY: startDay = 2; break;
+			case WEDNESDAY: startDay = 3; break;
+			case THURSDAY: startDay = 4; break;
+			case FRIDAY: startDay = 5; break;
+			case SATURDAY: startDay = 6; break;
+		}
+		
+		calendarString.append("|");
+		for (int i = 0; i < startDay; i++) {
+			calendarString.append("      |");
+		}
+		
+		//Starts the calendar from here with date and job
+		YearMonth ym = YearMonth.from(today);
+		while(ym.equals(YearMonth.from(today))) {
+			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
+				calendarString.append(System.getProperty("line.separator"));
+				calendarString.append("|");
+			}
+			if (today.getDayOfMonth() < 10) {
+				calendarString.append(" ");
+			}
+			calendarString.append(" " + today.getDayOfMonth() + ":" + "  |");
+			today = today.plusDays(1); 
+		}
+		
+		LocalDate currentDay = today; 
+		while(currentDay.getDayOfWeek() != (DayOfWeek.SUNDAY)) {
+			calendarString.append("      |");
+			currentDay = currentDay.plusDays(1);
+		}
+		
+		// This is where the next month's calendar starts
+		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append("               [");
+		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US) + "]");
+		calendarString.append(System.getProperty("line.separator"));
 
-	  
-	  return calendarString.toString();
-  }
+		switch(today.getDayOfWeek()) {
+			case SUNDAY: startDay = 0; break;
+			case MONDAY: startDay = 1; break;
+			case TUESDAY: startDay = 2; break;
+			case WEDNESDAY: startDay = 3; break;
+			case THURSDAY: startDay = 4; break;
+			case FRIDAY: startDay = 5; break;
+			case SATURDAY: startDay = 6; break;
+		}
+		
+		calendarString.append("|");
+		for (int i = 0; i < startDay; i++) {
+			calendarString.append("      |");
+		}
+		
+		while(today.getDayOfMonth() != monthCheck) {
+			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
+				calendarString.append(System.getProperty("line.separator"));
+				calendarString.append("|");
+			}
+			if (today.getDayOfMonth() < 10) {
+				calendarString.append(" ");
+			}
+			calendarString.append(" " + today.getDayOfMonth() + ":" + "  |");
+			today = today.plusDays(1); 
+		}
+		
+		currentDay = today; 
+		while(currentDay.getDayOfWeek() != (DayOfWeek.SUNDAY)) {
+			calendarString.append("      |");
+			currentDay = currentDay.plusDays(1);
+		}
+		return calendarString.toString();
+	}
 }

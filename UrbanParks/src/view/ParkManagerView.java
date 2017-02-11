@@ -31,7 +31,6 @@ public class ParkManagerView extends View {
 	}
 	@Override
 	public void launchGUI() {
-		// TODO Auto-generated method stub
 		mySB.append("\nWelcome to Urban Parks\nPark Manager: ");
 		mySB.append(myManager.getRealName());
 		mySB.append("\n----------------------------------------------------------\n\n");
@@ -70,7 +69,7 @@ public class ParkManagerView extends View {
 	private void SubmitJob() {
 		Job myJob = new Job();
 		List<Park> theParks = myDatastore.getAllParks();
-		Iterator itr = theParks.iterator();
+		Iterator<Park> itr = theParks.iterator();
 		while(myJob.getPark() == null ) {
 			Park tempPark = (Park) itr.next();
 			if(tempPark.getManager().equals(myManager)) {
@@ -100,10 +99,8 @@ public class ParkManagerView extends View {
 		myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please add any aditional notes here: ");
 		myJob.setNotes(myScanner.nextLine());
-		// TODO add park to the Job somehow?
 		myDatastore.addJob(myJob);
 		showJob(myJob);
-		// TODO Auto-generated method stub
 		
 	}
 /* -----------------------------------------------------------------------------------------------------------------------------*/
@@ -144,7 +141,6 @@ public class ParkManagerView extends View {
 		System.out.print(mySB.toString());
 		mySB.delete(0, mySB.capacity());
 		int theChoice = myScanner.nextInt();
-		// TODO get choice to show the job details
 		count = 0;
 		boolean flag = false;
 		for(int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
@@ -207,13 +203,11 @@ public class ParkManagerView extends View {
 		mySB.append("\n");
 		System.out.println(mySB.toString());
 		mySB.delete(0, mySB.capacity());
-		// TODO Auto-generated method stub
-		
 	}
 	private void showVolunteers(Job theJob) {
 		System.out.print("\nVolunteers for this Job.\n");
 		List<String> myVolunteers = theJob.getVolunteers();
-		Iterator itr = myVolunteers.iterator();
+		Iterator<String> itr = myVolunteers.iterator();
 		int count = 1;
 		while(itr.hasNext()) {
 			mySB.append(count);

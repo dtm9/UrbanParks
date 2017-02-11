@@ -54,28 +54,41 @@ public class OfficeStaffView extends View {
   }
   
   public String viewCalendar() { // Need to get data from Datastore for jobs
-	Calendar calendar = Calendar.getInstance();
-	StringBuilder calendarString = new StringBuilder();
-	int theMonth = Calendar.MONTH;
-	switch(theMonth) {
-	  case 1: calendarString.append("January "); break;
-	  case 2: calendarString.append("February "); break;
-	  case 3: calendarString.append("March "); break;
-	  case 4: calendarString.append("April "); break;
-	  case 5: calendarString.append("May "); break;
-	  case 6: calendarString.append("June "); break;
-	  case 7: calendarString.append("July "); break;
-	  case 8: calendarString.append("August "); break;
-	  case 9: calendarString.append("September "); break;
-	  case 10: calendarString.append("October "); break;
-	  case 11: calendarString.append("November "); break;
-	  default: calendarString.append("December "); break;
-	}
-	calendarString.append(calendar.get(Calendar.DAY_OF_MONTH) + ", ");
-	calendarString.append(calendar.get(Calendar.YEAR) + ".");
-	calendarString.append(System.getProperty("line.separator"));
-	calendarString.append(System.getProperty("line.separator"));
+	  StringBuilder calendarString = new StringBuilder();
+	  Calendar calendar = Calendar.getInstance();
+	  String month;
+	  int theMonth = Calendar.MONTH;
+	  
+	  switch(theMonth) {
+	  	case 1: month = "January"; break;
+	  	case 2: month = "February"; break;
+	  	case 3: month = "March"; break;
+	  	case 4: month = "April"; break;
+	  	case 5: month = "May"; break;
+	  	case 6: month = "June"; break;
+	  	case 7: month = "July"; break;
+	  	case 8: month = "August"; break;
+	  	case 9: month = "September"; break;
+	  	case 10: month = "October"; break;
+	  	case 11: month = "November"; break;
+	  	default: month = "December"; break;
+	  }
+	  calendarString.append(month + " " + calendar.get(Calendar.DAY_OF_MONTH) + ", ");
+	  calendarString.append(calendar.get(Calendar.YEAR) + "."); // First line ends here (Add Jobs this month)
+	  calendarString.append(System.getProperty("line.separator"));
+	  calendarString.append(System.getProperty("line.separator"));
+	  calendarString.append("   Su  ");
+	  calendarString.append("    M  ");
+	  calendarString.append("    T  ");
+	  calendarString.append("    E  ");
+	  calendarString.append("    T  ");
+	  calendarString.append("    F  ");
+	  calendarString.append("    S  ");
+	  calendarString.append(System.getProperty("line.separator"));
+	  calendarString.append("               [" + month + "]");
+	  calendarString.append(System.getProperty("line.separator"));
 
-	return calendarString.toString();
+	  
+	  return calendarString.toString();
   }
 }

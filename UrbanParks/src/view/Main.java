@@ -63,7 +63,6 @@ public class Main {
     
   theView = generateView(userAccount, theView);
   theView.launchGUI();
-    
   }
 
 /**

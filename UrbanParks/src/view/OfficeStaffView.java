@@ -76,6 +76,7 @@ public class OfficeStaffView extends View {
 		StringBuilder calendarString = new StringBuilder();
 		int startDay = 0;
 		int monthCheck = today.getDayOfMonth(); 
+		int jobsToday = 0;
 		List<Job> allJobs = theDatastore.getPendingJobs();
 		
 		// Still have to add total number of jobs to the first line
@@ -116,6 +117,7 @@ public class OfficeStaffView extends View {
 		//Starts the calendar from here with date and job
 		YearMonth ym = YearMonth.from(today);
 		while(ym.equals(YearMonth.from(today))) {
+			jobsToday = 0;
 			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
 				calendarString.append(System.getProperty("line.separator"));
 				calendarString.append("|");
@@ -123,7 +125,15 @@ public class OfficeStaffView extends View {
 			if (today.getDayOfMonth() < 10) {
 				calendarString.append(" ");
 			}
-			calendarString.append(" " + today.getDayOfMonth() + ":" + "0" + " |");
+			calendarString.append(" " + today.getDayOfMonth() + ":");
+			for (int i = 0; i < allJobs.size(); i++) {
+				if (allJobs.get(i).getMonth() == today.getMonthValue()) {
+					if (allJobs.get(i).getDay() == today.getDayOfMonth()) {
+						jobsToday++;
+					}
+				}
+			}
+			calendarString.append(jobsToday + " |");
 			today = today.plusDays(1); 
 		}
 		
@@ -155,6 +165,7 @@ public class OfficeStaffView extends View {
 		}
 		
 		while(today.getDayOfMonth() != monthCheck) {
+			jobsToday = 0;
 			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
 				calendarString.append(System.getProperty("line.separator"));
 				calendarString.append("|");
@@ -162,7 +173,15 @@ public class OfficeStaffView extends View {
 			if (today.getDayOfMonth() < 10) {
 				calendarString.append(" ");
 			}
-			calendarString.append(" " + today.getDayOfMonth() + ":" + "0" + " |");
+			calendarString.append(" " + today.getDayOfMonth() + ":");
+			for (int i = 0; i < allJobs.size(); i++) {
+				if (allJobs.get(i).getMonth() == today.getMonthValue()) {
+					if (allJobs.get(i).getDay() == today.getDayOfMonth()) {
+						jobsToday++;
+					}
+				}
+			}
+			calendarString.append(jobsToday + " |");
 			today = today.plusDays(1); 
 		}
 		

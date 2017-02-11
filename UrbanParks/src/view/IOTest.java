@@ -76,6 +76,7 @@ public class IOTest {
 	
 	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);
 	testDatastore.addAccount(testVolunteer1);
+	testJob1.setVolunteers(testVolunteer1.getRealName());
 	
 	testStaff1 = new OfficeStaff("ppark@urbanparks.org", "5555555555", "Peter Park");
 	testDatastore.addAccount(testStaff1);

@@ -167,10 +167,55 @@ public class ParkManagerView extends View {
 		// TODO Auto-generated method stub
 		
 	}
-	private void showJob(Job job) {
-		System.out.println("It Worked");
+	private void showJob(Job theJob) {
+		mySB.append("\n\nView of the selected Job.\n ----------------------------------------------------------\n");
+		System.out.println(mySB.toString());
+		mySB.delete(0, mySB.capacity());
+		showJobInformation(theJob);
+		showVolunteers(theJob);
 		
 		// TODO Auto-generated method stub
+		
+	}
+	private void showJobInformation(Job theJob) {
+		mySB.append("Name: ");
+		mySB.append(theJob.getName());
+		mySB.append("\nDescription: ");
+		mySB.append(theJob.getDescription());
+		mySB.append("\nDate(Day/Month: ");
+		mySB.append(theJob.getDay());
+		mySB.append("/");
+		mySB.append(theJob.getMonth());
+		mySB.append("\nTime: ");
+		mySB.append(theJob.getTime());
+		mySB.append("\nMinumum Light Grade Volunteers: ");
+		mySB.append(theJob.getMinLight());
+		mySB.append("\nMinumum Medium Grade Volunteers: ");
+		mySB.append(theJob.getMinMedium());
+		mySB.append("\nMinumum Heavy Grade Volunteers: ");
+		mySB.append(theJob.getMinHeavy());
+		mySB.append("\nMaximum Volunteers: ");
+		mySB.append(theJob.getMaxVolunteers());
+		mySB.append("\nAdditional Notes: ");
+		mySB.append(theJob.getNotes());
+		mySB.append("\n");
+		System.out.println(mySB.toString());
+		mySB.delete(0, mySB.capacity());
+		// TODO Auto-generated method stub
+		
+	}
+	private void showVolunteers(Job theJob) {
+		System.out.println("Volunteers for this Job.\n");
+		List<String> myVolunteers = theJob.getVolunteers();
+		Iterator itr = myVolunteers.iterator();
+		int count = 1;
+		while(itr.hasNext()) {
+			mySB.append(count);
+			mySB.append(".");
+			mySB.append(itr.next());
+			System.out.println(mySB.toString());
+			mySB.delete(0, mySB.capacity());
+		}
 		
 	}
 	

@@ -89,9 +89,9 @@ private static View generateView(Account userAccount, View theView) {
 	List<Account> myAccounts = datastore.getAllAccounts();
 
     //Just using the IOtest and Hard coding to load a View
-	View theView = new ParkManagerView(myAccounts.get(0),datastore);
-    //View theView = new OfficeStaffView(myAccounts.get(4),datastore);
-    //View theView = new VolunteerView(myAccounts.get(4),datastore);
+//	View theView = new ParkManagerView(myAccounts.get(0),datastore);
+    View theView = new OfficeStaffView(myAccounts.get(4),datastore);
+//    View theView = new VolunteerView(myAccounts.get(4),datastore);
 	theView.launchGUI();
 
   }

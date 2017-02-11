@@ -11,10 +11,12 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
+import java.util.List;
 import java.util.Locale;
 
 import backend.Account;
 import backend.Datastore;
+import backend.Job;
 import backend.ParkManager;
 import backend.OfficeStaff;
 
@@ -45,10 +47,10 @@ public class OfficeStaffView extends View {
    */
   @Override
   public void launchGUI() {
-  //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
-	  
-  //TODO some kind of exit/cleanup method after the call stack pops back here at the end.
-  System.out.println(printCalendar());
+    //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
+    //TODO some kind of exit/cleanup method after the call stack pops back here at the end.
+    Datastore theDatastore = myDataStore;
+    System.out.println(printCalendar(theDatastore));
   }
   
   private void mainMenu() {
@@ -68,17 +70,20 @@ public class OfficeStaffView extends View {
       }
   }
   
-	private String printCalendar() {
+	private String printCalendar(Datastore theDatastore) {
 		ZoneId z = ZoneId.of( "America/Los_Angeles" );
 		LocalDate today = LocalDate.now(z);		
 		StringBuilder calendarString = new StringBuilder();
 		int startDay = 0;
 		int monthCheck = today.getDayOfMonth(); 
+		List<Job> allJobs = theDatastore.getPendingJobs();
 		
 		// Still have to add total number of jobs to the first line
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));
 		calendarString.append(" " + today.getDayOfMonth() + ", ");
-		calendarString.append(today.getYear());
+		calendarString.append(today.getYear() + ". ");
+		calendarString.append(theDatastore.getNumberOfJobs() + " upcoming jobs out of ");
+		calendarString.append(theDatastore.getMaxPendingJobs() + " maximum");
 		calendarString.append(System.getProperty("line.separator"));
 		calendarString.append(System.getProperty("line.separator"));
 		calendarString.append("   Su  ");

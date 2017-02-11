@@ -10,16 +10,21 @@ import java.util.Scanner;
 
 import backend.Account;
 import backend.Datastore;
-import backend.Job;
 import backend.OfficeStaff;
-import backend.Park;
 import backend.ParkManager;
 import backend.Volunteer;
 
+/**
+ * Class to launch the application. Stores the mainline.
+ * @author Dylan Miller
+ */
 public class Main {
 
+  /** Static reference to the datastore in memory. */
   static Datastore datastore;
+  /** String builder for printing any text needed to console. */
   private static StringBuilder mySB = new StringBuilder();
+  /** Scanner object for any user input that may be required for log in. */
   private static Scanner myScanner = new Scanner(System.in);
   
   /**
@@ -66,9 +71,11 @@ public class Main {
   }
 
 /**
+ * Helper method to create the proper view for the user.
+ * @author Dylan Miller
  * @param userAccount
- * @param theView
- * @return
+ * @param theView 
+ * @return instantiated view object.
  */
 private static View generateView(Account userAccount, View theView) {
 	if (userAccount instanceof Volunteer) {
@@ -82,20 +89,27 @@ private static View generateView(Account userAccount, View theView) {
     }
 	return theView;
 }
+  /**
+   * For testing purposes only.
+   * @author Dylan Miller
+   * @author Gardner Gomes
+   */
   private static void debug_init() {
 
-    System.out.print(mySB.append("please enter your email(anything works this is a test): "));
-	String myUsername = myScanner.nextLine();//scanner to get the username for checking acounts, not used yet.
-	List<Account> myAccounts = datastore.getAllAccounts();
-
     //Just using the IOtest and Hard coding to load a View
-//	View theView = new ParkManagerView(myAccounts.get(0),datastore);
+	List<Account> myAccounts = datastore.getAllAccounts();
+	
+    //View theView = new ParkManagerView(myAccounts.get(0),datastore);
     View theView = new OfficeStaffView(myAccounts.get(4),datastore);
-//    View theView = new VolunteerView(myAccounts.get(4),datastore);
-	theView.launchGUI();
-
+    //View theView = new VolunteerView(myAccounts.get(4),datastore);
+	
+    theView.launchGUI();
   }
   
+  /**
+   * Saves the datastore object to file.
+   * @author Dylan Miller
+   */
   public static void save() { //consider private or package
       try {
     	  FileOutputStream outfile = new FileOutputStream("datastore.bin");
@@ -107,7 +121,11 @@ private static View generateView(Account userAccount, View theView) {
         e.printStackTrace();
       }
     }
-    
+  
+  /**
+   * Loads the datastore from file.
+   * @author Dylan Miller
+   */
   public static void load() {
     try {
       FileInputStream infile = new FileInputStream("datastore.bin");

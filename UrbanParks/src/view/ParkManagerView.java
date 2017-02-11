@@ -130,6 +130,7 @@ public class ParkManagerView extends View {
 	}
 	private void OpenJob(Job job) {
 		System.out.println("It Worked");
+		
 		// TODO Auto-generated method stub
 		
 	}

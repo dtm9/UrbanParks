@@ -44,8 +44,10 @@ public class Main {
 	  System.out.print(mySB.append("please enter your email(anything works this is a test): "));
 	  String myUsername = myScanner.nextLine();//scanner to get the username for checking acounts, not used yet.
 	  List<Account> myAccounts = datastore.getAllAccounts();
-	  //Just using the IOtest and Hard coding to load a Manager.
+	  //Just using the IOtest and Hard coding to load a View
 	  View theView = new ParkManagerView(myAccounts.get(1),datastore);
+	  //View theView = new OfficeStaffView(myAccounts.get(5),datastore);
+	  //View theView = new VolunteerView(myAccounts.get(4),datastore);
 	  theView.launchGUI();
     //TODO capture user's input and match account name
 

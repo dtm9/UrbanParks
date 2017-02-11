@@ -13,6 +13,10 @@ import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import backend.Account;
+import backend.Datastore;
+import backend.ParkManager;
+
 /**
  * @author Dylan Miller
  *
@@ -23,11 +27,15 @@ public class OfficeStaffView extends View {
   private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
   private StringBuilder sb;
+  private ParkManager myManager;
+  private Datastore myDataStore;
   
-  public OfficeStaffView() { //TODO consider having a OfficeStaff object be a param for the constructor..
-	  super();
-	  sb = new StringBuilder();
-  }
+	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
+		super();
+		myManager = (ParkManager) theAccount;
+		myDataStore = theDatastore;
+		sb = new StringBuilder();
+	}
   /**
    * Public method to launch the GUI for Office Staff accounts.
    * This is the only public method and it drives all other code in
@@ -39,6 +47,7 @@ public class OfficeStaffView extends View {
   //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
 	  
   //TODO some kind of exit/cleanup method after the call stack pops back here at the end.
+  printCalendar();
   }
   
   private void mainMenu() {

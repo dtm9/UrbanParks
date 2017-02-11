@@ -68,7 +68,7 @@ public class OfficeStaffView extends View {
       }
   }
   
-	private static String printCalendar() {
+	private String printCalendar() {
 		ZoneId z = ZoneId.of( "America/Los_Angeles" );
 		LocalDate today = LocalDate.now(z);		
 		StringBuilder calendarString = new StringBuilder();

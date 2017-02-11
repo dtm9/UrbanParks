@@ -87,6 +87,7 @@ public class OfficeStaffView extends View {
 	  calendarString.append(System.getProperty("line.separator"));
 	  calendarString.append("               [" + month + "]");
 	  calendarString.append(System.getProperty("line.separator"));
+	  
 
 	  
 	  return calendarString.toString();

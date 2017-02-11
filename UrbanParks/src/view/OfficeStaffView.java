@@ -48,7 +48,7 @@ public class OfficeStaffView extends View {
   //TODO all necessary initialization, then call another method to print first menu. That method should call more methods not return until the end.
 	  
   //TODO some kind of exit/cleanup method after the call stack pops back here at the end.
-  printCalendar();
+  System.out.println(printCalendar());
   }
   
   private void mainMenu() {

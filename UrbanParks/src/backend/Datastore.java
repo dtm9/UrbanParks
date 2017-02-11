@@ -16,7 +16,6 @@ import java.util.List;
  */
 public final class Datastore implements Serializable {
 
-
 	//***** Constant(s) ************************************************************************************************
 
     /**
@@ -247,6 +246,16 @@ public final class Datastore implements Serializable {
                 found = true;
             }
         }
+    }
+
+    /**
+     * Gets the list of previous jobs.
+     *
+     * @author Walter Weeks
+     * @return The previous jobs list.
+     */
+    public List<Job> getPreviousJobs() {
+        return myPreviousJobs;
     }
 
     /**

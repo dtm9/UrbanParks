@@ -28,12 +28,12 @@ public class OfficeStaffView extends View {
   private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
   private StringBuilder sb;
-  private OfficeStaff myManager;
+  private OfficeStaff myOfficeStaff;
   private Datastore myDataStore;
   
 	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
 		super();
-		myManager = (OfficeStaff) theAccount;
+		myOfficeStaff = (OfficeStaff) theAccount;
 		myDataStore = theDatastore;
 		sb = new StringBuilder();
 	}

@@ -65,6 +65,7 @@ public class ParkManagerView extends View {
 	private void SubmitJob() {
 		Job myJob = new Job();
 		System.out.print("Please set the Name of the Job: ");
+		myScanner.nextLine();
 		myJob.setName(myScanner.nextLine());
 		System.out.print("Please type out a description of the Job: ");
 		myJob.setDescription(myScanner.nextLine());

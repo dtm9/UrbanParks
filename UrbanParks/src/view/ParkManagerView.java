@@ -69,20 +69,19 @@ public class ParkManagerView extends View {
 		System.out.print("Please type out a description of the Job: ");
 		myJob.setDescription(myScanner.nextLine());
 		System.out.print("Please set the Month of this Job(1-12): ");
-		myJob.setMonth(myScanner.nextInt());
+		myJob.setMonth(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please set the Day of this Job(1-31): ");
-		myJob.setDay(myScanner.nextInt());
+		myJob.setDay(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please set the Time of this Job(ie. 12:30): ");
-		myScanner.nextLine();
 		myJob.setTime(myScanner.nextLine());
 		System.out.print("Please set the minumum Light Grade Workers: ");
-		myJob.setMinLight(myScanner.nextInt());
+		myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please set the minumum Medium Grade Workers: ");
-		myJob.setMinMedium(myScanner.nextInt());
+		myJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please set the minumum Heavy Grade Workers: ");
-		myJob.setMinHeavy(myScanner.nextInt());
+		myJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please set the maximum number of Volunteers: ");
-		myJob.setMaxVolunteers(myScanner.nextInt());
+		myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
 		System.out.print("Please add any aditional notes here: ");
 		myJob.setNotes(myScanner.nextLine());
 		// TODO add park to the Job somehow?

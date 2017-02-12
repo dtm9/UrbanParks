@@ -77,14 +77,21 @@ public class DatastoreTest {
 		myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
 
 		// populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
-		myJobs.add(new Job(myParks.get(0), "2017/03/01", "1030", "Raking leaves."));
-		myJobs.add(new Job(myParks.get(0), "2017/03/05", "1345", "Pick up litter."));
-		myJobs.add(new Job(myParks.get(1), "2017/04/01", "1500", "Build fence."));
-		myJobs.add(new Job(myParks.get(3), "2017/03/02", "1440", "Paint fence."));
-		myJobs.add(new Job(myParks.get(4), "2017/04/15", "1640", "Trail clearing"));
-		myJobs.add(new Job(myParks.get(0), "2017/03/10", "1145", "Digging ditches."));
-		myJobs.add(new Job(myParks.get(0), "2017/03/11", "1145", "More digging ditches."));
-		myJobs.add(new Job(myParks.get(2), "2017/05/01", "1200", "Construct building."));
+		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
+				"Raking leaves", 1, 1, 3, 2017));
+		myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
+				"Pick up litter", 1, 5, 3, 2017));
+		myJobs.add(new Job(myParks.get(1), "1500", "We will be building a fence.",
+				"Build fence", 1, 1, 4, 2017));
+		myJobs.add(new Job(myParks.get(3), "1400", "We will be painting a fence.",
+				"Paint fence", 1, 2, 3, 2017));
+		myJobs.add(new Job(myParks.get(4), "1640", "We will be clearing a trail",
+				"Trail clearing", 1, 15, 4, 2017));
+		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches.",
+				"Digging ditches", 1, 10, 3, 2017));
+		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
+				"More digging ditches", 1, 15, 3, 2017));
+		myJobs.add(new Job(myParks.get(2), "2017/05/01", "1200", "Construct building", 1, 1, 5, 2017));
 
 		// populate myVolunteers list data structure w/ 2 Volunteers
 		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
@@ -223,7 +230,8 @@ public class DatastoreTest {
 	 */
 	@Test
 	public void addJob_AddingASingleJob_ShouldBeSizeOfJobsTextFixurePlus1() {
-		Job newJob = new Job(myParks.get(0), "2017/05/18", "0600", "Build dome");
+		Job newJob = new Job(myParks.get(0), "0600", "We will be building a job",
+				"Build dome", 1, 18, 5, 2017);
 		myDatastore.addJob(newJob);
 		assertEquals(myJobs.size() + 1, myDatastore.getNumberOfJobs());
 	}
@@ -298,5 +306,17 @@ public class DatastoreTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void getJobsByCity_SearchFor1CharState_ExceptionThrown() {
 		myDatastore.getJobsByCity("Tacoma", "W");
+	}
+
+	/**
+	 * Tests for IllegalStateException when attempting to exceed the maximum number of pending jobs by 1.
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void addJob_AddMaxPendingJobsPlus1_ExceptionThrown() {
+		Datastore datastore = new Datastore();
+		for (int i = 0; i < datastore.getMaxPendingJobs() + 1; i++) {
+			datastore.addJob(new Job(myParks.get(0), Integer.toString(1200 + i), "We will be raking leaves",
+					"Raking leaves", 1, 1, (i % 12) + 1, 2017));
+		}
 	}
 }

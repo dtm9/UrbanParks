@@ -31,7 +31,6 @@ public class OfficeStaffView extends View {
   private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
   private OfficeStaff myOfficeStaff;
-  private Datastore myDataStore;
   private Scanner myScanner = new Scanner(System.in); 
   private StringBuilder mySB;
 
@@ -39,7 +38,6 @@ public class OfficeStaffView extends View {
 	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
 		super();
 		myOfficeStaff = (OfficeStaff) theAccount;
-		myDataStore = theDatastore;
 		mySB = new StringBuilder();
 	}
   /**
@@ -57,7 +55,6 @@ public class OfficeStaffView extends View {
   
   private void mainMenu() {
 	  //TODO print somethign with SB and listen for input option on console	  
-	  Datastore theDatastore = myDataStore;
 	  int choice;
 	  int newChoice;
 	  choice = 0; //temp to clear annoying error for temp code
@@ -76,7 +73,7 @@ public class OfficeStaffView extends View {
 		 
 		switch (theChoice) {
 		case 1:
-		    System.out.println(printCalendar(theDatastore));
+		    System.out.println(printCalendar(Main.datastore));
 		    System.out.println();
 		    System.out.println("What would you like to do?");
 		    System.out.println("1. Go back to prior menu");
@@ -95,7 +92,7 @@ public class OfficeStaffView extends View {
 			if (newChoice == 1) {
 				System.out.println("Please enter the new maximum number of pending jobs");
 				newChoice = myScanner.nextInt();
-				myDataStore.setMaxPendingJobs(newChoice);
+				Main.datastore.setMaxPendingJobs(newChoice);
 				System.out.println("The new maximum number of pending jobs is " + newChoice);
 				mainMenu();
 			} else if (newChoice == 2) {
@@ -118,7 +115,7 @@ public class OfficeStaffView extends View {
 		List<Job> allJobs = theDatastore.getPendingJobs();
 		
 		// Still have to add total number of jobs to the first line
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US));
 		calendarString.append(" " + today.getDayOfMonth() + ", ");
 		calendarString.append(today.getYear() + ". ");

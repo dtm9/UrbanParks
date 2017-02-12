@@ -85,6 +85,7 @@ public class ParkManagerView extends View {
         myJob = addTime(myJob);
         myJob = addDurration(myJob);
         myJob = addLightGrade(myJob);
+        //System.out.print();
         myJob = addMediumGrade(myJob);
         myJob = addHeavyGrade(myJob);
         myJob = addVolunteerMax(myJob);
@@ -97,7 +98,7 @@ public class ParkManagerView extends View {
     private Job addDurration(Job myJob) {
         System.out.print("Please set the Duration for this job(1 or 2 days): ");
         myJob.setDuration(Integer.parseInt(myScanner.nextLine()));
-        return null;
+        return myJob;
     }
 
     Job addNotes(Job myJob) {
@@ -130,7 +131,18 @@ public class ParkManagerView extends View {
 
     Job addLightGrade(Job myJob) {
         System.out.print("Please set the minumum Light Grade Workers: ");
-        myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
+       // int temp = myScanner.nextInt();
+        //System.out.println(temp);
+        try {
+           //System.out.println(myJob.getMinLight());
+           //int temp = myScanner.nextInt();
+           //myJob.setMinLight(temp);
+           myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+            addLightGrade(myJob);
+        }
+        //myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
         return myJob;
      // TODO TryCatch
     }

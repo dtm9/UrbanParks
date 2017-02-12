@@ -39,13 +39,11 @@ public class Main {
     
     boolean done = false;
     load();
-    //debug_init();
     while (!done) {
       done = init();
       mySB.delete(0, mySB.capacity());
       save();
     }
-    mySB.delete(0, mySB.capacity());
     mySB.append(SB_LINE_BREAK);
     System.out.print(mySB.toString());
   }
@@ -56,16 +54,16 @@ public class Main {
    */
   private static boolean init() {
     boolean done = false;
-	printHeader();
+    printHeader();
     
-	int theChoice = myScanner.nextInt();
+    int theChoice = myScanner.nextInt();
 
-	switch (theChoice) {
-	  case 1: //log in
-	    //get the username
-	    View theView = null;
-	    Account userAccount = null;
-	    String username = scanUsername();
+    switch (theChoice) {
+      case 1: //log in
+        //get the username
+        View theView = null;
+        Account userAccount = null;
+        String username = scanUsername();
 
         //get the account
         userAccount = seekAccount(username);
@@ -116,7 +114,7 @@ private static String scanUsername() {
  * @return account of user or null if not found.
  * @author Dylan Miller
  */
-private static Account seekAccount(String username) {
+static Account seekAccount(String username) {
     List<Account> users = datastore.getAllAccounts();
     boolean found = false;
     Account userAccount = null;
@@ -138,25 +136,25 @@ private static Account seekAccount(String username) {
  */
 private static void printHeader() {
     mySB.append(SB_LINE_BREAK);
-	mySB.append(SB_LINE_BREAK);
-	mySB.append("----------------------------------------------------------");
-	mySB.append(SB_LINE_BREAK);
-	mySB.append("Welcome to Urban Parks ");
-	mySB.append(SB_LINE_BREAK);
-	mySB.append("----------------------------------------------------------");
-	mySB.append(SB_LINE_BREAK);
-	mySB.append(SB_LINE_BREAK);
-	
-	mySB.append("Make a selection:");
-	mySB.append(SB_LINE_BREAK);
-	mySB.append("1. Log in");
-	mySB.append(SB_LINE_BREAK);
-	mySB.append("2. Exit");
-	mySB.append(SB_LINE_BREAK);
-	
-	System.out.print(mySB.toString());
-	System.out.print("Selection: ");
-	mySB.delete(0, mySB.capacity());
+    mySB.append(SB_LINE_BREAK);
+    mySB.append("----------------------------------------------------------");
+    mySB.append(SB_LINE_BREAK);
+    mySB.append("Welcome to Urban Parks ");
+    mySB.append(SB_LINE_BREAK);
+    mySB.append("----------------------------------------------------------");
+    mySB.append(SB_LINE_BREAK);
+    mySB.append(SB_LINE_BREAK);
+    
+    mySB.append("Make a selection:");
+    mySB.append(SB_LINE_BREAK);
+    mySB.append("1. Log in");
+    mySB.append(SB_LINE_BREAK);
+    mySB.append("2. Exit");
+    mySB.append(SB_LINE_BREAK);
+    
+    System.out.print(mySB.toString());
+    System.out.print("Selection: ");
+    mySB.delete(0, mySB.capacity());
 }
 
 /**
@@ -164,10 +162,11 @@ private static void printHeader() {
  * @author Dylan Miller
  * @param userAccount
  * @param theView 
+ * @throws NullPointerException if the userAccount was null (not found in previous method)
  * @return instantiated view object.
  */
-private static View generateView(Account userAccount, View theView) {
-	if (userAccount instanceof Volunteer) {
+static View generateView(Account userAccount, View theView) {
+    if (userAccount instanceof Volunteer) {
       theView = new VolunteerView();
     } else if (userAccount instanceof ParkManager) {
       theView = new ParkManagerView(userAccount, datastore);
@@ -176,24 +175,8 @@ private static View generateView(Account userAccount, View theView) {
     } else {
       throw new NullPointerException("Account not found.");
     }
-	return theView;
+    return theView;
 }
-  /**
-   * For testing purposes only.
-   * @author Dylan Miller
-   * @author Gardner Gomes
-   */
-  private static void debug_init() {
-
-    //Just using the IOtest and Hard coding to load a View
-	List<Account> myAccounts = datastore.getAllAccounts();
-	
-    //View theView = new ParkManagerView(myAccounts.get(0),datastore);
-    View theView = new OfficeStaffView(myAccounts.get(4),datastore);
-    //View theView = new VolunteerView(myAccounts.get(4),datastore);
-	
-    theView.launchGUI();
-  }
   
   /**
    * Saves the datastore object to file.
@@ -201,11 +184,11 @@ private static View generateView(Account userAccount, View theView) {
    */
   public static void save() { //consider private or package
       try {
-    	  FileOutputStream outfile = new FileOutputStream("datastore.bin");
-    	  ObjectOutputStream out = new ObjectOutputStream(outfile);
-    	  out.writeObject(datastore);
-    	  out.close();
-    	  outfile.close();
+          FileOutputStream outfile = new FileOutputStream("datastore.bin");
+          ObjectOutputStream out = new ObjectOutputStream(outfile);
+          out.writeObject(datastore);
+          out.close();
+          outfile.close();
       } catch(IOException e) {
         e.printStackTrace();
       }

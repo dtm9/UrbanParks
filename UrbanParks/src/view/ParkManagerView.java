@@ -30,10 +30,7 @@ public class ParkManagerView extends View {
         myDatastore = theDatastore;
     }
 
-    /*
-     * -------------------------------------------------------------------------
-     * ----------------------------------------------------
-     */
+    /*-----------------------------------------------------------------------------------------------------------------------------*/
     @Override
     public void launchGUI() {
         mySB.append("\nWelcome to Urban Parks\nPark Manager: ");
@@ -70,10 +67,7 @@ public class ParkManagerView extends View {
             this.launchGUI();
         }
     }
-    /*
-     * -------------------------------------------------------------------------
-     * ----------------------------------------------------
-     */
+    /*-----------------------------------------------------------------------------------------------------------------------------*/
 
     /**
      * Submit a Job element for the UI.
@@ -82,90 +76,107 @@ public class ParkManagerView extends View {
         Job myJob = new Job();
         System.out.println("\nSubmit a Job for " + myManager.getRealName());
         System.out.print("----------------------------------------------------------\n\n");
-        addPark(myJob);
-        addName(myJob);
-        addDescription(myJob);
-        addDay(myJob);
-        addMonth(myJob);
-        addYear(myJob);
-        addTime(myJob);
-        addLightGrade(myJob);
-        addMediumGrade(myJob);
-        addHeavyGrade(myJob);
-        addVolunteerMax(myJob);
-        addNotes(myJob);
+        myJob = addPark(myJob);
+        myJob = addName(myJob);
+        myJob = addDescription(myJob);
+        myJob = addDay(myJob);
+        myJob = addMonth(myJob);
+        myJob = addYear(myJob);
+        myJob = addTime(myJob);
+        myJob = addDurration(myJob);
+        myJob = addLightGrade(myJob);
+        myJob = addMediumGrade(myJob);
+        myJob = addHeavyGrade(myJob);
+        myJob = addVolunteerMax(myJob);
+        myJob = addNotes(myJob);
         myDatastore.addJob(myJob); // TODO TryCatch
         showJob(myJob);
 
     }
 
-    void addNotes(Job myJob) {
+    private Job addDurration(Job myJob) {
+        System.out.print("Please set the Duration for this job(1 or 2 days): ");
+        myJob.setDuration(Integer.parseInt(myScanner.nextLine()));
+        return null;
+    }
+
+    Job addNotes(Job myJob) {
         System.out.print("Please add any aditional notes here: ");
         myJob.setNotes(myScanner.nextLine());
+        return myJob;
      // TODO TryCatch
     }
 
-    void addVolunteerMax(Job myJob) {
+    Job addVolunteerMax(Job myJob) {
         System.out.print("Please set the maximum number of Volunteers: ");
         myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
 
-    void addHeavyGrade(Job myJob) {
+    Job addHeavyGrade(Job myJob) {
         System.out.print("Please set the minumum Heavy Grade Workers: ");
         myJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
 
-    void addMediumGrade(Job myJob) {
+    Job addMediumGrade(Job myJob) {
         System.out.print("Please set the minumum Medium Grade Workers: ");
         myJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
 
-    void addLightGrade(Job myJob) {
+    Job addLightGrade(Job myJob) {
         System.out.print("Please set the minumum Light Grade Workers: ");
         myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
 
-    void addTime(Job myJob) {
+    Job addTime(Job myJob) {
         System.out.print("Please set the Time of this Job(ie. 12:30): ");
         myJob.setTime(myScanner.nextLine());
+        return myJob;
      // TODO TryCatch
     }
 
-    private void addYear(Job myJob) {
+    private Job addYear(Job myJob) {
         // TODO Auto-generated method stub
+        return myJob;
         
     }
 
-    void addDay(Job myJob) {
+    Job addDay(Job myJob) {
         System.out.print("Please set the Day of this Job(1-31): ");
         myJob.setDay(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
-
-    void addMonth(Job myJob) {
+   Job addMonth(Job myJob) {
         System.out.print("Please set the Month of this Job(1-12): ");
         myJob.setMonth(Integer.parseInt(myScanner.nextLine()));
+        return myJob;
      // TODO TryCatch
     }
 
-    void addDescription(Job myJob) {
+    Job addDescription(Job myJob) {
         System.out.print("Please type out a description of the Job: ");
         myJob.setDescription(myScanner.nextLine());
+        return myJob;
      // TODO TryCatch
     }
 
-    void addName(Job myJob) {
+    Job addName(Job myJob) {
         System.out.print("Please set the Name of the Job: ");
         myScanner.nextLine();
         myJob.setName(myScanner.nextLine());
+        return myJob;
      // TODO TryCatch
     }
 
-    void addPark(Job myJob) {
+    Job addPark(Job myJob) {
         List<Park> theParks = myDatastore.getAllParks();
         Iterator<Park> itr = theParks.iterator();
         while (myJob.getPark() == null) {
@@ -174,12 +185,10 @@ public class ParkManagerView extends View {
                 myJob.setPark(tempPark);
             }
         }
+        return myJob;
     }
 
-    /*
-     * -------------------------------------------------------------------------
-     * ----------------------------------------------------
-     */
+    /* -----------------------------------------------------------------------------------------------------------------------------*/
     /**
      * View Jobs elemt for UI
      */
@@ -257,7 +266,27 @@ public class ParkManagerView extends View {
         mySB.delete(0, mySB.capacity());
         showJobInformation(theJob);
         showVolunteers(theJob);
+        
+        mySB.append("\nPlease choose what you would like to do now");
+        mySB.append("\n----------------------------------------------------------\n\n");
+        mySB.append("1. Submit Job\n");
+        mySB.append("2. View Jobs\n");
+        mySB.append("3. Exit\n");
+        System.out.print(mySB.toString());
+        mySB.delete(0, mySB.capacity());
+        int theChoice = myScanner.nextInt();
 
+        switch (theChoice) {
+        case 1:
+            checkMaxJobs();
+            SubmitJob();
+            break;
+        case 2:
+            ViewJobs();
+            break;
+        case 3:
+            break;
+        }
         // TODO UI functionality
 
     }
@@ -271,12 +300,16 @@ public class ParkManagerView extends View {
         mySB.append(theJob.getName());
         mySB.append("\nDescription: ");
         mySB.append(theJob.getDescription());
-        mySB.append("\nDate(Day/Month): ");
+        mySB.append("\nDate(Day/Month/year): ");
         mySB.append(theJob.getDay());
         mySB.append("/");
         mySB.append(theJob.getMonth());
+        mySB.append("/");
+        mySB.append(theJob.getYear());
         mySB.append("\nTime: ");
         mySB.append(theJob.getTime());
+        mySB.append("\nDurration for the Job: ");
+        mySB.append(theJob.getDuration());
         mySB.append("\nMinumum Light Grade Volunteers(0 or More): ");
         mySB.append(theJob.getMinLight());
         mySB.append("\nMinumum Medium Grade Volunteers(0 or More): ");

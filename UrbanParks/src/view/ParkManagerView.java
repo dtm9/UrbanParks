@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -19,11 +21,12 @@ import backend.ParkManager;
  */
 public class ParkManagerView extends View {
     private static final int TEMP_MAX_JOBS = 30;
-    private Scanner myScanner = new Scanner(System.in);
+    private static final int MONTH_BUFFER = 1;
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
     private final Datastore myDatastore;
-
+    private Scanner myScanner = new Scanner(System.in);
+    
     public ParkManagerView(Account theAccount, Datastore theDatastore) {
         super();
         myManager = (ParkManager) theAccount;
@@ -202,10 +205,18 @@ public class ParkManagerView extends View {
 
     Job addMonth(Job theJob) {
         System.out.print("Please set the Month of this Job(1-12): ");
-        try {
-            theJob.setMonth(Integer.parseInt(myScanner.nextLine()));
-        } catch (Exception e) {
-            System.out.println("Value not Accepted.");
+        ZoneId z = ZoneId.of("America/Los_Angeles");
+        LocalDate today = LocalDate.now(z);
+        int monthChoice = Integer.parseInt(myScanner.nextLine());
+        if(monthChoice <= today.getMonth().getValue() + MONTH_BUFFER && monthChoice >= today.getMonth().getValue()) {
+            try {
+                
+                    theJob.setMonth(monthChoice);
+            } catch (Exception e) {
+                System.out.println("Value not Accepted.");
+                addMonth(theJob);
+            }
+        } else {
             addMonth(theJob);
         }
         return theJob;

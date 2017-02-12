@@ -22,6 +22,11 @@ public class Job implements Serializable {
 
     /** Cannot create jobs earlier than this year. */
     private static final int MIN_YEAR = 1900;
+    
+    /**Durration limit for job */
+    private static final int MAX_DURRATION = 2;
+    /**Durration min for a job */
+    private static final int MIN_DURRATION = 1;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -213,7 +218,7 @@ public class Job implements Serializable {
      * @throw IllegalArgumentException if theDuration is less than 1.
      */
     public void setDuration(final int theDuration) {
-        if (theDuration < 1) {
+        if (theDuration > MAX_DURRATION && theDuration < MIN_DURRATION) {
             throw new IllegalArgumentException(theDuration + " is not a valid duration.");
         }
         myDuration = theDuration;

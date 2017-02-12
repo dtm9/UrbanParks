@@ -2,6 +2,7 @@ package backend;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,26 +11,37 @@ import java.util.Objects;
  *
  * @author Gardner Gomes
  * @author Walter Weeks
- * @version 2017 Feb 10
+ * @version 2017 Feb 12
  */
-public class Job implements Serializable{
+public class Job implements Serializable {
+
+    //***** Constant(s)
+
+    /** Default serialVersionUID for serialization. */
+    private static final long serialVersionUID = 1L;
+
+    /** Cannot create jobs earlier than this year. */
+    private static final int MIN_YEAR = 1900;
 
     //***** Field(s) ***************************************************************************************************
 
-    /** Default serialVersionUID for serialization. */
-	private static final long serialVersionUID = 1L;
-
-	/** Day for a Job. */
+    /** Day for a Job. */
     private int myDay;
-    
+
     /** Month for a Job. */
     private int myMonth;
 
+    /** Year for a Job. */
+    private int myYear;
+
     /** Time for a Job. */
     private String myTime;
-    
+
     /** Name of Job. */
     private String myName;
+
+    /** The duration of a Job. */
+    private int myDuration;
 
     /** Park the Job is at. */
     private Park myPark;
@@ -61,7 +73,7 @@ public class Job implements Serializable{
      * No-argument constructor for a Job object.
      */
     public Job() {
-    	setName("");
+        setName("");
         setDay(1);
         setMonth(1);
         setTime("");
@@ -79,24 +91,29 @@ public class Job implements Serializable{
      * A four-argument constructor that takes the park name, time, date and description of a job.
      *
      * @param thePark The park.
-     * @param theDate The date.
      * @param theTime The time.
      * @param theDescription The description.
-     * @param theDay 
-     * @param theMonth 
+     * @param theName The name.
+     * @param theDuration The duration in hours.
+     * @param theDay The day.
+     * @param theMonth The month.
+     * @param theYear The Year.
      * @throws NullPointerException if any value is null.
      */
-    public Job(final Park thePark, final String theDate, final String theTime, 
-    		   final String theDescription,final String theName, final int theDay, final int theMonth) {
+    public Job(final Park thePark, final String theTime, final String theDescription,
+               final String theName, final int theDuration, final int theDay, final int theMonth,
+               final int theYear) {
         this(); // call no-arg constructor to init missing arguments
 
-        if (thePark == null || theDay <= 0 || theTime == null || theDescription == null || theName == null || theMonth <= 0) {
+        if (thePark == null || theDay <= 0 || theTime == null || theDescription == null || theName == null) {
             throw new NullPointerException("No values passed to constructor can be null.");
         }
 
-        myPark = thePark;
+        setPark(thePark);
         setDay(theDay);
         setMonth(theMonth);
+        setDuration(theDuration);
+        setYear(theYear);
         setTime(theTime);
         setDescription(theDescription);
         setName(theName);
@@ -117,7 +134,7 @@ public class Job implements Serializable{
     /**
      * Setter for day of this job.
      *
-     * @param theDate The day of the Job.
+     * @param theDay The day of the Job.
      * @throws IllegalArgumentException Parameter not of type String
      * @author Gardner Gomes
      */
@@ -128,8 +145,9 @@ public class Job implements Serializable{
             throw new IllegalArgumentException("Parameter is out of bounds for Day");
         }
     }
+
     /**
-     * Getter for the Month of this Job.
+     * Getter for the month of this Job.
      *
      * @return The Month of the Job.
      * @author Gardner Gomes
@@ -139,9 +157,9 @@ public class Job implements Serializable{
     }
 
     /**
-     * Setter for day of this job.
+     * Setter for month of this job.
      *
-     * @param theDate The day of the Job.
+     * @param theMonth The month of the Job.
      * @throws IllegalArgumentException Parameter not of type String
      * @author Gardner Gomes
      */
@@ -151,6 +169,54 @@ public class Job implements Serializable{
         } else {
             throw new IllegalArgumentException("Parameter is out of Bounds for Month");
         }
+    }
+
+    /**
+     * Getter for the year of this Job.
+     *
+     * @author Walter Weeks
+     * @return The year of the Job.
+     */
+    public int getYear() {
+        return myYear;
+    }
+
+    /**
+     * Setter fo the year of this Job.
+     *
+     * @author Walter Weeks
+     * @param theYear The year of the Job.
+     * @throw IllegalArgumentException if theYear is invalid.
+     */
+    public void setYear(final int theYear) {
+        if (theYear < MIN_YEAR || theYear >  Calendar.getInstance().get(Calendar.YEAR)) {
+            throw new IllegalArgumentException(theYear +" is not valid.");
+        }
+        myYear = theYear;
+    }
+
+    /**
+     * Getter for the duratuon of this Job.
+     *
+     * @return The duration of the Job.
+     * @author Walter Weeks
+     */
+    public int getDuration() {
+        return myDuration;
+    }
+
+    /**
+     * Setter fo the year of this Job.
+     *
+     * @author Walter Weeks
+     * @param theDuration The duration of the Job.
+     * @throw IllegalArgumentException if theDuration is less than 1.
+     */
+    public void setDuration(final int theDuration) {
+        if (theDuration < 1) {
+            throw new IllegalArgumentException(theDuration + " is not a valid duration.");
+        }
+        myDuration = theDuration;
     }
 
     /**
@@ -252,7 +318,6 @@ public class Job implements Serializable{
         } else {
             throw new IllegalArgumentException("Size too ");
         }
-
     }
 
     /**
@@ -374,27 +439,28 @@ public class Job implements Serializable{
             throw new IllegalArgumentException("Parameter is not of type String");
         }
     }
+
     /**
      * Getter for myName.
      * @author VG Gnome
      * @return the Name of the Job.
      */
     public String getName() {
-		return myName;
-	}
+        return myName;
+    }
+
     /**
      * Setter for the name of the Job.
      * @author VG Gnome
      * @param theName
      */
-	public void setName(String theName) {
-		if (theName instanceof String) {
-			this.myName = theName;
-		} else {
+    public void setName(String theName) {
+        if (theName instanceof String) {
+            this.myName = theName;
+        } else {
             throw new IllegalArgumentException("Parameter is not of type String");
         }
-			
-	}
+    }
 
     //***** Overridden method(s) ***************************************************************************************
 
@@ -403,21 +469,21 @@ public class Job implements Serializable{
      * "contract."
      *
      * @author Walter Weeks
-     * @return  The hash code representing this object.
+     * @return The hash code representing this object.
      */
     public int hashCode() {
-        return Objects.hash(myPark, myTime);
+        return Objects.hash(myPark, myMonth, myDay, myMonth, myTime);
     }
 
     /**
      * Equals operation for comparing Job objects for equality. We consider Job objects to be equal
-     * if both Jobs have the same park name, date, and time fields.
+     * if both Jobs have the same park name, day, month, and time fields.
      *
      * TODO: This might have to be changed if we decide to use the Calendar class for date & time representation.
      *
      * @author Walter Weeks
      * @param theObj the other object we are comparing to.
-     * @return true if the Job objects are considered the same, i.e., park name, date, and time.
+     * @return true if the Job objects are considered the same, i.e., park name, day, month, and time.
      */
     @Override
     public boolean equals(Object theObj) {
@@ -432,8 +498,7 @@ public class Job implements Serializable{
         }
 
         Job otherJob = (Job) theObj;
-        return myPark.equals(otherJob.myPark) && //myDate.equals(otherJob.myDate) &&
-                myTime.equals(otherJob.myTime);
+        return myPark.equals(otherJob.myPark) && myDay == otherJob.myDay &&
+                myMonth == otherJob.myMonth && myTime.equals(otherJob.myTime);
     }
-
 }

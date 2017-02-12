@@ -19,291 +19,358 @@ import backend.Volunteer;
  * @author Dylan Miller
  * @author Walter Weeks
  */
-public class JobTest implements TestConstants  {
+public class JobTest implements TestConstants {
 
-    //***** Test fixture(s) and setUp() *****************************************************************************
+    // ***** Test fixture(s) and setUp()
+    // *****************************************************************************
 
-	/** The park manager test fixture. */
-	private ParkManager theManager;
+    /** The park manager test fixture. */
+    private ParkManager theManager;
 
-	/** The park test fixture. */
-	private Park thePark;
+    /** The park test fixture. */
+    private Park thePark;
 
-	/** The job test fixture. */
-	private Job myJob;
+    /** The job test fixture. */
+    private Job myJob;
 
-	/** The volunteer test fixture. */
-	private Volunteer theVolunteer;
+    /** The volunteer test fixture. */
+    private Volunteer theVolunteer;
 
-	/**
-	 * Sets up the test fixtures.
+    /**
+     * Sets up the test fixtures.
      *
-	 * @author Gardner Gomes
-	 */
-	@Before
-	public void setUp() throws Exception{
-		theManager = new ParkManager(GOOD_EMAIL,GOOD_PHONE,GOOD_NAME);
-		thePark = new Park(theManager, "Test Name", "123 E St","Test City", "WA", "Test ZIP");
-		theVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME,Volunteer.WorkGrade.LIGHT);
-		myJob = new Job();
-	}
+     * @author Gardner Gomes
+     */
+    @Before
+    public void setUp() throws Exception {
+        theManager = new ParkManager(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
+        thePark = new Park(theManager, "Test Name", "123 E St", "Test City", "WA", "Test ZIP");
+        theVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME, Volunteer.WorkGrade.LIGHT);
+        myJob = new Job();
+    }
 
-	//***** Unit test(s) *********************************************************************************************
+    // ***** Unit test(s)
+    // *********************************************************************************************
 
-	/**
-	 * Test for Good day on setDay().
+    /**
+     * Test for Good day on setDay().
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public final void setDay_goodDay_daySet() {
-		myJob.setDay(GOOD_INT);
-	    assertEquals(GOOD_INT, myJob.getDay());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public final void setDay_goodDay_daySet() {
+        myJob.setDay(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getDay());
+    }
 
-	/**
-	 * Test for bad day setting.
+    /**
+     * Test for bad day setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setDay_badDay_exceptionThrown() {
-	    myJob.setDay(BAD_INT);
-	}
-	/**
-	 * Test for Good Month on setMonth().
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setDay_badDay_exceptionThrown() {
+        myJob.setDay(BAD_INT);
+    }
+
+    /**
+     * Test for Good Month on setMonth().
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public final void setMonth_goodMonth_MonthSet() {
-		myJob.setMonth(GOOD_INT);
-	    assertEquals(GOOD_INT, myJob.getMonth());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public final void setMonth_goodMonth_MonthSet() {
+        myJob.setMonth(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getMonth());
+    }
 
-	/**
-	 * Test for bad Month setting.
+    /**
+     * Test for bad Month setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMonth_badMonth_exceptionThrown() {
-	    myJob.setDay(BAD_INT);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMonth_badMonth_exceptionThrown() {
+        myJob.setMonth(BAD_INT);
+    }
 
-	/**
-	 * Test for proper setting of time.
+    /**
+     * Test for proper setting of time.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public void setTime_goodTime_timeSet() {
-		myJob.setTime("1130");
-		assertEquals("1130", myJob.getTime());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setTime_goodTime_timeSet() {
+        myJob.setTime("1130");
+        assertEquals("1130", myJob.getTime());
+    }
 
-	/**
-	 * Tests for bad time setting.
+    /**
+     * Tests for bad time setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setTime_badTime_Exceptionthrown() {
-		myJob.setTime(BAD_STRING);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setTime_badTime_Exceptionthrown() {
+        myJob.setTime(BAD_STRING);
+    }
 
-	/**
-	 * Tests for proper setting of park name.
+    /**
+     * Tests for proper setting of park name.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public void setPark_goodPark_parkSet() {
-		myJob.setPark(thePark);
-		assertEquals(thePark, myJob.getPark());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setPark_goodPark_parkSet() {
+        myJob.setPark(thePark);
+        assertEquals(thePark, myJob.getPark());
+    }
 
-	/**
-	 * Tests for null park name setting.
+    /**
+     * Tests for null park name setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setPark_badName_ExceptionThrown() {
-		myJob.setPark(P_NULL);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setPark_badName_ExceptionThrown() {
+        myJob.setPark(P_NULL);
+    }
 
-	/**
-	 * Tests for proper setting of the job description.
+    /**
+     * Tests for proper setting of the job description.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public void setDescription_goodDescription_descriptionSet() {
-		myJob.setDescription(GOOD_STRING);
-		assertEquals(GOOD_STRING, myJob.getDescription());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setDescription_goodDescription_descriptionSet() {
+        myJob.setDescription(GOOD_STRING);
+        assertEquals(GOOD_STRING, myJob.getDescription());
+    }
 
-	/**
-	 * Tests for bad description string setting.
+    /**
+     * Tests for bad description string setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setDescription_badDescription_ExceptionThrown() {
-		myJob.setDescription(BAD_STRING);
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setDescription_badDescription_ExceptionThrown() {
+        myJob.setDescription(BAD_STRING);
 
-	}
+    }
 
-	/**
-	 * Test for proper setting of maximum number of volunteers.
+    /**
+     * Test for proper setting of maximum number of volunteers.
      *
-	 *@author Gardner Gomes
-	 */
-	@Test
-	public void setMaxVolunteers_goodInt_VolunteerMaxSet() {
-		myJob.setMaxVolunteers(GOOD_INT);
-		assertEquals(GOOD_INT, myJob.getMaxVolunteers());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setMaxVolunteers_goodInt_VolunteerMaxSet() {
+        myJob.setMaxVolunteers(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getMaxVolunteers());
+    }
 
-	/**
-	 * Tests for bad max volunteers setting.
+    /**
+     * Tests for bad max volunteers setting.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMaxVolunteers_badInt_ExceptionThrown() {
-		myJob.setMaxVolunteers(BAD_INT);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMaxVolunteers_badInt_ExceptionThrown() {
+        myJob.setMaxVolunteers(BAD_INT);
+    }
 
-	/**
-	 * Test for proper setting of minimum light workers.
+    /**
+     * Test for proper setting of minimum light workers.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public void setMinLight_goodInt_MinLightSet() {
-		myJob.setMinLight(GOOD_INT);
-		assertEquals(GOOD_INT, myJob.getMinLight());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setMinLight_goodInt_MinLightSet() {
+        myJob.setMinLight(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getMinLight());
+    }
 
-	/**
-	 * Tests for bad minimum light worker count.
-	 * @author VG Gnome
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMinLight_badInt_ExceptionThrown() {
-		myJob.setMinLight(BAD_INT);
-	}
+    /**
+     * Tests for bad minimum light worker count.
+     * 
+     * @author VG Gnome
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMinLight_badInt_ExceptionThrown() {
+        myJob.setMinLight(BAD_INT);
+    }
 
-	/**
-	 * Test for proper setting of minimum medium workers.
+    /**
+     * Test for proper setting of minimum medium workers.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test
-	public void setMyMinMedium_goodInt_MinMediumSet() {
-		myJob.setMinMedium(GOOD_INT);
-		assertEquals(GOOD_INT, myJob.getMinMedium());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setMyMinMedium_goodInt_MinMediumSet() {
+        myJob.setMinMedium(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getMinMedium());
+    }
 
-	/**
-	 * Tests for bad minimum medium worker count.
+    /**
+     * Tests for bad minimum medium worker count.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMinMedium_badInt_ExceptionThrown() {
-		myJob.setMinMedium(BAD_INT);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMinMedium_badInt_ExceptionThrown() {
+        myJob.setMinMedium(BAD_INT);
+    }
 
-	/**
-	 * Test for proper setting of minimum heavy workers.
+    /**
+     * Test for proper setting of minimum heavy workers.
      *
-	 *@author Gardner Gomes
-	 */
-	@Test
-	public void setMinHeavy_goodInt_MinHeavySet() {
-		myJob.setMinHeavy(GOOD_INT);
-		assertEquals(GOOD_INT, myJob.getMinHeavy());
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setMinHeavy_goodInt_MinHeavySet() {
+        myJob.setMinHeavy(GOOD_INT);
+        assertEquals(GOOD_INT, myJob.getMinHeavy());
+    }
 
-	/**
-	 * Tests for bad min of heavy workers.
+    /**
+     * Tests for bad min of heavy workers.
      *
-	 *@author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMinHeavy_badInt_ExceptionThrown() {
-		myJob.setMinHeavy(BAD_INT);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMinHeavy_badInt_ExceptionThrown() {
+        myJob.setMinHeavy(BAD_INT);
+    }
 
-	/**
-	 * Test for proper setting of the volunteer list.
+    /**
+     * Test for proper setting of the volunteer list.
      *
-	 *@author Gardner Gomes
-	 */
-	@Test
-	public void setVolunteers_goodVolunteer_volunteerAdded() {
-		myJob.setVolunteers(theVolunteer.getUsername());
-		List<String> vList = myJob.getVolunteers();
-		assertEquals(theVolunteer.getUsername(), vList.get(0));
-	}
+     * @author Gardner Gomes
+     */
+    @Test
+    public void setVolunteers_goodVolunteer_volunteerAdded() {
+        myJob.setVolunteers(theVolunteer.getUsername());
+        List<String> vList = myJob.getVolunteers();
+        assertEquals(theVolunteer.getUsername(), vList.get(0));
+    }
 
-	/**
-	 * Tests adding a bad volunteer to the volunteers list of a job.
+    /**
+     * Tests adding a bad volunteer to the volunteers list of a job.
      *
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setVolunteers_badVolunteerName_ExceptionThrown() {
-		myJob.setVolunteers(BAD_STRING);
-	}
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setVolunteers_badVolunteerName_ExceptionThrown() {
+        myJob.setVolunteers(BAD_STRING);
+    }
 
-	/**
-	 * Tests for proper setting of the job notes.
+    /**
+     * Tests for proper setting of the job notes.
      *
-	 * @author VG Gnome
-	 */
-	@Test
-	public void setNotes_goodNotes_NotesSet() {
-		myJob.setNotes(GOOD_STRING);
-		assertEquals(GOOD_STRING, myJob.getNotes());
-	}
-	/**
-	 * Tests adding a bad note to the notes list.
-	 * 
-	 * @author Gardner Gomes
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void setMyNotes_BadNotes_ExceptionThrown() {
-		myJob.setNotes(BAD_STRING);
-	}
+     * @author VG Gnome
+     */
+    @Test
+    public void setNotes_goodNotes_NotesSet() {
+        myJob.setNotes(GOOD_STRING);
+        assertEquals(GOOD_STRING, myJob.getNotes());
+    }
 
-	/**
-	 * Tests two separate Job objects for equality.
-	 *
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void testEquality_EqualJobs_True() {
-		Park park = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
-		Job job1 = new Job(park, "12:00", "Rake leaves", "Raking", 1,  2, 10, 2017);
-		Job job2 = new Job(park, "12:00", "Rake leaves", "Raking", 1,  2, 10, 2017);
-		assertTrue(job1.equals(job2));
-	}
+    /**
+     * Tests adding a bad note to the notes list.
+     * 
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMyNotes_BadNotes_ExceptionThrown() {
+        myJob.setNotes(BAD_STRING);
+    }
 
-	/**
-	 * Tests two separate Job objects for inequality.
-	 *
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void testInequality_DifferentJobs_False() {
+    /**
+     * Tests adding a good Name.
+     * 
+     * @author Gardner Gomes
+     */
+    public void setMyName_GoodName_NameSet() {
+        myJob.setName(GOOD_STRING);
+        assertEquals(GOOD_STRING, myJob.getName());
+    }
+
+    /**
+     * Tests adding a good Name.
+     * 
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMyName_BadName_ExceptionThrown() {
+        myJob.setName(BAD_STRING);
+    }
+    /**
+     * Tests Duration.
+     * 
+     * @author Gardner Gomes
+     */
+    public void setMyDuration_GoodInt_DurationSet() {
+        myJob.setDuration(GOOD_INT);
+        assertEquals(myJob.getDuration(), GOOD_INT);
+    }
+    /**
+     * Tests Duration.
+     * 
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMyDuration_IntLessThan1_ExceptionThrown() {
+        myJob.setDuration(BAD_INT);
+    }
+    /**
+     * Tests Duration.
+     * 
+     * @author Gardner Gomes
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMyDuration_IntGreaterThan2_ExceptionThrown() {
+        myJob.setDuration(GOOD_INT);
+    }
+    /**
+     * Tests Year.
+     * 
+     * @author Gardner Gomes
+     */
+    public void setMyYear_GoodYear_YearSet() {
+        myJob.setYear(2017);
+        assertEquals(myJob.getYear(), 2017);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void setMyYear_BadYear_ExceptionThrown() {
+        myJob.setYear(BAD_INT);
+        myJob.setYear(2099);
+    }
+
+    /**
+     * Tests two separate Job objects for equality.
+     *
+     * @author Walter Weeks
+     */
+    @Test
+    public void testEquality_EqualJobs_True() {
+        Park park = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
+        Job job1 = new Job(park, "12:00", "Rake leaves", "Raking", 1, 2, 10, 2017);
+        Job job2 = new Job(park, "12:00", "Rake leaves", "Raking", 1, 2, 10, 2017);
+        assertTrue(job1.equals(job2));
+    }
+
+    /**
+     * Tests two separate Job objects for inequality.
+     *
+     * @author Walter Weeks
+     */
+    @Test
+    public void testInequality_DifferentJobs_False() {
         Park park1 = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
-		Park park2 = new Park(theManager, "Jefferson Park","801 N Mason Ave","Tacoma", "WA", "98406");
-        Job job1 = new Job(park1, "1200", "Rake leaves", "Raking", 1, 2 , 10 , 2017);
-		Job job2 = new Job(park2, "1200", "Rake leaves", "Raking", 1, 2 ,10 , 2017);
-		assertFalse(job1.equals(job2));
-	}
+        Park park2 = new Park(theManager, "Jefferson Park", "801 N Mason Ave", "Tacoma", "WA", "98406");
+        Job job1 = new Job(park1, "1200", "Rake leaves", "Raking", 1, 2, 10, 2017);
+        Job job2 = new Job(park2, "1200", "Rake leaves", "Raking", 1, 2, 10, 2017);
+        assertFalse(job1.equals(job2));
+    }
 }

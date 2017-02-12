@@ -19,14 +19,16 @@ public class Job implements Serializable {
 
     /** Default serialVersionUID for serialization. */
     private static final long serialVersionUID = 1L;
-
     /** Cannot create jobs earlier than this year. */
     private static final int MIN_YEAR = 1900;
-    
     /**Durration limit for job */
     private static final int MAX_DURRATION = 2;
-    /**Durration min for a job */
+    /**Duration min for a job */
     private static final int MIN_DURRATION = 1;
+    /**Minimum days in a Month */
+    private static final int MONTH_MIN_DAY = 1;
+    /**Max days in a Month */
+    private static final int MONTH_MAX_DAY = 31;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -144,7 +146,7 @@ public class Job implements Serializable {
      * @author Gardner Gomes
      */
     public void setDay(final int theDay) {
-        if (theDay > 0 && theDay <= 31) {
+        if (theDay >= MONTH_MIN_DAY && theDay <= MONTH_MAX_DAY) {
             this.myDay = theDay;
         } else {
             throw new IllegalArgumentException("Parameter is out of bounds for Day\n");
@@ -187,7 +189,7 @@ public class Job implements Serializable {
     }
 
     /**
-     * Setter fo the year of this Job.
+     * Setter for the year of this Job.
      *
      * @author Walter Weeks
      * @param theYear The year of the Job.
@@ -201,7 +203,7 @@ public class Job implements Serializable {
     }
 
     /**
-     * Getter for the duratuon of this Job.
+     * Getter for the duration of this Job.
      *
      * @return The duration of the Job.
      * @author Walter Weeks
@@ -211,7 +213,7 @@ public class Job implements Serializable {
     }
 
     /**
-     * Setter fo the year of this Job.
+     * Setter for the year of this Job.
      *
      * @author Walter Weeks
      * @param theDuration The duration of the Job.

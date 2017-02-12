@@ -28,7 +28,7 @@ public class ParkManagerViewTest {
 		testDatastore = new Datastore();
 		testParkManagerView = new ParkManagerView(testParkManager, testDatastore);
 		
-	}
+	} 
 
 	@Test
 	public final void launchGUI_goodCases_runsParkManagerView() {

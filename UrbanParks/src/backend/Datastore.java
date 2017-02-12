@@ -213,12 +213,17 @@ public final class Datastore implements Serializable {
      *
      * @author Walter Weeks (ww3@uw.edu)
      * @param theJob the job to add to the pending jobs list.
+     * @throw NullPointerException if theJob is null.
+     * @throw IllegalStateException if the number of jobs is already at maximum capacity.
      */
     public void addJob(final Job theJob) {
         if (theJob == null) {
             throw new NullPointerException("theJob cannot be null.");
         }
-        if (myPendingJobs.size() < myMaxPendingJobs && !myPendingJobs.contains(theJob)) {
+        if (myPendingJobs.size() >= myMaxPendingJobs) {
+            throw new IllegalStateException("System cannot have more than " + myMaxPendingJobs + " jobs.");
+        }
+        if (!myPendingJobs.contains(theJob)) {
             myPendingJobs.add(theJob);
         }
     }

@@ -24,6 +24,8 @@ public class Main {
   static Datastore datastore;
   /** String builder for printing any text needed to console. */
   private static StringBuilder mySB = new StringBuilder();
+  /**OS-independent string to add a line break in string builder.*/
+  private static final String SB_LINE_BREAK = System.getProperty("line.separator");
   /** Scanner object for any user input that may be required for log in. */
   private static Scanner myScanner = new Scanner(System.in);
   
@@ -35,40 +37,110 @@ public class Main {
   
   public static void main(final String[] args) {
     
+    boolean done = false;
     load();
     //debug_init();
-    init();
-    save();
+    while (!done) {
+      done = init();
+      save();	
+    }
+    mySB.delete(0, mySB.capacity());
+    mySB.append(SB_LINE_BREAK);
+    System.out.print(mySB.toString());
   }
   
   /**
    * Helper method to log in and start the GUI.
    * @author Dylan Miller 
    */
-  private static void init() {
+  private static boolean init() {
+    boolean done = false;
+	printHeader();
+    
+	int theChoice = myScanner.nextInt();
 
+	switch (theChoice) {
+	  case 1: //log in
+	    //get the username
+	    View theView = null;
+	    Account userAccount = null;
+	    String username = scanUsername();
+
+        //get the account
+        userAccount = seekAccount(username);
+
+        //launch the view
+        theView = generateView(userAccount, theView);
+        theView.launchGUI();
+        
+        done = false;
+        break;
+      case 2: //exit
+        done = true;
+        break;
+      default: //wrong input
+      done = false; //will repeat the menu again
+      break;
+    }
+    return done;
+  }
+
+/**
+ * Helper method to get the username from the command line.
+ * @return user's GUID
+ * @author Dylan Miller
+ */
+private static String scanUsername() {
+    myScanner.nextLine();
     //get the username
     mySB.append("Username: ");
     System.out.print(mySB.toString());
     String username = myScanner.nextLine();
-    
-    //get the list of accounts
+    return username;
+}
+
+private static Account seekAccount(String username) {
     List<Account> users = datastore.getAllAccounts();
     boolean found = false;
     Account userAccount = null;
-    View theView = null;
     
     //seek the list for the entered username
     for (Account user : users) {
-      if (!found && user.getUsername().equals(username)) {
-        userAccount = user;
-        found = true;
-      }
+
+        if (!found && user.getUsername().equals(username)) {
+          userAccount = user;
+          found = true;
+        }
     }
-    
-  theView = generateView(userAccount, theView);
-  theView.launchGUI();
-  }
+    return userAccount;
+}
+
+/**
+ * Helper method to test the log-in screen display.
+ * @author Dylan Miller
+ */
+private static void printHeader() {
+    mySB.append(SB_LINE_BREAK);
+	mySB.append(SB_LINE_BREAK);
+	mySB.append("----------------------------------------------------------");
+	mySB.append(SB_LINE_BREAK);
+	mySB.append("Welcome to Urban Parks ");
+	mySB.append(SB_LINE_BREAK);
+	mySB.append("----------------------------------------------------------");
+	mySB.append(SB_LINE_BREAK);
+	mySB.append(SB_LINE_BREAK);
+	
+	mySB.append("Make a selection:");
+	mySB.append(SB_LINE_BREAK);
+	mySB.append("1. Log in");
+	mySB.append(SB_LINE_BREAK);
+	mySB.append("2. Exit");
+	mySB.append(SB_LINE_BREAK);
+	
+	System.out.print(mySB.toString());
+	System.out.print("Selection: ");
+	mySB.delete(0, mySB.capacity());
+}
 
 /**
  * Helper method to create the proper view for the user.

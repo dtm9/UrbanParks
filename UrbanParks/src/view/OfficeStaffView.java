@@ -30,18 +30,17 @@ public class OfficeStaffView extends View {
   /**OS-independent string to add a line break in string builder.*/
   private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
-  private StringBuilder sb;
   private OfficeStaff myOfficeStaff;
   private Datastore myDataStore;
   private Scanner myScanner = new Scanner(System.in); 
-  private StringBuilder mySB = new StringBuilder();
+  private StringBuilder mySB;
 
   
 	public OfficeStaffView(Account theAccount, Datastore theDatastore) {
 		super();
 		myOfficeStaff = (OfficeStaff) theAccount;
 		myDataStore = theDatastore;
-		sb = new StringBuilder();
+		mySB = new StringBuilder();
 	}
   /**
    * Public method to launch the GUI for Office Staff accounts.
@@ -125,8 +124,8 @@ public class OfficeStaffView extends View {
 		calendarString.append(today.getYear() + ". ");
 		calendarString.append(theDatastore.getNumberOfJobs() + " upcoming jobs out of ");
 		calendarString.append(theDatastore.getMaxPendingJobs() + " maximum");
-		calendarString.append(System.getProperty("line.separator"));
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
+		calendarString.append(SB_LINE_BREAK);
 		calendarString.append("   Su  ");
 		calendarString.append("    M  ");
 		calendarString.append("    T  ");
@@ -134,10 +133,10 @@ public class OfficeStaffView extends View {
 		calendarString.append("    T  ");
 		calendarString.append("    F  ");
 		calendarString.append("    S  ");
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
 		calendarString.append("               [");
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US) + "]");
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
 		
 		switch(today.getDayOfWeek()) {
 			case SUNDAY: startDay = 0; break;
@@ -159,7 +158,7 @@ public class OfficeStaffView extends View {
 		while(ym.equals(YearMonth.from(today))) {
 			jobsToday = 0;
 			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
-				calendarString.append(System.getProperty("line.separator"));
+				calendarString.append(SB_LINE_BREAK);
 				calendarString.append("|");
 			}
 			if (today.getDayOfMonth() < 10) {
@@ -184,10 +183,10 @@ public class OfficeStaffView extends View {
 		}
 		
 		// This is where the next month's calendar starts
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
 		calendarString.append("               [");
 		calendarString.append(today.getMonth().getDisplayName(TextStyle.FULL , Locale.US) + "]");
-		calendarString.append(System.getProperty("line.separator"));
+		calendarString.append(SB_LINE_BREAK);
 
 		switch(today.getDayOfWeek()) {
 			case SUNDAY: startDay = 0; break;
@@ -207,7 +206,7 @@ public class OfficeStaffView extends View {
 		while(today.getDayOfMonth() != monthCheck) {
 			jobsToday = 0;
 			if (today.getDayOfWeek() == DayOfWeek.SUNDAY) {
-				calendarString.append(System.getProperty("line.separator"));
+				calendarString.append(SB_LINE_BREAK);
 				calendarString.append("|");
 			}
 			if (today.getDayOfMonth() < 10) {

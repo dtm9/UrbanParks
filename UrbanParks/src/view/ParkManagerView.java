@@ -83,124 +83,172 @@ public class ParkManagerView extends View {
         myJob = addMonth(myJob);
         myJob = addYear(myJob);
         myJob = addTime(myJob);
-        myJob = addDurration(myJob);
+        myJob = addDuration(myJob);
         myJob = addLightGrade(myJob);
-        //System.out.print();
         myJob = addMediumGrade(myJob);
         myJob = addHeavyGrade(myJob);
         myJob = addVolunteerMax(myJob);
         myJob = addNotes(myJob);
-        myDatastore.addJob(myJob); // TODO TryCatch
+        try {
+            myDatastore.addJob(myJob);
+        } catch (Exception e){
+            System.out.println("Adding the Job Failed Unexpectedly, try again\n");
+            SubmitJob();
+        }
+        Main.save();
         showJob(myJob);
 
     }
 
-    private Job addDurration(Job myJob) {
+    private Job addDuration(Job theJob) {
         System.out.print("Please set the Duration for this job(1 or 2 days): ");
-        myJob.setDuration(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-    }
-
-    Job addNotes(Job myJob) {
-        System.out.print("Please add any aditional notes here: ");
-        myJob.setNotes(myScanner.nextLine());
-        return myJob;
-     // TODO TryCatch
-    }
-
-    Job addVolunteerMax(Job myJob) {
-        System.out.print("Please set the maximum number of Volunteers: ");
-        myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
-    }
-
-    Job addHeavyGrade(Job myJob) {
-        System.out.print("Please set the minumum Heavy Grade Workers: ");
-        myJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
-    }
-
-    Job addMediumGrade(Job myJob) {
-        System.out.print("Please set the minumum Medium Grade Workers: ");
-        myJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
-    }
-
-    Job addLightGrade(Job myJob) {
-        System.out.print("Please set the minumum Light Grade Workers: ");
-       // int temp = myScanner.nextInt();
-        //System.out.println(temp);
         try {
-           //System.out.println(myJob.getMinLight());
-           //int temp = myScanner.nextInt();
-           //myJob.setMinLight(temp);
-           myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
+            theJob.setDuration(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addDuration(theJob);
+        }
+        return theJob;
+    }
+
+    Job addNotes(Job theJob) {
+        System.out.print("Please add any aditional notes here: ");
+        try {
+            theJob.setNotes(myScanner.nextLine());
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addNotes(theJob);
+        }
+        return theJob;
+    }
+
+    Job addVolunteerMax(Job theJob) {
+        System.out.print("Please set the maximum number of Volunteers: ");
+        try {
+            theJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addVolunteerMax(theJob);
+        }
+        return theJob;
+    }
+
+    Job addHeavyGrade(Job theJob) {
+        System.out.print("Please set the minumum Heavy Grade Workers: ");
+        try {
+            theJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addHeavyGrade(theJob);
+        }
+        return theJob;
+    }
+
+    Job addMediumGrade(Job theJob) {
+        System.out.print("Please set the minumum Medium Grade Workers: ");
+        try {
+            theJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addMediumGrade(theJob);
+        }
+        return theJob;
+    }
+
+    Job addLightGrade(Job theJob) {
+        System.out.print("Please set the minumum Light Grade Workers: ");
+        try {
+            theJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
             System.out.print(e.getMessage());
-            addLightGrade(myJob);
+            addLightGrade(theJob);
         }
-        //myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
+        return theJob;
     }
 
-    Job addTime(Job myJob) {
+    Job addTime(Job theJob) {
         System.out.print("Please set the Time of this Job(ie. 12:30): ");
-        myJob.setTime(myScanner.nextLine());
-        return myJob;
-     // TODO TryCatch
+        try {
+            theJob.setTime(myScanner.nextLine());
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addTime(theJob);
+        }
+        return theJob;
     }
 
-    private Job addYear(Job myJob) {
-        // TODO Auto-generated method stub
-        return myJob;
-        
+    Job addYear(Job theJob) {
+        System.out.print("Please set the Year of this Job(ie.2017): ");
+        try {
+            theJob.setYear(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addYear(theJob);
+        }
+        return theJob;
+
     }
 
-    Job addDay(Job myJob) {
+    Job addDay(Job theJob) {
         System.out.print("Please set the Day of this Job(1-31): ");
-        myJob.setDay(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
+        try {
+            theJob.setDay(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addDay(theJob);
+        }
+        return theJob;
     }
-   Job addMonth(Job myJob) {
+
+    Job addMonth(Job theJob) {
         System.out.print("Please set the Month of this Job(1-12): ");
-        myJob.setMonth(Integer.parseInt(myScanner.nextLine()));
-        return myJob;
-     // TODO TryCatch
+        try {
+            theJob.setMonth(Integer.parseInt(myScanner.nextLine()));
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addMonth(theJob);
+        }
+        return theJob;
     }
 
-    Job addDescription(Job myJob) {
+    Job addDescription(Job theJob) {
         System.out.print("Please type out a description of the Job: ");
-        myJob.setDescription(myScanner.nextLine());
-        return myJob;
-     // TODO TryCatch
+        try {
+            theJob.setDescription(myScanner.nextLine());
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
+            addDescription(theJob);
+        }
+        return theJob;
     }
 
-    Job addName(Job myJob) {
+    Job addName(Job theJob) {
         System.out.print("Please set the Name of the Job: ");
-        myScanner.nextLine();
-        myJob.setName(myScanner.nextLine());
-        return myJob;
-     // TODO TryCatch
+        try {
+            myScanner.nextLine();
+            theJob.setName(myScanner.nextLine());
+        } catch (Exception e) {
+            addName(theJob);
+        }
+        return theJob;
     }
 
-    Job addPark(Job myJob) {
+    Job addPark(Job theJob) {
         List<Park> theParks = myDatastore.getAllParks();
         Iterator<Park> itr = theParks.iterator();
-        while (myJob.getPark() == null) {
+        while (theJob.getPark() == null) {
             Park tempPark = (Park) itr.next();
             if (tempPark.getManager().equals(myManager)) {
-                myJob.setPark(tempPark);
+                theJob.setPark(tempPark);
             }
         }
-        return myJob;
+        return theJob;
     }
 
-    /* -----------------------------------------------------------------------------------------------------------------------------*/
+    /*
+     * -------------------------------------------------------------------------
+     * ----------------------------------------------------
+     */
     /**
      * View Jobs elemt for UI
      */
@@ -278,7 +326,7 @@ public class ParkManagerView extends View {
         mySB.delete(0, mySB.capacity());
         showJobInformation(theJob);
         showVolunteers(theJob);
-        
+
         mySB.append("\nPlease choose what you would like to do now");
         mySB.append("\n----------------------------------------------------------\n\n");
         mySB.append("1. Submit Job\n");
@@ -299,8 +347,6 @@ public class ParkManagerView extends View {
         case 3:
             break;
         }
-        // TODO UI functionality
-
     }
 
     /**
@@ -342,18 +388,21 @@ public class ParkManagerView extends View {
      * @param theJob
      */
     private void showVolunteers(Job theJob) {
-        System.out.print("\nVolunteers for this Job.\n");
-        List<String> myVolunteers = theJob.getVolunteers();
-        Iterator<String> itr = myVolunteers.iterator();
-        int count = 1;
-        while (itr.hasNext()) {
-            mySB.append(count);
-            mySB.append(".");
-            mySB.append(itr.next());
-            System.out.println(mySB.toString());
-            mySB.delete(0, mySB.capacity());
+        if (!theJob.getVolunteers().isEmpty()) {
+            System.out.print("\nVolunteers for this Job.\n");
+            List<String> myVolunteers = theJob.getVolunteers();
+            Iterator<String> itr = myVolunteers.iterator();
+            int count = 1;
+            while (itr.hasNext()) {
+                mySB.append(count);
+                mySB.append(".");
+                mySB.append(itr.next());
+                System.out.println(mySB.toString());
+                mySB.delete(0, mySB.capacity());
+            }
+        } else {
+            System.out.println("There are no Volunteers signed up.\n");
         }
-
     }
 
 }

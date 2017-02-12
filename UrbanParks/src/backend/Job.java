@@ -147,7 +147,7 @@ public class Job implements Serializable {
         if (theDay > 0 && theDay <= 31) {
             this.myDay = theDay;
         } else {
-            throw new IllegalArgumentException("Parameter is out of bounds for Day");
+            throw new IllegalArgumentException("Parameter is out of bounds for Day\n");
         }
     }
 
@@ -172,7 +172,7 @@ public class Job implements Serializable {
         if (theMonth > 0 && theMonth <= 12) {
             this.myMonth = theMonth;
         } else {
-            throw new IllegalArgumentException("Parameter is out of Bounds for Month");
+            throw new IllegalArgumentException("Parameter is out of Bounds for Month\n");
         }
     }
 
@@ -195,7 +195,7 @@ public class Job implements Serializable {
      */
     public void setYear(final int theYear) {
         if (theYear < MIN_YEAR || theYear >  Calendar.getInstance().get(Calendar.YEAR)) {
-            throw new IllegalArgumentException(theYear +" is not valid.");
+            throw new IllegalArgumentException(theYear +" is not valid.\n");
         }
         myYear = theYear;
     }
@@ -218,8 +218,8 @@ public class Job implements Serializable {
      * @throw IllegalArgumentException if theDuration is less than 1.
      */
     public void setDuration(final int theDuration) {
-        if (theDuration > MAX_DURRATION && theDuration < MIN_DURRATION) {
-            throw new IllegalArgumentException(theDuration + " is not a valid duration.");
+        if (theDuration > MAX_DURRATION || theDuration < MIN_DURRATION) {
+            throw new IllegalArgumentException(theDuration + " is not a valid duration.\n");
         }
         myDuration = theDuration;
     }
@@ -245,7 +245,7 @@ public class Job implements Serializable {
         if (theTime instanceof String) {
             this.myTime = theTime;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
 
@@ -270,7 +270,7 @@ public class Job implements Serializable {
         if (thePark instanceof Park) {
             this.myPark = thePark;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type Park");
+            throw new IllegalArgumentException("Parameter is not of type Park\n");
         }
     	/*TODO J-UnitTest*/
 
@@ -296,7 +296,7 @@ public class Job implements Serializable {
         if (theDescription instanceof String) {
             this.myDescription = theDescription;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String\n");
         }
 
     }
@@ -321,7 +321,7 @@ public class Job implements Serializable {
         if (theMaxVolunteers >= 0) {
             this.myMaxVolunteers = theMaxVolunteers;
         } else {
-            throw new IllegalArgumentException("Size too ");
+            throw new IllegalArgumentException("Parameter is not of type String.\n ");
         }
     }
 
@@ -345,7 +345,7 @@ public class Job implements Serializable {
         if (theMinLight >= 0) {
             this.myMinLight = theMinLight;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type Integer");
+            throw new IllegalArgumentException("Parameter is not of type Integer\n");
         }
     }
 
@@ -369,7 +369,7 @@ public class Job implements Serializable {
         if (theMinMedium >= 0) {
             this.myMinMedium = theMinMedium;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type Integer");
+            throw new IllegalArgumentException("Parameter is not of type Integer\n");
         }
     }
 
@@ -393,7 +393,7 @@ public class Job implements Serializable {
         if (theMinHeavy >= 0) {
             this.myMinHeavy = theMinHeavy;
         } else {
-            throw new IllegalArgumentException("Paramater is not of type Integer");
+            throw new IllegalArgumentException("Paramater is not of type Integer\n");
         }
     }
 
@@ -417,7 +417,7 @@ public class Job implements Serializable {
         if (theVolunteerUsername instanceof String) {
             this.myVolunteers.add(theVolunteerUsername);
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
 
@@ -441,7 +441,7 @@ public class Job implements Serializable {
         if (theNotes instanceof String) {
             this.myNotes = theNotes;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
 
@@ -463,7 +463,7 @@ public class Job implements Serializable {
         if (theName instanceof String) {
             this.myName = theName;
         } else {
-            throw new IllegalArgumentException("Parameter is not of type String");
+            throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
 

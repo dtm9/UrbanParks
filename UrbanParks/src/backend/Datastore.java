@@ -26,6 +26,9 @@ public final class Datastore implements Serializable {
 	/** The maximum number of pending jobs default value. */
     public static final int MAX_PENDING_JOBS_DEFAULT = 30;
 
+    /** The maximum number of pending jobs on a calendar date default value. */
+    public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 2;
+
     //***** Field(s) ***************************************************************************************************
 
     /** The user accounts on the system, i.e, Volunteer, OfficeStaff, and ParkManager. */
@@ -206,7 +209,6 @@ public final class Datastore implements Serializable {
         return result;
     }
 
-
     /**
      * Adds a new pending job to the list, if it does not exceed the maximum allowed or if it is not already in
      * the list.
@@ -217,15 +219,47 @@ public final class Datastore implements Serializable {
      * @throw IllegalStateException if the number of jobs is already at maximum capacity.
      */
     public void addJob(final Job theJob) {
-        if (theJob == null) {
+        if (theJob == null) { // Check for null
             throw new NullPointerException("theJob cannot be null.");
         }
-        if (myPendingJobs.size() >= myMaxPendingJobs) {
+        if (myPendingJobs.size() >= myMaxPendingJobs) { // Check for total system pending jobs
             throw new IllegalStateException("System cannot have more than " + myMaxPendingJobs + " jobs.");
         }
-        if (!myPendingJobs.contains(theJob)) {
-            myPendingJobs.add(theJob);
+
+        List<Job> jobsOnDateList = getJobsByDate(theJob.getDay(), theJob.getMonth(), theJob.getYear());
+        if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) { // Check for only 2 jobs on a given day
+            throw new IllegalStateException("System cannot have more than + "+
+                    MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day.");
         }
+
+        if (!myPendingJobs.contains(theJob)) {
+           myPendingJobs.add(theJob);
+        }
+    }
+
+    /**
+     * Gets the list of jobs on a given calendar date, i.e. the day, the month, and the year.
+     *
+     * @author Walter Weeks
+     * @param theDay The day.
+     * @param theMonth The month.
+     * @param theYear The year.
+     * @return The list of jobs on a given calendar date.
+     */
+    public List<Job> getJobsByDate(final int theDay, final int theMonth, final int theYear) {
+        List<Job> result = new ArrayList<>();
+
+        Iterator<Job> itr = myPendingJobs.iterator();
+        while (itr.hasNext()) {
+            Job currentJob = itr.next();
+            if (currentJob.getDay() == theDay &&
+                    currentJob.getMonth() == theMonth &&
+                    currentJob.getYear() == theYear) {
+                result.add(currentJob);
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -371,7 +405,7 @@ public final class Datastore implements Serializable {
     
     /**
      * Get a list of all Parks in the system.
-     *
+     *a
      * @author Dylan Miller
      * @return parks list from fields.
      */

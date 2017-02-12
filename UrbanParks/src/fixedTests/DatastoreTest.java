@@ -27,6 +27,9 @@ public class DatastoreTest {
 	/** Job list auxiliary text fixture. */
 	private List<Job> myJobs;
 
+	/** Account list of every person participating in the Urban Parks system. */
+	private List<Account> myAccounts;
+
 	/** ParkManager list auxiliary test fixture. */
 	private List<ParkManager> myParkManagers;
 
@@ -48,6 +51,7 @@ public class DatastoreTest {
 		myParkManagers = new ArrayList<>();
 		myVolunteers = new ArrayList<>();
 		myOfficeStaff = new ArrayList<>();
+		myAccounts = new ArrayList<>();
 		myParks = new ArrayList<>();
 		myJobs = new ArrayList<>();
 		myDatastore = new Datastore();
@@ -91,7 +95,8 @@ public class DatastoreTest {
 				"Digging ditches", 1, 10, 3, 2017));
 		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
 				"More digging ditches", 1, 15, 3, 2017));
-		myJobs.add(new Job(myParks.get(2), "2017/05/01", "1200", "Construct building", 1, 1, 5, 2017));
+		myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
+				"Construct building", 1, 1, 5, 2017));
 
 		// populate myVolunteers list data structure w/ 2 Volunteers
 		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
@@ -106,6 +111,17 @@ public class DatastoreTest {
 
 		// Populate myOfficeStaff list data structure w/ 1 Office Staff
 		myOfficeStaff.add(new OfficeStaff("randy@urbanparks.com", "2065551234", "Randy Johnson"));
+
+		// Populate the accounts list
+        for (int i = 0; i < myVolunteers.size(); i++) { 	// Volunteers
+            myAccounts.add(myVolunteers.get(i));
+        }
+        for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
+            myAccounts.add(myParkManagers.get(i));
+        }
+        for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
+            myAccounts.add(myOfficeStaff.get(i));
+        }
 	}
 
 	/**
@@ -171,7 +187,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the number of jobs at particular park is as expected.
+	 * Tests to see if the number of jobs at particular park is as expected.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -182,7 +198,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the number of jobs a particular volunteers is as expected.
+	 * Tests to see if the number of jobs a particular volunteers is as expected.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -193,7 +209,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the number of jobs a particular park manager is as expected.
+	 * Tests to see if the number of jobs a particular park manager is as expected.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -204,7 +220,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the number of accounts is as expected.
+	 * Tests to see if the number of accounts is as expected.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -214,7 +230,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the number of parks is as expected.
+	 * Tests to see if the number of parks is as expected.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -224,7 +240,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Test to see if the Datastore#addJob(Job) works as expected for adding 1 pending job.
+	 * Tests to see if the Datastore#addJob(Job) works as expected for adding 1 pending job.
 	 *
 	 * @author Walter Weeks
 	 */
@@ -236,7 +252,52 @@ public class DatastoreTest {
 		assertEquals(myJobs.size() + 1, myDatastore.getNumberOfJobs());
 	}
 
-	//***** Unit test(s) looking or thrown exceptions for improper data *****************************************************
+    /**
+     * Test to see if the default value of maximum number of pending jobs allowed by system is set properly.
+     *
+     * @author Walter Weeks
+     */
+	@Test
+    public void getMaxPendingJobs_UnmodifiedDatastore_ShouldBeDefaultValue() {
+	    assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT, myDatastore.getMaxPendingJobs());
+    }
+
+    /**
+     * Tests to see if max pending jobs can be changed to an expected value;
+     *
+     * @author Walter Weeks
+     */
+    @Test
+    public void setMaxPendingJobs_ModifyingMaxPendingJobs_ShouldBeChangedToExpectedValue() {
+        myDatastore.setMaxPendingJobs(myDatastore.getMaxPendingJobs() - 2);
+        assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT - 2, myDatastore.getMaxPendingJobs());
+    }
+
+    /**
+     * Tests to see if the Park list is as expected.
+     *
+     * @author Walter Weeks
+     */
+    @Test
+    public void getAllParks_UnmodifedDatatstore_ShouldBe8() {
+        for (int i = 0; i < myDatastore.getAllParks().size(); i++) {
+            assertEquals(myParks.get(i), myDatastore.getAllParks().get(i));
+        }
+    }
+
+    /**
+     * Tests to see if the Accounts list is as expected.
+     *
+     * @author Walter Weeks
+     */
+    @Test
+    public void getAllAccounts_UnmodifedDatatstore_ShouldBe8() {
+        for (int i = 0; i < myDatastore.getAllAccounts().size(); i++) {
+            assertEquals(myAccounts.get(i), myDatastore.getAllAccounts().get(i));
+        }
+    }
+
+    //***** Unit test(s) looking or thrown exceptions for improper data *****************************************************
 
 	/**
 	 * Tests for NullPointerException when adding a null job.
@@ -310,6 +371,8 @@ public class DatastoreTest {
 
 	/**
 	 * Tests for IllegalStateException when attempting to exceed the maximum number of pending jobs by 1.
+	 *
+	 * @author Walter Weeks
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void addJob_AddMaxPendingJobsPlus1_ExceptionThrown() {
@@ -319,4 +382,30 @@ public class DatastoreTest {
 					"Raking leaves", 1, 1, (i % 12) + 1, 2017));
 		}
 	}
+
+    /**
+     * Test for IllegalStateException when attempting to exceed the maximum number of pending jobs per
+     * day by 1.
+     *
+     * @author Walter Weeks
+     */
+	@Test(expected = IllegalStateException.class)
+    public void addJob_AddMaxPendingJobsPerDayPlus1_ExceptionExpected() {
+	    // Add a second job on 3 Mar 2017
+        myDatastore.addJob(new Job(myParks.get(0), "1130", "We will be raking leaves.",
+                "Raking leaves", 1, 1, 3, 2017));
+        // Add a third job on 3 Mar 2017
+        myDatastore.addJob(new Job(myParks.get(0), "1230", "We will be raking leaves.",
+                "Raking leaves", 1, 1, 3, 2017));
+    }
+
+    /**
+     * Tests for IllegalArgrumentException when attempting to set the maximum number of pending jobs to 0.
+     *
+     * @author Walter Weeks
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMaxPendingJobs_SetMaxPendingJobsTo0_ExceptionExpected() {
+        myDatastore.setMaxPendingJobs(0);
+    }
 }

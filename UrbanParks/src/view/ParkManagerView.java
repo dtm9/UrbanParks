@@ -39,8 +39,9 @@ public class ParkManagerView extends View {
         mySB.append("\nWelcome to Urban Parks\nPark Manager: ");
         mySB.append(myManager.getRealName());
         mySB.append("\n----------------------------------------------------------\n\n");
-        mySB.append("1.Submit Job\n");
-        mySB.append("2.View Jobs\n");
+        mySB.append("1. Submit Job\n");
+        mySB.append("2. View Jobs\n");
+        mySB.append("3. Exit\n");
         mySB.append("\n\nPlease Select a number followed by the enter key: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -53,6 +54,8 @@ public class ParkManagerView extends View {
             break;
         case 2:
             ViewJobs();
+            break;
+        case 3:
             break;
         }
 
@@ -77,6 +80,92 @@ public class ParkManagerView extends View {
      */
     private void SubmitJob() {
         Job myJob = new Job();
+        System.out.println("\nSubmit a Job for " + myManager.getRealName());
+        System.out.print("----------------------------------------------------------\n\n");
+        addPark(myJob);
+        addName(myJob);
+        addDescription(myJob);
+        addDay(myJob);
+        addMonth(myJob);
+        addYear(myJob);
+        addTime(myJob);
+        addLightGrade(myJob);
+        addMediumGrade(myJob);
+        addHeavyGrade(myJob);
+        addVolunteerMax(myJob);
+        addNotes(myJob);
+        myDatastore.addJob(myJob); // TODO TryCatch
+        showJob(myJob);
+
+    }
+
+    void addNotes(Job myJob) {
+        System.out.print("Please add any aditional notes here: ");
+        myJob.setNotes(myScanner.nextLine());
+     // TODO TryCatch
+    }
+
+    void addVolunteerMax(Job myJob) {
+        System.out.print("Please set the maximum number of Volunteers: ");
+        myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addHeavyGrade(Job myJob) {
+        System.out.print("Please set the minumum Heavy Grade Workers: ");
+        myJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addMediumGrade(Job myJob) {
+        System.out.print("Please set the minumum Medium Grade Workers: ");
+        myJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addLightGrade(Job myJob) {
+        System.out.print("Please set the minumum Light Grade Workers: ");
+        myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addTime(Job myJob) {
+        System.out.print("Please set the Time of this Job(ie. 12:30): ");
+        myJob.setTime(myScanner.nextLine());
+     // TODO TryCatch
+    }
+
+    private void addYear(Job myJob) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    void addDay(Job myJob) {
+        System.out.print("Please set the Day of this Job(1-31): ");
+        myJob.setDay(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addMonth(Job myJob) {
+        System.out.print("Please set the Month of this Job(1-12): ");
+        myJob.setMonth(Integer.parseInt(myScanner.nextLine()));
+     // TODO TryCatch
+    }
+
+    void addDescription(Job myJob) {
+        System.out.print("Please type out a description of the Job: ");
+        myJob.setDescription(myScanner.nextLine());
+     // TODO TryCatch
+    }
+
+    void addName(Job myJob) {
+        System.out.print("Please set the Name of the Job: ");
+        myScanner.nextLine();
+        myJob.setName(myScanner.nextLine());
+     // TODO TryCatch
+    }
+
+    void addPark(Job myJob) {
         List<Park> theParks = myDatastore.getAllParks();
         Iterator<Park> itr = theParks.iterator();
         while (myJob.getPark() == null) {
@@ -85,32 +174,6 @@ public class ParkManagerView extends View {
                 myJob.setPark(tempPark);
             }
         }
-        System.out.println("\nSubmit a Job for " + myManager.getRealName());
-        System.out.print("----------------------------------------------------------\n\n");
-        System.out.print("Please set the Name of the Job: ");
-        myScanner.nextLine();
-        myJob.setName(myScanner.nextLine());
-        System.out.print("Please type out a description of the Job: ");
-        myJob.setDescription(myScanner.nextLine());
-        System.out.print("Please set the Month of this Job(1-12): ");
-        myJob.setMonth(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please set the Day of this Job(1-31): ");
-        myJob.setDay(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please set the Time of this Job(ie. 12:30): ");
-        myJob.setTime(myScanner.nextLine());
-        System.out.print("Please set the minumum Light Grade Workers: ");
-        myJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please set the minumum Medium Grade Workers: ");
-        myJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please set the minumum Heavy Grade Workers: ");
-        myJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please set the maximum number of Volunteers: ");
-        myJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
-        System.out.print("Please add any aditional notes here: ");
-        myJob.setNotes(myScanner.nextLine());
-        myDatastore.addJob(myJob);
-        showJob(myJob);
-
     }
 
     /*
@@ -195,7 +258,7 @@ public class ParkManagerView extends View {
         showJobInformation(theJob);
         showVolunteers(theJob);
 
-        // TODO Auto-generated method stub
+        // TODO UI functionality
 
     }
 

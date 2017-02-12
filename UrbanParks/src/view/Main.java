@@ -42,7 +42,8 @@ public class Main {
     //debug_init();
     while (!done) {
       done = init();
-      save();	
+      mySB.delete(0, mySB.capacity());
+      save();
     }
     mySB.delete(0, mySB.capacity());
     mySB.append(SB_LINE_BREAK);
@@ -70,8 +71,18 @@ public class Main {
         userAccount = seekAccount(username);
 
         //launch the view
-        theView = generateView(userAccount, theView);
-        theView.launchGUI();
+        try {
+          theView = generateView(userAccount, theView);
+          theView.launchGUI();   
+        } catch (NullPointerException e) {
+          mySB.delete(0, mySB.capacity());
+          mySB.append(SB_LINE_BREAK);
+          mySB.append(e.getMessage());
+          mySB.append(SB_LINE_BREAK);
+          mySB.append(SB_LINE_BREAK);
+          System.out.print(mySB.toString());
+          mySB.delete(0, mySB.capacity());
+        }
         
         done = false;
         break;
@@ -99,6 +110,12 @@ private static String scanUsername() {
     return username;
 }
 
+/**
+ * Matches passed in username for account in the datastore.
+ * @param username provided by user.
+ * @return account of user or null if not found.
+ * @author Dylan Miller
+ */
 private static Account seekAccount(String username) {
     List<Account> users = datastore.getAllAccounts();
     boolean found = false;

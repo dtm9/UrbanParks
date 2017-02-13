@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view;
 
 import static org.junit.Assert.fail;
@@ -19,104 +16,147 @@ import backend.Volunteer;
 import backend.Volunteer.WorkGrade;
 
 /**
- * @author Dylan Miller
+ * Unit tests for the Main driver class.
  *
+ * @author Dylan Miller
  */
 public class MainTest {
-  
-  private Account goodAccount;
-  private String goodUsername;
-  private ParkManager goodPM;
-  private Volunteer goodVolunteer;
-  private OfficeStaff goodOfficeStaff;
-  private View testView;
-    
+
+    //***** Test fixture(s), setUp(), etc. *****************************************************************************
+
+    /** The Account test fixture. */
+    private Account myGoodAccount;
+
+    /** The username test fixture. */
+    private String myGoodUsername;
+
+    /** The ParkManager test fixture. */
+    private ParkManager myGoodPM;
+
+    /** The Volunteer test fixture. */
+    private Volunteer myGoodVolunteer;
+
+    /** The OfficeStaff test fixture. */
+    private OfficeStaff myGoodOfficeStaff;
+
+    /** The View test fixture. */
+    private View myTestView;
+
+    /** The expected exception rule. */
     @Rule
     public final ExpectedException exception = ExpectedException.none();
     
     /**
-     * @throws java.lang.Exception
+     * Sets up the relevant test fixtures.
      */
     @Before
     public void setUp() throws Exception {
-      Main.load();
-      List<Account> accounts = Main.datastore.getAllAccounts();
-      
-      goodAccount = accounts.get(0);
-      goodUsername = goodAccount.getUsername();
-      
-      goodPM = new ParkManager("test@test.com", "5551112222", "Testy McTesterson");
-      goodVolunteer = new Volunteer("test2@test.com", "5552223333", "Testy McTesterson Jr.", WorkGrade.LIGHT);
-      goodOfficeStaff = new OfficeStaff("test3@test.com", "5553334444", "Testy McTesterson III");
+        Main.load();
+        List<Account> accounts = Main.datastore.getAllAccounts();
+
+        myGoodAccount = accounts.get(0);
+        myGoodUsername = myGoodAccount.getUsername();
+
+        myGoodPM = new ParkManager("test@test.com", "5551112222", "Testy McTesterson");
+        myGoodVolunteer = new Volunteer("test2@test.com", "5552223333", "Testy McTesterson Jr.", WorkGrade.LIGHT);
+        myGoodOfficeStaff = new OfficeStaff("test3@test.com", "5553334444", "Testy McTesterson III");
     }
-    
+
+    //***** Unit test(s) ***********************************************************************************************
+
+    /**
+     * Tests Main#seekAccount(String) using a good Account from the datastore.
+     */
     @Test
     public final void seekAccount_goodUsername_NoExceptionsExpected() {
-       Account testUser = Main.seekAccount(goodUsername);
-       if (!testUser.equals(goodAccount)) {
-         System.err.println("testUser name: " + testUser.getUsername() + "\ngoodAccount name: " + goodAccount.getUsername());
-         fail("Could not seek account!");
-       } 
+        Account testUser = Main.seekAccount(myGoodUsername);
+        if (!testUser.equals(myGoodAccount)) {
+            System.err.println("testUser name: " + testUser.getUsername() + "\ngoodAccount name: " + myGoodAccount.getUsername());
+            fail("Could not seek account!");
+        }
     }
-    
+
+    /**
+     * Tests Main#seekAccount(String) using an Account not contained in the datastore.
+     */
     @Test
     public final void seekAccount_UserNotInDatastore_ShouldReturnNull() {
-      String badUsername = "notInTheDatastore@gmail.com";
-      Account testUser = Main.seekAccount(badUsername);
-      if (testUser != null) fail("account was fetched with bad username input.");
+        String badUsername = "notInTheDatastore@gmail.com";
+        Account testUser = Main.seekAccount(badUsername);
+        if (testUser != null) fail("account was fetched with bad username input.");
     }
-    
+
+    /**
+     * Tests Main#generateView(Account, View) with each type of user Account, i.e., ParkManager,
+     * Volunteer, and OfficeStaff.
+     */
     @Test
     public final void generateView_EachAccountIsValid_NoExceptionsExcpected() {
-      try {
-        Main.generateView(goodPM, testView);
-      } catch (NullPointerException e) {
-        fail("Failing to launch park manager gui!");
-      }
-      
-      try {
-        Main.generateView(goodVolunteer, testView);
-      } catch (NullPointerException e) {
-        fail("failing to launch volunteer gui!");  
-      }
-      
-      try {
-        Main.generateView(goodOfficeStaff, testView);
-      } catch (NullPointerException e) {
-        fail("failing to launch office staff gui!");
-      }
+        try {
+            Main.generateView(myGoodPM, myTestView);
+        } catch (NullPointerException e) {
+            fail("Failing to launch park manager gui!");
+        }
+
+        try {
+            Main.generateView(myGoodVolunteer, myTestView);
+        } catch (NullPointerException e) {
+            fail("failing to launch volunteer gui!");
+        }
+
+        try {
+            Main.generateView(myGoodOfficeStaff, myTestView);
+        } catch (NullPointerException e) {
+            fail("failing to launch office staff gui!");
+        }
     }
-    
+
+    /**
+     * Tests Main#generateView(Account, View) with a null Account abstract object; expected to throw a
+     * NullPointerException.
+     */
     @Test
     public final void generateView_AbstractAccount_NullPointerExceptionExpected() {
-      exception.expect(NullPointerException.class);
-      exception.expectMessage("Account not found.");
-      
-      Account badAccount = null;
-      Main.generateView(badAccount, testView);
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("Account not found.");
+
+        Account badAccount = null;
+        Main.generateView(badAccount, myTestView);
     }
-    
+
+    /**
+     * Tests Main#generateView(Account, View) with a null Volunteer object; expected to throw a
+     * NullPointerException.
+     */
     @Test
     public final void generateView_NullObjectWithVolunteerCast_NullPointerExceptionExpected() {
-      exception.expect(NullPointerException.class);
-      exception.expectMessage("Account not found.");
-      
-      Main.generateView((Volunteer)null, testView);
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("Account not found.");
+
+        Main.generateView((Volunteer)null, myTestView);
     }
-    
+
+    /**
+     * Tests Main#generateView(Account, View) with a null ParkManager object; expected to throw a
+     * NullPointerException.
+     */
     @Test
     public final void generateView_NullObjectWithParkManagerCast_NullPointerExceptionExpected() {
-      exception.expect(NullPointerException.class);
-      exception.expectMessage("Account not found.");
-      
-      Main.generateView((ParkManager)null, testView);
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("Account not found.");
+
+        Main.generateView((ParkManager)null, myTestView);
     }
-    
+
+    /**
+     * Tests Main#generateView(Account, View) with a null OfficeStaff object; expected to throw a
+     * NullPointerException.
+     */
     @Test
     public final void generateView_NullObjectWithOfficeStaffCast_NullPointerExceptionExpected() {
-      exception.expect(NullPointerException.class);
-      exception.expectMessage("Account not found.");
-      
-      Main.generateView((OfficeStaff)null, testView);
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("Account not found.");
+
+        Main.generateView((OfficeStaff)null, myTestView);
     }
 }

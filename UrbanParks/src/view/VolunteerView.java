@@ -23,8 +23,7 @@ import backend.Park;
  *
  */
 public class VolunteerView extends View {
-	/** OS-independent string to add a line break in string builder. */
-    private static final String SB_LINE_BREAK = System.getProperty("line.separator");
+
     private Volunteer myVolunteer;
     private final Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
@@ -34,6 +33,7 @@ public class VolunteerView extends View {
     	super();
     	myVolunteer = (Volunteer) theAccount;
     	myDatastore = theDatastore;
+    	mySB = new StringBuilder();
     	
     	
     }
@@ -68,6 +68,10 @@ public class VolunteerView extends View {
 	}
 	
 	private void signUpForJob(){
+		if (myVolunteer.isBlackballed()){
+			mySB.append("You can not Sign up for a job.\nYou have been Blackballed.\nPlease contact an Urban Parks Staff Member.\n" );
+			mainMenu();
+		}
 		mySB.append("Which park do you want to volunteer for?");
 	    mySB.append("\n----------------------------------------------------------\n\n");
 	    List<Park> parkList = myDatastore.getAllParks();
@@ -108,11 +112,12 @@ public class VolunteerView extends View {
         LocalDate today = LocalDate.now(z);
         int futureDayofYear = today.getDayOfYear()+3;
         LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);
-//        int todayMonth = today.getMonthValue();
-//        int todayDay = today.getDayOfMonth();
 		Iterator<Job> itr=parkJobList.iterator();
 		if(parkJobList==null) mySB.append("There are no jobs to sign up for\n");
 		List<Job> legitJobs = new ArrayList<Job>();
+		//placeholder in array
+		Job notARealJob = new Job();
+		legitJobs.add(notARealJob);
 		while(itr.hasNext()){
 			Job currentJob=itr.next();
 			LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
@@ -133,21 +138,37 @@ public class VolunteerView extends View {
 			 System.out.print(mySB.toString());
 			 mySB.delete(0, mySB.capacity());
 			 int theChoice = myScanner.nextInt();
+			 boolean sameDayFlag = false;
 			 if (theChoice==count){
 			    	mainMenu();
 			 } else{
-			    mySB.append("You have signed up for this job: \n");
-			    Job printJob = legitJobs.get(theChoice);
-			    mySB.append(printJob.getName());
-			    mySB.append("\n");
-			    mySB.append(printJob.getDescription());
-			    mySB.append("\nDate: ");
-			    mySB.append(printJob.getMonth());
-			    mySB.append("/");
-			    mySB.append(printJob.getDay());
-			    mySB.append("/");
-			    mySB.append(printJob.getYear());
-			    mySB.append("\nHit any key to retutrn to main menu\n");
+				 Job printJob = legitJobs.get(theChoice);
+				 List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
+				 for(int i=0;i<volunteerJobs.size();i++){
+					 Job jobIterator = volunteerJobs.get(i);
+					 if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
+						 sameDayFlag=true;
+					 }
+				 }
+				if(!sameDayFlag){
+				    mySB.append("You have signed up for this job: \n");
+				    printJob.setVolunteers(myVolunteer.getUsername());
+				    mySB.append(printJob.getName());
+				    mySB.append("\n");
+				    mySB.append(printJob.getDescription());
+				    mySB.append("\nDate: ");
+				    mySB.append(printJob.getMonth());
+				    mySB.append("/");
+				    mySB.append(printJob.getDay());
+				    mySB.append("/");
+				    mySB.append(printJob.getYear());
+
+				}else {
+					mySB.append("You can not sign up for this job: \n");
+					mySB.append("You have already signed up for a job on this day.\n");
+				}
+				
+			    mySB.append("\nEnter 1 to retutrn to main menu\n");
 			    System.out.print(mySB.toString());
 			    mySB.delete(0, mySB.capacity());
 			    int throwAwayInpt = myScanner.nextInt();

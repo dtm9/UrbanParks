@@ -1,5 +1,8 @@
 /**
- * 
+ * The User Interface for volunteers
+ * This object is not able to validate the type of user interacting with the system
+ * so be mindful that the user's type is validated before
+ * running this code.
  */
 package view;
 
@@ -7,8 +10,10 @@ import backend.Datastore;
 import backend.OfficeStaff;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,8 +24,8 @@ import backend.Volunteer;
 import backend.Park;
 
 /**
- * @author dylan
- *
+ * @author Dylan
+ *@author Ethan
  */
 public class VolunteerView extends View {
 
@@ -28,33 +33,57 @@ public class VolunteerView extends View {
     private final Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
     private StringBuilder mySB;
+    private static LocalDate myDay;
+    private static ZoneId myZone;
     
+    /**
+     * Constructor That instantiates the Volunteer view
+     * @param theAccount
+     * @param theDatastore
+     */
     public VolunteerView(Account theAccount, Datastore theDatastore){
     	super();
     	myVolunteer = (Volunteer) theAccount;
     	myDatastore = theDatastore;
     	mySB= new StringBuilder();
+        myZone = ZoneId.of("America/Los_Angeles");
+        myDay = LocalDate.now(myZone);
 
     	
     	
     }
+	/**
+	 * Launches the GUI
+	 * 
+	 */
 	@Override
 	public void launchGUI() {
 		// TODO Auto-generated method stub
 		mainMenu();
 	}
-	
+	/**
+	 * Creates the main menu for the Volunteer
+	 */
 	private void mainMenu(){
-		 	mySB.append("\nWelcome to Urban Parks\nVolunteer: ");
-	        mySB.append(myVolunteer.getRealName());
-	        mySB.append("\n----------------------------------------------------------\n\n");
-	        mySB.append("1. Volunteer for jobs\n");
-	        mySB.append("2. View My Jobs\n");
-	        mySB.append("3. Exit\n");
-	        mySB.append("\n\nPlease Select a number followed by the enter key: ");
-	        System.out.print(mySB.toString());
-	        mySB.delete(0, mySB.capacity());
-	        int theChoice = myScanner.nextInt();
+			header();
+			int theChoice;
+			if (myVolunteer.isBlackballed()){
+				mySB.append("You can not Sign up for a job.\nYou have been Blackballed.\nPlease contact an Urban Parks Staff Member.\n" );
+				mySB.append("1. Exit\n");
+				mySB.append("Please make a selection: ");
+				System.out.print(mySB.toString());
+				 mySB.delete(0, mySB.capacity());
+				 theChoice=myScanner.nextInt();
+				 theChoice=3;
+			} else{
+		        mySB.append("1. Volunteer for jobs\n");
+		        mySB.append("2. View My Jobs\n");
+		        mySB.append("3. Exit\n");
+		        mySB.append("\n\nPlease Select a number followed by the enter key: ");
+		        System.out.print(mySB.toString());
+		        mySB.delete(0, mySB.capacity());
+		        theChoice = myScanner.nextInt();
+			}
 	        
 	        switch (theChoice) {
 	        case 1:
@@ -68,11 +97,12 @@ public class VolunteerView extends View {
 	        }
 	}
 	
+	/**
+	 * Lists the parks in anticipation of the volunteer selecting jobs from that park to sign up for
+	 */
 	private void signUpForJob(){
-		if (myVolunteer.isBlackballed()){
-			mySB.append("You can not Sign up for a job.\nYou have been Blackballed.\nPlease contact an Urban Parks Staff Member.\n" );
-			mainMenu();
-		}
+		header();
+		
 		mySB.append("Which park do you want to volunteer for?");
 	    mySB.append("\n----------------------------------------------------------\n\n");
 	    List<Park> parkList = myDatastore.getAllParks();
@@ -85,6 +115,8 @@ public class VolunteerView extends View {
 	    	mySB.append(count);
 	    	mySB.append(". ");
 	    	mySB.append(currentPark.getName());
+	    	mySB.append(" in ");
+	    	mySB.append(currentPark.getCity());
 	    	mySB.append("\n");
 	    }
 	    count ++;
@@ -96,6 +128,7 @@ public class VolunteerView extends View {
 	    if (theChoice==count){
 	    	mainMenu();
 	    } else{
+	    	theChoice--;
 	    	Park selectedPark = parkList.get(theChoice);
 	    	List<Job> parkJobList = myDatastore.getJobsByPark(selectedPark);
 	    	listJobs(selectedPark, parkJobList);
@@ -104,8 +137,13 @@ public class VolunteerView extends View {
 	    
 	}
 	
+	/**
+	 * Lists the jobs from the parkJobList parameter that the user can sign up for
+	 * @param selectedPark
+	 * @param parkJobList
+	 */
 	private void listJobs(Park selectedPark, List<Job> parkJobList){
-		
+		header();
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
 		int count = 0;
@@ -131,7 +169,13 @@ public class VolunteerView extends View {
 				mySB.append(currentJob.getName());
 				mySB.append("\n      ");
 				mySB.append(currentJob.getDescription());
-				mySB.append("\n");
+				mySB.append("\n     ");
+				mySB.append("Date: ");
+				mySB.append(currentJob.getDay());
+				mySB.append("/");
+				mySB.append(currentJob.getMonth());
+				mySB.append("/");
+				mySB.append(currentJob.getYear());
 			}
 			 count ++;
 			 mySB.append(count);
@@ -152,8 +196,8 @@ public class VolunteerView extends View {
 					 }
 				 }
 				if(!sameDayFlag){
-				    mySB.append("You have signed up for this job: \n");
-				    printJob.setVolunteers(myVolunteer.getUsername());
+					header();
+				    mySB.append("You are signing up for this job: \n");
 				    mySB.append(printJob.getName());
 				    mySB.append("\n");
 				    mySB.append(printJob.getDescription());
@@ -163,16 +207,22 @@ public class VolunteerView extends View {
 				    mySB.append(printJob.getDay());
 				    mySB.append("/");
 				    mySB.append(printJob.getYear());
+				    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
 
 				}else {
+					header();
 					mySB.append("You can not sign up for this job: \n");
 					mySB.append("You have already signed up for a job on this day.\n");
+					mySB.append("\nEnter 1 to retutrn to main menu\n");
 				}
 				
-			    mySB.append("\nEnter 1 to retutrn to main menu\n");
+			    
 			    System.out.print(mySB.toString());
 			    mySB.delete(0, mySB.capacity());
-			    int throwAwayInpt = myScanner.nextInt();
+			    String confirmChoice = myScanner.next();
+			    if(confirmChoice.equalsIgnoreCase("y")&&!sameDayFlag){
+			    	printJob.setVolunteers(myVolunteer.getUsername());
+			    }
 			    mainMenu();
 			 }
 			
@@ -180,9 +230,13 @@ public class VolunteerView extends View {
 		
 	}
 	
+	/**
+	 * Generates the view that lists all jobs the volunteer has signed up for
+	 */
 	private void viewJobs(){
-		mySB.append("\nView Jobs for: ");
-		mySB.append(myVolunteer.getRealName());
+		header();
+		mySB.append("\nJobs currently volunteering for: ");
+		mySB.append("\nDate         Park               Job Description");
 		mySB.append("\n----------------------------------------------------------\n\n");
 		List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
 		Iterator<Job> itr = volunteerJobs.iterator();
@@ -191,12 +245,19 @@ public class VolunteerView extends View {
 		while( itr.hasNext()){
 			 Job currentJob = itr.next();
 			 count++;
-			 mySB.append(count);
-			 mySB.append(". ");
-			 mySB.append(currentJob.getName());
+			 mySB.append(currentJob.getDay());
+			 mySB.append("/");
+			 mySB.append(currentJob.getMonth());
+			 mySB.append("/");
+			 mySB.append(currentJob.getYear());
+			 mySB.append("   ");
+			 mySB.append(currentJob.getPark().getName());
+			 mySB.append("     ");
+			 mySB.append(currentJob.getDescription());
 			 mySB.append("\n");
 			 
 		}	
+		mySB.append("What would you like to do?");
 		mySB.append("\n1. Back");
 		mySB.append("\n2. Exit\n");
 		System.out.print(mySB.toString());
@@ -213,5 +274,22 @@ public class VolunteerView extends View {
         }
 		
 	}
+	
+	/**
+	 * Prints the header to the console
+	 */
+    void header() {
+        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
+        mySB.append(myVolunteer.getRealName());
+        mySB.append(" logged in as a Volunteer\n");
+        mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+        mySB.append(" ");
+        mySB.append(myDay.getDayOfMonth());
+        mySB.append(", ");
+        mySB.append(myDay.getYear());
+        mySB.append(".\n-----------------------------------------------------------------\n");
+        System.out.print(mySB.toString());
+        mySB.delete(0, mySB.capacity());
+    }
 
 }

@@ -32,11 +32,18 @@ public class OfficeStaffView extends View {
     private OfficeStaff myOfficeStaff;
     private Scanner myScanner = new Scanner(System.in);
     private StringBuilder mySB;
+    private ZoneId z;
+    private LocalDate today;
+    private LocalDate current;
+
 
     public OfficeStaffView(Account theAccount, Datastore theDatastore) {
         super();
         myOfficeStaff = (OfficeStaff) theAccount;
         mySB = new StringBuilder();
+        z = ZoneId.of("America/Los_Angeles");
+        today = LocalDate.now(z);
+        current = LocalDate.now(z);
     }
 
     /**
@@ -62,8 +69,7 @@ public class OfficeStaffView extends View {
         choice = 0; // temp to clear annoying error for temp code
 
         // TODO Auto-generated method stub
-        mySB.append("\nWelcome to Urban Parks Office Staff: ");
-        mySB.append(myOfficeStaff.getRealName());
+        header();
         mySB.append("\n----------------------------------------------------------\n\n");
         mySB.append("What would you like to do?\n");
         mySB.append("1. View calendar of upcoming jobs\n");
@@ -75,6 +81,7 @@ public class OfficeStaffView extends View {
 
         switch (theChoice) {
         case 1:
+            header();
             System.out.println(printCalendar(Main.datastore));
             System.out.println();
             System.out.println("What would you like to do?");
@@ -86,12 +93,14 @@ public class OfficeStaffView extends View {
             }
             break;
         case 2:
+            header();
             System.out.println("What would you like to do?");
             System.out.println("1. Change max pending jobs");
             System.out.println("2. Go back to main menu");
             System.out.println("3. Exit eUrbanParks");
             newChoice = myScanner.nextInt();
             if (newChoice == 1) {
+                header();
                 System.out.println("Please enter the new maximum number of pending jobs");
                 newChoice = myScanner.nextInt();
                 Main.datastore.setMaxPendingJobs(newChoice);
@@ -108,8 +117,6 @@ public class OfficeStaffView extends View {
     }
 
     private String printCalendar(Datastore theDatastore) {
-        ZoneId z = ZoneId.of("America/Los_Angeles");
-        LocalDate today = LocalDate.now(z);
         StringBuilder calendarString = new StringBuilder();
         int startDay = 0;
         int monthCheck = today.getDayOfMonth();
@@ -257,5 +264,19 @@ public class OfficeStaffView extends View {
             currentDay = currentDay.plusDays(1);
         }
         return calendarString.toString();
+    }
+    
+    void header() {
+        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
+        mySB.append(myOfficeStaff.getRealName());
+        mySB.append(" logged in as Urban Parks staff person\n");
+        mySB.append(current.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+        mySB.append(" ");
+        mySB.append(current.getDayOfMonth());
+        mySB.append(", ");
+        mySB.append(current.getYear());
+        mySB.append(".\n-----------------------------------------------------------------\n");
+        System.out.print(mySB.toString());
+        mySB.delete(0, mySB.capacity());
     }
 }

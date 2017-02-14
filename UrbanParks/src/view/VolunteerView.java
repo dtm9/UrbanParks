@@ -176,7 +176,9 @@ public class VolunteerView extends View {
 				mySB.append(currentJob.getMonth());
 				mySB.append("/");
 				mySB.append(currentJob.getYear());
+				mySB.append("\n");
 			}
+		}
 			 count ++;
 			 mySB.append(count);
 			 mySB.append(". Back to main menu\n");
@@ -226,7 +228,7 @@ public class VolunteerView extends View {
 			    mainMenu();
 			 }
 			
-		}
+		
 		
 	}
 	

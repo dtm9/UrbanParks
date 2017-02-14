@@ -6,7 +6,9 @@ package view;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import org.junit.Before;
@@ -14,6 +16,8 @@ import org.junit.Test;
 
 import backend.Datastore;
 import backend.ParkManager;
+import backend.Volunteer;
+import backend.Volunteer.WorkGrade;
 import backend.Job;
 import backend.Park;
 
@@ -56,6 +60,23 @@ public class ParkManagerViewTest {
     private Job testJob27;
     private Job testJob28;
     private Job testJob29;
+    private Job testPastJob5;
+    private Job testPastJob4;
+    private Job testPastJob3;
+    private Job testPastJob2;
+    private Job testPastJob1;
+    private Volunteer testVolunteer12;
+    private Volunteer testVolunteer11;
+    private Volunteer testVolunteer10;
+    private Volunteer testVolunteer9;
+    private Volunteer testVolunteer8;
+    private Volunteer testVolunteer7;
+    private Volunteer testVolunteer6;
+    private Volunteer testVolunteer5;
+    private Volunteer testVolunteer4;
+    private Volunteer testVolunteer3;
+    private Volunteer testVolunteer2;
+    private Volunteer testVolunteer1;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -65,13 +86,70 @@ public class ParkManagerViewTest {
 		
 		testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
 		testParkManagerView = new ParkManagerView(testPM1, testDatastore);
+		
+		
+		testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);
+	    testDatastore.addAccount(testVolunteer1);
+	    testVolunteer2 = new Volunteer("Sinefield@gmail.com", "5559998887", "Jerry Sienfield", WorkGrade.LIGHT);
+        testDatastore.addAccount(testVolunteer2);
+        testVolunteer3 = new Volunteer("ShelGod@gmail.com", "5559997588", "Sheldon Garret", WorkGrade.MEDIUM);
+        testDatastore.addAccount(testVolunteer3);
+        testVolunteer4 = new Volunteer("SwanMan@gmail.com", "5559698888", "Darren Swanson", WorkGrade.HEAVY);
+        testDatastore.addAccount(testVolunteer4);
+        testVolunteer5 = new Volunteer("Rudy@gmail.com", "5559693888", "Rudy Larson", WorkGrade.HEAVY);
+        testDatastore.addAccount(testVolunteer5);
+        testVolunteer6 = new Volunteer("SDvenny@gmail.com", "5543693888", "Stephanie Devenny", WorkGrade.MEDIUM);
+        testDatastore.addAccount(testVolunteer6);
+        testVolunteer7 = new Volunteer("LiZZ2002@gmail.com", "5559654588", "Julie Lindsey", WorkGrade.LIGHT);
+        testDatastore.addAccount(testVolunteer7);
+        testVolunteer8 = new Volunteer("R053MErry@gmail.com", "2539693888", "Rosie Mary", WorkGrade.HEAVY);
+        testDatastore.addAccount(testVolunteer8);
+        testVolunteer9 = new Volunteer("CapKirk@gmail.com", "5559693548", "Kirk Robinson", WorkGrade.LIGHT);
+        testDatastore.addAccount(testVolunteer9);
+        testVolunteer10 = new Volunteer("RamoxxxXD@gmail.com", "5559693768", "Ramon Mendoza", WorkGrade.MEDIUM);
+        testDatastore.addAccount(testVolunteer10);
+        testVolunteer11 = new Volunteer("Sharpie23@gmail.com", "5559693867", "Leslie Sharp", WorkGrade.HEAVY);
+        testDatastore.addAccount(testVolunteer11);
+        testVolunteer12 = new Volunteer("MonInc@gmail.com", "5559693222", "Mike Wazowski", WorkGrade.LIGHT);
+        testDatastore.addAccount(testVolunteer12);
+        
 	    testDatastore.addAccount(testPM1);
 	    testPark1 = new Park(testPM1, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
 	    testDatastore.addPark(testPark1);
+	    /*JOBS------------------------------------------------------------------------------------------------------*/
 		testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Recycling", 1, 13, 2 ,2017);
 	    testDatastore.addJob(testJob1);
+	    testJob1.setMaxVolunteers(20);
+	    testJob1.setVolunteers(testVolunteer1.getRealName());
+	    testJob1.setVolunteers(testVolunteer2.getRealName());
+	    testJob1.setVolunteers(testVolunteer3.getRealName());
+	    testJob1.setVolunteers(testVolunteer4.getRealName());
+	    testJob1.setVolunteers(testVolunteer5.getRealName());
+	    testJob1.setVolunteers(testVolunteer6.getRealName());
+	    testJob1.setVolunteers(testVolunteer7.getRealName());
+	    testJob1.setVolunteers(testVolunteer8.getRealName());
+	    testJob1.setVolunteers(testVolunteer9.getRealName());
+	    testJob1.setVolunteers(testVolunteer10.getRealName());
+	    testJob1.setVolunteers(testVolunteer11.getRealName());
+	    testJob1.setVolunteers(testVolunteer12.getRealName());
+	    
+	    
 	    testJob2 = new Job(testPark1, "09:00", "Paint over graphiti.","Painting", 1, 14, 2 , 2017);
 	    testDatastore.addJob(testJob2);
+	    testJob2.setMaxVolunteers(20);
+	    testJob2.setVolunteers(testVolunteer1.getRealName());
+        testJob2.setVolunteers(testVolunteer2.getRealName());
+        testJob2.setVolunteers(testVolunteer3.getRealName());
+        testJob2.setVolunteers(testVolunteer4.getRealName());
+        testJob2.setVolunteers(testVolunteer5.getRealName());
+        testJob2.setVolunteers(testVolunteer6.getRealName());
+        testJob2.setVolunteers(testVolunteer7.getRealName());
+        testJob2.setVolunteers(testVolunteer8.getRealName());
+        testJob2.setVolunteers(testVolunteer9.getRealName());
+        testJob2.setVolunteers(testVolunteer10.getRealName());
+        testJob2.setVolunteers(testVolunteer11.getRealName());
+        testJob2.setVolunteers(testVolunteer12.getRealName());
+        
 	    testJob3 = new Job(testPark1, "11:00", "Feed the ducks.","Feeding", 1,  15, 2, 2017);
 	    testDatastore.addJob(testJob3);
 	    testJob4 = new Job(testPark1, "14:00", "Mow grass.","Mowing", 1, 16, 2, 2017);
@@ -126,6 +204,43 @@ public class ParkManagerViewTest {
         testDatastore.addJob(testJob28);
         testJob29 = new Job(testPark1, "10:00", "Cutting the Lawn.","Mowing", 1, 13, 3 ,2017);
         testDatastore.addJob(testJob29);
+        
+        testPastJob1 = new Job(testPark1, "10:00", "Volunteers to not only taste wine but pour it too.","Wine tasting", 1, 8, 1 ,2017);
+        testDatastore.addJob(testPastJob1);
+        
+        //TODO add volunteers to past job
+        
+        
+        
+        
+        
+        
+        
+        
+        testDatastore.removeJob(testJob1);
+        testDatastore.removeJob(testPastJob1);
+        testPastJob2 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Recycling", 1, 12, 1 ,2017);
+        testDatastore.addJob(testPastJob2);
+        testDatastore.removeJob(testPastJob2);
+        testPastJob3 = new Job(testPark1, "10:00", "Repainting the Gazebo.","Painting", 1, 11, 3 ,2017);
+        testDatastore.addJob(testPastJob3);
+        testDatastore.removeJob(testPastJob3);
+        testPastJob4 = new Job(testPark1, "10:00", "People to bring their dogs and go for a walk!","Dog Walk", 1, 10, 1 ,2017);
+        testDatastore.addJob(testPastJob4);
+        testDatastore.removeJob(testPastJob4);
+        testPastJob5 = new Job(testPark1, "10:00", "Cleaning Leaves.","Raking", 1, 9, 1 ,2017);
+        testDatastore.addJob(testPastJob5);
+        testDatastore.removeJob(testPastJob5);
+        
+        try {
+            FileOutputStream outfile = new FileOutputStream("datastore.bin");
+            ObjectOutputStream out = new ObjectOutputStream(outfile);
+            out.writeObject(testDatastore);
+            out.close();
+            outfile.close();
+          } catch(IOException e) {
+            e.printStackTrace();
+          }
 		
 	} 
 	// TODO Test for 31 Jobs
@@ -134,10 +249,14 @@ public class ParkManagerViewTest {
 	//TODO test Job more than 1 month in future 
 	//TODO VIEW Volunteers for past and present Jobs.
 	//TODO no Job Longer Than 2 Days.
-	@Test
-	public final void launchGUI_goodCases_runsParkManagerView() {
-		testParkManagerView.launchGUI();
-	}
+      /**
+       * 
+       */
+	  @Test
+	  public final void save_DefaultState_NoExceptionsExpected() {
+	    Main.datastore = testDatastore;
+	    Main.save();
+	  }
 //	@Test
 //    public final void launchGUI_BadCases_ExceptionsTrownOrHandeled() {
 //	    Job testJob30 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 14, 3 ,2017);

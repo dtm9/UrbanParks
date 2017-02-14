@@ -5,8 +5,10 @@ package view;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import backend.Account;
@@ -26,9 +28,14 @@ public class ParkManagerView extends View {
     private final ParkManager myManager;
     private final Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
+    private static LocalDate myDay;
+    private static ZoneId myZone;
+    
     
     public ParkManagerView(Account theAccount, Datastore theDatastore) {
         super();
+        myZone = ZoneId.of("America/Los_Angeles");
+        myDay = LocalDate.now(myZone);
         myManager = (ParkManager) theAccount;
         myDatastore = theDatastore;
     }
@@ -36,21 +43,25 @@ public class ParkManagerView extends View {
     /*-----------------------------------------------------------------------------------------------------------------------------*/
     @Override
     public void launchGUI() {
-        mySB.append("\nWelcome to Urban Parks\nPark Manager: ");
-        mySB.append(myManager.getRealName());
-        mySB.append("\n----------------------------------------------------------\n\n");
-        mySB.append("1. Submit Job\n");
+        header();
+        userChoice();
+
+    }
+    /**
+     * presents the user with a choice of what to do next.
+     */
+    private void userChoice() {
+        mySB.append("\n1. Submit Job\n");
         mySB.append("2. View Jobs\n");
-        mySB.append("3. Exit\n");
-        mySB.append("\n\nPlease Select a number followed by the enter key: ");
+        mySB.append("3. Exit eUrbanParks\n");
+        mySB.append("\nWhat would you like to do?: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();
-
         switch (theChoice) {
         case 1:
             checkMaxJobs();
-            SubmitJob();
+            submitJob();
             break;
         case 2:
             ViewJobs();
@@ -58,7 +69,7 @@ public class ParkManagerView extends View {
         case 3:
             break;
         }
-
+        
     }
 
     /**
@@ -66,7 +77,7 @@ public class ParkManagerView extends View {
      */
     private void checkMaxJobs() {
         if (myDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
-            System.out.println("Max Number of Jobs reached. Please choose a different selection.\n\n");
+            System.out.println("Max Number of Jobs reached. Please choose a different selection.");
             this.launchGUI();
         }
     }
@@ -75,15 +86,16 @@ public class ParkManagerView extends View {
     /**
      * Submit a Job element for the UI.
      */
-    private void SubmitJob() {
+    private void submitJob() {
         Job myJob = new Job();
-        System.out.println("\nSubmit a Job for " + myManager.getRealName());
+        header();
+        System.out.println("Submit a Job for " + myManager.getRealName());
         System.out.print("----------------------------------------------------------\n\n");
         myJob = addPark(myJob);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
-        myJob = addDay(myJob);
         myJob = addMonth(myJob);
+        myJob = addDay(myJob);
         myJob = addYear(myJob);
         myJob = addTime(myJob);
         myJob = addDuration(myJob);
@@ -96,14 +108,15 @@ public class ParkManagerView extends View {
             myDatastore.addJob(myJob);
         } catch (Exception e){
             System.out.println("Adding the Job Failed Unexpectedly, try again\n");
-            SubmitJob();
+            submitJob();
         }
         Main.save();
-        showJob(myJob);
+        System.out.println("Job submitted. You can view it in your Jobs.");
+        userChoice();
 
     }
 
-    private Job addDuration(Job theJob) {
+    Job addDuration(Job theJob) {
         System.out.print("Please set the Duration for this job(1 or 2 days): ");
         try {
             theJob.setDuration(Integer.parseInt(myScanner.nextLine()));
@@ -204,11 +217,10 @@ public class ParkManagerView extends View {
     }
 
     Job addMonth(Job theJob) {
-        System.out.print("Please set the Month of this Job(1-12): ");
-        ZoneId z = ZoneId.of("America/Los_Angeles");
-        LocalDate today = LocalDate.now(z);
+        System.out.print("Please set the Month of this Job(1-12, Within 1 month from now): ");
+        
         int monthChoice = Integer.parseInt(myScanner.nextLine());
-        if(monthChoice <= today.getMonth().getValue() + MONTH_BUFFER && monthChoice >= today.getMonth().getValue()) {
+        if(monthChoice <= myDay.getMonth().getValue() + MONTH_BUFFER && monthChoice >= myDay.getMonth().getValue()) {
             try {
                 
                     theJob.setMonth(monthChoice);
@@ -256,17 +268,11 @@ public class ParkManagerView extends View {
         return theJob;
     }
 
-    /*
-     * -------------------------------------------------------------------------
-     * ----------------------------------------------------
-     */
     /**
      * View Jobs elemt for UI
      */
     private void ViewJobs() {
-        mySB.append("\nView Jobs for ");
-        mySB.append(myManager.getRealName());
-        mySB.append("\n----------------------------------------------------------\n\n");
+        header();
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
             if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
@@ -281,16 +287,15 @@ public class ParkManagerView extends View {
             }
         }
         mySB.append("\nPast Jobs Below this Point\n");
-        for (int i = myDatastore.getNumberOfJobs(); i < myDatastore.getNumberOfJobs()
-                + myDatastore.getNumberOfPreviousJobs(); i++) {
+        for (int i = 0; i < myDatastore.getPreviousJobs().size(); i++) {
             if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
                 mySB.append(count++);
                 mySB.append(". ");
                 mySB.append(myDatastore.getPreviousJobs().get(i).getName());
                 mySB.append(", ");
-                mySB.append(myDatastore.getPendingJobs().get(i).getDay());
+                mySB.append(myDatastore.getPreviousJobs().get(i).getDay());
                 mySB.append("/");
-                mySB.append(myDatastore.getPendingJobs().get(i).getMonth());
+                mySB.append(myDatastore.getPreviousJobs().get(i).getMonth());
                 mySB.append("\n");
             }
         }
@@ -305,16 +310,19 @@ public class ParkManagerView extends View {
                 count++;
                 if (count == theChoice) {
                     showJob(myDatastore.getPendingJobs().get(i));
+                    break;
                 }
             }
-            if (i == myDatastore.getNumberOfJobs()) {
+            if (i == myDatastore.getNumberOfJobs() - 1) {
                 flag = true;
+                System.out.println("got here");
                 theChoice = theChoice - count;
                 count = 0;
+                break;
             }
         }
         if (flag) {
-            for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
+            for (int i = 0; i < myDatastore.getPreviousJobs().size(); i++) {
                 if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
                     count++;
                     if (count == theChoice) {
@@ -331,33 +339,10 @@ public class ParkManagerView extends View {
      * @param theJob
      */
     private void showJob(Job theJob) {
-        mySB.append("\n\nView of the Job.");
-        mySB.append("\n----------------------------------------------------------\n\n");
-        System.out.print(mySB.toString());
-        mySB.delete(0, mySB.capacity());
+        header();
         showJobInformation(theJob);
         showVolunteers(theJob);
-
-        mySB.append("\nPlease choose what you would like to do now");
-        mySB.append("\n----------------------------------------------------------\n\n");
-        mySB.append("1. Submit Job\n");
-        mySB.append("2. View Jobs\n");
-        mySB.append("3. Exit\n");
-        System.out.print(mySB.toString());
-        mySB.delete(0, mySB.capacity());
-        int theChoice = myScanner.nextInt();
-
-        switch (theChoice) {
-        case 1:
-            checkMaxJobs();
-            SubmitJob();
-            break;
-        case 2:
-            ViewJobs();
-            break;
-        case 3:
-            break;
-        }
+        userChoice();
     }
 
     /**
@@ -405,7 +390,7 @@ public class ParkManagerView extends View {
             Iterator<String> itr = myVolunteers.iterator();
             int count = 1;
             while (itr.hasNext()) {
-                mySB.append(count);
+                mySB.append(count++);
                 mySB.append(".");
                 mySB.append(itr.next());
                 System.out.println(mySB.toString());
@@ -414,6 +399,20 @@ public class ParkManagerView extends View {
         } else {
             System.out.println("There are no Volunteers signed up.\n");
         }
+    }
+    
+     void header() {
+        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
+        mySB.append(myManager.getRealName());
+        mySB.append(" logged in as Urban Parks Manager\n");
+        mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+        mySB.append(" ");
+        mySB.append(myDay.getDayOfMonth());
+        mySB.append(", ");
+        mySB.append(myDay.getYear());
+        mySB.append(".\n-----------------------------------------------------------------\n");
+        System.out.print(mySB.toString());
+        mySB.delete(0, mySB.capacity());
     }
 
 }

@@ -150,7 +150,7 @@ public class VolunteerView extends View {
 			    mySB.append("\nHit any key to retutrn to main menu\n");
 			    System.out.print(mySB.toString());
 			    mySB.delete(0, mySB.capacity());
-			    int throwAwayInput = myScanner.nextInt();
+			    int throwAwayInpt = myScanner.nextInt();
 			    mainMenu();
 			 }
 			

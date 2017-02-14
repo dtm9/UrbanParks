@@ -81,7 +81,16 @@ public final class Park implements Serializable {
     public String getName() {
         return myName;
     }
-	
+
+    /**
+     * Getter for the park's street.
+     *
+     * @return the park's street.
+     */
+    public String getStreet() {
+        return myStreet;
+    }
+
     /**
      * Getter for the park's city.
      *

@@ -21,8 +21,7 @@ import backend.Volunteer;
  */
 public class JobTest implements TestConstants {
 
-    // ***** Test fixture(s) and setUp()
-    // *****************************************************************************
+    // ***** Test fixture(s) and setUp() *****************************************************************************
 
     /** The park manager test fixture. */
     private ParkManager theManager;
@@ -49,8 +48,7 @@ public class JobTest implements TestConstants {
         myJob = new Job();
     }
 
-    // ***** Unit test(s)
-    // *********************************************************************************************
+    // ***** Unit test(s) **********************************************************************************************
 
     /**
      * Test for Good day on setDay().
@@ -58,7 +56,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public final void setDay_goodDay_daySet() {
+    public final void setDay_GoodDay_DaySet() {
         myJob.setDay(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getDay());
     }
@@ -69,7 +67,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setDay_badDay_exceptionThrown() {
+    public void setDay_BadDay_ExceptionThrown() {
         myJob.setDay(BAD_INT);
     }
 
@@ -79,7 +77,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public final void setMonth_goodMonth_MonthSet() {
+    public final void setMonth_GoodMonth_MonthSet() {
         myJob.setMonth(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getMonth());
     }
@@ -90,7 +88,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMonth_badMonth_exceptionThrown() {
+    public void setMonth_BadMonth_ExceptionThrown() {
         myJob.setMonth(BAD_INT);
     }
 
@@ -100,7 +98,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setTime_goodTime_timeSet() {
+    public void setTime_GoodTime_TimeSet() {
         myJob.setTime("1130");
         assertEquals("1130", myJob.getTime());
     }
@@ -111,7 +109,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setTime_badTime_Exceptionthrown() {
+    public void setTime_BadTime_ExceptionThrown() {
         myJob.setTime(BAD_STRING);
     }
 
@@ -121,7 +119,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setPark_goodPark_parkSet() {
+    public void setPark_GoodPark_ParkSet() {
         myJob.setPark(thePark);
         assertEquals(thePark, myJob.getPark());
     }
@@ -132,7 +130,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setPark_badName_ExceptionThrown() {
+    public void setPark_BadName_ExceptionThrown() {
         myJob.setPark(P_NULL);
     }
 
@@ -142,7 +140,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setDescription_goodDescription_descriptionSet() {
+    public void setDescription_GoodDescription_DescriptionSet() {
         myJob.setDescription(GOOD_STRING);
         assertEquals(GOOD_STRING, myJob.getDescription());
     }
@@ -153,7 +151,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setDescription_badDescription_ExceptionThrown() {
+    public void setDescription_BadDescription_ExceptionThrown() {
         myJob.setDescription(BAD_STRING);
 
     }
@@ -164,7 +162,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setMaxVolunteers_goodInt_VolunteerMaxSet() {
+    public void setMaxVolunteers_GoodInt_VolunteerMaxSet() {
         myJob.setMaxVolunteers(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getMaxVolunteers());
     }
@@ -175,7 +173,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMaxVolunteers_badInt_ExceptionThrown() {
+    public void setMaxVolunteers_BadInt_ExceptionThrown() {
         myJob.setMaxVolunteers(BAD_INT);
     }
 
@@ -185,7 +183,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setMinLight_goodInt_MinLightSet() {
+    public void setMinLight_GoodInt_MinLightSet() {
         myJob.setMinLight(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getMinLight());
     }
@@ -196,7 +194,7 @@ public class JobTest implements TestConstants {
      * @author VG Gnome
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMinLight_badInt_ExceptionThrown() {
+    public void setMinLight_BadInt_ExceptionThrown() {
         myJob.setMinLight(BAD_INT);
     }
 
@@ -206,7 +204,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setMyMinMedium_goodInt_MinMediumSet() {
+    public void setMyMinMedium_GoodInt_MinMediumSet() {
         myJob.setMinMedium(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getMinMedium());
     }
@@ -217,7 +215,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMinMedium_badInt_ExceptionThrown() {
+    public void setMinMedium_BadInt_ExceptionThrown() {
         myJob.setMinMedium(BAD_INT);
     }
 
@@ -227,7 +225,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setMinHeavy_goodInt_MinHeavySet() {
+    public void setMinHeavy_GoodInt_MinHeavySet() {
         myJob.setMinHeavy(GOOD_INT);
         assertEquals(GOOD_INT, myJob.getMinHeavy());
     }
@@ -238,7 +236,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMinHeavy_badInt_ExceptionThrown() {
+    public void setMinHeavy_BadInt_ExceptionThrown() {
         myJob.setMinHeavy(BAD_INT);
     }
 
@@ -248,7 +246,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test
-    public void setVolunteers_goodVolunteer_volunteerAdded() {
+    public void setVolunteers_GoodVolunteer_VolunteerAdded() {
         myJob.setVolunteers(theVolunteer.getUsername());
         List<String> vList = myJob.getVolunteers();
         assertEquals(theVolunteer.getUsername(), vList.get(0));
@@ -260,7 +258,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setVolunteers_badVolunteerName_ExceptionThrown() {
+    public void setVolunteers_BadVolunteerName_ExceptionThrown() {
         myJob.setVolunteers(BAD_STRING);
     }
 
@@ -270,7 +268,7 @@ public class JobTest implements TestConstants {
      * @author VG Gnome
      */
     @Test
-    public void setNotes_goodNotes_NotesSet() {
+    public void setNotes_GoodNotes_NotesSet() {
         myJob.setNotes(GOOD_STRING);
         assertEquals(GOOD_STRING, myJob.getNotes());
     }
@@ -281,7 +279,7 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMyNotes_BadNotes_ExceptionThrown() {
+    public void setNotes_BadNotes_ExceptionThrown() {
         myJob.setNotes(BAD_STRING);
     }
 
@@ -290,7 +288,7 @@ public class JobTest implements TestConstants {
      * 
      * @author Gardner Gomes
      */
-    public void setMyName_GoodName_NameSet() {
+    public void setName_GoodName_NameSet() {
         myJob.setName(GOOD_STRING);
         assertEquals(GOOD_STRING, myJob.getName());
     }
@@ -301,48 +299,57 @@ public class JobTest implements TestConstants {
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMyName_BadName_ExceptionThrown() {
+    public void setName_BadName_ExceptionThrown() {
         myJob.setName(BAD_STRING);
     }
+
     /**
      * Tests Duration.
      * 
      * @author Gardner Gomes
      */
-    public void setMyDuration_GoodInt_DurationSet() {
+    public void setDuration_GoodInt_DurationSet() {
         myJob.setDuration(GOOD_INT);
         assertEquals(myJob.getDuration(), GOOD_INT);
     }
+
     /**
      * Tests Duration.
      * 
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMyDuration_IntLessThan1_ExceptionThrown() {
+    public void setDuration_IntLessThan1_ExceptionThrown() {
         myJob.setDuration(BAD_INT);
     }
+
     /**
      * Tests Duration.
      * 
      * @author Gardner Gomes
      */
     @Test(expected = IllegalArgumentException.class)
-    public void setMyDuration_IntGreaterThan2_ExceptionThrown() {
+    public void setDuration_IntGreaterThan2_ExceptionThrown() {
         myJob.setDuration(GOOD_INT);
     }
+
     /**
      * Tests Year.
      * 
      * @author Gardner Gomes
      */
-    public void setMyYear_GoodYear_YearSet() {
+    public void setYear_GoodYear_YearSet() {
         myJob.setYear(2017);
         assertEquals(myJob.getYear(), 2017);
     }
-    
+
+    /**
+     * Tests Job#setYear(int) for bad int data.
+     *
+     * @author Gardner Gomes
+     */
     @Test(expected = IllegalArgumentException.class)
-    public void setMyYear_BadYear_ExceptionThrown() {
+    public void setYear_BadYear_ExceptionThrown() {
         myJob.setYear(BAD_INT);
         myJob.setYear(2099);
     }
@@ -353,7 +360,7 @@ public class JobTest implements TestConstants {
      * @author Walter Weeks
      */
     @Test
-    public void testEquality_EqualJobs_True() {
+    public void equals_EqualJobs_True() {
         Park park = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
         Job job1 = new Job(park, "12:00", "Rake leaves", "Raking", 1, 2, 10, 2017);
         Job job2 = new Job(park, "12:00", "Rake leaves", "Raking", 1, 2, 10, 2017);
@@ -366,7 +373,7 @@ public class JobTest implements TestConstants {
      * @author Walter Weeks
      */
     @Test
-    public void testInequality_DifferentJobs_False() {
+    public void equals_DifferentJobs_False() {
         Park park1 = new Park(theManager, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98406");
         Park park2 = new Park(theManager, "Jefferson Park", "801 N Mason Ave", "Tacoma", "WA", "98406");
         Job job1 = new Job(park1, "1200", "Rake leaves", "Raking", 1, 2, 10, 2017);

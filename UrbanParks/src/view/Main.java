@@ -192,7 +192,7 @@ public class Main {
      */
     static View generateView(Account userAccount, View theView) {
         if (userAccount instanceof Volunteer) {
-            theView = new VolunteerView();
+            theView = new VolunteerView(userAccount, datastore);
         } else if (userAccount instanceof ParkManager) {
             theView = new ParkManagerView(userAccount, datastore);
         } else if (userAccount instanceof OfficeStaff) {

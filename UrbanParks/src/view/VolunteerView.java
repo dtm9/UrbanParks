@@ -5,13 +5,16 @@ package view;
 
 import backend.Datastore;
 import backend.OfficeStaff;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import backend.Account;
 import backend.Job;
+import backend.Datastore;
 import backend.Volunteer;
 import backend.Park;
 
@@ -70,7 +73,7 @@ public class VolunteerView extends View {
 	    List<Park> parkList = myDatastore.getAllParks();
 	    Iterator<Park> itr = parkList.iterator();
 	    int count = 0;
-	    if(parkList==null) mySB.append("There are no jobs to sign up for");
+	    if(parkList==null) mySB.append("There are no jobs to sign up for\n");
 	    while(itr.hasNext()){
 	    	Park currentPark =itr.next();
 	    	count++;
@@ -97,9 +100,61 @@ public class VolunteerView extends View {
 	}
 	
 	private void listJobs(Park selectedPark, List<Job> parkJobList){
+		
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
-		
+		int count = 0;
+        ZoneId z = ZoneId.of("America/Los_Angeles");
+        LocalDate today = LocalDate.now(z);
+        int futureDayofYear = today.getDayOfYear()+3;
+        LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);
+//        int todayMonth = today.getMonthValue();
+//        int todayDay = today.getDayOfMonth();
+		Iterator<Job> itr=parkJobList.iterator();
+		if(parkJobList==null) mySB.append("There are no jobs to sign up for\n");
+		List<Job> legitJobs = new ArrayList<Job>();
+		while(itr.hasNext()){
+			Job currentJob=itr.next();
+			LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
+			//logic error...This does not cover the case of signing up for a January job during December
+			if (jobDate.getDayOfYear()>futureLimit.getDayOfYear()){
+				count++;
+				legitJobs.add(currentJob);
+				mySB.append(count);
+				mySB.append(". ");
+				mySB.append(currentJob.getName());
+				mySB.append("\n      ");
+				mySB.append(currentJob.getDescription());
+				mySB.append("\n");
+			}
+			 count ++;
+			 mySB.append(count);
+			 mySB.append(". Back to main menu\n");
+			 System.out.print(mySB.toString());
+			 mySB.delete(0, mySB.capacity());
+			 int theChoice = myScanner.nextInt();
+			 if (theChoice==count){
+			    	mainMenu();
+			 } else{
+			    mySB.append("You have signed up for this job: \n");
+			    Job printJob = legitJobs.get(theChoice);
+			    mySB.append(printJob.getName());
+			    mySB.append("\n");
+			    mySB.append(printJob.getDescription());
+			    mySB.append("\nDate: ");
+			    mySB.append(printJob.getMonth());
+			    mySB.append("/");
+			    mySB.append(printJob.getDay());
+			    mySB.append("/");
+			    mySB.append(printJob.getYear());
+			    mySB.append("\nHit any key to retutrn to main menu\n");
+			    System.out.print(mySB.toString());
+			    mySB.delete(0, mySB.capacity());
+			    int throwAwayInput = myScanner.nextInt();
+			    mainMenu();
+			 }
+			
+		}
 		
 	}
 	

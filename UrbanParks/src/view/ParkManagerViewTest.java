@@ -77,6 +77,8 @@ public class ParkManagerViewTest {
     private Volunteer testVolunteer3;
     private Volunteer testVolunteer2;
     private Volunteer testVolunteer1;
+    private Job testJob30;
+    private Job testJob31;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -84,7 +86,7 @@ public class ParkManagerViewTest {
 	public void setUp() throws Exception {
 		testDatastore = new Datastore();
 		
-		testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
+		testPM1 = new ParkManager("batman@tacomaparks.com", "5551112222", "Dylan Miller");
 		testParkManagerView = new ParkManagerView(testPM1, testDatastore);
 		
 		
@@ -205,18 +207,9 @@ public class ParkManagerViewTest {
         testJob29 = new Job(testPark1, "10:00", "Cutting the Lawn.","Mowing", 1, 13, 3 ,2017);
         testDatastore.addJob(testJob29);
         
+        
         testPastJob1 = new Job(testPark1, "10:00", "Volunteers to not only taste wine but pour it too.","Wine tasting", 1, 8, 1 ,2017);
         testDatastore.addJob(testPastJob1);
-        
-        //TODO add volunteers to past job
-        
-        
-        
-        
-        
-        
-        
-        
         testDatastore.removeJob(testJob1);
         testDatastore.removeJob(testPastJob1);
         testPastJob2 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Recycling", 1, 12, 1 ,2017);
@@ -231,6 +224,11 @@ public class ParkManagerViewTest {
         testPastJob5 = new Job(testPark1, "10:00", "Cleaning Leaves.","Raking", 1, 9, 1 ,2017);
         testDatastore.addJob(testPastJob5);
         testDatastore.removeJob(testPastJob5);
+        
+        testJob30 = new Job(testPark1, "10:00", "wiping down the swiming pool.","Cleaning Swming pool", 1, 14, 3 ,2017);
+        testDatastore.addJob(testJob30);
+        testJob31 = new Job(testPark1, "10:00", "sanitizing the bathrooms.","Cleaning Bathrooms", 1, 15, 3 ,2017);
+        testDatastore.addJob(testJob31);
         
         try {
             FileOutputStream outfile = new FileOutputStream("datastore.bin");

@@ -33,7 +33,8 @@ public class VolunteerView extends View {
     	super();
     	myVolunteer = (Volunteer) theAccount;
     	myDatastore = theDatastore;
-    	mySB = new StringBuilder();
+    	mySB= new StringBuilder();
+
     	
     	
     }

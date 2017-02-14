@@ -30,7 +30,8 @@ public class ParkTest {
 	@Before
 	public void setUp() {
 		myManager = new ParkManager("johnjones@tacomaparks.com", "2535551111", "John Jones");
-		myPark = new Park(myManager, "Tacoma Nature Center", "1919 S Tyler St", "Tacoma", "WA", "98405");
+		myPark = new Park(myManager, "Tacoma Nature Center", "1919 S Tyler St",
+                "Tacoma", "WA", "98405");
 	}
 
 	//***** Unit test(s) ***********************************************************************************************
@@ -65,7 +66,7 @@ public class ParkTest {
 	 * @author Peter Park
 	 */
 	@Test
-	public void testGetManager() {
+	public void getManager_UnchangedTestFixture_True() {
 		assertEquals("johnjones@tacomaparks.com", myPark.getManager().getUsername());
 	}
 
@@ -75,7 +76,7 @@ public class ParkTest {
 	 * @author Peter Park
 	 */
 	@Test
-	public void testGetName() {
+	public void getName_UnchangedTestFixture_True() {
 		assertEquals("Tacoma Nature Center", myPark.getName());
 	}
 
@@ -109,6 +110,11 @@ public class ParkTest {
 		assertEquals("98405", myPark.getZipcode());
 	}
 
+    /**
+     * Tests to see if the getter works properly, Park#getStreet().
+     *
+     * @author Walter Weeks
+     */
 	@Test
 	public void getStreet_UnchangedTestFixture_True() {
 		assertEquals("1919 S Tyler St", myPark.getStreet());

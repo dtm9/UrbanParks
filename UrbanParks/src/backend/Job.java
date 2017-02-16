@@ -29,6 +29,8 @@ public class Job implements Serializable {
     private static final int MONTH_MIN_DAY = 1;
     /**Max days in a Month */
     private static final int MONTH_MAX_DAY = 31;
+    
+    // ToDo private static final int MAX_VOLUNTEERS = x;
 
     //***** Field(s) ***************************************************************************************************
 

@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import model.AbstractAccount;
 import model.Datastore;
-import model.OfficeStaff;
 import model.ParkManager;
 import model.Volunteer;
 
@@ -196,8 +195,6 @@ public class Main {
             theView = new VolunteerView(userAccount, datastore);
         } else if (userAccount instanceof ParkManager) {
             theView = new ParkManagerView(userAccount, datastore);
-        } else if (userAccount instanceof OfficeStaff) {
-            theView = new OfficeStaffView(userAccount, datastore);
         } else {
             throw new NullPointerException("Account not found.");
         }

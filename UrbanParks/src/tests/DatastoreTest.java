@@ -38,7 +38,7 @@ public class DatastoreTest {
 	private List<Volunteer> myVolunteers;
 
 	/** Urban Parks Office Staff auxiliary test fixture. */
-	private List<OfficeStaff> myOfficeStaff;
+	//private List<OfficeStaff> myOfficeStaff; depreciated
 
 	/**
 	 * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
@@ -51,7 +51,7 @@ public class DatastoreTest {
 		// initialize the test fixtures
 		myParkManagers = new ArrayList<>();
 		myVolunteers = new ArrayList<>();
-		myOfficeStaff = new ArrayList<>();
+//		myOfficeStaff = new ArrayList<>();
 		myAccounts = new ArrayList<>();
 		myParks = new ArrayList<>();
 		myJobs = new ArrayList<>();
@@ -111,7 +111,7 @@ public class DatastoreTest {
 		myJobs.get(1).setVolunteers(myVolunteers.get(0).getUsername());
 
 		// Populate myOfficeStaff list data structure w/ 1 Office Staff
-		myOfficeStaff.add(new OfficeStaff("randy@urbanparks.com", "2065551234", "Randy Johnson"));
+		//myOfficeStaff.add(new OfficeStaff("randy@urbanparks.com", "2065551234", "Randy Johnson"));
 
 		// Populate the accounts list
         for (int i = 0; i < myVolunteers.size(); i++) { 	// Volunteers
@@ -120,9 +120,9 @@ public class DatastoreTest {
         for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
             myAccounts.add(myParkManagers.get(i));
         }
-        for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
-            myAccounts.add(myOfficeStaff.get(i));
-        }
+//        for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
+//            myAccounts.add(myOfficeStaff.get(i));
+//        }
 	}
 
 	/**
@@ -138,9 +138,9 @@ public class DatastoreTest {
 		for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
 			myDatastore.addAccount(myParkManagers.get(i));
 		}
-		for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
-			myDatastore.addAccount(myOfficeStaff.get(i));
-		}
+//		for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
+//			myDatastore.addAccount(myOfficeStaff.get(i));
+//		}
 		// Add the Parks to myDatastore
 		for (int i = 0; i < myParks.size(); i++) {
 			myDatastore.addPark(myParks.get(i));
@@ -227,7 +227,7 @@ public class DatastoreTest {
 	 */
 	@Test
 	public void getNumberOfAccounts_UnmodifiedDatastore_ShouldBeSumOfAccountTestFixturesSizes() {
-		assertEquals(myVolunteers.size() + myParkManagers.size() + myOfficeStaff.size(), myDatastore.getNumberOfAccounts());
+		assertEquals(myVolunteers.size() + myParkManagers.size(), myDatastore.getNumberOfAccounts());
 	}
 
 	/**

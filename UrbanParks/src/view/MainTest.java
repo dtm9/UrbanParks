@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import model.AbstractAccount;
-import model.OfficeStaff;
 import model.ParkManager;
 import model.Volunteer;
 import model.Volunteer.WorkGrade;
@@ -36,9 +35,6 @@ public class MainTest {
     /** The Volunteer test fixture. */
     private Volunteer myGoodVolunteer;
 
-    /** The OfficeStaff test fixture. */
-    private OfficeStaff myGoodOfficeStaff;
-
     /** The View test fixture. */
     private AbstractView myTestView;
 
@@ -59,7 +55,6 @@ public class MainTest {
 
         myGoodPM = new ParkManager("test@test.com", "5551112222", "Testy McTesterson");
         myGoodVolunteer = new Volunteer("test2@test.com", "5552223333", "Testy McTesterson Jr.", WorkGrade.LIGHT);
-        myGoodOfficeStaff = new OfficeStaff("test3@test.com", "5553334444", "Testy McTesterson III");
     }
 
     //***** Unit test(s) ***********************************************************************************************
@@ -103,12 +98,6 @@ public class MainTest {
         } catch (NullPointerException e) {
             fail("failing to launch volunteer gui!");
         }
-
-        try {
-            Main.generateView(myGoodOfficeStaff, myTestView);
-        } catch (NullPointerException e) {
-            fail("failing to launch office staff gui!");
-        }
     }
 
     /**
@@ -146,17 +135,5 @@ public class MainTest {
         exception.expectMessage("Account not found.");
 
         Main.generateView((ParkManager)null, myTestView);
-    }
-
-    /**
-     * Tests Main#generateView(Account, View) with a null OfficeStaff object; expected to throw a
-     * NullPointerException.
-     */
-    @Test
-    public final void generateView_NullObjectWithOfficeStaffCast_NullPointerExceptionExpected() {
-        exception.expect(NullPointerException.class);
-        exception.expectMessage("Account not found.");
-
-        Main.generateView((OfficeStaff)null, myTestView);
     }
 }

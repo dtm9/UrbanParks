@@ -9,22 +9,21 @@ package view;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.AbstractAccount;
 import model.Datastore;
 import model.Job;
-import model.OfficeStaff;
 import model.Park;
 import model.Volunteer;
 
 /**
- * @author Dylan
- *@author Ethan
+ * @author Dylan Miller
+ * @author Ethan Young
  */
 public class VolunteerView extends AbstractView {
 

@@ -6,7 +6,7 @@
  */
 package view;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +19,6 @@ import org.junit.Test;
 import model.AbstractAccount;
 import model.Datastore;
 import model.Job;
-import model.OfficeStaff;
 import model.Park;
 import model.ParkManager;
 import model.Volunteer;
@@ -44,7 +43,7 @@ public class IOTest {
     Job testJob4;
     Volunteer testVolunteer1;
     Volunteer testVolunteer2;
-    OfficeStaff testStaff1;
+//    OfficeStaff testStaff1;
 	
     /**
     * @throws java.lang.Exception
@@ -91,8 +90,8 @@ public class IOTest {
 	testVolunteer2.setBlackballed(true);
 	testDatastore.addAccount(testVolunteer2);
 	
-	testStaff1 = new OfficeStaff("ppark@urbanparks.org", "5555555555", "Peter Park");
-	testDatastore.addAccount(testStaff1);
+//	testStaff1 = new OfficeStaff("ppark@urbanparks.org", "5555555555", "Peter Park");
+//	testDatastore.addAccount(testStaff1);
 	
 	//write out the test datastore as the same filename that main loads.
 	try {

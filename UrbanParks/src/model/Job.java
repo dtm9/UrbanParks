@@ -61,15 +61,6 @@ public class Job implements Serializable {
     /** Max Volunteers for the Job. */
     private int myMaxVolunteers;
 
-    /** Minimum number of volunteers for light work grade. */
-    private int myMinLight;
-
-    /** Minimum number of volunteers for medium work grade. */
-    private int myMinMedium;
-
-    /** Minimum number of volunteers for heavy work grade. */
-    private int myMinHeavy;
-
     /** List of Volunteers signed up for the Job. */
     private List<String> myVolunteers;
 
@@ -89,9 +80,6 @@ public class Job implements Serializable {
         myPark = null;
         setDescription("");
         setMaxVolunteers(0);
-        setMinLight(0);
-        setMinMedium(0);
-        setMinHeavy(0);
         setNotes("");
         myVolunteers = new ArrayList<String>();
     }
@@ -326,78 +314,6 @@ public class Job implements Serializable {
             this.myMaxVolunteers = theMaxVolunteers;
         } else {
             throw new IllegalArgumentException("Parameter is not of type String.\n ");
-        }
-    }
-
-    /**
-     * Getter for the minimum light-grade Volunteers required for this Job..
-     *
-     * @return The minimum light-grade Volunteers required for this Job.
-     * @author Gardner Gomes
-     */
-    public int getMinLight() {
-        return myMinLight;
-    }
-
-    /**
-     * Setter for the minimum light-grade Volunteers required for this Job..
-     *
-     * @param theMinLight The minimum light-grade Volunteers required for this Job.
-     * @author Gardner Gomes
-     */
-    public void setMinLight(final int theMinLight) {
-        if (theMinLight >= 0) {
-            this.myMinLight = theMinLight;
-        } else {
-            throw new IllegalArgumentException("Parameter is not of type Integer\n");
-        }
-    }
-
-    /**
-     * Getter for myMinMedium.
-     *
-     * @return The minimum medium-grade Volunteers for this Job.
-     * @author Gardner Gomes
-     */
-    public int getMinMedium() {
-        return myMinMedium;
-    }
-
-    /**
-     * Setter for myMinMedium.
-     *
-     * @param theMinMedium The minimum medium-grade Volunteers required for this Job.
-     * @author Gardner Gomes
-     */
-    public void setMinMedium(final int theMinMedium) {
-        if (theMinMedium >= 0) {
-            this.myMinMedium = theMinMedium;
-        } else {
-            throw new IllegalArgumentException("Parameter is not of type Integer\n");
-        }
-    }
-
-    /**
-     * Getter for the minimum heavy-grade Volunteers required for this Job..
-     *
-     * @return myMinHeavy The minimum heavy-grade Volunteers required for this Job.
-     * @author Gardner Gomes
-     */
-    public int getMinHeavy() {
-        return myMinHeavy;
-    }
-
-    /**
-     * Setter for the minimum heavy-grade Volunteers required for this Job..
-     *
-     * @param theMinHeavy The minimum heavy-grade Volunteers required for this Job.
-     * @author Gardner Gomes
-     */
-    public void setMinHeavy(final int theMinHeavy) {
-        if (theMinHeavy >= 0) {
-            this.myMinHeavy = theMinHeavy;
-        } else {
-            throw new IllegalArgumentException("Paramater is not of type Integer\n");
         }
     }
 

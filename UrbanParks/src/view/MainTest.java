@@ -12,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import model.AbstractAccount;
 import model.ParkManager;
 import model.Volunteer;
-import model.Volunteer.WorkGrade;
 
 /**
  * Unit tests for the Main driver class.
@@ -54,7 +53,7 @@ public class MainTest {
         myGoodUsername = myGoodAccount.getUsername();
 
         myGoodPM = new ParkManager("test@test.com", "5551112222", "Testy McTesterson");
-        myGoodVolunteer = new Volunteer("test2@test.com", "5552223333", "Testy McTesterson Jr.", WorkGrade.LIGHT);
+        myGoodVolunteer = new Volunteer("test2@test.com", "5552223333", "Testy McTesterson Jr.");
     }
 
     //***** Unit test(s) ***********************************************************************************************

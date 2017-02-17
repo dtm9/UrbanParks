@@ -22,7 +22,6 @@ import model.Job;
 import model.Park;
 import model.ParkManager;
 import model.Volunteer;
-import model.Volunteer.WorkGrade;
 
 /**
  * This is a integration test for saving and loading.
@@ -43,7 +42,6 @@ public class IOTest {
     Job testJob4;
     Volunteer testVolunteer1;
     Volunteer testVolunteer2;
-//    OfficeStaff testStaff1;
 	
     /**
     * @throws java.lang.Exception
@@ -82,16 +80,12 @@ public class IOTest {
 	testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
 	testDatastore.addJob(testJob4);
 	
-	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);
+	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes");
 	testDatastore.addAccount(testVolunteer1);
 	testJob1.setVolunteers(testVolunteer1.getRealName());
 	
-	testVolunteer2 = new Volunteer("AncientAliens@gmail.com", "5559998888", "Giorgio A. Tsoukalos", WorkGrade.HEAVY);
-	testVolunteer2.setBlackballed(true);
+	testVolunteer2 = new Volunteer("AncientAliens@gmail.com", "5559998888", "Giorgio A. Tsoukalos");
 	testDatastore.addAccount(testVolunteer2);
-	
-//	testStaff1 = new OfficeStaff("ppark@urbanparks.org", "5555555555", "Peter Park");
-//	testDatastore.addAccount(testStaff1);
 	
 	//write out the test datastore as the same filename that main loads.
 	try {
@@ -137,17 +131,6 @@ public class IOTest {
     List<Park> testParks = testDatastore.getAllParks();
     List<Park> loadedParks = Main.datastore.getAllParks();
     if (!testParks.equals(loadedParks)) fail("Loaded park list does not match original park list!");
-    
-    //sanity test (debugging this test case)
-    /*
-    for (Account account : testAccounts) {
-      System.out.println("test account list -- " + account.getUsername() + "\n");
-    }
-
-    for (Account account : loadedAccounts) {
-      System.out.println("loaded account list -- " + account.getUsername() + "\n");	
-    } 
-    */
   }
 
 }

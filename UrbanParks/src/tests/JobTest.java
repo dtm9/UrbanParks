@@ -44,7 +44,7 @@ public class JobTest implements TestConstants {
     public void setUp() throws Exception {
         theManager = new ParkManager(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
         thePark = new Park(theManager, "Test Name", "123 E St", "Test City", "WA", "Test ZIP");
-        theVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME, Volunteer.WorkGrade.LIGHT);
+        theVolunteer = new Volunteer(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
         myJob = new Job();
     }
 
@@ -175,69 +175,6 @@ public class JobTest implements TestConstants {
     @Test(expected = IllegalArgumentException.class)
     public void setMaxVolunteers_BadInt_ExceptionThrown() {
         myJob.setMaxVolunteers(BAD_INT);
-    }
-
-    /**
-     * Test for proper setting of minimum light workers.
-     *
-     * @author Gardner Gomes
-     */
-    @Test
-    public void setMinLight_GoodInt_MinLightSet() {
-        myJob.setMinLight(GOOD_INT);
-        assertEquals(GOOD_INT, myJob.getMinLight());
-    }
-
-    /**
-     * Tests for bad minimum light worker count.
-     * 
-     * @author VG Gnome
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void setMinLight_BadInt_ExceptionThrown() {
-        myJob.setMinLight(BAD_INT);
-    }
-
-    /**
-     * Test for proper setting of minimum medium workers.
-     *
-     * @author Gardner Gomes
-     */
-    @Test
-    public void setMyMinMedium_GoodInt_MinMediumSet() {
-        myJob.setMinMedium(GOOD_INT);
-        assertEquals(GOOD_INT, myJob.getMinMedium());
-    }
-
-    /**
-     * Tests for bad minimum medium worker count.
-     *
-     * @author Gardner Gomes
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void setMinMedium_BadInt_ExceptionThrown() {
-        myJob.setMinMedium(BAD_INT);
-    }
-
-    /**
-     * Test for proper setting of minimum heavy workers.
-     *
-     * @author Gardner Gomes
-     */
-    @Test
-    public void setMinHeavy_GoodInt_MinHeavySet() {
-        myJob.setMinHeavy(GOOD_INT);
-        assertEquals(GOOD_INT, myJob.getMinHeavy());
-    }
-
-    /**
-     * Tests for bad min of heavy workers.
-     *
-     * @author Gardner Gomes
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void setMinHeavy_BadInt_ExceptionThrown() {
-        myJob.setMinHeavy(BAD_INT);
     }
 
     /**

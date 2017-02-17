@@ -99,9 +99,6 @@ public class ParkManagerView extends AbstractView {
         myJob = addYear(myJob);
         myJob = addTime(myJob);
         myJob = addDuration(myJob);
-        myJob = addLightGrade(myJob);
-        myJob = addMediumGrade(myJob);
-        myJob = addHeavyGrade(myJob);
         myJob = addVolunteerMax(myJob);
         myJob = addNotes(myJob);
         try {
@@ -145,39 +142,6 @@ public class ParkManagerView extends AbstractView {
         } catch (Exception e) {
             System.out.println("Value not Accepted.");
             addVolunteerMax(theJob);
-        }
-        return theJob;
-    }
-
-    Job addHeavyGrade(Job theJob) {
-        System.out.print("Please set the minumum Heavy Grade Workers: ");
-        try {
-            theJob.setMinHeavy(Integer.parseInt(myScanner.nextLine()));
-        } catch (Exception e) {
-            System.out.println("Value not Accepted.");
-            addHeavyGrade(theJob);
-        }
-        return theJob;
-    }
-
-    Job addMediumGrade(Job theJob) {
-        System.out.print("Please set the minumum Medium Grade Workers: ");
-        try {
-            theJob.setMinMedium(Integer.parseInt(myScanner.nextLine()));
-        } catch (Exception e) {
-            System.out.println("Value not Accepted.");
-            addMediumGrade(theJob);
-        }
-        return theJob;
-    }
-
-    Job addLightGrade(Job theJob) {
-        System.out.print("Please set the minumum Light Grade Workers: ");
-        try {
-            theJob.setMinLight(Integer.parseInt(myScanner.nextLine()));
-        } catch (Exception e) {
-            System.out.print(e.getMessage());
-            addLightGrade(theJob);
         }
         return theJob;
     }
@@ -365,11 +329,8 @@ public class ParkManagerView extends AbstractView {
         mySB.append("\nDurration for the Job: ");
         mySB.append(theJob.getDuration());
         mySB.append("\nMinumum Light Grade Volunteers(0 or More): ");
-        mySB.append(theJob.getMinLight());
         mySB.append("\nMinumum Medium Grade Volunteers(0 or More): ");
-        mySB.append(theJob.getMinMedium());
         mySB.append("\nMinumum Heavy Grade Volunteers(0 or More): ");
-        mySB.append(theJob.getMinHeavy());
         mySB.append("\nMaximum Volunteers(0 or More): ");
         mySB.append(theJob.getMaxVolunteers());
         mySB.append("\nAdditional Notes: ");

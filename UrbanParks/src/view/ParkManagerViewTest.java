@@ -3,13 +3,9 @@
  */
 package view;
 
-import static org.junit.Assert.*;
-
-import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +15,9 @@ import model.Job;
 import model.Park;
 import model.ParkManager;
 import model.Volunteer;
-import model.Volunteer.WorkGrade;
 
 /**
- * @author dylan
- *
+ * @author Dylan Miller
  */
 public class ParkManagerViewTest {
 	private ParkManager testParkManager;
@@ -90,29 +84,29 @@ public class ParkManagerViewTest {
 		testParkManagerView = new ParkManagerView(testPM1, testDatastore);
 		
 		
-		testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes", WorkGrade.HEAVY);
+		testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
 	    testDatastore.addAccount(testVolunteer1);
-	    testVolunteer2 = new Volunteer("Sinefield@gmail.com", "5559998887", "Jerry Sienfield", WorkGrade.LIGHT);
+	    testVolunteer2 = new Volunteer("Sinefield@gmail.com", "5559998887", "Jerry Sienfield");
         testDatastore.addAccount(testVolunteer2);
-        testVolunteer3 = new Volunteer("ShelGod@gmail.com", "5559997588", "Sheldon Garret", WorkGrade.MEDIUM);
+        testVolunteer3 = new Volunteer("ShelGod@gmail.com", "5559997588", "Sheldon Garret");
         testDatastore.addAccount(testVolunteer3);
-        testVolunteer4 = new Volunteer("SwanMan@gmail.com", "5559698888", "Darren Swanson", WorkGrade.HEAVY);
+        testVolunteer4 = new Volunteer("SwanMan@gmail.com", "5559698888", "Darren Swanson");
         testDatastore.addAccount(testVolunteer4);
-        testVolunteer5 = new Volunteer("Rudy@gmail.com", "5559693888", "Rudy Larson", WorkGrade.HEAVY);
+        testVolunteer5 = new Volunteer("Rudy@gmail.com", "5559693888", "Rudy Larson");
         testDatastore.addAccount(testVolunteer5);
-        testVolunteer6 = new Volunteer("SDvenny@gmail.com", "5543693888", "Stephanie Devenny", WorkGrade.MEDIUM);
+        testVolunteer6 = new Volunteer("SDvenny@gmail.com", "5543693888", "Stephanie Devenny");
         testDatastore.addAccount(testVolunteer6);
-        testVolunteer7 = new Volunteer("LiZZ2002@gmail.com", "5559654588", "Julie Lindsey", WorkGrade.LIGHT);
+        testVolunteer7 = new Volunteer("LiZZ2002@gmail.com", "5559654588", "Julie Lindsey");
         testDatastore.addAccount(testVolunteer7);
-        testVolunteer8 = new Volunteer("R053MErry@gmail.com", "2539693888", "Rosie Mary", WorkGrade.HEAVY);
+        testVolunteer8 = new Volunteer("R053MErry@gmail.com", "2539693888", "Rosie Mary");
         testDatastore.addAccount(testVolunteer8);
-        testVolunteer9 = new Volunteer("CapKirk@gmail.com", "5559693548", "Kirk Robinson", WorkGrade.LIGHT);
+        testVolunteer9 = new Volunteer("CapKirk@gmail.com", "5559693548", "Kirk Robinson");
         testDatastore.addAccount(testVolunteer9);
-        testVolunteer10 = new Volunteer("RamoxxxXD@gmail.com", "5559693768", "Ramon Mendoza", WorkGrade.MEDIUM);
+        testVolunteer10 = new Volunteer("RamoxxxXD@gmail.com", "5559693768", "Ramon Mendoza");
         testDatastore.addAccount(testVolunteer10);
-        testVolunteer11 = new Volunteer("Sharpie23@gmail.com", "5559693867", "Leslie Sharp", WorkGrade.HEAVY);
+        testVolunteer11 = new Volunteer("Sharpie23@gmail.com", "5559693867", "Leslie Sharp");
         testDatastore.addAccount(testVolunteer11);
-        testVolunteer12 = new Volunteer("MonInc@gmail.com", "5559693222", "Mike Wazowski", WorkGrade.LIGHT);
+        testVolunteer12 = new Volunteer("MonInc@gmail.com", "5559693222", "Mike Wazowski");
         testDatastore.addAccount(testVolunteer12);
         
 	    testDatastore.addAccount(testPM1);

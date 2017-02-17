@@ -37,9 +37,6 @@ public class DatastoreTest {
 	/** Volunteer list auxiliary test fixture. */
 	private List<Volunteer> myVolunteers;
 
-	/** Urban Parks Office Staff auxiliary test fixture. */
-	//private List<OfficeStaff> myOfficeStaff; depreciated
-
 	/**
 	 * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
 	 * building a small amount of data used by the Datastore methods to verify their proper working order.
@@ -51,7 +48,6 @@ public class DatastoreTest {
 		// initialize the test fixtures
 		myParkManagers = new ArrayList<>();
 		myVolunteers = new ArrayList<>();
-//		myOfficeStaff = new ArrayList<>();
 		myAccounts = new ArrayList<>();
 		myParks = new ArrayList<>();
 		myJobs = new ArrayList<>();
@@ -101,9 +97,9 @@ public class DatastoreTest {
 
 		// populate myVolunteers list data structure w/ 2 Volunteers
 		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
-				"Steve Jones", Volunteer.WorkGrade.MEDIUM));
+				"Steve Jones"));
 		myVolunteers.add(new Volunteer("nancy@yahoo.com", "2069995432",
-				"Nancy Hawkins", Volunteer.WorkGrade.HEAVY));
+				"Nancy Hawkins"));
 
 		// Set the 1st Job @ Wapato Park with 2 Volunteers and 1 volunteer having 2 pending jobs
 		myJobs.get(0).setVolunteers(myVolunteers.get(0).getUsername());
@@ -120,9 +116,6 @@ public class DatastoreTest {
         for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
             myAccounts.add(myParkManagers.get(i));
         }
-//        for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
-//            myAccounts.add(myOfficeStaff.get(i));
-//        }
 	}
 
 	/**
@@ -138,9 +131,6 @@ public class DatastoreTest {
 		for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
 			myDatastore.addAccount(myParkManagers.get(i));
 		}
-//		for (int i = 0; i < myOfficeStaff.size(); i++) {    // Office Staff
-//			myDatastore.addAccount(myOfficeStaff.get(i));
-//		}
 		// Add the Parks to myDatastore
 		for (int i = 0; i < myParks.size(); i++) {
 			myDatastore.addPark(myParks.get(i));

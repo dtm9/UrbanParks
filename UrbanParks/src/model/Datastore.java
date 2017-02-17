@@ -1,4 +1,4 @@
-package backend;
+package model;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,15 +18,13 @@ public final class Datastore implements Serializable {
 
 	//***** Constant(s) ************************************************************************************************
 
-    /**
-	 * Default serialVersionUID. This should not change.
-	 */
+    /**Default serialVersionUID. This should not change.*/
 	private static final long serialVersionUID = 1L;
 
-	/** The maximum number of pending jobs default value. */
+	/**The maximum number of pending jobs default value.*/
     public static final int MAX_PENDING_JOBS_DEFAULT = 30;
 
-    /** The maximum number of pending jobs on a calendar date default value. */
+    /**The maximum number of pending jobs on a calendar date default value.*/
     public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 2;
 
     //***** Field(s) ***************************************************************************************************
@@ -66,6 +64,7 @@ public final class Datastore implements Serializable {
 
     //**** Accessor/Mutator Method(s) **********************************************************************************
 
+    //TODO this is implemented in Park.java. Remove this below method after testing the new one
     /**
      * Gets the list of pending jobs at a given park.
      *
@@ -93,9 +92,9 @@ public final class Datastore implements Serializable {
         return result;
     }
 
+    //TODO this is now implemented in Volunteer.java. Test the new one and then remove this one.
     /**
      * Gets a list of jobs of a given volunteer.
-     *
      * @author Walter Weeks (ww3@uw.edu)
      * @param theVolunteer The volunteer.
      * @return The list of jobs of a given volunteer.
@@ -120,6 +119,7 @@ public final class Datastore implements Serializable {
         return result;
     }
 
+    //TODO this has been implemented in ParkManager.java. Go test that and then remove this one.
     /**
      * Gets a list of pending jobs given a particular park manager.
      *
@@ -156,6 +156,7 @@ public final class Datastore implements Serializable {
         return result;
     }
 
+    //TODO is this one of the ones we agreed to remove? Nobody posted the picture... -Dylan
     /**
      * Gets the list of pending jobs within a given city and state.
      *
@@ -237,6 +238,7 @@ public final class Datastore implements Serializable {
         }
     }
 
+    //TODO do we still need this one?
     /**
      * Gets the list of jobs on a given calendar date, i.e. the day, the month, and the year.
      *

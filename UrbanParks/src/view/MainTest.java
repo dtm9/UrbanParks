@@ -9,11 +9,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import backend.AbstractAccount;
-import backend.OfficeStaff;
-import backend.ParkManager;
-import backend.Volunteer;
-import backend.Volunteer.WorkGrade;
+import model.AbstractAccount;
+import model.OfficeStaff;
+import model.ParkManager;
+import model.Volunteer;
+import model.Volunteer.WorkGrade;
 
 /**
  * Unit tests for the Main driver class.
@@ -40,7 +40,7 @@ public class MainTest {
     private OfficeStaff myGoodOfficeStaff;
 
     /** The View test fixture. */
-    private View myTestView;
+    private AbstractView myTestView;
 
     /** The expected exception rule. */
     @Rule

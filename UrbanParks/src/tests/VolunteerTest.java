@@ -1,4 +1,4 @@
-package fixedTests;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import backend.Volunteer;
-import backend.Volunteer.WorkGrade;
+import model.Volunteer;
+import model.Volunteer.WorkGrade;
 
 /**
  * Basic unit tests for the Volunteer class.
@@ -21,21 +21,21 @@ public class VolunteerTest {
 
     //***** Constants **************************************************************************************************
 
-	/** Address that passes the email REGEX validation. */
+	/**Example username.*/
 	private static final String GOOD_EMAIL = "joe@yahoo.com";
 
-	/** 10 digit phone number that meets our phone REGEX validation. */
+	/**10 digit phone number that meets our phone REGEX validation.*/
 	private static final String GOOD_PHONE = "5551112222";
 
-	/** There is no REGEX for real names, it just needs to not be blank. */
+	/**There is no REGEX for real names, it just needs to not be blank.*/
 	private static final String GOOD_NAME = "Joe Smith";
 
-	/** The work grade. */
+	/**The work grade.*/
 	private static final WorkGrade GRADE = Volunteer.WorkGrade.LIGHT;
 
 	//***** Test fixture(s), setUp(), etc. *****************************************************************************
 
-    /** Volunteer manager account test fixture. */
+    /**Volunteer manager account test fixture.*/
     private Volunteer myValidVolunteerAccount;
     
     @Rule
@@ -43,7 +43,6 @@ public class VolunteerTest {
 	
     /**
      * Sets up the test fixture.
-     *
      * @author Walter Weeks
      */
     @Before
@@ -52,184 +51,6 @@ public class VolunteerTest {
     }
 
     //***** Unit test(s) ***********************************************************************************************
-
-//   /** Consider removing this ***
-//	* All three account types use the abstract Account.java's constructor
-//	* for these parameters so this test should hold for all valid data examples.
-//	* @author Dylan Miller
-//	*/
-//	@Test
-//	public final void sunnyDayScenario() {
-//    OfficeStaff goodUser = new OfficeStaff(GOOD_EMAIL, GOOD_PHONE, GOOD_NAME);
-//  }
-	
-    /**
-     * Scenario for when there are no special characters.
-     * @author Dylan Miller
-     */
-    @Test
-    public final void volunteerConstructor_FirstNameAsEmail_ShouldThrowException() {
-      exception.expect(IllegalArgumentException.class);
-      exception.expectMessage("Must be a valid email address.");
-
-      new Volunteer("Jim", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-
-    /**
-     * Scenario for when the at sign is missing in the email.
-     *
-     * @author Dylan Miller
-     */
-    @Test
-    public final void volunteerConstructor_NoAtSignInEmail_ShouldThrowException() {
-      exception.expect(IllegalArgumentException.class);
-      exception.expectMessage("Must be a valid email address.");
-
-      new Volunteer("Jimhotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a space.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_SpaceInEmailAddress_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there are multiple @ symbols.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_MultipleAtSigns_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim@Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there are two dots.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_multipleConsecutiveDots_ShouldThrowException() {
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim..Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a quote.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsQuotes_ShouldThrowException() {
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim\"Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a comma.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsComma_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim,Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a backslash.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsBackslash_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim\\Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a colon.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsColon_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim:Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a semi-colon.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsSemiColon_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim;Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a parentheses.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailContainsParenthesis_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim)(Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-    
-    /**
-     * Scenario for when there is a inequality symbol.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailWithInequality_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-
-  	  new Volunteer("Jim<>Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
-
-    /**
-     * Scenario for when there is a brackets.
-     *
-     * @author Ethan Young
-     */
-    @Test
-    public final void volunteerConstructor_emailWithBrackets_ShouldThrowException(){
-  	  exception.expect(IllegalArgumentException.class);
-  	  exception.expectMessage("Must be a valid email address.");
-  	  
-  	  new Volunteer("[Jim]Jim@hotmail.com", GOOD_PHONE, GOOD_NAME, GRADE);
-    }
 
     /**
      * Scenario for a phone number that is 10 digits but uses hyphens.

@@ -5,4 +5,4 @@
  * @author dylan
  *
  */
-package fixedTests;
+package tests;

@@ -1,4 +1,4 @@
-package backend;
+package model;
 
 /**
  * Enumeration for the United States including D.C. and Puerto Rico. This enumeration does not include the ISO

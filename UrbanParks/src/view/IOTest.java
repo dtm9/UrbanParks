@@ -16,14 +16,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import backend.AbstractAccount;
-import backend.Datastore;
-import backend.Job;
-import backend.OfficeStaff;
-import backend.Park;
-import backend.ParkManager;
-import backend.Volunteer;
-import backend.Volunteer.WorkGrade;
+import model.AbstractAccount;
+import model.Datastore;
+import model.Job;
+import model.OfficeStaff;
+import model.Park;
+import model.ParkManager;
+import model.Volunteer;
+import model.Volunteer.WorkGrade;
 
 /**
  * This is a integration test for saving and loading.

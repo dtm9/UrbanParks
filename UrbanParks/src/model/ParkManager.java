@@ -1,7 +1,12 @@
-package backend;
+package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
+
+import view.Main;
 
 /**
  * Park Manager User. Other classes will check instance of account
@@ -64,5 +69,36 @@ public class ParkManager extends AbstractAccount implements Serializable {
     ParkManager otherManager = (ParkManager) theObj;
 
     return otherManager.getUsername().equals(getUsername());
+  }
+  
+  //TODO test this method and then remove the original from Datastore.java
+  /**
+   * Gets a list of pending jobs for this park manager.
+   * @author Walter Weeks (ww3@uw.edu)
+   * @return The list of pending jobs that the park manager has.
+   */
+  public final List<Job> getJobsByParkManager() {
+    List<Park> allParks = Main.datastore.getAllParks();
+    List<Job> allJobs = Main.datastore.getPendingJobs();
+    // Compile the list of Parks within a given city and ZIP Code
+    List<Park> managedParks = new ArrayList<>();
+    for (int i = 0; i < allParks.size(); i++) {
+      if (allParks.get(i).getManager().equals(this)) {
+        managedParks.add(allParks.get(i));
+      }
+    }
+
+    List<Job> result = new ArrayList<>();
+
+    // Iterate over the entire pending jobs list to compile the list of job @ a given city
+    Iterator<Job> itr = allJobs.iterator();
+    while (itr.hasNext()) {
+      Job currentJob = itr.next();
+      if (managedParks.contains(currentJob.getPark())) {
+        result.add(currentJob);
+      }
+    }
+
+    return result;
   }
 }

@@ -1,7 +1,12 @@
-package backend;
+package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
+
+import view.Main;
 
 /**
  * Immutable Park class for Urban Parks.
@@ -192,5 +197,30 @@ public final class Park implements Serializable {
         if (theState.length() != 2) {
             throw new IllegalArgumentException("The state must be exactly 2 characters.");
         }
+    }
+    
+    //TODO new method, needs testing
+    /**
+     * Gets the list of pending jobs at this park.
+     *
+     * @author Walter Weeks (ww3@uw.edu)
+     * @param thePark the park we want the jobs from.
+     * @throws NullPointerException if thePark is null.
+     * @return the list of jobs given a Park.
+     */
+    public final List<Job> getJobs() {
+
+        List<Job> result = new ArrayList<>();
+
+        // Iterate over the entire pending jobs list to compile the list of job @ a given park
+        Iterator<Job> itr = Main.datastore.getPendingJobs().iterator();
+        while (itr.hasNext()) {
+            Job currentJob = itr.next();
+            if (this.equals(currentJob.getPark())) {
+                result.add(currentJob);
+            }
+        }
+
+        return result;
     }
 }

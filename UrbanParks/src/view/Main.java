@@ -8,11 +8,11 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import backend.AbstractAccount;
-import backend.Datastore;
-import backend.OfficeStaff;
-import backend.ParkManager;
-import backend.Volunteer;
+import model.AbstractAccount;
+import model.Datastore;
+import model.OfficeStaff;
+import model.ParkManager;
+import model.Volunteer;
 
 /**
  * Class to launch the application. Stores the mainline.
@@ -26,7 +26,7 @@ public class Main {
     /**
      * Static reference to the datastore in memory.
      */
-    static Datastore datastore;
+    public static Datastore datastore;
 
     /**
      * String builder for printing any text needed to console.
@@ -50,8 +50,7 @@ public class Main {
      *
      * @author Dylan Miller
      */
-    Main() {
-    }
+    Main() {}
 
     //***** Static method(s) *******************************************************************************************
 
@@ -82,7 +81,7 @@ public class Main {
         switch (theChoice) {
             case 1: //log in
                 //get the username
-                View theView = null;
+                AbstractView theView = null;
                 AbstractAccount userAccount = null;
                 String username = scanUsername();
 
@@ -92,11 +91,13 @@ public class Main {
                 //launch the view
                 try {
                     theView = generateView(userAccount, theView);
+                    System.out.println("generateView worked\n");
                     theView.launchGUI();
                 } catch (NullPointerException e) {
                     mySB.delete(0, mySB.capacity());
                     mySB.append(SB_LINE_BREAK);
                     mySB.append(e.getMessage());
+                    mySB.append("did we just fuck shit up?");
                     mySB.append(SB_LINE_BREAK);
                     mySB.append(SB_LINE_BREAK);
                     System.out.print(mySB.toString());
@@ -190,7 +191,7 @@ public class Main {
      * @throws NullPointerException if the userAccount was null (not found in previous method)
      * @author Dylan Miller
      */
-    static View generateView(AbstractAccount userAccount, View theView) {
+    static AbstractView generateView(AbstractAccount userAccount, AbstractView theView) {
         if (userAccount instanceof Volunteer) {
             theView = new VolunteerView(userAccount, datastore);
         } else if (userAccount instanceof ParkManager) {
@@ -208,7 +209,7 @@ public class Main {
      *
      * @author Dylan Miller
      */
-    public static void save() { //consider private or package
+    public static void save() { 
         try {
             FileOutputStream outfile = new FileOutputStream("datastore.bin");
             ObjectOutputStream out = new ObjectOutputStream(outfile);
@@ -241,17 +242,17 @@ public class Main {
 
     //***** Misc method(s) *********************************************************************************************
 
-    /**
-     * (package level) for testing only.
-     */
-    void setDatastore(Datastore theDatastore) {
-        Main.datastore = theDatastore;
-    }
-
-    /**
-     * (package level) for testing only.
-     */
-    Datastore getDatastore() {
-        return Main.datastore;
-    }
+//    /**
+//     * (package level) for testing only.
+//     */
+//    void setDatastore(Datastore theDatastore) {
+//        Main.datastore = theDatastore;
+//    }
+//
+//    /**
+//     * (package level) for testing only.
+//     */
+//    Datastore getDatastore() {
+//        return Main.datastore;
+//    }
 }

@@ -1,4 +1,4 @@
-package fixedTests;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -7,10 +7,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import backend.Job;
-import backend.Park;
-import backend.ParkManager;
-import backend.Volunteer;
+import model.Job;
+import model.Park;
+import model.ParkManager;
+import model.Volunteer;
 
 /**
  * Unit tests for the Job class.

@@ -2,4 +2,4 @@
  * @author Dylan Miller
  *
  */
-package backend;
+package model;

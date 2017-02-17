@@ -6,8 +6,6 @@
  */
 package view;
 
-import backend.Datastore;
-import backend.OfficeStaff;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
@@ -17,17 +15,18 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import backend.AbstractAccount;
-import backend.Job;
-import backend.Datastore;
-import backend.Volunteer;
-import backend.Park;
+import model.AbstractAccount;
+import model.Datastore;
+import model.Job;
+import model.OfficeStaff;
+import model.Park;
+import model.Volunteer;
 
 /**
  * @author Dylan
  *@author Ethan
  */
-public class VolunteerView extends View {
+public class VolunteerView extends AbstractView {
 
     private Volunteer myVolunteer;
     private final Datastore myDatastore;

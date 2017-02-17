@@ -11,17 +11,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import backend.AbstractAccount;
-import backend.Datastore;
-import backend.Job;
-import backend.Park;
-import backend.ParkManager;
+import model.AbstractAccount;
+import model.Datastore;
+import model.Job;
+import model.Park;
+import model.ParkManager;
 
 /**
  * @author dylan
  * @author VG Gnome
  */
-public class ParkManagerView extends View {
+public class ParkManagerView extends AbstractView {
     private static final int TEMP_MAX_JOBS = 30;
     private static final int MONTH_BUFFER = 1;
     private StringBuilder mySB = new StringBuilder();
@@ -38,14 +38,14 @@ public class ParkManagerView extends View {
         myDay = LocalDate.now(myZone);
         myManager = (ParkManager) theAccount;
         myDatastore = theDatastore;
+        System.out.println("do i even get this far?\n");
     }
 
     /*-----------------------------------------------------------------------------------------------------------------------------*/
     @Override
     public void launchGUI() {
-        header();
+        displayHeader();
         userChoice();
-
     }
     /**
      * presents the user with a choice of what to do next.
@@ -88,7 +88,7 @@ public class ParkManagerView extends View {
      */
     private void submitJob() {
         Job myJob = new Job();
-        header();
+        displayHeader();
         System.out.println("Submit a Job for " + myManager.getRealName());
         System.out.print("----------------------------------------------------------\n\n");
         myJob = addPark(myJob);
@@ -272,7 +272,7 @@ public class ParkManagerView extends View {
      * View Jobs elemt for UI
      */
     private void ViewJobs() {
-        header();
+        displayHeader();
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
             if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
@@ -339,7 +339,7 @@ public class ParkManagerView extends View {
      * @param theJob
      */
     private void showJob(Job theJob) {
-        header();
+        displayHeader();
         showJobInformation(theJob);
         showVolunteers(theJob);
         userChoice();
@@ -401,18 +401,18 @@ public class ParkManagerView extends View {
         }
     }
     
-     void header() {
-        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
-        mySB.append(myManager.getRealName());
-        mySB.append(" logged in as Urban Parks Manager\n");
-        mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
-        mySB.append(" ");
-        mySB.append(myDay.getDayOfMonth());
-        mySB.append(", ");
-        mySB.append(myDay.getYear());
-        mySB.append(".\n-----------------------------------------------------------------\n");
-        System.out.print(mySB.toString());
-        mySB.delete(0, mySB.capacity());
+    void displayHeader() {
+      mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
+      mySB.append(myManager.getRealName());
+      mySB.append(" logged in as Urban Parks Manager\n");
+      mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+      mySB.append(" ");
+      mySB.append(myDay.getDayOfMonth());
+      mySB.append(", ");
+      mySB.append(myDay.getYear());
+      mySB.append(".\n-----------------------------------------------------------------\n");
+      System.out.print(mySB.toString());
+      mySB.delete(0, mySB.capacity());
     }
 
 }

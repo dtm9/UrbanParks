@@ -14,12 +14,12 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
-import backend.Datastore;
-import backend.ParkManager;
-import backend.Volunteer;
-import backend.Volunteer.WorkGrade;
-import backend.Job;
-import backend.Park;
+import model.Datastore;
+import model.Job;
+import model.Park;
+import model.ParkManager;
+import model.Volunteer;
+import model.Volunteer.WorkGrade;
 
 /**
  * @author dylan

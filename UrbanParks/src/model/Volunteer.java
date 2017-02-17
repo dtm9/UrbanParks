@@ -1,6 +1,11 @@
-package backend;
+package model;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+
+import view.Main;
 
 /**
  * Volunteer User. Other classes will check instance of account
@@ -189,5 +194,29 @@ public class Volunteer extends AbstractAccount implements Serializable {
       }
 
       this.myAccountNotes.add(theNewNote);
+  }
+  
+  //TODO new method. Test this and remove the old one in datastore.java
+  /**
+   * Gets a list of jobs for this Volunteer.
+   *
+   * @author Walter Weeks (ww3@uw.edu)
+   * @return The list of jobs of a given volunteer.
+   */
+  public final List<Job> getJobsByVolunteer() {
+
+      List<Job> result = new ArrayList<>();
+
+      // Iterate over the entire pending jobs list to compile the list of job @ a given park
+      Iterator<Job> itr = Main.datastore.getPendingJobs().iterator();
+
+      while (itr.hasNext()) {
+          Job currentJob = itr.next();
+          if (currentJob.getVolunteers().contains(this.getUsername())) {
+              result.add(currentJob);
+          }
+      }
+
+      return result;
   }
 }

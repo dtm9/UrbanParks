@@ -1,4 +1,4 @@
-package backend;
+package model;
 
 /**
  * Enumeration for the month.

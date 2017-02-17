@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import backend.AbstractAccount;
-import backend.Datastore;
-import backend.Job;
-import backend.ParkManager;
-import backend.OfficeStaff;
+import model.AbstractAccount;
+import model.Datastore;
+import model.Job;
+import model.OfficeStaff;
+import model.ParkManager;
 
 /**
  * @author Dylan Miller
  *
  */
-public class OfficeStaffView extends View {
+public class OfficeStaffView extends AbstractView {
 
     /** OS-independent string to add a line break in string builder. */
     private static final String SB_LINE_BREAK = System.getProperty("line.separator");

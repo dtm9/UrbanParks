@@ -4,9 +4,9 @@
  * @author Dylan Miller
  */
 
-package fixedTests;
+package tests;
 
-import backend.Park;
+import model.Park;
 
 /**
  * The constants for the test cases.

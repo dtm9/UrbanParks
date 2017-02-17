@@ -1,11 +1,12 @@
-package fixedTests;
+package tests;
 
 import static org.junit.Assert.*;
 
-import backend.Park;
-import backend.ParkManager;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.Park;
+import model.ParkManager;
 
 /**
  * Basic test cases for the Park class.

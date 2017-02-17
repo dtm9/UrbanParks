@@ -1,10 +1,11 @@
-package fixedTests;
+package tests;
 
 import static org.junit.Assert.*;
 
-import backend.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.*;
 
 import java.util.ArrayList;
 import java.util.List;

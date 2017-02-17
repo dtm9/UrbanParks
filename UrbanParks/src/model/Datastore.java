@@ -17,15 +17,15 @@ import java.util.List;
 public final class Datastore implements Serializable {
 
 	//***** Constant(s) ************************************************************************************************
-
+//TODO where the fuck do we define the maximum allowed date in the future? should be 75 days now, no idea where to set that - Dylan
     /**Default serialVersionUID. This should not change.*/
 	private static final long serialVersionUID = 1L;
 
 	/**The maximum number of pending jobs default value.*/
-    public static final int MAX_PENDING_JOBS_DEFAULT = 30;
+    public static final int MAX_PENDING_JOBS_DEFAULT = 20;
 
     /**The maximum number of pending jobs on a calendar date default value.*/
-    public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 2;
+    public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 4;
 
     //***** Field(s) ***************************************************************************************************
 

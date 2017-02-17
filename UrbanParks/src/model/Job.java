@@ -16,13 +16,13 @@ import java.util.Objects;
 public class Job implements Serializable {
 
     //***** Constant(s)
-
+//TODO review these constants for the minimums and MONTH_MAX_DAY -- do we need those?
     /** Default serialVersionUID for serialization. */
     private static final long serialVersionUID = 1L;
     /** Cannot create jobs earlier than this year. */
     private static final int MIN_YEAR = 1900;
     /**Durration limit for job */
-    private static final int MAX_DURRATION = 2;
+    private static final int MAX_DURRATION = 3;
     /**Duration min for a job */
     private static final int MIN_DURRATION = 1;
     /**Minimum days in a Month */

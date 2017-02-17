@@ -76,7 +76,7 @@ public class VolunteerView extends AbstractView {
 
       switch (theChoice) {
 	    case 1:
-	      signUpForJob();
+	      signUpForJobByPark();
 	      break;
 	    case 2:
 	      viewJobs();
@@ -89,12 +89,13 @@ public class VolunteerView extends AbstractView {
 	/**
 	 * Lists the parks in anticipation of the volunteer selecting jobs from that park to sign up for
 	 */
-	private void signUpForJob(){
+	private void signUpForJobByPark(){
 		displayHeader();
 		
 		mySB.append("Which park do you want to volunteer for?");
 	    mySB.append("\n----------------------------------------------------------\n\n");
-	    List<Park> parkList = myDatastore.getAllParks();
+	    //using main datastore instead of local copy
+	    List<Park> parkList = Main.datastore.getAllParks();
 	    Iterator<Park> itr = parkList.iterator();
 	    int count = 0;
 	    if(parkList==null) mySB.append("There are no jobs to sign up for\n");
@@ -117,10 +118,12 @@ public class VolunteerView extends AbstractView {
 	    if (theChoice==count){
 	    	mainMenu();
 	    } else{
+	    	// subtract because parkList starts at index 0
 	    	theChoice--;
 	    	Park selectedPark = parkList.get(theChoice);
-	    	List<Job> parkJobList = myDatastore.getJobsByPark(selectedPark);
-	    	listJobs(selectedPark, parkJobList);
+	    	List<Job> parkJobList = selectedPark.getJobs();
+	    	// List<Job> parkJobList = myDatastore.getJobsByPark(selectedPark);
+	    	listJobsInPark(selectedPark, parkJobList);
 	    }
 	    
 	    
@@ -131,14 +134,16 @@ public class VolunteerView extends AbstractView {
 	 * @param selectedPark
 	 * @param parkJobList
 	 */
-	private void listJobs(Park selectedPark, List<Job> parkJobList){
+	private void listJobsInPark(Park selectedPark, List<Job> parkJobList){
 		displayHeader();
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
 		int count = 0;
         ZoneId z = ZoneId.of("America/Los_Angeles");
         LocalDate today = LocalDate.now(z);
-        int futureDayofYear = today.getDayOfYear()+3;
+        // BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
+        // may need to be un-hardcoded
+        int futureDayofYear = today.getDayOfYear()+2;
         LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);
 		Iterator<Job> itr=parkJobList.iterator();
 		if(parkJobList==null) mySB.append("There are no jobs to sign up for\n");
@@ -149,8 +154,10 @@ public class VolunteerView extends AbstractView {
 		while(itr.hasNext()){
 			Job currentJob=itr.next();
 			LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
-			//logic error...This does not cover the case of signing up for a January job during December
-			if (jobDate.getDayOfYear()>futureLimit.getDayOfYear()){
+			//TODO test this logic for BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
+			boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear();
+			boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1;
+			if (futureDatesSameYear||futureDatesNextYear){
 				count++;
 				legitJobs.add(currentJob);
 				mySB.append(count);
@@ -174,51 +181,58 @@ public class VolunteerView extends AbstractView {
 			 System.out.print(mySB.toString());
 			 mySB.delete(0, mySB.capacity());
 			 int theChoice = myScanner.nextInt();
-			 boolean sameDayFlag = false;
+			 
 			 if (theChoice==count){
 			    	mainMenu();
 			 } else{
-				 Job printJob = legitJobs.get(theChoice);
-				 List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
-				 for(int i=0;i<volunteerJobs.size();i++){
-					 Job jobIterator = volunteerJobs.get(i);
-					 if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
-						 sameDayFlag=true;
-					 }
-				 }
-				if(!sameDayFlag){
-					displayHeader();
-				    mySB.append("You are signing up for this job: \n");
-				    mySB.append(printJob.getName());
-				    mySB.append("\n");
-				    mySB.append(printJob.getDescription());
-				    mySB.append("\nDate: ");
-				    mySB.append(printJob.getMonth());
-				    mySB.append("/");
-				    mySB.append(printJob.getDay());
-				    mySB.append("/");
-				    mySB.append(printJob.getYear());
-				    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
-
-				}else {
-					displayHeader();
-					mySB.append("You can not sign up for this job: \n");
-					mySB.append("You have already signed up for a job on this day.\n");
-					mySB.append("\nEnter 1 to retutrn to main menu\n");
-				}
-				
-			    
-			    System.out.print(mySB.toString());
-			    mySB.delete(0, mySB.capacity());
-			    String confirmChoice = myScanner.next();
-			    if(confirmChoice.equalsIgnoreCase("y")&&!sameDayFlag){
-			    	printJob.setVolunteers(myVolunteer.getUsername());
-			    }
-			    mainMenu();
+				 confirmScreen(theChoice, legitJobs);
 			 }
 			
 		
 		
+	}
+	
+	private void confirmScreen(int theChoice, List<Job> legitJobs){
+		boolean sameDayFlag = false;
+		Job printJob = legitJobs.get(theChoice);
+		//TODO test this call
+		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer();
+		 for(int i=0;i<volunteerJobs.size();i++){
+			 Job jobIterator = volunteerJobs.get(i);
+			 //If Date in job changes this needs to change
+			 if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
+				 sameDayFlag=true;
+			 }
+		 }
+		if(!sameDayFlag){
+			displayHeader();
+		    mySB.append("You are signing up for this job: \n");
+		    mySB.append(printJob.getName());
+		    mySB.append("\n");
+		    mySB.append(printJob.getDescription());
+		    mySB.append("\nDate: ");
+		    mySB.append(printJob.getMonth());
+		    mySB.append("/");
+		    mySB.append(printJob.getDay());
+		    mySB.append("/");
+		    mySB.append(printJob.getYear());
+		    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
+
+		}else {
+			displayHeader();
+			mySB.append("You can not sign up for this job: \n");
+			mySB.append("You have already signed up for a job on this day.\n");
+			mySB.append("\nEnter 1 to retutrn to main menu\n");
+		}
+		
+	    
+	    System.out.print(mySB.toString());
+	    mySB.delete(0, mySB.capacity());
+	    String confirmChoice = myScanner.next();
+	    if(confirmChoice.equalsIgnoreCase("y")&&!sameDayFlag){
+	    	printJob.setVolunteers(myVolunteer.getUsername());
+	    }
+	    mainMenu();
 	}
 	
 	/**

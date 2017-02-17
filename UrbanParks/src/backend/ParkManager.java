@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author Dylan Miller
  * @author Walter Weeks
  */
-public class ParkManager extends Account implements Serializable {
+public class ParkManager extends AbstractAccount implements Serializable {
 
   /** Default serialVersionUID for serialization. */
   private static final long serialVersionUID = 1L;

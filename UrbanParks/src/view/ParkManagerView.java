@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.Datastore;
 import backend.Job;
 import backend.Park;
@@ -32,7 +32,7 @@ public class ParkManagerView extends View {
     private static ZoneId myZone;
     
     
-    public ParkManagerView(Account theAccount, Datastore theDatastore) {
+    public ParkManagerView(AbstractAccount theAccount, Datastore theDatastore) {
         super();
         myZone = ZoneId.of("America/Los_Angeles");
         myDay = LocalDate.now(myZone);

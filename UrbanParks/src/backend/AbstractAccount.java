@@ -7,17 +7,17 @@ import java.util.regex.Pattern;
  * @author Dylan Miller
  * @author Ethan Young
  */
-public abstract class Account implements Serializable {
+public abstract class AbstractAccount implements Serializable {
 	
   /**Default serialVersionUID for serialization.*/
   private static final long serialVersionUID = 1L;
 
-  /**Regular expression for phone number format.*/
+  /**Regular expression for letters and symbols. Will be negated for phone numbers so there aren't any symbols.*/
   private static final String PHONE_REGEX = "[a-zA-Z]+";
 
-  /**Regular expression for email address format.*/
-  private static final String EMAIL_REGEX =
-  "^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$";
+//  /**Regular expression for email address format.*/
+//  private static final String EMAIL_REGEX =
+//  "^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$";
   
 
   /**Maxminum length a phone number can be.*/
@@ -42,7 +42,7 @@ public abstract class Account implements Serializable {
   * @param thePhone phone number of the user.
   * @param theRealName legal name of the user.
   */
-  public Account(final String theUsername, final String thePhone,
+  public AbstractAccount(final String theUsername, final String thePhone,
                  final String theRealName) {
     super();
     this.setUsername(theUsername);
@@ -57,7 +57,7 @@ public abstract class Account implements Serializable {
    * to log into the system.
    * @param theRealName legal name of the user.
    */
-  public Account(final String theUsername, final String theRealName) {
+  public AbstractAccount(final String theUsername, final String theRealName) {
     this(theUsername, null, theRealName);
   }
 
@@ -67,7 +67,7 @@ public abstract class Account implements Serializable {
    * @param theUsername email address of the user that is used
    * to log into the system.
    */
-  public Account(final String theUsername) {
+  public AbstractAccount(final String theUsername) {
     this(theUsername, null, null);
   }
 
@@ -101,17 +101,12 @@ public abstract class Account implements Serializable {
   }
 
   /**
-   * Method to set the username. Checks for valid email address format.
+   * Method to set the username.
    * @param theUsername email address of the user used to log in.
    * @author Dylan Miller
-   * @throws IllegalArgumentException if the email address is invalid.
    */
   private void setUsername(final String theUsername) {
-    if (Pattern.matches(EMAIL_REGEX, theUsername)) {
-      this.myUsername = theUsername;
-    } else {
-      throw new IllegalArgumentException("Must be a valid email address.");
-    }
+    this.myUsername = theUsername;
   }
 
   /**
@@ -146,10 +141,14 @@ public abstract class Account implements Serializable {
     }
   }
   
+  /**
+   * Returns true if both accounts have the same username.
+   * @author Dylan Miller
+   */
   @Override
   public boolean equals(Object obj) {
     boolean result = false;
-    if (obj instanceof Account && myUsername.equals(((Account)obj).myUsername)) {
+    if (obj instanceof AbstractAccount && myUsername.equals(((AbstractAccount)obj).myUsername)) {
       result = true;
     }
     return result;

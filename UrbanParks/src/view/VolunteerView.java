@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.Job;
 import backend.Datastore;
 import backend.Volunteer;
@@ -41,7 +41,7 @@ public class VolunteerView extends View {
      * @param theAccount
      * @param theDatastore
      */
-    public VolunteerView(Account theAccount, Datastore theDatastore){
+    public VolunteerView(AbstractAccount theAccount, Datastore theDatastore){
     	super();
     	myVolunteer = (Volunteer) theAccount;
     	myDatastore = theDatastore;

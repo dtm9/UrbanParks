@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @author Ethan Young
  * @author Dylan Miller
  */
-public class Volunteer extends Account implements Serializable {
+public class Volunteer extends AbstractAccount implements Serializable {
 
   /** Default serialVersionUID for serialization. */
   private static final long serialVersionUID = 1L;

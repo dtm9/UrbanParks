@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.Datastore;
 import backend.OfficeStaff;
 import backend.ParkManager;
@@ -83,7 +83,7 @@ public class Main {
             case 1: //log in
                 //get the username
                 View theView = null;
-                Account userAccount = null;
+                AbstractAccount userAccount = null;
                 String username = scanUsername();
 
                 //get the account
@@ -137,13 +137,13 @@ public class Main {
      * @return account of user or null if not found.
      * @author Dylan Miller
      */
-    static Account seekAccount(String username) {
-        List<Account> users = datastore.getAllAccounts();
+    static AbstractAccount seekAccount(String username) {
+        List<AbstractAccount> users = datastore.getAllAccounts();
         boolean found = false;
-        Account userAccount = null;
+        AbstractAccount userAccount = null;
 
         //seek the list for the entered username
-        for (Account user : users) {
+        for (AbstractAccount user : users) {
 
             if (!found && user.getUsername().equals(username)) {
                 userAccount = user;
@@ -190,7 +190,7 @@ public class Main {
      * @throws NullPointerException if the userAccount was null (not found in previous method)
      * @author Dylan Miller
      */
-    static View generateView(Account userAccount, View theView) {
+    static View generateView(AbstractAccount userAccount, View theView) {
         if (userAccount instanceof Volunteer) {
             theView = new VolunteerView(userAccount, datastore);
         } else if (userAccount instanceof ParkManager) {

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.Datastore;
 import backend.Job;
 import backend.ParkManager;
@@ -37,7 +37,7 @@ public class OfficeStaffView extends View {
     private LocalDate current;
 
 
-    public OfficeStaffView(Account theAccount, Datastore theDatastore) {
+    public OfficeStaffView(AbstractAccount theAccount, Datastore theDatastore) {
         super();
         myOfficeStaff = (OfficeStaff) theAccount;
         mySB = new StringBuilder();

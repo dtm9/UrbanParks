@@ -16,7 +16,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.Datastore;
 import backend.Job;
 import backend.OfficeStaff;
@@ -125,8 +125,8 @@ public class IOTest {
     Main.load();
     
     //users
-    List<Account> testAccounts = testDatastore.getAllAccounts();
-    List<Account> loadedAccounts = Main.datastore.getAllAccounts();
+    List<AbstractAccount> testAccounts = testDatastore.getAllAccounts();
+    List<AbstractAccount> loadedAccounts = Main.datastore.getAllAccounts();
     if (!testAccounts.equals(loadedAccounts)) fail("Loaded account list does not match original account list!");
     
     //jobs

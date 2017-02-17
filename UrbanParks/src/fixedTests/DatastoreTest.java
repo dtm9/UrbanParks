@@ -28,7 +28,7 @@ public class DatastoreTest {
 	private List<Job> myJobs;
 
 	/** Account list of every person participating in the Urban Parks system. */
-	private List<Account> myAccounts;
+	private List<AbstractAccount> myAccounts;
 
 	/** ParkManager list auxiliary test fixture. */
 	private List<ParkManager> myParkManagers;

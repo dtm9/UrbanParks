@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import backend.Account;
+import backend.AbstractAccount;
 import backend.OfficeStaff;
 import backend.ParkManager;
 import backend.Volunteer;
@@ -25,7 +25,7 @@ public class MainTest {
     //***** Test fixture(s), setUp(), etc. *****************************************************************************
 
     /** The Account test fixture. */
-    private Account myGoodAccount;
+    private AbstractAccount myGoodAccount;
 
     /** The username test fixture. */
     private String myGoodUsername;
@@ -52,7 +52,7 @@ public class MainTest {
     @Before
     public void setUp() throws Exception {
         Main.load();
-        List<Account> accounts = Main.datastore.getAllAccounts();
+        List<AbstractAccount> accounts = Main.datastore.getAllAccounts();
 
         myGoodAccount = accounts.get(0);
         myGoodUsername = myGoodAccount.getUsername();
@@ -69,7 +69,7 @@ public class MainTest {
      */
     @Test
     public final void seekAccount_goodUsername_NoExceptionsExpected() {
-        Account testUser = Main.seekAccount(myGoodUsername);
+        AbstractAccount testUser = Main.seekAccount(myGoodUsername);
         if (!testUser.equals(myGoodAccount)) {
             System.err.println("testUser name: " + testUser.getUsername() + "\ngoodAccount name: " + myGoodAccount.getUsername());
             fail("Could not seek account!");
@@ -82,7 +82,7 @@ public class MainTest {
     @Test
     public final void seekAccount_UserNotInDatastore_ShouldReturnNull() {
         String badUsername = "notInTheDatastore@gmail.com";
-        Account testUser = Main.seekAccount(badUsername);
+        AbstractAccount testUser = Main.seekAccount(badUsername);
         if (testUser != null) fail("account was fetched with bad username input.");
     }
 
@@ -120,7 +120,7 @@ public class MainTest {
         exception.expect(NullPointerException.class);
         exception.expectMessage("Account not found.");
 
-        Account badAccount = null;
+        AbstractAccount badAccount = null;
         Main.generateView(badAccount, myTestView);
     }
 

@@ -32,7 +32,7 @@ public final class Datastore implements Serializable {
     //***** Field(s) ***************************************************************************************************
 
     /** The user accounts on the system, i.e, Volunteer, OfficeStaff, and ParkManager. */
-    private List<Account> myAccounts;
+    private List<AbstractAccount> myAccounts;
 
     /** The parks list. */
     private List<Park> myParks;
@@ -339,7 +339,7 @@ public final class Datastore implements Serializable {
      * @author Walter Weeks
      * @param theAccount The account.
      */
-    public void addAccount(final Account theAccount) {
+    public void addAccount(final AbstractAccount theAccount) {
         if (theAccount == null) {
             throw new NullPointerException("theAccount cannot be null.");
         }
@@ -419,7 +419,7 @@ public final class Datastore implements Serializable {
      * @author Dylan Miller
      * @return account list from fields.
      */
-    public List<Account> getAllAccounts() {
+    public List<AbstractAccount> getAllAccounts() {
       return this.myAccounts;
     }
 }

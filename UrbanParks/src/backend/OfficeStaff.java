@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Dylan Miller
  *
  */
-public class OfficeStaff extends Account implements Serializable {
+public class OfficeStaff extends AbstractAccount implements Serializable {
 
   /** Default serialVersionUID for serialization. */
   private static final long serialVersionUID = 1L;

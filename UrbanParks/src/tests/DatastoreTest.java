@@ -388,6 +388,9 @@ public class DatastoreTest {
         // Add a third job on 3 Mar 2017
         myDatastore.addJob(new Job(myParks.get(0), "1230", "We will be raking leaves.",
                 "Raking leaves", 1, 1, 3, 2017));
+        // Add a fourth job on 3 Mar 2017
+        myDatastore.addJob(new Job(myParks.get(0), "1330", "We will be raking leaves.",
+                "Raking leaves", 1, 1, 3, 2017));
     }
 
     /**

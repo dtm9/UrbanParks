@@ -38,7 +38,6 @@ public class ParkManagerView extends AbstractView {
         myDay = LocalDate.now(myZone);
         myManager = (ParkManager) theAccount;
         myDatastore = theDatastore;
-        System.out.println("do i even get this far?\n");
     }
 
     /*-----------------------------------------------------------------------------------------------------------------------------*/

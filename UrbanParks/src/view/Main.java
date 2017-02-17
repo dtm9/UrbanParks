@@ -90,7 +90,6 @@ public class Main {
                 //launch the view
                 try {
                     theView = generateView(userAccount, theView);
-                    System.out.println("generateView worked\n");
                     theView.launchGUI();
                 } catch (NullPointerException e) {
                     mySB.delete(0, mySB.capacity());

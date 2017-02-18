@@ -193,7 +193,7 @@ public class Main {
         if (userAccount instanceof Volunteer) {
             theView = new VolunteerView(userAccount, datastore);
         } else if (userAccount instanceof ParkManager) {
-            theView = new ParkManagerView(userAccount, datastore);
+            theView = new ParkManagerView(userAccount);
         } else {
             throw new NullPointerException("Account not found.");
         }

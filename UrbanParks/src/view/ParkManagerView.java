@@ -26,18 +26,16 @@ public class ParkManagerView extends AbstractView {
     private static final int MONTH_BUFFER = 1;
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
-    private final Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
     private static LocalDate myDay;
     private static ZoneId myZone;
     
     
-    public ParkManagerView(AbstractAccount theAccount, Datastore theDatastore) {
+    public ParkManagerView(AbstractAccount theAccount) {
         super();
         myZone = ZoneId.of("America/Los_Angeles");
         myDay = LocalDate.now(myZone);
         myManager = (ParkManager) theAccount;
-        myDatastore = theDatastore;
     }
 
     /*-----------------------------------------------------------------------------------------------------------------------------*/
@@ -75,7 +73,7 @@ public class ParkManagerView extends AbstractView {
      * Helper Method to check if max Jobs are already created.
      */
     private void checkMaxJobs() {
-        if (myDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
+        if (Main.datastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
             this.launchGUI();
         }
@@ -101,7 +99,7 @@ public class ParkManagerView extends AbstractView {
         myJob = addVolunteerMax(myJob);
         myJob = addNotes(myJob);
         try {
-            myDatastore.addJob(myJob);
+            Main.datastore.addJob(myJob);
         } catch (Exception e){
             System.out.println("Adding the Job Failed Unexpectedly, try again\n");
             submitJob();
@@ -220,7 +218,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     Job addPark(Job theJob) {
-        List<Park> theParks = myDatastore.getAllParks();
+        List<Park> theParks = Main.datastore.getAllParks();
         Iterator<Park> itr = theParks.iterator();
         while (theJob.getPark() == null) {
             Park tempPark = (Park) itr.next();
@@ -237,28 +235,28 @@ public class ParkManagerView extends AbstractView {
     private void ViewJobs() {
         displayHeader();
         int count = 1;
-        for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
-            if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
+        for (int i = 0; i < Main.datastore.getNumberOfJobs(); i++) {
+            if (Main.datastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
                 mySB.append(count++);
                 mySB.append(". ");
-                mySB.append(myDatastore.getPendingJobs().get(i).getName());
+                mySB.append(Main.datastore.getPendingJobs().get(i).getName());
                 mySB.append(", ");
-                mySB.append(myDatastore.getPendingJobs().get(i).getDay());
+                mySB.append(Main.datastore.getPendingJobs().get(i).getDay());
                 mySB.append("/");
-                mySB.append(myDatastore.getPendingJobs().get(i).getMonth());
+                mySB.append(Main.datastore.getPendingJobs().get(i).getMonth());
                 mySB.append("\n");
             }
         }
         mySB.append("\nPast Jobs Below this Point\n");
-        for (int i = 0; i < myDatastore.getPreviousJobs().size(); i++) {
-            if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
+        for (int i = 0; i < Main.datastore.getPreviousJobs().size(); i++) {
+            if (Main.datastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
                 mySB.append(count++);
                 mySB.append(". ");
-                mySB.append(myDatastore.getPreviousJobs().get(i).getName());
+                mySB.append(Main.datastore.getPreviousJobs().get(i).getName());
                 mySB.append(", ");
-                mySB.append(myDatastore.getPreviousJobs().get(i).getDay());
+                mySB.append(Main.datastore.getPreviousJobs().get(i).getDay());
                 mySB.append("/");
-                mySB.append(myDatastore.getPreviousJobs().get(i).getMonth());
+                mySB.append(Main.datastore.getPreviousJobs().get(i).getMonth());
                 mySB.append("\n");
             }
         }
@@ -268,15 +266,15 @@ public class ParkManagerView extends AbstractView {
         int theChoice = myScanner.nextInt();
         count = 0;
         boolean flag = false;
-        for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
-            if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
+        for (int i = 0; i < Main.datastore.getNumberOfJobs(); i++) {
+            if (Main.datastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
                 count++;
                 if (count == theChoice) {
-                    showJob(myDatastore.getPendingJobs().get(i));
+                    showJob(Main.datastore.getPendingJobs().get(i));
                     break;
                 }
             }
-            if (i == myDatastore.getNumberOfJobs() - 1) {
+            if (i == Main.datastore.getNumberOfJobs() - 1) {
                 flag = true;
                 System.out.println("got here");
                 theChoice = theChoice - count;
@@ -285,11 +283,11 @@ public class ParkManagerView extends AbstractView {
             }
         }
         if (flag) {
-            for (int i = 0; i < myDatastore.getPreviousJobs().size(); i++) {
-                if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
+            for (int i = 0; i < Main.datastore.getPreviousJobs().size(); i++) {
+                if (Main.datastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
                     count++;
                     if (count == theChoice) {
-                        showJob(myDatastore.getPreviousJobs().get(i));
+                        showJob(Main.datastore.getPreviousJobs().get(i));
                     }
                 }
             }

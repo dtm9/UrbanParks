@@ -244,7 +244,8 @@ public class VolunteerView extends AbstractView {
 		mySB.append("\nJobs currently volunteering for: ");
 		mySB.append("\nDate         Park               Job Description");
 		mySB.append("\n----------------------------------------------------------\n\n");
-		List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
+		//List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
+		List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		Iterator<Job> itr = volunteerJobs.iterator();
 		int count =0;
 		if (volunteerJobs==null) mySB.append("You have not signed up for any jobs");

@@ -74,12 +74,13 @@ public class ParkManager extends AbstractAccount implements Serializable {
   //TODO test this method and then remove the original from Datastore.java
   /**
    * Gets a list of pending jobs for this park manager.
+   * @param readOnlyDatastore - the datastore from the caller, does not modify it.
    * @author Walter Weeks (ww3@uw.edu)
    * @return The list of pending jobs that the park manager has.
    */
-  public final List<Job> getJobsByParkManager() {
-    List<Park> allParks = Main.datastore.getAllParks();
-    List<Job> allJobs = Main.datastore.getPendingJobs();
+  public final List<Job> getJobsByParkManager(Datastore readOnlyDatastore) {
+    List<Park> allParks = readOnlyDatastore.getAllParks();
+    List<Job> allJobs = readOnlyDatastore.getPendingJobs();
     // Compile the list of Parks within a given city and ZIP Code
     List<Park> managedParks = new ArrayList<>();
     for (int i = 0; i < allParks.size(); i++) {

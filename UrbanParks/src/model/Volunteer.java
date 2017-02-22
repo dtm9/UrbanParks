@@ -61,14 +61,15 @@ public class Volunteer extends AbstractAccount implements Serializable {
    * Gets a list of jobs for this Volunteer.
    *
    * @author Walter Weeks (ww3@uw.edu)
+   * @param readOnlyDatastore a copy of the datastore. It will not be modified.
    * @return The list of jobs of a given volunteer.
    */
-  public final List<Job> getJobsByVolunteer() {
+  public final List<Job> getJobsByVolunteer(Datastore readOnlyDatastore) {
 
       List<Job> result = new ArrayList<>();
 
       // Iterate over the entire pending jobs list to compile the list of job @ a given park
-      Iterator<Job> itr = Main.datastore.getPendingJobs().iterator();
+      Iterator<Job> itr = readOnlyDatastore.getPendingJobs().iterator();
 
       while (itr.hasNext()) {
           Job currentJob = itr.next();

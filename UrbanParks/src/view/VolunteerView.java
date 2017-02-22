@@ -122,7 +122,7 @@ public class VolunteerView extends AbstractView {
 	    	// subtract because parkList starts at index 0
 	    	theChoice--;
 	    	Park selectedPark = parkList.get(theChoice);
-	    	List<Job> parkJobList = selectedPark.getJobs();
+	    	List<Job> parkJobList = selectedPark.getJobs(myDatastore);
 	    	// List<Job> parkJobList = myDatastore.getJobsByPark(selectedPark);
 	    	listJobsInPark(selectedPark, parkJobList);
 	    }
@@ -197,7 +197,7 @@ public class VolunteerView extends AbstractView {
 		boolean sameDayFlag = false;
 		Job printJob = legitJobs.get(theChoice);
 		//TODO test this call
-		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer();
+		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		 for(int i=0;i<volunteerJobs.size();i++){
 			 Job jobIterator = volunteerJobs.get(i);
 			 //If Date in job changes this needs to change

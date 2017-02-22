@@ -47,7 +47,9 @@ public class MainTest {
     @Before
     public void setUp() throws Exception {
         Main.load();
-        List<AbstractAccount> accounts = Main.datastore.getAllAccounts();
+        Main testMainObj = new Main();
+        List<AbstractAccount> accounts = testMainObj.getAllAccounts();
+        //List<AbstractAccount> accounts = datastore.getAllAccounts();
 
         myGoodAccount = accounts.get(0);
         myGoodUsername = myGoodAccount.getUsername();

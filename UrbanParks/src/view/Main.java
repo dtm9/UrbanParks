@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import model.AbstractAccount;
 import model.Datastore;
+import model.Job;
+import model.Park;
 import model.ParkManager;
 import model.Volunteer;
 
@@ -238,17 +240,31 @@ public class Main {
 
     //***** Misc method(s) *********************************************************************************************
 
-//    /**
-//     * (package level) for testing only.
-//     */
-//    void setDatastore(Datastore theDatastore) {
-//        Main.datastore = theDatastore;
-//    }
-//
-//    /**
-//     * (package level) for testing only.
-//     */
-//    Datastore getDatastore() {
-//        return Main.datastore;
-//    }
+    //TODO This code sucks but I can't get MainTest.java or IOTest to work any other way.
+    /**
+     * Returns the list of all accounts in this object's datastore for validation testing.
+     * It is more efficient to call the getter methods on specific components than to use this one.
+     * @author Dylan Miller
+     */
+    List<AbstractAccount> getAllAccounts() {
+        return datastore.getAllAccounts();
+    }
+    
+    /**
+     * Returns the list of all jobs in this object's datastore for validation testing.
+     * It is more efficient to call the getter methods on specific components than to use this one.
+     * @author Dylan Miller
+     */
+    List<Job> getAllJobs() {
+        return datastore.getPendingJobs();
+    }
+    
+    /**
+     * Returns the list of all parks in this object's datastore for validation testing.
+     * It is more efficient to call the getter methods on specific components than to use this one.
+     * @author Dylan Miller
+     */
+    List<Park> getAllParks() {
+        return datastore.getAllParks();
+    }
 }

@@ -205,15 +205,16 @@ public final class Park implements Serializable {
      *
      * @author Walter Weeks (ww3@uw.edu)
      * @param thePark the park we want the jobs from.
+     * @param readOnlyDatastore the datastore object from the caller. Is not modified.
      * @throws NullPointerException if thePark is null.
      * @return the list of jobs given a Park.
      */
-    public final List<Job> getJobs() {
+    public final List<Job> getJobs(Datastore readOnlyDatastore) {
 
         List<Job> result = new ArrayList<>();
 
         // Iterate over the entire pending jobs list to compile the list of job @ a given park
-        Iterator<Job> itr = Main.datastore.getPendingJobs().iterator();
+        Iterator<Job> itr = readOnlyDatastore.getPendingJobs().iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
             if (this.equals(currentJob.getPark())) {

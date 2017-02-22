@@ -97,14 +97,15 @@ public class IOTest {
     } catch(IOException e) {
       e.printStackTrace();
     }
+	
+	Main.load();
   }
 
-  @Test
-  public final void save_DefaultState_NoExceptionsExpected() {
-
-    Main.datastore = testDatastore;
-    Main.save();
-  }
+//  @Test
+//  public final void save_DefaultState_NoExceptionsExpected() {
+//    Main.datastore = testDatastore;
+//    Main.save();
+//  }
   
   @Test
   public final void load_DefaultState_NoExceptionsExpected() {
@@ -116,20 +117,21 @@ public class IOTest {
   public final void load_DefaultState_DataIntegrityPreserved() {
 
     Main.load();
+    Main testMainObj = new Main();
     
     //users
     List<AbstractAccount> testAccounts = testDatastore.getAllAccounts();
-    List<AbstractAccount> loadedAccounts = Main.datastore.getAllAccounts();
+    List<AbstractAccount> loadedAccounts = testMainObj.getAllAccounts();
     if (!testAccounts.equals(loadedAccounts)) fail("Loaded account list does not match original account list!");
     
     //jobs
     List<Job> testJobs = testDatastore.getPendingJobs();
-    List<Job> loadedJobs = Main.datastore.getPendingJobs();
+    List<Job> loadedJobs = testMainObj.getAllJobs();
     if (!testJobs.equals(loadedJobs)) fail("Loaded job list does not match original job list!");
     
     //parks
     List<Park> testParks = testDatastore.getAllParks();
-    List<Park> loadedParks = Main.datastore.getAllParks();
+    List<Park> loadedParks = testMainObj.getAllParks();
     if (!testParks.equals(loadedParks)) fail("Loaded park list does not match original park list!");
   }
 

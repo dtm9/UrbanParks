@@ -81,7 +81,7 @@ public class ParkManagerViewTest {
 		testDatastore = new Datastore();
 		
 		testPM1 = new ParkManager("batman@tacomaparks.com", "5551112222", "Dylan Miller");
-		testParkManagerView = new ParkManagerView(testPM1, testDatastore);
+		testParkManagerView = new ParkManagerView(testPM1);
 		
 		
 		testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
@@ -241,20 +241,5 @@ public class ParkManagerViewTest {
 	//TODO test Job more than 1 month in future 
 	//TODO VIEW Volunteers for past and present Jobs.
 	//TODO no Job Longer Than 2 Days.
-      /**
-       * 
-       */
-	  @Test
-	  public final void save_DefaultState_NoExceptionsExpected() {
-	    Main.datastore = testDatastore;
-	    Main.save();
-	  }
-//	@Test
-//    public final void launchGUI_BadCases_ExceptionsTrownOrHandeled() {
-//	    Job testJob30 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 14, 3 ,2017);
-//        testDatastore.addJob(testJob30);
-//        Job testJob31 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 15, 3 ,2017);
-//        testDatastore.addJob(testJob31);
-//    }
 
 }

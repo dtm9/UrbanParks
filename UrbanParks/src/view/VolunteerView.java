@@ -28,7 +28,7 @@ import model.Volunteer;
 public class VolunteerView extends AbstractView {
 
     private Volunteer myVolunteer;
-    private final Datastore myDatastore;
+    private static Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
     private StringBuilder mySB;
     private static LocalDate myDay;
@@ -39,10 +39,10 @@ public class VolunteerView extends AbstractView {
      * @param theAccount
      * @param theDatastore
      */
-    public VolunteerView(AbstractAccount theAccount, Datastore theDatastore){
+    public VolunteerView(AbstractAccount theAccount){
     	super();
     	myVolunteer = (Volunteer) theAccount;
-    	myDatastore = theDatastore;
+    	myDatastore = null;
     	mySB= new StringBuilder();
         myZone = ZoneId.of("America/Los_Angeles");
         myDay = LocalDate.now(myZone);
@@ -55,9 +55,10 @@ public class VolunteerView extends AbstractView {
 	 * 
 	 */
 	@Override
-	public void launchGUI() {
-		// TODO Auto-generated method stub
+	public Datastore launchGUI(Datastore theDatastore) {
+		myDatastore = theDatastore;
 		mainMenu();
+		return myDatastore;
 	}
 	/**
 	 * Creates the main menu for the Volunteer
@@ -95,7 +96,7 @@ public class VolunteerView extends AbstractView {
 		mySB.append("Which park do you want to volunteer for?");
 	    mySB.append("\n----------------------------------------------------------\n\n");
 	    //using main datastore instead of local copy
-	    List<Park> parkList = Main.datastore.getAllParks();
+	    List<Park> parkList = myDatastore.getAllParks();
 	    Iterator<Park> itr = parkList.iterator();
 	    int count = 0;
 	    if(parkList==null) mySB.append("There are no jobs to sign up for\n");

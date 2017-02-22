@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.Locale;
-
+import model.Datastore;
 import model.AbstractAccount;
 
 /**
@@ -28,9 +28,10 @@ public abstract class AbstractView {
   }
   
   /**All view objects must use this signature to run the GUI.*/
-  public abstract void launchGUI();
+  public abstract Datastore launchGUI(Datastore theDatastore);
   
-//  void displayHeader() {
+  // 
+//  void displayHeader() { 
 //      mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
 //      mySB.append(myUser.getRealName());
 //      mySB.append(" logged in as Urban Parks Manager\n");

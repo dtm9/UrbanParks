@@ -25,7 +25,7 @@ public class Main {
     /**
      * Static reference to the datastore in memory.
      */
-    public static Datastore datastore;
+    private static Datastore datastore;
 
     /**
      * String builder for printing any text needed to console.
@@ -90,7 +90,7 @@ public class Main {
                 //launch the view
                 try {
                     theView = generateView(userAccount, theView);
-                    theView.launchGUI();
+                    datastore = theView.launchGUI(datastore);
                 } catch (NullPointerException e) {
                     mySB.delete(0, mySB.capacity());
                     mySB.append(SB_LINE_BREAK);
@@ -191,7 +191,7 @@ public class Main {
      */
     static AbstractView generateView(AbstractAccount userAccount, AbstractView theView) {
         if (userAccount instanceof Volunteer) {
-            theView = new VolunteerView(userAccount, datastore);
+            theView = new VolunteerView(userAccount);
         } else if (userAccount instanceof ParkManager) {
             theView = new ParkManagerView(userAccount);
         } else {

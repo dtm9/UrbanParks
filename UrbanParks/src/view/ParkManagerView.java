@@ -236,7 +236,7 @@ public class ParkManagerView extends AbstractView {
     /**
      * View Jobs elemt for UI
      */
-    private void ViewJobs() {
+    private void ViewJobs() { // TODO Break this method up
         displayHeader();
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
@@ -264,7 +264,7 @@ public class ParkManagerView extends AbstractView {
                 mySB.append("\n");
             }
         }
-        mySB.append("\n\nPlease choose a job you want to view: ");
+        mySB.append("\n\nPlease choose a job you want to view: "); // TODO Refactor
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();

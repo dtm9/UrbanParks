@@ -230,7 +230,7 @@ public final class Datastore implements Serializable {
         List<Job> jobsOnDateList = getJobsByDate(theJob.getDay(), theJob.getMonth(), theJob.getYear());
         if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) { // Check for only 2 jobs on a given day
             throw new IllegalStateException("System cannot have more than + "+
-                    MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day.");
+                    MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day."); // TODO Move to its own method
         }
 
         if (!myPendingJobs.contains(theJob)) {

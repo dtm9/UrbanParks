@@ -30,10 +30,10 @@ public abstract class AbstractView {
   /**All view objects must use this signature to run the GUI.*/
   public abstract Datastore launchGUI(Datastore theDatastore);
   
-  // 
-//  void displayHeader() { 
+  // TODO Gardner fix this shit
+//  void displayHeader(StringBuilder mySB, LocalDate myDay) { 
 //      mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
-//      mySB.append(myUser.getRealName());
+//      mySB.append(this.myUser.getRealName());
 //      mySB.append(" logged in as Urban Parks Manager\n");
 //      mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
 //      mySB.append(" ");

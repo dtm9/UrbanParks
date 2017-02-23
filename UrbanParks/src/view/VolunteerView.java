@@ -156,8 +156,8 @@ public class VolunteerView extends AbstractView {
 			Job currentJob=itr.next();
 			LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
 			//TODO test this logic for BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
-			boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear();
-			boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1;
+			boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear(); // TODO move these to their own methods
+			boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1; // TODO move these to their own methods
 			if (futureDatesSameYear||futureDatesNextYear){
 				count++;
 				legitJobs.add(currentJob);
@@ -202,10 +202,10 @@ public class VolunteerView extends AbstractView {
 			 Job jobIterator = volunteerJobs.get(i);
 			 //If Date in job changes this needs to change
 			 if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
-				 sameDayFlag=true;
+				 sameDayFlag=true; // TODO Move to its own method
 			 }
 		 }
-		if(!sameDayFlag){
+		if(!sameDayFlag){ 
 			displayHeader();
 		    mySB.append("You are signing up for this job: \n");
 		    mySB.append(printJob.getName());

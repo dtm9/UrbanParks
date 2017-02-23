@@ -223,7 +223,7 @@ public class VolunteerView extends AbstractView {
 			displayHeader();
 			mySB.append("You can not sign up for this job: \n");
 			mySB.append("You have already signed up for a job on this day.\n");
-			mySB.append("\nEnter 1 to retutrn to main menu\n");
+			mySB.append("\nEnter 1 to return to main menu\n");
 		}
 		
 	    

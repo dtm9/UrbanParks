@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public final class Datastore implements Serializable {
 
     /**The maximum number of pending jobs on a calendar date default value.*/
     public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 4;
+    
+    /**The maximum number of days in the future a job can be created.*/
+    public static final int MAX_FUTURE_JOB_START_DATE = 75;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -226,6 +231,10 @@ public final class Datastore implements Serializable {
         if (myPendingJobs.size() >= myMaxPendingJobs) { // Check for total system pending jobs
             throw new IllegalStateException("System cannot have more than " + myMaxPendingJobs + " jobs.");
         }
+        
+        if (!isJobWithinMaxFutureDate(theJob)) {
+            throw new IllegalStateException("System will only accept jobs within " + MAX_FUTURE_JOB_START_DATE + " days from today.");
+        }
 
         List<Job> jobsOnDateList = getJobsByDate(theJob.getDay(), theJob.getMonth(), theJob.getYear());
         if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) { // Check for only 2 jobs on a given day
@@ -238,6 +247,35 @@ public final class Datastore implements Serializable {
         }
     }
 
+    /**
+     * Returns true if a job is within the allowed start date range.
+     * @param theJob job to be checked.
+     * @return true if within the range, false if either before today's date or after max allowed date.
+     * @precondition theJob must not be null.
+     * @author Dylan Miller
+     */
+    public boolean isJobWithinMaxFutureDate(Job theJob) {
+        Calendar jobCal = Calendar.getInstance();
+        jobCal.set(Calendar.YEAR, theJob.getYear());
+        jobCal.set(Calendar.MONTH, theJob.getMonth());
+        jobCal.set(Calendar.DAY_OF_MONTH, theJob.getDay());
+        
+        Calendar maxCal = Calendar.getInstance();
+        maxCal.setTime(new Date()); //today's date
+        maxCal.add(Calendar.DATE, MAX_FUTURE_JOB_START_DATE);
+        
+        Date jobStartDate = jobCal.getTime();
+        
+        jobCal.add(Calendar.DAY_OF_MONTH, (theJob.getDuration() - 1));
+        Date jobEndDate = jobCal.getTime();
+        
+        Date maxAllowedDate = maxCal.getTime();
+        Date todaysDate = new Date();
+        
+        return jobStartDate.compareTo(todaysDate) >= 0 && jobStartDate.compareTo(maxAllowedDate) <= 0
+               && jobEndDate.compareTo(todaysDate) >= 0 && jobEndDate.compareTo(maxAllowedDate) <= 0;
+    }
+    
     //TODO do we still need this one?
     /**
      * Gets the list of jobs on a given calendar date, i.e. the day, the month, and the year.

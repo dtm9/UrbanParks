@@ -18,8 +18,9 @@ import model.Park;
 import model.ParkManager;
 
 /**
- * @author dylan
- * @author VG Gnome
+ * Object that runs the user interaface for a Park Manager user. Launch with the public launchGUI() method.
+ * @author Dylan Miller
+ * @author Gardner Gomes
  */
 public class ParkManagerView extends AbstractView {
     private static final int TEMP_MAX_JOBS = 30;

@@ -69,152 +69,6 @@ public final class Datastore implements Serializable {
 
     //**** Accessor/Mutator Method(s) **********************************************************************************
 
-    //TODO this is implemented in Park.java. Remove this below method after testing the new one
-//    /**
-//     * Gets the list of pending jobs at a given park.
-//     *
-//     * @author Walter Weeks (ww3@uw.edu)
-//     * @param thePark the park we want the jobs from.
-//     * @throws NullPointerException if thePark is null.
-//     * @return the list of jobs given a Park.
-//     */
-//    public final List<Job> getJobsByPark(final Park thePark) {
-//        if (thePark == null) {
-//            throw new NullPointerException("thePark cannot be null.");
-//        }
-//
-//        List<Job> result = new ArrayList<>();
-//
-//        // Iterate over the entire pending jobs list to compile the list of job @ a given park
-//        Iterator<Job> itr = myPendingJobs.iterator();
-//        while (itr.hasNext()) {
-//            Job currentJob = itr.next();
-//            if (thePark.equals(currentJob.getPark())) {
-//                result.add(currentJob);
-//            }
-//        }
-//
-//        return result;
-//    }
-
-//    //TODO this is now implemented in Volunteer.java. Test the new one and then remove this one.
-//    /**
-//     * Gets a list of jobs of a given volunteer.
-//     * @author Walter Weeks (ww3@uw.edu)
-//     * @param theVolunteer The volunteer.
-//     * @return The list of jobs of a given volunteer.
-//     * @throws NullPointerException if theVolunteer is null.
-//     */
-//    public final List<Job> getJobsByVolunteer(final Volunteer theVolunteer) {
-//        if (theVolunteer == null) {
-//            throw new NullPointerException("theVolunteer cannot be null.");
-//        }
-//
-//        List<Job> result = new ArrayList<>();
-//
-//        // Iterate over the entire pending jobs list to compile the list of job @ a given park
-//        Iterator<Job> itr = myPendingJobs.iterator();
-//        while (itr.hasNext()) {
-//            Job currentJob = itr.next();
-//            if (currentJob.getVolunteers().contains(theVolunteer.getUsername())) {
-//                result.add(currentJob);
-//            }
-//        }
-//
-//        return result;
-//    }
-
-//    //TODO this has been implemented in ParkManager.java. Go test that and then remove this one.
-//    /**
-//     * Gets a list of pending jobs given a particular park manager.
-//     *
-//     * @author Walter Weeks (ww3@uw.edu)
-//     * @param theParkManager The park manager.
-//     * @return The list of pending jobs that the park manager has.
-//     */
-//    public final List<Job> getJobsByParkManager(final ParkManager theParkManager) {
-//        if (theParkManager == null) {
-//            throw new NullPointerException("theParkManager cannot be null.");
-//        }
-//
-//        // Compile the list of Parks within a given city and ZIP Code
-//        List<Park> managedParks = new ArrayList<>();
-//        for (int i = 0; i < myParks.size(); i++) {
-//            if (myParks.get(i).getManager().equals(theParkManager)) {
-//                managedParks.add(myParks.get(i));
-//                //System.out.println("Added Park: " + myParks.get(i).getName());
-//            }
-//        }
-//
-//        List<Job> result = new ArrayList<>();
-//
-//        // Iterate over the entire pending jobs list to compile the list of job @ a given city
-//        Iterator<Job> itr = myPendingJobs.iterator();
-//        while (itr.hasNext()) {
-//            Job currentJob = itr.next();
-//            if (managedParks.contains(currentJob.getPark())) {
-//                result.add(currentJob);
-//                //System.out.println("Added Job: " + currentJob.getMyDescription());
-//            }
-//        }
-//
-//        return result;
-//    }
-
-//    //TODO is this one of the ones we agreed to remove? Nobody posted the picture... -Dylan
-//    /**
-//     * Gets the list of pending jobs within a given city and state.
-//     *
-//     * Note that the ZIP Code is useful city name conflict resolution, i.e., cities
-//     * with the same name but are in different places.
-//     *
-//     * @author Walter Weeks (ww3@uw.edu)
-//     * @param theCity city string.
-//     * @param theState state abbreviation two-character string.
-//     * @throws NullPointerException if theCity is null.
-//     * @throws NullPointerException if theState is null.
-//     * @throws IllegalArgumentException if theCity is less than 1 character.
-//     * @throws IllegalArgumentException if theState is not exactly 2 characters.
-//     * @return the list of jobs given a city.
-//     */
-//    public final List<Job> getJobsByCity(final String theCity, final String theState) {
-//        if (theCity == null) {
-//            throw new NullPointerException("theCity cannot be null.");
-//        }
-//        if (theCity.length() < 1) {
-//            throw new IllegalArgumentException("theCity must be at least one character.");
-//        }
-//        if (theState == null) {
-//            throw new NullPointerException("theState cannot be null.");
-//        }
-//        if (theState.length() != 2) {
-//            throw new IllegalArgumentException("theState must be exactly 2 characters, i.e., state abbreviation.");
-//        }
-//
-//        // Compile the list of Parks within a given city and ZIP Code
-//        List<Park> parks = new ArrayList<>();
-//        for (int i = 0; i < myParks.size(); i++) {
-//            if (myParks.get(i).getCity().equals(theCity) && myParks.get(i).getState() == US.parse(theState)) {
-//                parks.add(myParks.get(i));
-//                //System.out.println("Added Park: " + myParks.get(i).getName());
-//            }
-//        }
-//
-//        List<Job> result = new ArrayList<>();
-//
-//        // Iterate over the entire pending jobs list to compile the list of job @ a given city
-//        Iterator<Job> itr = myPendingJobs.iterator();
-//        while (itr.hasNext()) {
-//            Job currentJob = itr.next();
-//            if (parks.contains(currentJob.getPark())) {
-//                result.add(currentJob);
-//                //System.out.println("Added Job: " + currentJob.getMyDescription());
-//            }
-//        }
-//
-//        return result;
-//    }
-
     /**
      * Adds a new pending job to the list, if it does not exceed the maximum allowed or if it is not already in
      * the list.
@@ -248,7 +102,7 @@ public final class Datastore implements Serializable {
     }
 
     /**
-     * Returns true if a job is within the allowed start date range.
+     * Returns true if a job is within the allowed date range.
      * @param theJob job to be checked.
      * @return true if within the range, false if either before today's date or after max allowed date.
      * @precondition theJob must not be null.
@@ -267,7 +121,7 @@ public final class Datastore implements Serializable {
         
         Date jobStartDate = jobCal.getTime();
         
-        jobCal.add(Calendar.DAY_OF_MONTH, (theJob.getDuration() - 1));
+        jobCal.add(Calendar.DATE, (theJob.getDuration() - 1));
         Date jobEndDate = jobCal.getTime();
         
         Date maxAllowedDate = maxCal.getTime();

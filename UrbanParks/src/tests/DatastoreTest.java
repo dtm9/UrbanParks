@@ -8,6 +8,8 @@ import org.junit.Test;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,6 +80,10 @@ public class DatastoreTest {
 		myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
 
 		// populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		
+		/* old test jobs before bus rule 2E
 		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
 				"Raking leaves", 1, 1, 3, 2017));
 		myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
@@ -93,7 +99,34 @@ public class DatastoreTest {
 		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
 				"More digging ditches", 1, 15, 3, 2017));
 		myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
-				"Construct building", 1, 1, 5, 2017));
+				"Construct building", 1, 1, 4, 2017)); 
+		*/
+		
+		cal.add(Calendar.DATE, 5); //5 days from today
+		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
+                "Raking leaves", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+		
+		cal.add(Calendar.DATE, 1); //6 days from today
+        myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
+                "Pick up litter", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        
+        cal.add(Calendar.DATE, 1); //7 days from today
+        myJobs.add(new Job(myParks.get(1), "1500", "We will be building a fence.",
+                "Build fence", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        myJobs.add(new Job(myParks.get(3), "1400", "We will be painting a fence.",
+                "Paint fence", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        
+        cal.add(Calendar.DATE, 1); //8 days from today
+        myJobs.add(new Job(myParks.get(4), "1640", "We will be clearing a trail",
+                "Trail clearing", 1, cal.get(Calendar.DATE), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        
+        cal.add(Calendar.DATE, 1); //9 days from today
+        myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches.",
+                "Digging ditches", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
+                "More digging ditches", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+        myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
+                "Construct building", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
 
 		// populate myVolunteers list data structure w/ 2 Volunteers
 		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
@@ -376,6 +409,7 @@ public class DatastoreTest {
 		}
 	}
 
+	//TODO fix this test. i hasn't worked since deliverable 2.
     /**
      * Test for IllegalStateException when attempting to exceed the maximum number of pending jobs per
      * day by 1.
@@ -403,5 +437,69 @@ public class DatastoreTest {
     @Test(expected = IllegalArgumentException.class)
     public void setMaxPendingJobs_SetMaxPendingJobsTo0_ExceptionExpected() {
         myDatastore.setMaxPendingJobs(0);
+    }
+    
+    /**
+     * Sunny-day scenario for business rule for how far in the future a job can be made.
+     * @author Dylan Miller
+     */
+    @Test
+    public void isJobWithinMaxFutureDate_jobIsInTheRange_NoExceptionsExpected() {
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(new Date()); //today
+      cal.add(Calendar.DATE, Datastore.MAX_FUTURE_JOB_START_DATE - 1); //one day before max allowed day
+      
+      Job jobInRange = new Job(myParks.get(0), "1030", "Painting over graffiti in bathrooms", "Painting", 1, 
+                               cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+      
+      assertTrue(myDatastore.isJobWithinMaxFutureDate(jobInRange));
+    }
+    
+    /**
+     * Tests future start date business rule for when job is beyond the upper bound.
+     * @author Dylan Miller
+     */
+    @Test
+    public void isJobWithinMaxFutureDate_jobIsAfterMaxAllowed_ShouldReturnFalse() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date()); //today
+        cal.add(Calendar.DATE, Datastore.MAX_FUTURE_JOB_START_DATE + 1); //max allowed into the future + 1 from today
+        
+        Job jobInRange = new Job(myParks.get(0), "1030", "Painting over graffiti in bathrooms", "Painting", 1, 
+                                 cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+        
+        assertFalse(myDatastore.isJobWithinMaxFutureDate(jobInRange));
+    }
+    
+    /**
+     * Tests future start date business rule for when the job starts within the range but it's duration ends outside the upper bound.
+     * @author Dylan Miller
+     */
+    @Test
+    public void isJobWithinMaxFutureDate_jobEndsOutOfBounds_ShouldReturnFalse() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date()); //today
+        cal.add(Calendar.DATE, Datastore.MAX_FUTURE_JOB_START_DATE); //starts on the last allowed day
+        
+        Job jobEndingOutOfRange = new Job(myParks.get(0), "1030", "Painting over graffiti in bathrooms", "Painting", Job.getMaxDuration(), 
+                                 cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)); //job with maximum duration
+        
+        assertFalse(myDatastore.isJobWithinMaxFutureDate(jobEndingOutOfRange));
+    }
+    
+    /**
+     * Tests future start date business rule for when the job starts in the past.
+     * @author Dylan Miller
+     */
+    @Test
+    public void isJobWithinMaxFutureDate_jobStartsInPast_ShouldReturnFalse() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date()); //today
+        cal.add(Calendar.DATE, -1); //set to yesterday
+        
+        Job jobStartingInThePast = new Job(myParks.get(0), "1030", "Painting over graffiti in bathrooms", "Painting", 1, 
+                                 cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)); 
+        
+        assertFalse(myDatastore.isJobWithinMaxFutureDate(jobStartingInThePast));
     }
 }

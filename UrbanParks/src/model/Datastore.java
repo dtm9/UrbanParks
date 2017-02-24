@@ -252,6 +252,7 @@ public final class Datastore implements Serializable {
      * @param theJob job to be checked.
      * @return true if within the range, false if either before today's date or after max allowed date.
      * @precondition theJob must not be null.
+     * @precondition theJob must be for the future.
      * @author Dylan Miller
      */
     public boolean isJobWithinMaxFutureDate(Job theJob) {

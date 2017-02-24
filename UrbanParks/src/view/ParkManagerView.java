@@ -18,7 +18,8 @@ import model.Park;
 import model.ParkManager;
 
 /**
- * Object that runs the user interaface for a Park Manager user. Launch with the public launchGUI() method.
+ * Object that runs the user interaface for a Park Manager user. 
+ * Launch with the public launchGUI() method.
  * @author Dylan Miller
  * @author Gardner Gomes
  */

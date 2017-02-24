@@ -386,6 +386,15 @@ public class Job implements Serializable {
             throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
+    
+    /**
+     * Getter for max duration constant.
+     * @return int representing how many days a job can last.
+     * @author Dylan Miller
+     */
+    public static int getMaxDuration() {
+      return MAX_DURRATION;
+    }
 
     //***** Overridden method(s) ***************************************************************************************
 

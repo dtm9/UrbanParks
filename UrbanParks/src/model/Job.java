@@ -18,19 +18,13 @@ public class Job implements Serializable {
     //***** Constant(s)
 //TODO review these constants for the minimums and MONTH_MAX_DAY -- do we need those?
     /** Default serialVersionUID for serialization. */
-    private static final long serialVersionUID = 1L;
-    /** Cannot create jobs earlier than this year. */
-    private static final int MIN_YEAR = 1900;
-    /**Durration limit for job */
-    private static final int MAX_DURRATION = 3;
-    /**Duration min for a job */
-    private static final int MIN_DURRATION = 1;
-    /**Minimum days in a Month */
-    private static final int MONTH_MIN_DAY = 1;
-    /**Max days in a Month */
-    private static final int MONTH_MAX_DAY = 31;
-    
-    // TODO private static final int MAX_VOLUNTEERS = x;
+    public static final long serialVersionUID = 1L;
+    public static final int MIN_YEAR = 1900;
+    public static final int MAX_DURRATION = 3;
+    public static final int MIN_DURRATION = 1;
+    public static final int MONTH_MIN_DAY = 1;
+    public static final int MONTH_MAX_DAY = 31;
+    public static final int MAX_Volunteers = 10;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -58,7 +52,8 @@ public class Job implements Serializable {
     /** Description of the Job. */
     private String myDescription;
 
-    /** Max Volunteers for the Job. */
+    /** Max Volunteers for the Job.
+     * @deprecated */
     private int myMaxVolunteers;
 
     /** List of Volunteers signed up for the Job. */
@@ -298,6 +293,7 @@ public class Job implements Serializable {
      *
      * @return The maximum required Volunteers for the Job.
      * @author Gardner Gomes
+     * @deprecated
      */
     public int getMaxVolunteers() {
         return myMaxVolunteers;
@@ -308,6 +304,7 @@ public class Job implements Serializable {
      *
      * @param theMaxVolunteers The maximum Volunteers required for this Job.
      * @author Gardner Gomes
+     * @deprecated
      */
     public void setMaxVolunteers(final int theMaxVolunteers) {
         if (theMaxVolunteers >= 0) {
@@ -385,6 +382,13 @@ public class Job implements Serializable {
         } else {
             throw new IllegalArgumentException("Parameter is not of type String\n");
         }
+    }
+    public boolean isMaxVolunteers() {
+        boolean ans = true;
+        if (this.myVolunteers.size() < MAX_Volunteers) {
+            ans = false;
+        }
+        return ans;
     }
     
     /**

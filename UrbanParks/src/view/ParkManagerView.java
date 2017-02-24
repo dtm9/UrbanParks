@@ -24,8 +24,9 @@ import model.ParkManager;
  * @author Gardner Gomes
  */
 public class ParkManagerView extends AbstractView {
-    private static final int TEMP_MAX_JOBS = 30;
-    private static final int MONTH_BUFFER = 1;
+    public static final int TEMP_MAX_JOBS = 30;
+    public static final int MONTH_BUFFER = 1;
+    //TODO add a 75 day buffer where ever we are doing this? data store or view.
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
     private Scanner myScanner = new Scanner(System.in);
@@ -55,7 +56,7 @@ public class ParkManagerView extends AbstractView {
      */
     private void userChoice() {
         mySB.append("\n1. Submit Job\n");
-        mySB.append("2. View Jobs\n");
+        mySB.append("2. View Jobs\n"); //Don't need to display the Jobs
         mySB.append("3. Exit eUrbanParks\n");
         mySB.append("\nWhat would you like to do?: ");
         System.out.print(mySB.toString());
@@ -78,7 +79,7 @@ public class ParkManagerView extends AbstractView {
     /**
      * Helper Method to check if max Jobs are already created.
      */
-    private void checkMaxJobs() {
+    public void checkMaxJobs() {
         if (myDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
             this.userChoice();
@@ -102,22 +103,21 @@ public class ParkManagerView extends AbstractView {
         myJob = addYear(myJob);
         myJob = addTime(myJob);
         myJob = addDuration(myJob);
-        myJob = addVolunteerMax(myJob);
+        //myJob = addVolunteerMax(myJob); Deprecated.
         myJob = addNotes(myJob);
         try {
             myDatastore.addJob(myJob);
         } catch (Exception e){
-            System.out.println("Adding the Job Failed Unexpectedly, try again\n");
+            System.out.println("Adding the Job failed, try again\n");
             submitJob();
         }
-        Main.save();
         System.out.println("Job submitted. You can view it in your Jobs.");
         userChoice();
 
     }
 
     Job addDuration(Job theJob) {
-        System.out.print("Please set the Duration for this job(1 or 2 days): ");
+        System.out.print("Please set the Duration for this job(in days): ");
         try {
             theJob.setDuration(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -137,7 +137,12 @@ public class ParkManagerView extends AbstractView {
         }
         return theJob;
     }
-
+    /**
+     * 
+     * @param theJob
+     * @return
+     * @deprecated
+     */
     Job addVolunteerMax(Job theJob) {
         System.out.print("Please set the maximum number of Volunteers: ");
         try {
@@ -237,6 +242,7 @@ public class ParkManagerView extends AbstractView {
 
     /**
      * View Jobs elemt for UI
+     * @deprecated
      */
     private void ViewJobs() { // TODO Break this method up
         displayHeader();
@@ -276,7 +282,7 @@ public class ParkManagerView extends AbstractView {
             if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
                 count++;
                 if (count == theChoice) {
-                    showJob(myDatastore.getPendingJobs().get(i));
+                    showAJob(myDatastore.getPendingJobs().get(i));
                     break;
                 }
             }
@@ -293,7 +299,7 @@ public class ParkManagerView extends AbstractView {
                 if (myDatastore.getPreviousJobs().get(i).getPark().getManager().equals(myManager)) {
                     count++;
                     if (count == theChoice) {
-                        showJob(myDatastore.getPreviousJobs().get(i));
+                        showAJob(myDatastore.getPreviousJobs().get(i));
                     }
                 }
             }
@@ -304,8 +310,9 @@ public class ParkManagerView extends AbstractView {
     /**
      * 
      * @param theJob
+     * @deprecated
      */
-    private void showJob(Job theJob) {
+    private void showAJob(Job theJob) {
         displayHeader();
         showJobInformation(theJob);
         showVolunteers(theJob);
@@ -315,6 +322,7 @@ public class ParkManagerView extends AbstractView {
     /**
      * 
      * @param theJob
+     * @deprecated
      */
     private void showJobInformation(Job theJob) {
         mySB.append("Name: ");
@@ -334,8 +342,8 @@ public class ParkManagerView extends AbstractView {
         mySB.append("\nMinumum Light Grade Volunteers(0 or More): ");
         mySB.append("\nMinumum Medium Grade Volunteers(0 or More): ");
         mySB.append("\nMinumum Heavy Grade Volunteers(0 or More): ");
-        mySB.append("\nMaximum Volunteers(0 or More): ");
-        mySB.append(theJob.getMaxVolunteers());
+//        mySB.append("\nMaximum Volunteers(0 or More): "); 
+//        mySB.append(theJob.getMaxVolunteers());
         mySB.append("\nAdditional Notes: ");
         mySB.append(theJob.getNotes());
         mySB.append("\n");
@@ -344,7 +352,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     /**
-     * 
+     * @deprecated
      * @param theJob
      */
     private void showVolunteers(Job theJob) {
@@ -364,8 +372,8 @@ public class ParkManagerView extends AbstractView {
             System.out.println("There are no Volunteers signed up.\n");
         }
     }
-    
-    void displayHeader() {
+    @Override
+    public void displayHeader() {
       mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
       mySB.append(myManager.getRealName());
       mySB.append(" logged in as Urban Parks Manager\n");

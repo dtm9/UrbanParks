@@ -285,7 +285,8 @@ public class VolunteerView extends AbstractView {
 	/**
 	 * Prints the header to the console
 	 */
-    void displayHeader() {
+	@Override
+    public void displayHeader() {
         mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
         mySB.append(myVolunteer.getRealName());
         mySB.append(" logged in as a Volunteer\n");

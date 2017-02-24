@@ -239,12 +239,31 @@ public class JobTest implements TestConstants {
     public void setName_BadName_ExceptionThrown() {
         myJob.setName(BAD_STRING);
     }
+    @Test
+    public void isMaxVolunteersTest_FullJob_true() {
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        myJob.setVolunteers(GOOD_NAME);
+        assertTrue(myJob.isMaxVolunteers());
+    }
+    @Test
+    public void isMaxVolunteersTest_EmptyJob_true() {
+        assertFalse(myJob.isMaxVolunteers());
+    }
 
     /**
      * Tests Duration.
      * 
      * @author Gardner Gomes
      */
+    @Test
     public void setDuration_GoodInt_DurationSet() {
         myJob.setDuration(GOOD_INT);
         assertEquals(myJob.getDuration(), GOOD_INT);
@@ -317,4 +336,5 @@ public class JobTest implements TestConstants {
         Job job2 = new Job(park2, "1200", "Rake leaves", "Raking", 1, 2, 10, 2017);
         assertFalse(job1.equals(job2));
     }
+
 }

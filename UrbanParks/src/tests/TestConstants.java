@@ -24,7 +24,7 @@ interface TestConstants {
   String GOOD_NAME = "Jim Bob";
   
   /** int for testing good values in Job. */
-  int GOOD_INT = 5;
+  int GOOD_INT = 3;
   
   /** int for testing bad values in Job. */
   int BAD_INT = -5;

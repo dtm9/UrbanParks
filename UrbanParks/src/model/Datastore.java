@@ -1,8 +1,5 @@
 package model;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,7 +16,6 @@ import java.util.List;
 public final class Datastore implements Serializable {
 
 	//***** Constant(s) ************************************************************************************************
-//TODO where the fuck do we define the maximum allowed date in the future? should be 75 days now, no idea where to set that - Dylan
     /**Default serialVersionUID. This should not change.*/
 	private static final long serialVersionUID = 1L;
 
@@ -101,6 +97,8 @@ public final class Datastore implements Serializable {
         }
     }
 
+    //TODO if a job is in the past, it returns false as expected. Do we need that second precondition?
+    
     /**
      * Returns true if a job is within the allowed date range.
      * @param theJob job to be checked.

@@ -37,7 +37,6 @@ public class VolunteerView extends AbstractView {
     /**
      * Constructor That instantiates the Volunteer view
      * @param theAccount
-     * @param theDatastore
      */
     public VolunteerView(AbstractAccount theAccount){
     	super();
@@ -183,6 +182,7 @@ public class VolunteerView extends AbstractView {
 	/**
 	 * @author Peter Park
 	 * 
+	 * This is business rule 1B for Deliverable 3
 	 * @param currentJob
 	 * @return boolean
 	 */
@@ -190,16 +190,16 @@ public class VolunteerView extends AbstractView {
         ZoneId z = ZoneId.of("America/Los_Angeles");
         LocalDate today = LocalDate.now(z);
         
-        // BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
-        // may need to be un-hardcoded
-        int futureDayofYear = today.getDayOfYear() + 1;
+        int futureDayofYear = today.getDayOfYear() + 1; // TODO un-hardcode the +1 to the correct amount of days away (days away you want - 1)
         LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);	
 		LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
 		
-		//TODO test this logic for BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
-		boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear(); // TODO move these to their own methods
-		boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1; // TODO move these to their own methods
-		return (futureDatesSameYear || futureDatesNextYear);
+		boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear();
+		boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1; 
+//		System.out.println("Job Day = " + jobDate.getDayOfYear() + ";  Future Job Day = " + futureLimit.getDayOfYear());
+//		System.out.println("Job Year = " + jobDate.getYear() + ";  Future Job Year = " + futureLimit.getYear());
+
+		return futureDatesSameYear || futureDatesNextYear; // TODO Discuss whether we even need futureDatesNextYear
 	}
 	
 	private void confirmScreen(int theChoice, List<Job> legitJobs){

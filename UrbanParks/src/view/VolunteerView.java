@@ -144,7 +144,7 @@ public class VolunteerView extends AbstractView {
         LocalDate today = LocalDate.now(z);
         // BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
         // may need to be un-hardcoded
-        int futureDayofYear = today.getDayOfYear()+2;
+        int futureDayofYear = today.getDayOfYear()+1;
         LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);
 		Iterator<Job> itr=parkJobList.iterator();
 		if(parkJobList==null) mySB.append("There are no jobs to sign up for\n");

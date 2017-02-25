@@ -71,7 +71,10 @@ public class IOTest {
 	testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
 	testDatastore.addJob(testJob1);
 	
-	testJob2 = new Job(testPark2, "09:00", "Paint over graphiti.","Painting", 1, 19, 2 , 2017);
+//	testJob2 = new Job(testPark2, "09:00", "Paint over graphiti.","Painting", 1, 19, 2 , 2017);
+//	testDatastore.addJob(testJob2); 
+	
+	testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
 	testDatastore.addJob(testJob2);
 	
 	testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);

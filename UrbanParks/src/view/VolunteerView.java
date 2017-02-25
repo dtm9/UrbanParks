@@ -99,7 +99,7 @@ public class VolunteerView extends AbstractView {
 	    List<Park> parkList = myDatastore.getAllParks();
 	    Iterator<Park> itr = parkList.iterator();
 	    int count = 0;
-	    if(parkList==null) mySB.append("There are no jobs to sign up for\n");
+	    if(parkList==null) mySB.append("There are no jobs to sign up for\n"); // TODO dead code
 	    while(itr.hasNext()){
 	    	Park currentPark =itr.next();
 	    	count++;
@@ -140,25 +140,15 @@ public class VolunteerView extends AbstractView {
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
 		int count = 0;
-        ZoneId z = ZoneId.of("America/Los_Angeles");
-        LocalDate today = LocalDate.now(z);
-        // BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
-        // may need to be un-hardcoded
-        int futureDayofYear = today.getDayOfYear()+1;
-        LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);
 		Iterator<Job> itr=parkJobList.iterator();
-		if(parkJobList==null) mySB.append("There are no jobs to sign up for\n");
+		if(parkJobList.size() == 0) mySB.append("There are no jobs to sign up for\n"); // Changed because parkJobList can never be NULL
 		List<Job> legitJobs = new ArrayList<Job>();
 		//placeholder in array
 		Job notARealJob = new Job();
 		legitJobs.add(notARealJob);
 		while(itr.hasNext()){
 			Job currentJob=itr.next();
-			LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
-			//TODO test this logic for BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
-			boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear(); // TODO move these to their own methods
-			boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1; // TODO move these to their own methods
-			if (futureDatesSameYear||futureDatesNextYear){
+			if (minDaysAway(currentJob)) { // This if-statement calls the helper method directly
 				count++;
 				legitJobs.add(currentJob);
 				mySB.append(count);
@@ -188,9 +178,28 @@ public class VolunteerView extends AbstractView {
 			 } else{
 				 confirmScreen(theChoice, legitJobs);
 			 }
-			
+	}
+	
+	/**
+	 * @author Peter Park
+	 * 
+	 * @param currentJob
+	 * @return boolean
+	 */
+	private boolean minDaysAway(Job currentJob) {
+        ZoneId z = ZoneId.of("America/Los_Angeles");
+        LocalDate today = LocalDate.now(z);
+        
+        // BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
+        // may need to be un-hardcoded
+        int futureDayofYear = today.getDayOfYear() + 1;
+        LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);	
+		LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
 		
-		
+		//TODO test this logic for BR: A volunteer may sign up only if the job is at least a minimum number of calendar days from the current date, default of 2.
+		boolean futureDatesSameYear = jobDate.getDayOfYear()>futureLimit.getDayOfYear(); // TODO move these to their own methods
+		boolean futureDatesNextYear = jobDate.getYear()>=futureLimit.getYear()+1; // TODO move these to their own methods
+		return (futureDatesSameYear || futureDatesNextYear);
 	}
 	
 	private void confirmScreen(int theChoice, List<Job> legitJobs){
@@ -247,8 +256,8 @@ public class VolunteerView extends AbstractView {
 		//List<Job> volunteerJobs = myDatastore.getJobsByVolunteer(myVolunteer);
 		List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		Iterator<Job> itr = volunteerJobs.iterator();
-		int count =0;
-		if (volunteerJobs==null) mySB.append("You have not signed up for any jobs");
+		int count = 0; // TODO never used
+		if (volunteerJobs==null) mySB.append("You have not signed up for any jobs"); // TODO dead code
 		while( itr.hasNext()){
 			 Job currentJob = itr.next();
 			 count++;

@@ -11,6 +11,7 @@ import model.Volunteer;
 
 /**
  * Test cases for the VolunterView class.
+ * Changed visibility of minDaysAway to package during testing.
  *
  * @author Peter Park (ragnarok@uw.edu)
  */

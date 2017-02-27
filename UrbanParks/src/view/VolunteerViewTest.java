@@ -1,5 +1,7 @@
 package view;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,8 +51,7 @@ public class VolunteerViewTest {
     public void minDaysAway_GoodJob_ListThisJob() {
     	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, 2, 3 ,2017);
     	myDatastore.addJob(testJob1);
-    	System.out.println(testJob1.getName());
-        assert(myView.minDaysAway(testJob1));
+        assertTrue("This will succeed", myView.minDaysAway(testJob1));
     }
 
 	/**
@@ -62,7 +63,7 @@ public class VolunteerViewTest {
     public void minDaysAway_BadJob_DoNotListThisJob() {
     	Job testJob2 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 2","Testing", 1, 27, 2 ,2017);
     	myDatastore.addJob(testJob2);
-        assert(!myView.minDaysAway(testJob2));
+        assertFalse("This will fail", myView.minDaysAway(testJob2));
     }
     
 	/**
@@ -74,6 +75,6 @@ public class VolunteerViewTest {
     public void minDaysAway_PastJob_DoNotListThisJob() {
     	Job testJob3 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 3","Testing", 1, 22, 2 ,2017);
     	myDatastore.addJob(testJob3);
-        assert(!myView.minDaysAway(testJob3));
+        assertFalse("This will fail", myView.minDaysAway(testJob3));
     }
 }

@@ -108,6 +108,6 @@ public class VolunteerViewTest {
     	Job testJob7 = new Job(myPark, "11:00", "Test VolunteerViewTest case 5", "testing2", 1, 24,3,2017);
     	List<Job> jobList = new ArrayList<Job>();
     	jobList.add(testJob6);
-    	assertTrue("This will fail", myView.isSameDayJob(testJob7, jobList, mySB));
+    	assertTrue("This will be true", myView.isSameDayJob(testJob7, jobList, mySB));
     }
 }

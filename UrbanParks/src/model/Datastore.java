@@ -73,7 +73,7 @@ public final class Datastore implements Serializable {
      * @author Walter Weeks (ww3@uw.edu)
      * @param theJob the job to add to the pending jobs list.
      * @throw NullPointerException if theJob is null.
-     * @throw IllegalStateException if the number of jobs is already at maximum capacity.
+     * @throw InvalidJobDurationException if the number of jobs is already at maximum capacity.
      */
     public void addJob(final Job theJob) {
         if (theJob == null) { // Check for null

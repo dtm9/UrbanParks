@@ -103,8 +103,8 @@ public final class Datastore implements Serializable {
      * 
      * @param theStartDate The start dating of the job,
      * @param theDuration The number of days of the job.
-     * @return True if any given day in the job's duration conflicts with the maximum allowed 
-     * pending jobs per day.
+     * @return True if the given start date to end date has the maximum number of pending jobs allowed;
+     * false otherwise.
      */
     public boolean hasMaxJobsAlreadyOnJobDate(LocalDate theStartDate, int theDuration) {
     	boolean result = false;

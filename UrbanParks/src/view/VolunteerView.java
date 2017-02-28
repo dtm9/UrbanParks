@@ -208,6 +208,27 @@ public class VolunteerView extends AbstractView {
 		//TODO test this call
 		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		 sameDayFlag=isSameDayJob(printJob, volunteerJobs, mySB);
+		 
+		 if(!sameDayFlag){ 
+				displayHeader();
+			    mySB.append("You are signing up for this job: \n");
+			    mySB.append(printJob.getName());
+			    mySB.append("\n");
+			    mySB.append(printJob.getDescription());
+			    mySB.append("\nDate: ");
+			    mySB.append(printJob.getMonth());
+			    mySB.append("/");
+			    mySB.append(printJob.getDay());
+			    mySB.append("/");
+			    mySB.append(printJob.getYear());
+			    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
+
+			}else {
+				displayHeader();
+				mySB.append("You can not sign up for this job: \n");
+				mySB.append("You have already signed up for a job on this day.\n");
+				mySB.append("\nEnter 1 to return to main menu\n");
+			}
 	    System.out.print(mySB.toString());
 	    mySB.delete(0, mySB.capacity());
 	    String confirmChoice = myScanner.next();
@@ -232,26 +253,7 @@ public class VolunteerView extends AbstractView {
 				 sameDayFlag=true; // TODO Move to its own method
 			 }
 		 }
-		if(!sameDayFlag){ 
-			displayHeader();
-		    mySB.append("You are signing up for this job: \n");
-		    mySB.append(printJob.getName());
-		    mySB.append("\n");
-		    mySB.append(printJob.getDescription());
-		    mySB.append("\nDate: ");
-		    mySB.append(printJob.getMonth());
-		    mySB.append("/");
-		    mySB.append(printJob.getDay());
-		    mySB.append("/");
-		    mySB.append(printJob.getYear());
-		    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
-
-		}else {
-			displayHeader();
-			mySB.append("You can not sign up for this job: \n");
-			mySB.append("You have already signed up for a job on this day.\n");
-			mySB.append("\nEnter 1 to return to main menu\n");
-		}
+		
 		
 		return sameDayFlag;
 		

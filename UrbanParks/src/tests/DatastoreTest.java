@@ -459,7 +459,7 @@ public class DatastoreTest {
 	 *
 	 * @author Walter Weeks
 	 */
-	@Test (expected = IllegalStateException.class)
+	@Test (expected = InvalidJobDurationException.class)
 	public void addJob_AddingMoreThanMaximumPendingJobsOnDate_ExpectsException() {
 		myCal.add(Calendar.DATE, 1); // 10 Days from today
 		

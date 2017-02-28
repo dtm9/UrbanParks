@@ -88,7 +88,7 @@ public final class Datastore implements Serializable {
         }
 
         if (hasMaxJobsAlreadyOnJobDate(LocalDate.of(theJob.getYear(), theJob.getMonth(), theJob.getDay()), theJob.getDuration())) {
-            throw new IllegalStateException("System cannot have more than " +
+            throw new InvalidJobDurationException("System cannot have more than " +
                     MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day."); 
         }
 

@@ -207,7 +207,26 @@ public class VolunteerView extends AbstractView {
 		Job printJob = legitJobs.get(theChoice);
 		//TODO test this call
 		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
-		 for(int i=0;i<volunteerJobs.size();i++){
+		 sameDayFlag=isSameDayJob(printJob, volunteerJobs, mySB);
+	    
+	    System.out.print(mySB.toString());
+	    mySB.delete(0, mySB.capacity());
+	    String confirmChoice = myScanner.next();
+	    if(confirmChoice.equalsIgnoreCase("y")&&!sameDayFlag){
+	    	printJob.setVolunteers(myVolunteer.getUsername());
+	    }
+	    mainMenu();
+	}
+	/**
+	 * Tests if the day the selected job is on, is on the same day as another job the volunteer has signed up for
+	 * @param printJob
+	 * @param volunteerJobs
+	 * @param mySB
+	 * @return
+	 */
+	private boolean isSameDayJob(Job printJob, List<Job> volunteerJobs, StringBuilder mySB ){
+		boolean sameDayFlag = false;
+		for(int i=0;i<volunteerJobs.size();i++){
 			 Job jobIterator = volunteerJobs.get(i);
 			 //If Date in job changes this needs to change
 			 if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
@@ -235,14 +254,8 @@ public class VolunteerView extends AbstractView {
 			mySB.append("\nEnter 1 to return to main menu\n");
 		}
 		
-	    
-	    System.out.print(mySB.toString());
-	    mySB.delete(0, mySB.capacity());
-	    String confirmChoice = myScanner.next();
-	    if(confirmChoice.equalsIgnoreCase("y")&&!sameDayFlag){
-	    	printJob.setVolunteers(myVolunteer.getUsername());
-	    }
-	    mainMenu();
+		return sameDayFlag;
+		
 	}
 	
 	/**

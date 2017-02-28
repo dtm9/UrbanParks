@@ -1,5 +1,6 @@
 package model;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -139,6 +140,15 @@ public abstract class AbstractAccount implements Serializable {
     } else {
       this.myRealName = theName;
     }
+  }
+  
+  /**
+   * This method is required to maintain the equals contract.
+   * @author Walter Weeks
+   */
+  @Override
+  public int hashCode() {
+	  return Objects.hash(myUsername);
   }
   
   /**

@@ -98,8 +98,8 @@ public final class Datastore implements Serializable {
     }
    
     /**
-     * Determines whether or not a job conflicts with the maximum number of pending jobs on a given 
-     * day. This method checks each day in its range, i.e., the job's "duration."
+     * Determines whether or not a job date conflicts with the maximum number of pending jobs on a given 
+     * day. This method checks each day in its day range, i.e., the job's "duration."
      * 
      * @param theStartDate The start dating of the job,
      * @param theDuration The number of days of the job.

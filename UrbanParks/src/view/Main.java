@@ -97,7 +97,7 @@ public class Main {
                     mySB.delete(0, mySB.capacity());
                     mySB.append(SB_LINE_BREAK);
                     mySB.append(e.getMessage());
-                    mySB.append("did we just fuck shit up?");
+                    mySB.append(" Did we just mess up?");
                     mySB.append(SB_LINE_BREAK);
                     mySB.append(SB_LINE_BREAK);
                     System.out.print(mySB.toString());

@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import model.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +40,9 @@ public class DatastoreTest {
 
 	/** Volunteer list auxiliary test fixture. */
 	private List<Volunteer> myVolunteers;
+	
+	/** Used for dynamically selecting current system dates. */
+	Calendar myCal;
 
 	/**
 	 * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
@@ -53,10 +58,13 @@ public class DatastoreTest {
 		myAccounts = new ArrayList<>();
 		myParks = new ArrayList<>();
 		myJobs = new ArrayList<>();
+		myCal = Calendar.getInstance();
+		myCal.setTime(new Date());
 		myDatastore = new Datastore();
 		// populate the test fixtures
 		populateAuxiliaryTestFixtures();
 		populateDatastoreTestFixture();
+		
 	}
 
 	//***** Helper method(s) *******************************************************************************************
@@ -80,8 +88,7 @@ public class DatastoreTest {
 		myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
 
 		// populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
+		
 		
 		/* old test jobs before bus rule 2E
 		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
@@ -102,31 +109,31 @@ public class DatastoreTest {
 				"Construct building", 1, 1, 4, 2017)); 
 		*/
 		
-		cal.add(Calendar.DATE, 5); //5 days from today
+		myCal.add(Calendar.DATE, 5); //5 days from today
 		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
-                "Raking leaves", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Raking leaves", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
 		
-		cal.add(Calendar.DATE, 1); //6 days from today
+		myCal.add(Calendar.DATE, 1); //6 days from today
         myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
-                "Pick up litter", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Pick up litter", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         
-        cal.add(Calendar.DATE, 1); //7 days from today
+        myCal.add(Calendar.DATE, 1); //7 days from today
         myJobs.add(new Job(myParks.get(1), "1500", "We will be building a fence.",
-                "Build fence", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Build fence", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         myJobs.add(new Job(myParks.get(3), "1400", "We will be painting a fence.",
-                "Paint fence", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Paint fence", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         
-        cal.add(Calendar.DATE, 1); //8 days from today
+        myCal.add(Calendar.DATE, 1); //8 days from today
         myJobs.add(new Job(myParks.get(4), "1640", "We will be clearing a trail",
-                "Trail clearing", 1, cal.get(Calendar.DATE), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Trail clearing", 1, myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         
-        cal.add(Calendar.DATE, 1); //9 days from today
+        myCal.add(Calendar.DATE, 1); //9 days from today
         myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches.",
-                "Digging ditches", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
-        myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
-                "More digging ditches", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+        myJobs.add(new Job(myParks.get(1), "1145", "We will be clearing pathways.",
+                "Clearing pathways", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
-                "Construct building", 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                "Construct building", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
 
 		// populate myVolunteers list data structure w/ 2 Volunteers
 		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
@@ -182,7 +189,7 @@ public class DatastoreTest {
 	 * @author Walter Weeks
 	 */
 	@Test
-	public void getNumberOfJobs_UnmodifiedDatastore_ShouldBeSameAsJobsListTestFixture() {
+	public void getNumberOfJobs_AddMultipleJobs_AllJobsAdded() {
 		assertEquals(myJobs.size(), myDatastore.getNumberOfJobs());
 	}
 
@@ -193,10 +200,11 @@ public class DatastoreTest {
 	 * @author Walter Weeks
 	 */
 	@Test
-	public void removeJob_RemovalOf2Jobs_ShouldBe2() {
+	public void removeJob_RemovalOf2Jobs_PreviousJobsListShouldBeSize2() {
 		myDatastore.removeJob(myJobs.get(0));
 		myDatastore.removeJob(myJobs.get(1));
 		assertEquals(2, myDatastore.getNumberOfPreviousJobs());
+		//assertEquals(myJobs.size() - 2, myDatastore.getNumberOfJobs());
 	}
 
 	//TODO these tests are broken due to datastore changes. Are they necessary? Should we migrate them to other test classes?
@@ -250,7 +258,7 @@ public class DatastoreTest {
 	 * @author Walter Weeks
 	 */
 	@Test
-	public void getNumberOfAccounts_UnmodifiedDatastore_ShouldBeSumOfAccountTestFixturesSizes() {
+	public void getNumberOfAccounts_AddMultipleAccounts_AllTestFixtureAccountsShouldBeAdded() {
 		assertEquals(myVolunteers.size() + myParkManagers.size(), myDatastore.getNumberOfAccounts());
 	}
 
@@ -260,7 +268,7 @@ public class DatastoreTest {
 	 * @author Walter Weeks
 	 */
 	@Test
-	public void getNumberOfParks_UnmodifiedDatastore_ShouldBeSizeOfParksTestFixture() {
+	public void getNumberOfParks_AddMultipleParks_AllTestFixtureParksShouldBeAdded() {
 		assertEquals(myParks.size(), myDatastore.getNumberOfParks());
 	}
 
@@ -271,11 +279,59 @@ public class DatastoreTest {
 	 */
 	@Test
 	public void addJob_AddingASingleJob_ShouldBeSizeOfJobsTextFixurePlus1() {
-		Job newJob = new Job(myParks.get(0), "0600", "We will be building a job",
-				"Build dome", 1, 18, 5, 2017);
+		myCal.add(Calendar.DATE, 1); // 10 Days from today
+		Job newJob = new Job(myParks.get(0), "0600", "We will be building a green house",
+				"Building green house", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
 		myDatastore.addJob(newJob);
 		assertEquals(myJobs.size() + 1, myDatastore.getNumberOfJobs());
 	}
+	
+	/**
+	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns true if a particular day has exactly
+	 * the maximum number of allowed pending jobs.
+	 * 
+	 * NOTE: This was added for the Unit Testing 2 homework.
+	 *
+	 * @author Walter Weeks
+	 */
+	@Test
+	public void hasMaxJobsAlreadyOnJobDate_AddingExactlyTheMaximumPendingJobsAllowedOnGivenDay_ShouldReturnTrue() {
+		myCal.add(Calendar.DATE, 1); // 10 Days from today
+		
+		for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT; i++) {
+			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+		}
+		
+		Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
+                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+		LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
+		assertTrue(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
+	}
+	
+	/**
+	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns false if a particular day has exactly
+	 * the maximum number of allowed pending jobs minus one, i.e., one more job can be placed on that day.
+	 * 
+	 * NOTE: This was added for the Unit Testing 2 homework.
+	 *
+	 * @author Walter Weeks
+	 */
+	@Test
+	public void hasMaxJobsAlreadyOnJobDate_AddingTheMaximumPendingJobsAllowedOnGivenDayMinusOne_ShouldReturnFalse() {
+		myCal.add(Calendar.DATE, 1); // 10 Days from today
+		
+		for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT - 1; i++) {
+			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+		}
+		
+		Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
+                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+		LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
+		assertFalse(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
+	}
+
 
     /**
      * Test to see if the default value of maximum number of pending jobs allowed by system is set properly.
@@ -283,7 +339,7 @@ public class DatastoreTest {
      * @author Walter Weeks
      */
 	@Test
-    public void getMaxPendingJobs_UnmodifiedDatastore_ShouldBeDefaultValue() {
+    public void getMaxPendingJobs_InitializeMaxPendingJobsToDefaultValue_ShouldBeDefaultValue() {
 	    assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT, myDatastore.getMaxPendingJobs());
     }
 
@@ -293,7 +349,7 @@ public class DatastoreTest {
      * @author Walter Weeks
      */
     @Test
-    public void setMaxPendingJobs_ModifyingMaxPendingJobs_ShouldBeChangedToExpectedValue() {
+    public void setMaxPendingJobs_ModifyingMaxPendingJobs_ShouldBeChangedToNewValue() {
         myDatastore.setMaxPendingJobs(myDatastore.getMaxPendingJobs() - 2);
         assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT - 2, myDatastore.getMaxPendingJobs());
     }
@@ -304,7 +360,7 @@ public class DatastoreTest {
      * @author Walter Weeks
      */
     @Test
-    public void getAllParks_UnmodifedDatatstore_ShouldBe8() {
+    public void getAllParks_AddMultipleParks_AllParksShouldBeAdded() {
         for (int i = 0; i < myDatastore.getAllParks().size(); i++) {
             assertEquals(myParks.get(i), myDatastore.getAllParks().get(i));
         }
@@ -316,7 +372,7 @@ public class DatastoreTest {
      * @author Walter Weeks
      */
     @Test
-    public void getAllAccounts_UnmodifedDatatstore_ShouldBe8() {
+    public void getAllAccounts_AddMultipleAccounts_AllAccountsShouldBeAdded() {
         for (int i = 0; i < myDatastore.getAllAccounts().size(); i++) {
             assertEquals(myAccounts.get(i), myDatastore.getAllAccounts().get(i));
         }
@@ -396,38 +452,22 @@ public class DatastoreTest {
 //	}
 
 	/**
-	 * Tests for IllegalStateException when attempting to exceed the maximum number of pending jobs by 1.
+	 * Tests to see if the Datastore#addJob(Job) does not allow for adding more than the
+	 * maximum number of pending jobs on a given date.
+	 * 
+	 * NOTE: This was added for the Unit Testing 2 homework.
 	 *
 	 * @author Walter Weeks
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void addJob_AddMaxPendingJobsPlus1_ExceptionThrown() {
-		Datastore datastore = new Datastore();
-		for (int i = 0; i < datastore.getMaxPendingJobs() + 1; i++) {
-			datastore.addJob(new Job(myParks.get(0), Integer.toString(1200 + i), "We will be raking leaves",
-					"Raking leaves", 1, 1, (i % 12) + 1, 2017));
+	@Test (expected = InvalidJobDurationException.class)
+	public void addJob_AddingMoreThanMaximumPendingJobsOnDate_ExpectsException() {
+		myCal.add(Calendar.DATE, 1); // 10 Days from today
+		
+		for (int i = 0; i <= myDatastore.getMaxPendingJobs(); i++) {
+			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
 		}
 	}
-
-	//TODO fix this test. i hasn't worked since deliverable 2.
-    /**
-     * Test for IllegalStateException when attempting to exceed the maximum number of pending jobs per
-     * day by 1.
-     *
-     * @author Walter Weeks
-     */
-	@Test(expected = IllegalStateException.class)
-    public void addJob_AddMaxPendingJobsPerDayPlus1_ExceptionExpected() {
-	    // Add a second job on 3 Mar 2017
-        myDatastore.addJob(new Job(myParks.get(0), "1130", "We will be raking leaves.",
-                "Raking leaves", 1, 1, 3, 2017));
-        // Add a third job on 3 Mar 2017
-        myDatastore.addJob(new Job(myParks.get(0), "1230", "We will be raking leaves.",
-                "Raking leaves", 1, 1, 3, 2017));
-        // Add a fourth job on 3 Mar 2017
-        myDatastore.addJob(new Job(myParks.get(0), "1330", "We will be raking leaves.",
-                "Raking leaves", 1, 1, 3, 2017));
-    }
 
     /**
      * Tests for IllegalArgrumentException when attempting to set the maximum number of pending jobs to 0.

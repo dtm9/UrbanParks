@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,7 +73,7 @@ public final class Datastore implements Serializable {
      * @author Walter Weeks (ww3@uw.edu)
      * @param theJob the job to add to the pending jobs list.
      * @throw NullPointerException if theJob is null.
-     * @throw IllegalStateException if the number of jobs is already at maximum capacity.
+     * @throw InvalidJobDurationException if the number of jobs is already at maximum capacity.
      */
     public void addJob(final Job theJob) {
         if (theJob == null) { // Check for null
@@ -86,15 +87,41 @@ public final class Datastore implements Serializable {
             throw new IllegalStateException("System will only accept jobs within " + MAX_FUTURE_JOB_START_DATE + " days from today.");
         }
 
-        List<Job> jobsOnDateList = getJobsByDate(theJob.getDay(), theJob.getMonth(), theJob.getYear());
-        if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) { // Check for only 2 jobs on a given day
-            throw new IllegalStateException("System cannot have more than + "+
-                    MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day."); // TODO Move to its own method
+        if (hasMaxJobsAlreadyOnJobDate(LocalDate.of(theJob.getYear(), theJob.getMonth(), theJob.getDay()), theJob.getDuration())) {
+            throw new InvalidJobDurationException("System cannot have more than " +
+                    MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day."); 
         }
 
         if (!myPendingJobs.contains(theJob)) {
            myPendingJobs.add(theJob);
         }
+    }
+   
+    /**
+     * Determines whether or not a job date conflicts with the maximum number of pending jobs on a given 
+     * day. This method checks each day in its day range, i.e., the job's "duration."
+     * 
+     * @param theStartDate The start dating of the job,
+     * @param theDuration The number of days of the job.
+     * @return True if the given start date to end date has the maximum number of pending jobs allowed;
+     * false otherwise.
+     */
+    public boolean hasMaxJobsAlreadyOnJobDate(LocalDate theStartDate, int theDuration) {
+    	boolean result = false;
+    	
+    	List<Job> jobsOnDateList;
+    	LocalDate currentDate = theStartDate;
+    	
+    	for (int i = 0; i < theDuration; i++) {
+    		jobsOnDateList = getJobsByDate(currentDate.getDayOfMonth(), currentDate.getMonthValue(), currentDate.getYear());
+    		if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) {
+                result = true;
+                break;
+            }
+    		currentDate = currentDate.plusDays(1);
+		}
+    	
+    	return result;
     }
 
     //TODO if a job is in the past, it returns false as expected. Do we need that second precondition?

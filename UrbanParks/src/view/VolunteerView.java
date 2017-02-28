@@ -208,7 +208,6 @@ public class VolunteerView extends AbstractView {
 		//TODO test this call
 		 List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		 sameDayFlag=isSameDayJob(printJob, volunteerJobs, mySB);
-	    
 	    System.out.print(mySB.toString());
 	    mySB.delete(0, mySB.capacity());
 	    String confirmChoice = myScanner.next();

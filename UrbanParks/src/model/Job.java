@@ -383,6 +383,10 @@ public class Job implements Serializable {
             throw new IllegalArgumentException("Parameter is not of type String\n");
         }
     }
+    /**
+     * @author Gardner Gomes
+     * @return boolean true if Job had max volunteers false otherwise
+     */
     public boolean isMaxVolunteers() {
         boolean ans = true;
         if (this.myVolunteers.size() < MAX_Volunteers) {

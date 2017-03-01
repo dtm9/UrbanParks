@@ -16,6 +16,7 @@ public class Volunteer extends AbstractAccount implements Serializable {
 
   /** Default serialVersionUID for serialization. */
   private static final long serialVersionUID = 1L;
+private static final String ACCOUNT_TYPE = "Volunteer";
 
   /**
    * Creates an Volunteer user. minimal permissions
@@ -79,5 +80,12 @@ public class Volunteer extends AbstractAccount implements Serializable {
       }
 
       return result;
+  }
+  /**
+   * returns a string of what kind of account this is.
+   */
+  @Override
+  public String AccountType() {
+      return ACCOUNT_TYPE;
   }
 }

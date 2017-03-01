@@ -25,8 +25,10 @@ import model.ParkManager;
  */
 public class ParkManagerView extends AbstractView {
     public static final int TEMP_MAX_JOBS = 30;
+    /**
+     * @deprecated
+     */
     public static final int MONTH_BUFFER = 1;
-    //TODO add a 75 day buffer where ever we are doing this? data store or view.
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
     private Scanner myScanner = new Scanner(System.in);
@@ -47,7 +49,7 @@ public class ParkManagerView extends AbstractView {
     @Override
     public Datastore launchGUI(Datastore theDatastore) {
         myDatastore = theDatastore;
-        displayHeader();
+        super.displayHeader(myManager, myDay);
         userChoice();
         return myDatastore;
     }
@@ -56,7 +58,7 @@ public class ParkManagerView extends AbstractView {
      */
     private void userChoice() {
         mySB.append("\n1. Submit Job\n");
-        mySB.append("2. View Jobs\n"); //Don't need to display the Jobs
+        mySB.append("2. View Jobs\n"); //Don't need to display the Jobs TODO
         mySB.append("3. Exit eUrbanParks\n");
         mySB.append("\nWhat would you like to do?: ");
         System.out.print(mySB.toString());
@@ -92,9 +94,9 @@ public class ParkManagerView extends AbstractView {
      */
     private void submitJob() {
         Job myJob = new Job();
-        displayHeader();
+        super.displayHeader(myManager, myDay);
         System.out.println("Submit a Job for " + myManager.getRealName());
-        System.out.print("----------------------------------------------------------\n\n");
+        System.out.print("-----------------------------------------------------------------\n\n");
         myJob = addPark(myJob);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
@@ -244,8 +246,8 @@ public class ParkManagerView extends AbstractView {
      * View Jobs elemt for UI
      * @deprecated
      */
-    private void ViewJobs() { // TODO Break this method up
-        displayHeader();
+    private void ViewJobs() { // TODO Break this method up? or remove?
+        super.displayHeader(myManager, myDay);
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
             if (myDatastore.getPendingJobs().get(i).getPark().getManager().equals(myManager)) {
@@ -272,7 +274,7 @@ public class ParkManagerView extends AbstractView {
                 mySB.append("\n");
             }
         }
-        mySB.append("\n\nPlease choose a job you want to view: "); // TODO Refactor
+        mySB.append("\n\nPlease choose a job you want to view: "); // TODO Refactor or remove?
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();
@@ -313,7 +315,7 @@ public class ParkManagerView extends AbstractView {
      * @deprecated
      */
     private void showAJob(Job theJob) {
-        displayHeader();
+        super.displayHeader(myManager, myDay);
         showJobInformation(theJob);
         showVolunteers(theJob);
         userChoice();
@@ -371,20 +373,6 @@ public class ParkManagerView extends AbstractView {
         } else {
             System.out.println("There are no Volunteers signed up.\n");
         }
-    }
-    @Override
-    public void displayHeader() {
-      mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
-      mySB.append(myManager.getRealName());
-      mySB.append(" logged in as Urban Parks Manager\n");
-      mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
-      mySB.append(" ");
-      mySB.append(myDay.getDayOfMonth());
-      mySB.append(", ");
-      mySB.append(myDay.getYear());
-      mySB.append(".\n-----------------------------------------------------------------\n");
-      System.out.print(mySB.toString());
-      mySB.delete(0, mySB.capacity());
     }
 
 }

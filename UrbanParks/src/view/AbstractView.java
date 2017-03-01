@@ -15,7 +15,6 @@ import model.AbstractAccount;
  *
  */
 public abstract class AbstractView {
-//TODO make displayHeader work in a centralized and abstract way. COmmented out for now.  Display Header needs to be implemented in an interface if we are doing it that way.
   private AbstractAccount myUser;
   
   public AbstractView() {
@@ -24,7 +23,20 @@ public abstract class AbstractView {
   /**All view objects must use this signature to run the GUI.*/
   public abstract Datastore launchGUI(Datastore theDatastore);
   
-  // TODO Gardner fix this shit
-  public void displayHeader() { 
+  /**
+   * Displays the header for the views.
+   * @param theAccount
+   * @param theDay
+   */
+  public void displayHeader(AbstractAccount theAccount, LocalDate theDay) { 
+      System.out.print("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n\n");
+      System.out.print(theAccount.getRealName());
+      System.out.print(" logged in as Urban Parks " + theAccount.AccountType() + "\n");
+      System.out.print(theDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+      System.out.print(" ");
+      System.out.print(theDay.getDayOfMonth());
+      System.out.print(", ");
+      System.out.print(theDay.getYear());
+      System.out.print(".\n-----------------------------------------------------------------\n");
   }
 }

@@ -163,4 +163,5 @@ public abstract class AbstractAccount implements Serializable {
     }
     return result;
   }
+  public abstract String AccountType();
 }

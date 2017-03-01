@@ -1,6 +1,2 @@
-/.idea/
-/backend/
-/fixedTests/
-/view/
-/tests/
 /model/
+/view/

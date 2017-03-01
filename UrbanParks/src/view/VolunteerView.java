@@ -63,7 +63,7 @@ public class VolunteerView extends AbstractView {
 	 * Creates the main menu for the Volunteer
 	 */
 	private void mainMenu(){
-      displayHeader();
+	  super.displayHeader(myVolunteer, myDay);
       int theChoice;
 
       mySB.append("1. Volunteer for jobs\n");
@@ -90,7 +90,7 @@ public class VolunteerView extends AbstractView {
 	 * Lists the parks in anticipation of the volunteer selecting jobs from that park to sign up for
 	 */
 	private void signUpForJobByPark(){
-		displayHeader();
+	    super.displayHeader(myVolunteer, myDay);
 		
 		mySB.append("Which park do you want to volunteer for?");
 	    mySB.append("\n----------------------------------------------------------\n\n");
@@ -135,7 +135,7 @@ public class VolunteerView extends AbstractView {
 	 * @param parkJobList
 	 */
 	private void listJobsInPark(Park selectedPark, List<Job> parkJobList){
-		displayHeader();
+	    super.displayHeader(myVolunteer, myDay);
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
 		int count = 0;
@@ -210,7 +210,7 @@ public class VolunteerView extends AbstractView {
 		 sameDayFlag=isSameDayJob(printJob, volunteerJobs, mySB);
 		 
 		 if(!sameDayFlag){ 
-				displayHeader();
+		     super.displayHeader(myVolunteer, myDay);
 			    mySB.append("You are signing up for this job: \n");
 			    mySB.append(printJob.getName());
 			    mySB.append("\n");
@@ -224,7 +224,7 @@ public class VolunteerView extends AbstractView {
 			    mySB.append("\nAre you sure you want to volunteer for this job? (Y/N)");
 
 			}else {
-				displayHeader();
+			    super.displayHeader(myVolunteer, myDay);
 				mySB.append("You can not sign up for this job: \n");
 				mySB.append("You have already signed up for a job on this day.\n");
 				mySB.append("\nEnter 1 to return to main menu\n");
@@ -263,7 +263,7 @@ public class VolunteerView extends AbstractView {
 	 * Generates the view that lists all jobs the volunteer has signed up for
 	 */
 	private void viewJobs(){
-		displayHeader();
+		super.displayHeader(myVolunteer, myDay);
 		mySB.append("\nJobs currently volunteering for: ");
 		mySB.append("\nDate         Park               Job Description");
 		mySB.append("\n----------------------------------------------------------\n\n");
@@ -305,22 +305,22 @@ public class VolunteerView extends AbstractView {
 		
 	}
 	
-	/**
-	 * Prints the header to the console
-	 */
-	@Override
-    public void displayHeader() {
-        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
-        mySB.append(myVolunteer.getRealName());
-        mySB.append(" logged in as a Volunteer\n");
-        mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
-        mySB.append(" ");
-        mySB.append(myDay.getDayOfMonth());
-        mySB.append(", ");
-        mySB.append(myDay.getYear());
-        mySB.append(".\n-----------------------------------------------------------------\n");
-        System.out.print(mySB.toString());
-        mySB.delete(0, mySB.capacity());
-    }
+//	/**
+//	 * Prints the header to the console
+//	 */
+//	@Override
+//    public void displayHeader() {
+//        mySB.append("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n");
+//        mySB.append(myVolunteer.getRealName());
+//        mySB.append(" logged in as a Volunteer\n");
+//        mySB.append(myDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+//        mySB.append(" ");
+//        mySB.append(myDay.getDayOfMonth());
+//        mySB.append(", ");
+//        mySB.append(myDay.getYear());
+//        mySB.append(".\n-----------------------------------------------------------------\n");
+//        System.out.print(mySB.toString());
+//        mySB.delete(0, mySB.capacity());
+//    }
 
 }

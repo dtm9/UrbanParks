@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import view.Main;
-
 /**
  * Immutable Park class for Urban Parks.
  *
@@ -199,7 +197,6 @@ public final class Park implements Serializable {
         }
     }
     
-    //TODO new method, needs testing
     /**
      * Gets the list of pending jobs at this park.
      *

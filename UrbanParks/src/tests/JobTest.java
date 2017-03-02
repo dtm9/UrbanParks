@@ -286,7 +286,7 @@ public class JobTest implements TestConstants {
      */
     @Test(expected = IllegalArgumentException.class)
     public void setDuration_IntLargerThanDurationMax_ExceptionThrown() {
-        myJob.setDuration(Job.MAX_DURRATION + 1);
+        myJob.setDuration(Job.MAX_DURATION + 1);
     }
 
     /**

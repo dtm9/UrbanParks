@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import view.Main;
-
 /**
  * Volunteer User. Other classes will check instance of account
  * and grant this user appropriate view and permissions in the application.
@@ -29,7 +27,6 @@ private static final String ACCOUNT_TYPE = "Volunteer";
   public Volunteer(final String theUsername, final String thePhone, final String theRealName) {
     super(theUsername, thePhone, theRealName);
   }
-  //TODO can volunteer just have a 3 arg constructor?
   /**
    * Creates a volunteer user. minimal permissions.
    * Volunteers do not need to provide all of the account info at first
@@ -57,7 +54,6 @@ private static final String ACCOUNT_TYPE = "Volunteer";
     this(theUsername, null, null);
   }
   
-  //TODO new method. Test this and remove the old one in datastore.java
   /**
    * Gets a list of jobs for this Volunteer.
    *

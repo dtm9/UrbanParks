@@ -240,7 +240,6 @@ public class Main {
 
     //***** Misc method(s) *********************************************************************************************
 
-    //TODO This code sucks but I can't get MainTest.java or IOTest to work any other way.
     /**
      * Returns the list of all accounts in this object's datastore for validation testing.
      * It is more efficient to call the getter methods on specific components than to use this one.

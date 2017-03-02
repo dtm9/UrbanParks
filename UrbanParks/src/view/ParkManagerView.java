@@ -5,10 +5,8 @@ package view;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.TextStyle;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 import model.AbstractAccount;
@@ -57,8 +55,9 @@ public class ParkManagerView extends AbstractView {
      * presents the user with a choice of what to do next.
      */
     private void userChoice() {
+    	//TODO Hidden menu item
         mySB.append("\n1. Submit Job\n");
-        mySB.append("2. View Jobs\n"); //Don't need to display the Jobs TODO
+        mySB.append("2. View Jobs\n"); 
         mySB.append("3. Exit eUrbanParks\n");
         mySB.append("\nWhat would you like to do?: ");
         System.out.print(mySB.toString());
@@ -191,9 +190,11 @@ public class ParkManagerView extends AbstractView {
     }
 
     Job addMonth(Job theJob) {
+    	//TODO Fucking fix it
         System.out.print("Please set the Month of this Job(1-12, Within 1 month from now): ");
         
         int monthChoice = Integer.parseInt(myScanner.nextLine());
+        //TODO fix the If statement
         if(monthChoice <= myDay.getMonth().getValue() + MONTH_BUFFER && monthChoice >= myDay.getMonth().getValue()) {
             try {
                 
@@ -246,7 +247,7 @@ public class ParkManagerView extends AbstractView {
      * View Jobs elemt for UI
      * @deprecated
      */
-    private void ViewJobs() { // TODO Break this method up? or remove?
+    private void ViewJobs() { // TODO  Hidden from GUI
         super.displayHeader(myManager, myDay);
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {
@@ -274,7 +275,7 @@ public class ParkManagerView extends AbstractView {
                 mySB.append("\n");
             }
         }
-        mySB.append("\n\nPlease choose a job you want to view: "); // TODO Refactor or remove?
+        mySB.append("\n\nPlease choose a job you want to view: "); 
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();

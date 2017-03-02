@@ -16,12 +16,9 @@ public abstract class AbstractAccount implements Serializable {
   /**Regular expression for letters and symbols. Will be negated for phone numbers so there aren't any symbols.*/
   private static final String PHONE_REGEX = "[a-zA-Z]+";
 
-//  /**Regular expression for email address format.*/
-//  private static final String EMAIL_REGEX =
-//  "^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$";
   
 
-  /**Maxminum length a phone number can be.*/
+  /**Maximum length a phone number can be.*/
   private static final int PHONE_LENGTH = 10;
 
   /**The email address of the user that is used to log in.*/

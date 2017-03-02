@@ -124,7 +124,6 @@ public final class Datastore implements Serializable {
     	return result;
     }
 
-    //TODO if a job is in the past, it returns false as expected. Do we need that second precondition?
     
     /**
      * Returns true if a job is within the allowed date range.
@@ -156,7 +155,6 @@ public final class Datastore implements Serializable {
                && jobEndDate.compareTo(todaysDate) >= 0 && jobEndDate.compareTo(maxAllowedDate) <= 0;
     }
     
-    //TODO do we still need this one?
     /**
      * Gets the list of jobs on a given calendar date, i.e. the day, the month, and the year.
      *
@@ -188,6 +186,7 @@ public final class Datastore implements Serializable {
      *
      * @author Walter Weeks
      * @param theJob the job to move to previous jobs list.
+     * @deprecated
      */
     public void removeJob(final Job theJob) {
         if (theJob == null) {

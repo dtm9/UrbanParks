@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import view.Main;
-
 /**
  * Park Manager User. Other classes will check instance of account
  * and grant this user appropriate view and permissions in the application.
@@ -72,7 +70,6 @@ private static final String ACCOUNT_TYPE = "Park Manager";
     return otherManager.getUsername().equals(getUsername());
   }
   
-  //TODO test this method and then remove the original from Datastore.java
   /**
    * Gets a list of pending jobs for this park manager.
    * @param readOnlyDatastore - the datastore from the caller, does not modify it.

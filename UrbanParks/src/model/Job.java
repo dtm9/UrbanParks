@@ -19,12 +19,13 @@ public class Job implements Serializable {
 //TODO review these constants for the minimums and MONTH_MAX_DAY -- do we need those?
     /** Default serialVersionUID for serialization. */
     public static final long serialVersionUID = 1L;
+    //TODO Remove this constant
     public static final int MIN_YEAR = 1900;
-    public static final int MAX_DURRATION = 3;
-    public static final int MIN_DURRATION = 1;
+    public static final int MAX_DURATION = 3;
+    public static final int MIN_DURATION = 1;
     public static final int MONTH_MIN_DAY = 1;
     public static final int MONTH_MAX_DAY = 31;
-    public static final int MAX_Volunteers = 10;
+    public static final int MAX_VOLUNTEERS = 10;
 
     //***** Field(s) ***************************************************************************************************
 
@@ -181,6 +182,7 @@ public class Job implements Serializable {
      * @throw IllegalArgumentException if theYear is invalid.
      */
     public void setYear(final int theYear) {
+    	//TODO remove constant 
         if (theYear < MIN_YEAR || theYear >  Calendar.getInstance().get(Calendar.YEAR)) {
             throw new IllegalArgumentException(theYear +" is not valid.\n");
         }
@@ -205,7 +207,7 @@ public class Job implements Serializable {
      * @throw IllegalArgumentException if theDuration is less than 1.
      */
     public void setDuration(final int theDuration) {
-        if (theDuration > MAX_DURRATION || theDuration < MIN_DURRATION) {
+        if (theDuration > MAX_DURATION || theDuration < MIN_DURATION) {
             throw new IllegalArgumentException(theDuration + " is not a valid duration.\n");
         }
         myDuration = theDuration;
@@ -259,7 +261,6 @@ public class Job implements Serializable {
         } else {
             throw new IllegalArgumentException("Parameter is not of type Park\n");
         }
-    	/*TODO J-UnitTest*/
 
     }
 
@@ -389,7 +390,7 @@ public class Job implements Serializable {
      */
     public boolean isMaxVolunteers() {
         boolean ans = true;
-        if (this.myVolunteers.size() < MAX_Volunteers) {
+        if (this.myVolunteers.size() < MAX_VOLUNTEERS) {
             ans = false;
         }
         return ans;
@@ -401,7 +402,7 @@ public class Job implements Serializable {
      * @author Dylan Miller
      */
     public static int getMaxDuration() {
-      return MAX_DURRATION;
+      return MAX_DURATION;
     }
 
     //***** Overridden method(s) ***************************************************************************************
@@ -421,7 +422,6 @@ public class Job implements Serializable {
      * Equals operation for comparing Job objects for equality. We consider Job objects to be equal
      * if both Jobs have the same park name, day, month, and time fields.
      *
-     * TODO: This might have to be changed if we decide to use the Calendar class for date & time representation.
      *
      * @author Walter Weeks
      * @param theObj the other object we are comparing to.

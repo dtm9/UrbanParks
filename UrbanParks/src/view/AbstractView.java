@@ -1,21 +1,18 @@
 package view;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.Locale;
-import model.Datastore;
+
 import model.AbstractAccount;
+import model.Datastore;
 
 /**
  * @author Dylan Miller
  *
  */
 public abstract class AbstractView {
-  private AbstractAccount myUser;
+  
   
   public AbstractView() {
   }

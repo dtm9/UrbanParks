@@ -7,14 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import model.Datastore;
 import model.Job;
 import model.Park;
 import model.ParkManager;
 import model.Volunteer;
+
+import org.junit.Before;
 
 /**
  * @author Dylan Miller

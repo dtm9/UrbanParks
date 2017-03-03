@@ -25,7 +25,8 @@ import model.Volunteer;
  */
 public class VolunteerView extends AbstractView {
 
-	private Volunteer myVolunteer;
+	private static final int MIN_DATE_AWAY_MINUS_ONE = 1;
+    private Volunteer myVolunteer;
 	private static Datastore myDatastore;
 	private Scanner myScanner = new Scanner(System.in);
 	private StringBuilder mySB;
@@ -190,7 +191,7 @@ public class VolunteerView extends AbstractView {
 		ZoneId z = ZoneId.of("America/Los_Angeles");
 		LocalDate today = LocalDate.now(z);
 
-		int futureDayofYear = today.getDayOfYear() + 1; // TODO un-hardcode the +1 to the correct amount of days away (days away you want - 1)
+		int futureDayofYear = today.getDayOfYear() + MIN_DATE_AWAY_MINUS_ONE; 
 		LocalDate futureLimit = LocalDate.ofYearDay(today.getYear(), futureDayofYear);	
 		LocalDate jobDate = LocalDate.of(currentJob.getYear(), currentJob.getMonth(), currentJob.getDay());
 

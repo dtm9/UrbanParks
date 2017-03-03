@@ -17,38 +17,28 @@ import model.Volunteer;
 
 /**
  * Class to launch the application. Stores the mainline.
- *
  * @author Dylan Miller
  */
 public class Main {
 
     //***** Field(s) ***************************************************************************************************
 
-    /**
-     * Static reference to the datastore in memory.
-     */
+    /**Static reference to the datastore in memory.*/
     private static Datastore datastore;
 
-    /**
-     * String builder for printing any text needed to console.
-     */
+    /**String builder for printing any text needed to console.*/
     private static StringBuilder mySB = new StringBuilder();
 
-    /**
-     * OS-independent string to add a line break in string builder.
-     */
+    /**OS-independent string to add a line break in string builder.*/
     private static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
-    /**
-     * Scanner object for any user input that may be required for log in.
-     */
+    /**Scanner object for any user input that may be required for log in.*/
     private static Scanner myScanner = new Scanner(System.in);
 
     //***** Constructor(s) *********************************************************************************************
 
     /**
      * Empty package-level constructor for testing purposes only.
-     *
      * @author Dylan Miller
      */
     Main() {}
@@ -70,7 +60,6 @@ public class Main {
 
     /**
      * Helper method to log in and start the GUI.
-     *
      * @author Dylan Miller
      */
     private static boolean init() {
@@ -118,7 +107,6 @@ public class Main {
 
     /**
      * Helper method to get the username from the command line.
-     *
      * @return user's GUID
      * @author Dylan Miller
      */
@@ -133,7 +121,6 @@ public class Main {
 
     /**
      * Matches passed in username for account in the datastore.
-     *
      * @param username provided by user.
      * @return account of user or null if not found.
      * @author Dylan Miller
@@ -156,7 +143,6 @@ public class Main {
 
     /**
      * Helper method to test the log-in screen display.
-     *
      * @author Dylan Miller
      */
     private static void printHeader() {
@@ -184,7 +170,6 @@ public class Main {
 
     /**
      * Helper method to create the proper view for the user.
-     *
      * @param userAccount
      * @param theView
      * @return instantiated view object.
@@ -204,7 +189,6 @@ public class Main {
 
     /**
      * Saves the datastore object to file.
-     *
      * @author Dylan Miller
      */
     public static void save() { 
@@ -221,7 +205,6 @@ public class Main {
 
     /**
      * Loads the datastore from file.
-     *
      * @author Dylan Miller
      */
     public static void load() {

@@ -15,7 +15,6 @@ import model.Volunteer;
 
 /**
  * Unit tests for the Main driver class.
- *
  * @author Dylan Miller
  */
 public class MainTest {
@@ -49,7 +48,6 @@ public class MainTest {
         Main.load();
         Main testMainObj = new Main();
         List<AbstractAccount> accounts = testMainObj.getAllAccounts();
-        //List<AbstractAccount> accounts = datastore.getAllAccounts();
 
         myGoodAccount = accounts.get(0);
         myGoodUsername = myGoodAccount.getUsername();
@@ -62,6 +60,7 @@ public class MainTest {
 
     /**
      * Tests Main#seekAccount(String) using a good Account from the datastore.
+     * @author Dylan Miller
      */
     @Test
     public final void seekAccount_goodUsername_NoExceptionsExpected() {
@@ -74,6 +73,7 @@ public class MainTest {
 
     /**
      * Tests Main#seekAccount(String) using an Account not contained in the datastore.
+     * @author Dylan Miller
      */
     @Test
     public final void seekAccount_UserNotInDatastore_ShouldReturnNull() {
@@ -85,6 +85,7 @@ public class MainTest {
     /**
      * Tests Main#generateView(Account, View) with each type of user Account, i.e., ParkManager,
      * Volunteer, and OfficeStaff.
+     * @author Dylan Miller
      */
     @Test
     public final void generateView_EachAccountIsValid_NoExceptionsExcpected() {
@@ -104,6 +105,7 @@ public class MainTest {
     /**
      * Tests Main#generateView(Account, View) with a null Account abstract object; expected to throw a
      * NullPointerException.
+     * @author Dylan Miller
      */
     @Test
     public final void generateView_AbstractAccount_NullPointerExceptionExpected() {
@@ -117,6 +119,7 @@ public class MainTest {
     /**
      * Tests Main#generateView(Account, View) with a null Volunteer object; expected to throw a
      * NullPointerException.
+     * @author Dylan Miller
      */
     @Test
     public final void generateView_NullObjectWithVolunteerCast_NullPointerExceptionExpected() {
@@ -129,6 +132,7 @@ public class MainTest {
     /**
      * Tests Main#generateView(Account, View) with a null ParkManager object; expected to throw a
      * NullPointerException.
+     * @author Dylan Miller
      */
     @Test
     public final void generateView_NullObjectWithParkManagerCast_NullPointerExceptionExpected() {

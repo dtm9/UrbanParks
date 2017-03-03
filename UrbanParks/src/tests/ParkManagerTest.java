@@ -1,11 +1,11 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +14,6 @@ import model.Datastore;
 import model.Job;
 import model.Park;
 import model.ParkManager;
-import view.Main;
-import view.ParkManagerView;
 
 /**
  * Basic unit tests for the ParkManager class.

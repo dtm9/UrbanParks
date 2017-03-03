@@ -17,7 +17,6 @@ import model.Volunteer;
 /**
  * Test cases for the VolunterView class.
  * Changed visibility of minDaysAway to package during testing.
- *
  * @author Peter Park (ragnarok@uw.edu)
  */
 public class VolunteerViewTest {
@@ -31,7 +30,6 @@ public class VolunteerViewTest {
 
 	/**
 	 * Sets up the text fixtures.
-	 * 
 	 * @author Peter Park
 	 */
 	@Before
@@ -49,7 +47,6 @@ public class VolunteerViewTest {
 	
 	/**
      * Tests for a valid/good job passed in.
-     * 
      * @author Peter Park
      */
     @Test
@@ -61,7 +58,6 @@ public class VolunteerViewTest {
 
 	/**
      * Tests for a job that starts sooner than the minimum number of days away.
-     * 
      * @author Peter Park
      */
     @Test
@@ -73,7 +69,6 @@ public class VolunteerViewTest {
     
 	/**
      * Tests for a past job passed in.
-     * 
      * @author Peter Park
      */
     @Test
@@ -84,7 +79,6 @@ public class VolunteerViewTest {
     }
     /**
      * Tests if a same day sign up will return a false flag 
-     * 
      * @author Ethan Young
      */
     public void isSameDayJob_SameDay_ReturnFalseFlag(){
@@ -93,14 +87,10 @@ public class VolunteerViewTest {
     	List<Job> jobList = new ArrayList<Job>();
     	jobList.add(testJob4);
     	assertFalse("This will fail", myView.isSameDayJob(testJob5, jobList, mySB));
-    	
-    	
-    	
     }
     
     /**
      * Tests if a different day sign up will return a true flag
-     * 
      * @author Ethan Young
      */
     public void isSameDayJob_NotSameDay_ReturnTrueFlag(){

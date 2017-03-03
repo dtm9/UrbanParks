@@ -23,9 +23,7 @@ import model.ParkManager;
  */
 public class ParkManagerView extends AbstractView {
     public static final int TEMP_MAX_JOBS = 30;
-    /**
-     * @deprecated
-     */
+    /**@deprecated*/
     public static final int MONTH_BUFFER = 1;
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
@@ -55,10 +53,8 @@ public class ParkManagerView extends AbstractView {
      * presents the user with a choice of what to do next.
      */
     private void userChoice() {
-    	//TODO Hidden menu item
         mySB.append("\n1. Submit Job\n");
-        mySB.append("2. View Jobs\n"); 
-        mySB.append("3. Exit eUrbanParks\n");
+        mySB.append("2. Exit eUrbanParks\n");
         mySB.append("\nWhat would you like to do?: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -69,9 +65,9 @@ public class ParkManagerView extends AbstractView {
             submitJob();
             break;
         case 2:
-            ViewJobs();
             break;
         case 3:
+            ViewJobs();
             break;
         }
         
@@ -190,8 +186,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     Job addMonth(Job theJob) {
-    	//TODO Fucking fix it
-        System.out.print("Please set the Month of this Job(1-12, Within 1 month from now): ");
+        System.out.print("Please set the Month of this Job(1-12): ");
         
         int monthChoice = Integer.parseInt(myScanner.nextLine());
         //TODO fix the If statement
@@ -247,7 +242,7 @@ public class ParkManagerView extends AbstractView {
      * View Jobs elemt for UI
      * @deprecated
      */
-    private void ViewJobs() { // TODO  Hidden from GUI
+    private void ViewJobs() { 
         super.displayHeader(myManager, myDay);
         int count = 1;
         for (int i = 0; i < myDatastore.getNumberOfJobs(); i++) {

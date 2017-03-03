@@ -2,9 +2,15 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Datastore;
+import model.Job;
 import model.Park;
 import model.ParkManager;
 
@@ -17,21 +23,39 @@ public class ParkTest {
 
 	// ***** Test fixture(s) and setUp() *******************************************************************************
 
-	/** The park manager test fixture. */
+	/**The park manager test fixture.*/
 	private ParkManager myManager;
 
-	/** The park test fixture. */
+	/**The park test fixture.*/
 	private Park myPark;
-
+	
+	/**The job test fixture.*/
+    private Job myJob;
+    
+	/**Test Datastore test fixture.*/
+	private Datastore myDatastore;
+	
 	/**
 	 * Sets up the test fixture.
 	 * @author Walter Weeks
 	 */
 	@Before
 	public void setUp() {
+	    Calendar myCal = Calendar.getInstance();
+	    myCal.setTime(new Date());
+	    myCal.add(Calendar.DAY_OF_MONTH, 1);
+	    
 		myManager = new ParkManager("johnjones@tacomaparks.com", "2535551111", "John Jones");
 		myPark = new Park(myManager, "Tacoma Nature Center", "1919 S Tyler St",
                 "Tacoma", "WA", "98405");
+		myJob = new Job(myPark, "12:30", "Raking leaves in the courtyard", "Raking Leaves", 1,
+		                myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+		myDatastore = new Datastore();
+		
+		myDatastore.addAccount(myManager);
+		myDatastore.addPark(myPark);
+		myDatastore.addJob(myJob);
+		
 	}
 
 	//***** Unit test(s) ***********************************************************************************************
@@ -244,14 +268,15 @@ public class ParkTest {
 				"Tacoma", "Was", "98405");
 	}
 	
-// /**
-//  * Tests to see if the number of jobs at particular park is as expected.
-//  *
-//  * @author Walter Weeks
-//  */
-// @Test
-// public void getJobsByPark_UnmodifiedDatastore_ShouldBe4Jobs() {
-//     List<Job> jobsAtWapato = myDatastore.getJobsByPark(myParks.get(0));
-//     assertEquals(4, jobsAtWapato.size());
-// }
+    /**
+    * Tests to see if the number of jobs at particular park is as expected.
+    * @author Walter Weeks
+    * @author Dylan Miller
+    */
+    @Test
+    public void getJobs_UnmodifiedDatastore_ShouldBeOneJob() {
+        ArrayList<Job> jobs = (ArrayList<Job>)myPark.getJobs(myDatastore);
+        assertEquals(1, jobs.size());
+    }
+    //TODO add some rainy-day scenarios for getJobs()
 }

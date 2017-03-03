@@ -112,6 +112,7 @@ public class ParkManagerTest {
     /**
     * Tests to see if the number of jobs a particular park manager is as expected.
     * @author Walter Weeks
+    * @author Dylan Miller
     */
     @Test
     public void getJobsByParkManager_UnmodifiedDatastore_ShouldBe4Jobs() {

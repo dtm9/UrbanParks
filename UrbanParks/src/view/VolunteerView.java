@@ -259,8 +259,8 @@ public class VolunteerView extends AbstractView {
 	private void viewJobs(){
 		super.displayHeader(myVolunteer, myDay);
 		mySB.append("\nJobs currently volunteering for: ");
-		mySB.append("\nDate         Park               Job Description");
-		mySB.append("\n----------------------------------------------------------\n\n");
+		mySB.append("\nDate         Park            Job Time    Duration     Job Description");
+		mySB.append("\n-----------------------------------------------------------------------\n\n");
 		List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		Iterator<Job> itr = volunteerJobs.iterator();
 		while( itr.hasNext()){
@@ -273,8 +273,15 @@ public class VolunteerView extends AbstractView {
 			mySB.append(currentJob.getYear());
 			mySB.append("   ");
 			mySB.append(currentJob.getPark().getName());
-			mySB.append("     ");
+			mySB.append("       ");
+			mySB.append(currentJob.getTime());
+			mySB.append("         ");
+			mySB.append(currentJob.getDuration());
+			mySB.append("          ");
 			mySB.append(currentJob.getDescription());
+			mySB.append("     ");
+			mySB.append("\n");
+			mySB.append("\n");
 			mySB.append("\n");
 
 		}	

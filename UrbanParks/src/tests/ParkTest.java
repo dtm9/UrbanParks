@@ -25,7 +25,6 @@ public class ParkTest {
 
 	/**
 	 * Sets up the test fixture.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Before
@@ -39,7 +38,6 @@ public class ParkTest {
 
 	/**
 	 * Tests two separate Park objects for equality; should be true.
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -51,7 +49,6 @@ public class ParkTest {
 
 	/**
 	 * Tests two separate Park objects for equality; should be false.
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -63,7 +60,6 @@ public class ParkTest {
 
 	/**
 	 * Tests to see if the park manager is as expected from the getter, Park#getManager().
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -73,7 +69,6 @@ public class ParkTest {
 
 	/**
 	 * Tests to see if a park name is as expected from the getter, Park#getName().
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -83,7 +78,6 @@ public class ParkTest {
 
 	/**
 	 * Tests to see if the getter works properly, Park#getCity().
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -93,7 +87,6 @@ public class ParkTest {
 
 	/**
 	 * Tests to see if the getter works properly, Park#getState().
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -103,7 +96,6 @@ public class ParkTest {
 
 	/**
 	 * Tests to see if the getter works properly, Park#getZipcode().
-	 *
 	 * @author Peter Park
 	 */
 	@Test
@@ -113,7 +105,6 @@ public class ParkTest {
 
     /**
      * Tests to see if the getter works properly, Park#getStreet().
-     *
      * @author Walter Weeks
      */
 	@Test
@@ -125,7 +116,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad state data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -136,7 +126,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad state data, i.e., the empty string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -147,7 +136,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad ZIP Code data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -158,7 +146,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad ZIP Code data, i.e., the empty string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -169,7 +156,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad city data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -180,7 +166,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad city data, i.e., the empty string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -191,7 +176,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad street data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -202,7 +186,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad street data, i.e., the empty string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -213,7 +196,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad park name data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -224,7 +206,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad park name data, i.e., the empty string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -235,7 +216,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for NullPointerException when passed bad park manager data, i.e., null.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = NullPointerException.class)
@@ -246,7 +226,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad state data, i.e., 1 character string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -257,7 +236,6 @@ public class ParkTest {
 
 	/**
 	 * Tests for IllegalArgumentException when passed bad state data, i.e., 3 character string.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = IllegalArgumentException.class)
@@ -265,4 +243,15 @@ public class ParkTest {
 		myPark = new Park(myManager, "Tacoma Nature Center", "1919 S Tyler St",
 				"Tacoma", "Was", "98405");
 	}
+	
+// /**
+//  * Tests to see if the number of jobs at particular park is as expected.
+//  *
+//  * @author Walter Weeks
+//  */
+// @Test
+// public void getJobsByPark_UnmodifiedDatastore_ShouldBe4Jobs() {
+//     List<Job> jobsAtWapato = myDatastore.getJobsByPark(myParks.get(0));
+//     assertEquals(4, jobsAtWapato.size());
+// }
 }

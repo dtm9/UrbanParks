@@ -64,5 +64,16 @@ public class ParkManagerTest {
         ParkManager otherManager = new ParkManager("jimmy@tacomaparks.com", "2535551234", "John Doe");
         assertFalse(otherManager.equals(validParkManagerAccount));
     }
+    
+//  /**
+//  * Tests to see if the number of jobs a particular park manager is as expected.
+//  *
+//  * @author Walter Weeks
+//  */
+// @Test
+// public void getJobsByParkManager_UnmodifiedDatastore_ShouldBe6Jobs() {
+//     List<Job> jobsByParkManager = myDatastore.getJobsByParkManager(myParkManagers.get(0));
+//     assertEquals(6, jobsByParkManager.size());
+// }
 
 }

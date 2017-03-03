@@ -1,22 +1,28 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import model.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import model.AbstractAccount;
+import model.Datastore;
+import model.InvalidJobDurationException;
+import model.Job;
+import model.Park;
+import model.ParkManager;
+import model.Volunteer;
+
 /**
  * Basic unit tests for the Datastore class.
- *
  * @author Walter Weeks
  */
 public class DatastoreTest {
@@ -47,7 +53,6 @@ public class DatastoreTest {
 	/**
 	 * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
 	 * building a small amount of data used by the Datastore methods to verify their proper working order.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Before
@@ -71,8 +76,8 @@ public class DatastoreTest {
 
 	/**
 	 * Helper method that populates the auxiliary test fixtures.
-	 *
 	 * @author Walter Weeks
+	 * @author Dylan Miller
 	 */
 	private void populateAuxiliaryTestFixtures() {
 		// populate myParkManagers list data structure w/ 4 total managers
@@ -88,26 +93,6 @@ public class DatastoreTest {
 		myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
 
 		// populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
-		
-		
-		/* old test jobs before bus rule 2E
-		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
-				"Raking leaves", 1, 1, 3, 2017));
-		myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
-				"Pick up litter", 1, 5, 3, 2017));
-		myJobs.add(new Job(myParks.get(1), "1500", "We will be building a fence.",
-				"Build fence", 1, 1, 4, 2017));
-		myJobs.add(new Job(myParks.get(3), "1400", "We will be painting a fence.",
-				"Paint fence", 1, 2, 3, 2017));
-		myJobs.add(new Job(myParks.get(4), "1640", "We will be clearing a trail",
-				"Trail clearing", 1, 15, 4, 2017));
-		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches.",
-				"Digging ditches", 1, 10, 3, 2017));
-		myJobs.add(new Job(myParks.get(0), "1145", "We will be digging ditches again.",
-				"More digging ditches", 1, 15, 3, 2017));
-		myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
-				"Construct building", 1, 1, 4, 2017)); 
-		*/
 		
 		myCal.add(Calendar.DATE, 5); //5 days from today
 		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
@@ -160,7 +145,6 @@ public class DatastoreTest {
 
 	/**
 	 * Helper method that populates the myDatastore text fixture.
-	 *
 	 * @author Walter Weeks
 	 */
 	private void populateDatastoreTestFixture() {
@@ -185,7 +169,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests to see if the current number of pending jobs is as expected for the test fixture.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -194,67 +177,7 @@ public class DatastoreTest {
 	}
 
 	/**
-	 * Tests to see if the number of previous jobs is as expected after twos jobs have
-	 * been removed from the pending list.
-	 *
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void removeJob_RemovalOf2Jobs_PreviousJobsListShouldBeSize2() {
-		myDatastore.removeJob(myJobs.get(0));
-		myDatastore.removeJob(myJobs.get(1));
-		assertEquals(2, myDatastore.getNumberOfPreviousJobs());
-		//assertEquals(myJobs.size() - 2, myDatastore.getNumberOfJobs());
-	}
-
-	//TODO these tests are broken due to datastore changes. Are they necessary? Should we migrate them to other test classes?
-//	/**
-//	 * Tests to see if the number of expected jobs within a particular city is as expected.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test
-//	public void getJobsByCity_UnmodifiedDatastore_ShouldBe7JobsInTacoma() {
-//		List<Job> jobsInTacoma = myDatastore.getJobsByCity("Tacoma", "WA");
-//		assertEquals(7, jobsInTacoma.size());
-//	}
-//
-//	/**
-//	 * Tests to see if the number of jobs at particular park is as expected.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test
-//	public void getJobsByPark_UnmodifiedDatastore_ShouldBe4Jobs() {
-//		List<Job> jobsAtWapato = myDatastore.getJobsByPark(myParks.get(0));
-//		assertEquals(4, jobsAtWapato.size());
-//	}
-//
-//	/**
-//	 * Tests to see if the number of jobs a particular volunteers is as expected.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test
-//	public void getJobsByVolunteer_UnmodifiedDatastore_ShouldBe2() {
-//		List<Job> jobsByVolunteer = myDatastore.getJobsByVolunteer(myVolunteers.get(0));
-//		assertEquals(2, jobsByVolunteer.size());
-//	}
-//
-//	/**
-//	 * Tests to see if the number of jobs a particular park manager is as expected.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test
-//	public void getJobsByParkManager_UnmodifiedDatastore_ShouldBe6Jobs() {
-//		List<Job> jobsByParkManager = myDatastore.getJobsByParkManager(myParkManagers.get(0));
-//		assertEquals(6, jobsByParkManager.size());
-//	}
-
-	/**
 	 * Tests to see if the number of accounts is as expected.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -264,7 +187,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests to see if the number of parks is as expected.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -274,7 +196,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests to see if the Datastore#addJob(Job) works as expected for adding 1 pending job.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -289,9 +210,7 @@ public class DatastoreTest {
 	/**
 	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns true if a particular day has exactly
 	 * the maximum number of allowed pending jobs.
-	 * 
 	 * NOTE: This was added for the Unit Testing 2 homework.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -312,9 +231,7 @@ public class DatastoreTest {
 	/**
 	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns false if a particular day has exactly
 	 * the maximum number of allowed pending jobs minus one, i.e., one more job can be placed on that day.
-	 * 
 	 * NOTE: This was added for the Unit Testing 2 homework.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test
@@ -335,7 +252,6 @@ public class DatastoreTest {
 
     /**
      * Test to see if the default value of maximum number of pending jobs allowed by system is set properly.
-     *
      * @author Walter Weeks
      */
 	@Test
@@ -345,7 +261,6 @@ public class DatastoreTest {
 
     /**
      * Tests to see if max pending jobs can be changed to an expected value;
-     *
      * @author Walter Weeks
      */
     @Test
@@ -356,7 +271,6 @@ public class DatastoreTest {
 
     /**
      * Tests to see if the Park list is as expected.
-     *
      * @author Walter Weeks
      */
     @Test
@@ -368,7 +282,6 @@ public class DatastoreTest {
 
     /**
      * Tests to see if the Accounts list is as expected.
-     *
      * @author Walter Weeks
      */
     @Test
@@ -382,7 +295,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests for NullPointerException when adding a null job.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test(expected = NullPointerException.class)
@@ -392,7 +304,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests for NullPointerException when adding a null account.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test(expected = NullPointerException.class)
@@ -402,7 +313,6 @@ public class DatastoreTest {
 
 	/**
 	 * Tests for NullPointerException when adding a null park.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test(expected = NullPointerException.class)
@@ -410,53 +320,10 @@ public class DatastoreTest {
 		myDatastore.addPark(null);
 	}
 
-	//TODO these tests were broken by datastore changes. Do we need them? Should we migrate them to other test classes?
-//	/**
-//	 * Tests for NullPointerException when getting jobs by city, for null city.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test(expected = NullPointerException.class)
-//	public void getJobsByCity_SearchingForNullCity_ExceptionThrown() {
-//		myDatastore.getJobsByCity(null, "WA");
-//	}
-//
-//	/**
-//	 * Tests for NullPointerException when getting jobs by city, for null state.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test(expected = NullPointerException.class)
-//	public void getJobsByCity_SearchingForNullState_ExceptionThrown() {
-//		myDatastore.getJobsByCity("Tacoma", null);
-//	}
-//
-//	/**
-//	 * Tests for IllegalArgumentException when getting jobs by city, for empty city string.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test(expected = IllegalArgumentException.class)
-//	public void getJobsByCity_SearchForEmptyStringCity_ExceptionThrown() {
-//		myDatastore.getJobsByCity("", "WA");
-//	}
-//
-//	/**
-//	 * Tests for IllegalArgumentException when getting jobs by city, for 1 character state string.
-//	 *
-//	 * @author Walter Weeks
-//	 */
-//	@Test(expected = IllegalArgumentException.class)
-//	public void getJobsByCity_SearchFor1CharState_ExceptionThrown() {
-//		myDatastore.getJobsByCity("Tacoma", "W");
-//	}
-
 	/**
 	 * Tests to see if the Datastore#addJob(Job) does not allow for adding more than the
 	 * maximum number of pending jobs on a given date.
-	 * 
 	 * NOTE: This was added for the Unit Testing 2 homework.
-	 *
 	 * @author Walter Weeks
 	 */
 	@Test (expected = InvalidJobDurationException.class)
@@ -471,7 +338,6 @@ public class DatastoreTest {
 
     /**
      * Tests for IllegalArgrumentException when attempting to set the maximum number of pending jobs to 0.
-     *
      * @author Walter Weeks
      */
     @Test(expected = IllegalArgumentException.class)

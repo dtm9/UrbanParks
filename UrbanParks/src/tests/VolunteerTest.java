@@ -142,4 +142,15 @@ public class VolunteerTest {
 
       new Volunteer(GOOD_EMAIL, "555111222", GOOD_NAME);
     }
+    
+//  /**
+//  * Tests to see if the number of jobs a particular volunteers is as expected.
+//  *
+//  * @author Walter Weeks
+//  */
+// @Test
+// public void getJobsByVolunteer_UnmodifiedDatastore_ShouldBe2() {
+//     List<Job> jobsByVolunteer = myDatastore.getJobsByVolunteer(myVolunteers.get(0));
+//     assertEquals(2, jobsByVolunteer.size());
+// }
 }

@@ -11,6 +11,8 @@ import static org.junit.Assert.fail;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -49,6 +51,9 @@ public class IOTest {
     @Before
     public void setUp() throws Exception {
     testDatastore = new Datastore();
+    Calendar myCal = Calendar.getInstance();
+    myCal.setTime(new Date());
+    myCal.add(Calendar.DAY_OF_MONTH, 2); //two days from today
 
     testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
     testDatastore.addAccount(testPM1);
@@ -68,19 +73,26 @@ public class IOTest {
     testPark3 = new Park(testPM3, "Wright Park", "501 S I St", "Tacoma", "WA", "98408");
     testDatastore.addPark(testPark3);
 
-	testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
+	//testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
+    testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1,
+            myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob1);
 	
-//	testJob2 = new Job(testPark2, "09:00", "Paint over graphiti.","Painting", 1, 19, 2 , 2017);
-//	testDatastore.addJob(testJob2); 
 	
-	testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
+	//testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
+	testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1,
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob2);
 	
-	testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);
+	myCal.add(Calendar.DAY_OF_MONTH, 1);
+	//testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);
+	testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob3);
 	
-	testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
+	//testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
+	testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1,
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob4);
 	
 	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes");
@@ -104,15 +116,13 @@ public class IOTest {
 	Main.load();
   }
 
-//  @Test
-//  public final void save_DefaultState_NoExceptionsExpected() {
-//    Main.datastore = testDatastore;
-//    Main.save();
-//  }
+  @Test
+  public final void save_DefaultState_NoExceptionsExpected() {
+    Main.save();
+  }
   
   @Test
   public final void load_DefaultState_NoExceptionsExpected() {
-
     Main.load();
   }
   

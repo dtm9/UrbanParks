@@ -132,10 +132,11 @@ public class VolunteerView extends AbstractView {
 	 * @param parkJobList
 	 */
 	private void listJobsInPark(Park selectedPark, List<Job> parkJobList){
-		//TODO Same GUI format as view jobs
 		super.displayHeader(myVolunteer, myDay);
 		mySB.append("Which job do you want to sign up for?\n");
 		mySB.append("\n----------------------------------------------------------\n\n");
+		mySB.append("\nDate          Park               Job Time    Duration     Job Description");
+		mySB.append("\n-----------------------------------------------------------------------\n\n");
 		int count = 0;
 		Iterator<Job> itr=parkJobList.iterator();
 		if(parkJobList.size() == 0) mySB.append("There are no jobs to sign up for\n"); // Changed because parkJobList can never be NULL
@@ -150,16 +151,17 @@ public class VolunteerView extends AbstractView {
 				legitJobs.add(currentJob);
 				mySB.append(count);
 				mySB.append(". ");
-				mySB.append(currentJob.getName());
-				mySB.append("\n      ");
+				mySB.append(currentJob.getMonth()+"/"+currentJob.getDay()+"/"+currentJob.getYear());
+				mySB.append("    ");
+				mySB.append(currentJob.getPark().getName());
+				mySB.append("     ");
+				mySB.append(currentJob.getTime());
+				mySB.append("         ");
+				mySB.append(currentJob.getDuration());
+				mySB.append("            ");
 				mySB.append(currentJob.getDescription());
-				mySB.append("\n     ");
-				mySB.append("Date: ");
-				mySB.append(currentJob.getDay());
-				mySB.append("/");
-				mySB.append(currentJob.getMonth());
-				mySB.append("/");
-				mySB.append(currentJob.getYear());
+				mySB.append("\n");
+				mySB.append("\n");
 				mySB.append("\n");
 			}
 		}
@@ -264,7 +266,6 @@ public class VolunteerView extends AbstractView {
 		List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
 		Iterator<Job> itr = volunteerJobs.iterator();
 		while( itr.hasNext()){
-			//TODO Add Job Time and Duration
 			Job currentJob = itr.next();
 			mySB.append(currentJob.getDay());
 			mySB.append("/");

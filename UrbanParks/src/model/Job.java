@@ -16,11 +16,8 @@ import java.util.Objects;
 public class Job implements Serializable {
 
     //***** Constant(s)
-//TODO review these constants for the minimums and MONTH_MAX_DAY -- do we need those?
     /** Default serialVersionUID for serialization. */
     public static final long serialVersionUID = 1L;
-    //TODO Remove this constant
-    public static final int MIN_YEAR = 1900;
     public static final int MAX_DURATION = 3;
     public static final int MIN_DURATION = 1;
     public static final int MONTH_MIN_DAY = 1;
@@ -182,8 +179,8 @@ public class Job implements Serializable {
      * @throw IllegalArgumentException if theYear is invalid.
      */
     public void setYear(final int theYear) {
-    	//TODO remove constant 
-        if (theYear < MIN_YEAR || theYear >  Calendar.getInstance().get(Calendar.YEAR)) {
+    	//if in the past or bigger than year after next
+        if (theYear <  Calendar.getInstance().get(Calendar.YEAR) || theYear > Calendar.getInstance().get(Calendar.YEAR) + 1) {
             throw new IllegalArgumentException(theYear +" is not valid.\n");
         }
         myYear = theYear;

@@ -117,5 +117,4 @@ public class ParkManagerTest {
       ArrayList<Job> jobList = (ArrayList<Job>)validParkManagerAccount.getJobsByParkManager(testDatastore);
       assertTrue(jobList.size() == 4);
     }
-    //TODO some rainy-day tests for getJobsByParkManager for input partitions. Shouldn't be many, takes no inputs.
 }

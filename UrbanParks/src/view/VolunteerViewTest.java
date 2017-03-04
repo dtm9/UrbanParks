@@ -2,6 +2,8 @@ package view;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,11 +55,10 @@ public class VolunteerViewTest {
      */
     @Test
     public void minDaysAway_GoodJob_ListThisJob() {
-        Calendar myCal = Calendar.getInstance();
-        myCal.setTime(new Date());
-        myCal.add(Calendar.DATE, 4); //more than minimum days away
-    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, 
-    	                       myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH) ,myCal.get(Calendar.YEAR));
+		ZoneId z = ZoneId.of("America/Los_Angeles");
+		LocalDate today = LocalDate.now(z);
+		today.plusDays(4);
+    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     	myDatastore.addJob(testJob1);
         assertTrue(myView.minDaysAway(testJob1));
     }

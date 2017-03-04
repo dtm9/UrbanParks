@@ -187,18 +187,12 @@ public class ParkManagerView extends AbstractView {
 
     Job addMonth(Job theJob) {
         System.out.print("Please set the Month of this Job(1-12): ");
-        
         int monthChoice = Integer.parseInt(myScanner.nextLine());
-        //TODO fix the If statement
-        if(monthChoice <= myDay.getMonth().getValue() + MONTH_BUFFER && monthChoice >= myDay.getMonth().getValue()) {
-            try {
-                
-                    theJob.setMonth(monthChoice);
-            } catch (Exception e) {
-                System.out.println("Value not Accepted.");
-                addMonth(theJob);
-            }
-        } else {
+        try {
+
+            theJob.setMonth(monthChoice);
+        } catch (Exception e) {
+            System.out.println("Value not Accepted.");
             addMonth(theJob);
         }
         return theJob;

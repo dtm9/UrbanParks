@@ -13,7 +13,11 @@ import model.Datastore;
 import model.Job;
 import model.Park;
 import model.ParkManager;
-
+/**
+ * This creates a state of the datastore to test if the max jobs has been created. 
+ * @author VG Gnome 
+ *
+ */
 public class MaxPendingJobsStateTest {
     public int NUMBER_OF_JOBS = 19;
     public int YEAR = 2017;
@@ -23,7 +27,6 @@ public class MaxPendingJobsStateTest {
     public String[] Times = {"11:00","14:00","10:00","09:00","11:00","14:00"};
     public int[] Duration = {1,2,3};
     public int[] Day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
-//    public int[] Month = {1,2,3,4,5,6,7,8,9,10,11,12};
     public String DESCRIPTION = "No Description";
     
     public Datastore testDatastore;
@@ -45,7 +48,6 @@ public class MaxPendingJobsStateTest {
         int theDuration;
         for(int i = 0; i < NUMBER_OF_JOBS; i++) {
             theDay = Day[i%(Day.length - 1)];
-//            theMonth = Month[i%(Month.length - 1)];
             theTime = Times[i%(Times.length - 1)];
             theDuration = Duration[i%(Duration.length - 1)];
             theName = JobTitles[i%(JobTitles.length - 1)];

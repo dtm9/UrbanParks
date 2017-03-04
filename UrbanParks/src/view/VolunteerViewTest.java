@@ -57,8 +57,12 @@ public class VolunteerViewTest {
     public void minDaysAway_GoodJob_ListThisJob() {
 		ZoneId z = ZoneId.of("America/Los_Angeles");
 		LocalDate today = LocalDate.now(z);
-		today.plusDays(4);
-    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, 7, 3, 2017);
+		today.plusDays(2);
+		System.out.println(today.getMonthValue());
+		System.out.println(today.getDayOfMonth());
+		System.out.println(today.getYear());
+
+    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, today.getMonthValue(), today.getDayOfMonth(), today.getYear());
     	myDatastore.addJob(testJob1);
         assertTrue(myView.minDaysAway(testJob1));
     }

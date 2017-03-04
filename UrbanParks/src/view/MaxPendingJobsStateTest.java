@@ -42,7 +42,6 @@ public class MaxPendingJobsStateTest {
         testPark = new Park(myManager, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
         testDatastore.addPark(testPark);
         int theDay;
-        int theMonth;
         String theTime;
         String theName;
         int theDuration;

@@ -7,9 +7,6 @@ package model;
  */
 public class InvalidJobDurationException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public InvalidJobDurationException() { }

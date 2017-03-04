@@ -47,6 +47,8 @@ public class JobWithMaxVolunteersStateTest {
                 myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
         JobWithLessThanMaxVolunteers = new Job(testPark, "10:00", "Emptying YardWaste Bins","Mowing", 1,
                 myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+        testDatastore.addJob(JobWithLessThanMaxVolunteers);
+        testDatastore.addJob(JobWithMaxVolunteers);
         for(int i = 0; i < MAX_VOLUNTEERS; i++) {
             JobWithMaxVolunteers.setVolunteers(VolunteerNames[i%(VolunteerNames.length)]);
         }

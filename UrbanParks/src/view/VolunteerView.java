@@ -315,7 +315,4 @@ public class VolunteerView extends AbstractView {
 		}
 
 	}
-
-
-
 }

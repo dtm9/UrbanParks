@@ -22,7 +22,7 @@ import model.ParkManager;
  * @author Gardner Gomes
  */
 public class ParkManagerView extends AbstractView {
-    public static final int TEMP_MAX_JOBS = 30;
+    public static final int TEMP_MAX_JOBS = 20;
     /**@deprecated*/
     public static final int MONTH_BUFFER = 1;
     private StringBuilder mySB = new StringBuilder();
@@ -61,7 +61,7 @@ public class ParkManagerView extends AbstractView {
         int theChoice = myScanner.nextInt();
         switch (theChoice) {
         case 1:
-            checkMaxJobs();
+            checkMaxJobs(myDatastore);
             submitJob();
             break;
         case 2:
@@ -76,8 +76,8 @@ public class ParkManagerView extends AbstractView {
     /**
      * Helper Method to check if max Jobs are already created.
      */
-    public void checkMaxJobs() {
-        if (myDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
+    public void checkMaxJobs(Datastore theDatastore) {
+        if (theDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
             this.userChoice();
         }

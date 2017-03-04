@@ -3,6 +3,8 @@ package view;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -51,9 +53,13 @@ public class VolunteerViewTest {
      */
     @Test
     public void minDaysAway_GoodJob_ListThisJob() {
-    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, 2, 3 ,2017);
+        Calendar myCal = Calendar.getInstance();
+        myCal.setTime(new Date());
+        myCal.add(Calendar.DATE, 4); //more than minimum days away
+    	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, 
+    	                       myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH) ,myCal.get(Calendar.YEAR));
     	myDatastore.addJob(testJob1);
-        assertTrue("This will succeed", myView.minDaysAway(testJob1));
+        assertTrue(myView.minDaysAway(testJob1));
     }
 
 	/**
@@ -86,7 +92,7 @@ public class VolunteerViewTest {
     	Job testJob5 = new Job(myPark, "11:00", "Test VolunteerViewTest case 5", "testing2", 1, 23,3,2017);
     	List<Job> jobList = new ArrayList<Job>();
     	jobList.add(testJob4);
-    	assertFalse("This will fail", myView.isSameDayJob(testJob5, jobList, mySB));
+    	assertFalse("This will fail", myView.isSameDayJob(testJob5.getDay(), testJob5.getMonth(), jobList, mySB));
     }
     
     /**
@@ -98,6 +104,6 @@ public class VolunteerViewTest {
     	Job testJob7 = new Job(myPark, "11:00", "Test VolunteerViewTest case 5", "testing2", 1, 24,3,2017);
     	List<Job> jobList = new ArrayList<Job>();
     	jobList.add(testJob6);
-    	assertTrue("This will be true", myView.isSameDayJob(testJob7, jobList, mySB));
+    	assertTrue("This will be true", myView.isSameDayJob(testJob7.getDay(), testJob7.getMonth(), jobList, mySB));
     }
 }

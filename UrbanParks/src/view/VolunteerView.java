@@ -9,6 +9,7 @@ package view;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +26,7 @@ import model.Volunteer;
  */
 public class VolunteerView extends AbstractView {
 
-	private static final int MIN_DATE_AWAY_MINUS_ONE = 1;
+    static final int MIN_DATE_AWAY_MINUS_ONE = 1;
     private Volunteer myVolunteer;
 	private static Datastore myDatastore;
 	private Scanner myScanner = new Scanner(System.in);
@@ -205,7 +206,16 @@ public class VolunteerView extends AbstractView {
 		boolean sameDayFlag = false;
 		Job printJob = legitJobs.get(theChoice);
 		List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
-		sameDayFlag=isSameDayJob(printJob, volunteerJobs, mySB);
+		Calendar myCal = Calendar.getInstance();
+		myCal.set(Calendar.DAY_OF_MONTH, printJob.getDay());
+		myCal.set(Calendar.MONTH, printJob.getMonth());
+		myCal.set(Calendar.YEAR, printJob.getYear());
+		for (int i = 0; i < printJob.getDuration(); i++) {
+		  myCal.add(Calendar.DATE, i);
+		  if(isSameDayJob(myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), volunteerJobs, mySB)) {
+		    sameDayFlag = true;
+		  }
+		}
 
 		if(!sameDayFlag){ 
 			super.displayHeader(myVolunteer, myDay);
@@ -235,27 +245,28 @@ public class VolunteerView extends AbstractView {
 		}
 		mainMenu();
 	}
+	
 	/**
-	 * Tests if the day the selected job is on, is on the same day as another job the volunteer has signed up for
-	 * @param printJob
-	 * @param volunteerJobs
-	 * @param mySB
-	 * @return
-	 */
-	boolean isSameDayJob(Job printJob, List<Job> volunteerJobs, StringBuilder mySB ){
-		boolean sameDayFlag = false;
-		for(int i=0;i<volunteerJobs.size();i++){
-			Job jobIterator = volunteerJobs.get(i);
-			if(jobIterator.getDay()==printJob.getDay() && jobIterator.getMonth()==printJob.getMonth()){
-				sameDayFlag=true;
-			}
-		}
+     * Tests if the day the selected job is on, is on the same day as another job the volunteer has signed up for
+     * @param printJob
+     * @param volunteerJobs
+     * @param mySB
+     * @return
+     */
+    boolean isSameDayJob(int jobDay, int jobMonth, List<Job> volunteerJobs, StringBuilder mySB ){
+        boolean sameDayFlag = false;
+        for(int i=0;i<volunteerJobs.size();i++){
+            Job jobIterator = volunteerJobs.get(i);
+            if(jobIterator.getDay()==jobDay && jobIterator.getMonth()==jobMonth){
+                sameDayFlag=true;
+            }
+        }
 
 
-		return sameDayFlag;
+        return sameDayFlag;
 
-	}
-
+    }
+	
 	/**
 	 * Generates the view that lists all jobs the volunteer has signed up for
 	 */

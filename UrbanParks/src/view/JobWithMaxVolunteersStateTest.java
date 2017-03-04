@@ -27,7 +27,7 @@ public class JobWithMaxVolunteersStateTest {
     public ParkManager myManager;
     public Job JobWithMaxVolunteers;
     public Job JobWithLessThanMaxVolunteers;
-    public Volunteer tempVolunteer;
+    public Volunteer testVolunteer;
     public Park testPark;
     
     @Before
@@ -41,6 +41,8 @@ public class JobWithMaxVolunteersStateTest {
         testDatastore.addAccount(myManager);
         testPark = new Park(myManager, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
         testDatastore.addPark(testPark);
+        testVolunteer = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
+        testDatastore.addAccount(testVolunteer);
         JobWithMaxVolunteers = new Job(testPark, "10:00", "Empty all trash and recycling bins.","Raking", 1,
                 myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
         JobWithLessThanMaxVolunteers = new Job(testPark, "10:00", "Emptying YardWaste Bins","Mowing", 1,

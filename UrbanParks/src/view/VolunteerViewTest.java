@@ -57,11 +57,7 @@ public class VolunteerViewTest {
     public void minDaysAway_GoodJob_ListThisJob() {
 		ZoneId z = ZoneId.of("America/Los_Angeles");
 		LocalDate today = LocalDate.now(z);
-		today = today.plusDays(2);
-		System.out.println(today.getDayOfMonth());
-		System.out.println(today.getMonthValue());
-		System.out.println(today.getYear());
-
+		today = today.plusDays(2); // 2 days away
     	Job testJob1 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 1","Testing", 1, today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     	myDatastore.addJob(testJob1);
         assertTrue(myView.minDaysAway(testJob1));
@@ -73,7 +69,10 @@ public class VolunteerViewTest {
      */
     @Test
     public void minDaysAway_BadJob_DoNotListThisJob() {
-    	Job testJob2 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 2","Testing", 1, 27, 2 ,2017);
+		ZoneId z = ZoneId.of("America/Los_Angeles");
+		LocalDate today = LocalDate.now(z);
+		today = today.plusDays(1); // 1 day away
+    	Job testJob2 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 2","Testing", 1, today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     	myDatastore.addJob(testJob2);
         assertFalse("This will fail", myView.minDaysAway(testJob2));
     }
@@ -84,7 +83,10 @@ public class VolunteerViewTest {
      */
     @Test
     public void minDaysAway_PastJob_DoNotListThisJob() {
-    	Job testJob3 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 3","Testing", 1, 22, 2 ,2017);
+		ZoneId z = ZoneId.of("America/Los_Angeles");
+		LocalDate today = LocalDate.now(z);
+		today = today.minusDays(1); // 1 day in the past
+    	Job testJob3 = new Job(myPark, "10:00", "Test VolunteerViewTest Case 3","Testing", 1, today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     	myDatastore.addJob(testJob3);
         assertFalse("This will fail", myView.minDaysAway(testJob3));
     }

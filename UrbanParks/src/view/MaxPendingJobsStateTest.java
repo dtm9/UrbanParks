@@ -1,10 +1,12 @@
 package view;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +22,8 @@ import model.ParkManager;
  */
 public class MaxPendingJobsStateTest {
     public int NUMBER_OF_JOBS = 19;
-    public int YEAR = 2017;
-    public int MONTH = 3;
+    public int YEAR;
+    public int MONTH;
     public String[] JobTitles = {"Mowing","Raking","Sprinkler Set Up","Trash Pick up","Pond Cleaning"
                                 ,"Dog Park Cleanup","Cleaning Swimming pool","Recycling","Trash Pick up"};
     public String[] Times = {"11:00","14:00","10:00","09:00","11:00","14:00"};
@@ -36,6 +38,11 @@ public class MaxPendingJobsStateTest {
     
     @Before
     public void setUp() throws Exception {
+        Calendar myCal = Calendar.getInstance();
+        myCal.setTime(new Date());
+        YEAR = myCal.get(Calendar.YEAR);
+        MONTH = myCal.get(Calendar.MONTH) + 2; //next month
+        
         testDatastore = new Datastore();
         myManager = new ParkManager("batman@tacomaparks.com", "5551112222", "Dylan Miller");
         testDatastore.addAccount(myManager);
@@ -68,7 +75,7 @@ public class MaxPendingJobsStateTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
+        assertTrue("Datastore ready to test MaxPendingJobsState", true);
     }
 
 }

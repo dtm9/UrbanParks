@@ -44,9 +44,9 @@ public class JobWithMaxVolunteersStateTest {
         testVolunteer = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
         testDatastore.addAccount(testVolunteer);
         JobWithMaxVolunteers = new Job(testPark, "10:00", "Empty all trash and recycling bins.","Raking", 1,
-                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
         JobWithLessThanMaxVolunteers = new Job(testPark, "10:00", "Emptying YardWaste Bins","Mowing", 1,
-                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
         testDatastore.addJob(JobWithLessThanMaxVolunteers);
         testDatastore.addJob(JobWithMaxVolunteers);
         for(int i = 0; i < MAX_VOLUNTEERS; i++) {
@@ -70,7 +70,7 @@ public class JobWithMaxVolunteersStateTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
+        assertTrue("Datastore prepped to test jobWithMaxVolunteers for the Demo", true);
     }
 
 }

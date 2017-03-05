@@ -99,7 +99,7 @@ public class ParkManagerView extends AbstractView {
      * Helper Method to check if max Jobs are already created.
      * @author Gardner Gomes
      */
-    public void checkMaxJobs(Datastore theDatastore) {
+    private void checkMaxJobs(Datastore theDatastore) {
         if (theDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
             this.userChoice();

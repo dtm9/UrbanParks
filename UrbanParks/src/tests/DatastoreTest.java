@@ -27,78 +27,77 @@ import model.Volunteer;
  */
 public class DatastoreTest {
 
-	//***** Test fixture(s) and setUp() ********************************************************************************
+    //***** Test fixture(s) and setUp() ********************************************************************************
 
-	/** Datastore test fixture. */
-	private Datastore myDatastore;
+    /** Datastore test fixture. */
+    private Datastore myDatastore;
 
-	/** Park list auxiliary text fixture. */
-	private List<Park> myParks;
+    /** Park list auxiliary text fixture. */
+    private List<Park> myParks;
 
-	/** Job list auxiliary text fixture. */
-	private List<Job> myJobs;
+    /** Job list auxiliary text fixture. */
+    private List<Job> myJobs;
 
-	/** Account list of every person participating in the Urban Parks system. */
-	private List<AbstractAccount> myAccounts;
+    /** Account list of every person participating in the Urban Parks system. */
+    private List<AbstractAccount> myAccounts;
 
-	/** ParkManager list auxiliary test fixture. */
-	private List<ParkManager> myParkManagers;
+    /** ParkManager list auxiliary test fixture. */
+    private List<ParkManager> myParkManagers;
 
-	/** Volunteer list auxiliary test fixture. */
-	private List<Volunteer> myVolunteers;
-	
-	/** Used for dynamically selecting current system dates. */
-	Calendar myCal;
+    /** Volunteer list auxiliary test fixture. */
+    private List<Volunteer> myVolunteers;
 
-	/**
-	 * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
-	 * building a small amount of data used by the Datastore methods to verify their proper working order.
-	 * @author Walter Weeks
-	 */
-	@Before
+    /** Used for dynamically selecting current system dates. */
+    Calendar myCal;
+
+    /**
+     * Sets up the test fixture(s) used by the unit tests. This method is fairly long because of the requirement of
+     * building a small amount of data used by the Datastore methods to verify their proper working order.
+     * @author Walter Weeks
+     */
+    @Before
 	public void setUp() {
-		// initialize the test fixtures
-		myParkManagers = new ArrayList<>();
-		myVolunteers = new ArrayList<>();
-		myAccounts = new ArrayList<>();
-		myParks = new ArrayList<>();
-		myJobs = new ArrayList<>();
-		myCal = Calendar.getInstance();
-		myCal.setTime(new Date());
-		myDatastore = new Datastore();
-		// populate the test fixtures
-		populateAuxiliaryTestFixtures();
-		populateDatastoreTestFixture();
-		
-	}
+        // initialize the test fixtures
+        myParkManagers = new ArrayList<>();
+        myVolunteers = new ArrayList<>();
+        myAccounts = new ArrayList<>();
+        myParks = new ArrayList<>();
+        myJobs = new ArrayList<>();
+        myCal = Calendar.getInstance();
+        myCal.setTime(new Date());
+        myDatastore = new Datastore();
+        // populate the test fixtures
+        populateAuxiliaryTestFixtures();
+        populateDatastoreTestFixture();
+    }
 
-	//***** Helper method(s) *******************************************************************************************
+    //***** Helper method(s) *******************************************************************************************
 
-	/**
-	 * Helper method that populates the auxiliary test fixtures.
-	 * @author Walter Weeks
-	 * @author Dylan Miller
-	 */
-	private void populateAuxiliaryTestFixtures() {
-		// populate myParkManagers list data structure w/ 4 total managers
-		myParkManagers.add(new ParkManager("billy@tacomaparks.com", "2535550000", "Billy Bob"));
-		myParkManagers.add(new ParkManager("jane@gmail.com", "2536661111", "Jane Doe"));
-		myParkManagers.add(new ParkManager("john@seattleparks.gov", "2067772222", "John Doe"));
-
-		// populate myParks list data structure w/ 5 total Parks where 1 ParkManager has 3 Parks under management
-		myParks.add(new Park(myParkManagers.get(0),"Wapato Park","6500 S Sheridan Ave", "Tacoma", "WA", "98406"));
-		myParks.add(new Park(myParkManagers.get(1),"Jefferson Park","801 N Mason Ave","Tacoma", "WA", "98406"));
-		myParks.add(new Park(myParkManagers.get(2),"Discovery Park","3801 Discovery Park Blvd","Seattle", "WA", "98199"));
-		myParks.add(new Park(myParkManagers.get(0), "Baltimore Park", "4716 N Baltimore St","Tacoma", "WA", "98407"));
-		myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
-
-		// populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
-		
-		myCal.add(Calendar.DATE, 5); //5 days from today
-		myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
+    /**
+     * Helper method that populates the auxiliary test fixtures; method is called by setUp().
+     * @author Walter Weeks
+     * @author Dylan Miller
+     */
+    private void populateAuxiliaryTestFixtures() {
+        // populate myParkManagers list data structure w/ 4 total managers
+        myParkManagers.add(new ParkManager("billy@tacomaparks.com", "2535550000", "Billy Bob"));
+        myParkManagers.add(new ParkManager("jane@gmail.com", "2536661111", "Jane Doe"));
+        myParkManagers.add(new ParkManager("john@seattleparks.gov", "2067772222", "John Doe"));
+        
+        // populate myParks list data structure w/ 5 total Parks where 1 ParkManager has 3 Parks under management
+        myParks.add(new Park(myParkManagers.get(0),"Wapato Park","6500 S Sheridan Ave", "Tacoma", "WA", "98406"));
+        myParks.add(new Park(myParkManagers.get(1),"Jefferson Park","801 N Mason Ave","Tacoma", "WA", "98406"));
+        myParks.add(new Park(myParkManagers.get(2),"Discovery Park","3801 Discovery Park Blvd","Seattle", "WA", "98199"));
+        myParks.add(new Park(myParkManagers.get(0), "Baltimore Park", "4716 N Baltimore St","Tacoma", "WA", "98407"));
+        myParks.add(new Park(myParkManagers.get(0), "South Park","4851 S Tacoma Way","Tacoma", "WA", "98409"));
+        
+        // populate myJobs list data structure w/ 8 total Jobs where Wapato Park has 4 Jobs and a Park Manager that manages 4 parks
+        
+        myCal.add(Calendar.DATE, 5); //5 days from today
+        myJobs.add(new Job(myParks.get(0), "1030", "We will be raking leaves.",
                 "Raking leaves", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
-		
-		myCal.add(Calendar.DATE, 1); //6 days from today
+        
+        myCal.add(Calendar.DATE, 1); //6 days from today
         myJobs.add(new Job(myParks.get(0), "1345", "We will be picking up litter.",
                 "Pick up litter", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         
@@ -119,146 +118,145 @@ public class DatastoreTest {
                 "Clearing pathways", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
         myJobs.add(new Job(myParks.get(2), "1200", "We will be constructing a new building",
                 "Construct building", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
-
-		// populate myVolunteers list data structure w/ 2 Volunteers
-		myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333",
-				"Steve Jones"));
-		myVolunteers.add(new Volunteer("nancy@yahoo.com", "2069995432",
-				"Nancy Hawkins"));
-
-		// Set the 1st Job @ Wapato Park with 2 Volunteers and 1 volunteer having 2 pending jobs
-		myJobs.get(0).setVolunteers(myVolunteers.get(0).getUsername());
-		myJobs.get(0).setVolunteers(myVolunteers.get(1).getUsername());
-		myJobs.get(1).setVolunteers(myVolunteers.get(0).getUsername());
-
-		// Populate myOfficeStaff list data structure w/ 1 Office Staff
-		//myOfficeStaff.add(new OfficeStaff("randy@urbanparks.com", "2065551234", "Randy Johnson"));
-
-		// Populate the accounts list
+        
+        // populate myVolunteers list data structure w/ 2 Volunteers
+        myVolunteers.add(new Volunteer("steve@gmail.com", "2538883333", 
+                "Steve Jones"));
+        myVolunteers.add(new Volunteer("nancy@yahoo.com", "2069995432",
+                "Nancy Hawkins"));
+        
+        // Set the 1st Job @ Wapato Park with 2 Volunteers and 1 volunteer having 2 pending jobs
+        myJobs.get(0).setVolunteers(myVolunteers.get(0).getUsername());
+        myJobs.get(0).setVolunteers(myVolunteers.get(1).getUsername());
+        myJobs.get(1).setVolunteers(myVolunteers.get(0).getUsername());
+        
+        // Populate myOfficeStaff list data structure w/ 1 Office Staff
+        //myOfficeStaff.add(new OfficeStaff("randy@urbanparks.com", "2065551234", "Randy Johnson"));
+        
+        // Populate the accounts list
         for (int i = 0; i < myVolunteers.size(); i++) { 	// Volunteers
             myAccounts.add(myVolunteers.get(i));
         }
         for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
             myAccounts.add(myParkManagers.get(i));
         }
-	}
+    }
+    
+    /**
+     * Helper method that populates the myDatastore text fixture; method is called by setUp().
+     * @author Walter Weeks
+     */
+    private void populateDatastoreTestFixture() {
+        // Add the Accounts to myDatastore
+        for (int i = 0; i < myVolunteers.size(); i++) { 	// Volunteers
+            myDatastore.addAccount(myVolunteers.get(i));
+        }
+        for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
+            myDatastore.addAccount(myParkManagers.get(i));
+        }
+        // Add the Parks to myDatastore
+        for (int i = 0; i < myParks.size(); i++) {
+            myDatastore.addPark(myParks.get(i));
+        }
+        // Add the Jobs to myDatastore
+        for (int i = 0; i < myJobs.size(); i++) {
+            myDatastore.addJob(myJobs.get(i));
+        }
+    }
 
-	/**
-	 * Helper method that populates the myDatastore text fixture.
-	 * @author Walter Weeks
-	 */
-	private void populateDatastoreTestFixture() {
-		// Add the Accounts to myDatastore
-		for (int i = 0; i < myVolunteers.size(); i++) { 	// Volunteers
-			myDatastore.addAccount(myVolunteers.get(i));
-		}
-		for (int i = 0; i < myParkManagers.size(); i++) { 	// Park Managers
-			myDatastore.addAccount(myParkManagers.get(i));
-		}
-		// Add the Parks to myDatastore
-		for (int i = 0; i < myParks.size(); i++) {
-			myDatastore.addPark(myParks.get(i));
-		}
-		// Add the Jobs to myDatastore
-		for (int i = 0; i < myJobs.size(); i++) {
-			myDatastore.addJob(myJobs.get(i));
-		}
-	}
+    //***** Unit test(s) ***********************************************************************************************
 
-	//***** Unit test(s) ***********************************************************************************************
+    /**
+     * Tests to see if the current number of pending jobs is as expected for the test fixture.
+     * @author Walter Weeks
+     */
+    @Test
+    public void getNumberOfJobs_AddMultipleJobs_AllJobsAdded() {
+        assertEquals(myJobs.size(), myDatastore.getNumberOfJobs());
+    }
+    
+    /**
+     * Tests to see if the number of accounts is as expected.
+     * @author Walter Weeks
+     */
+    @Test
+    public void getNumberOfAccounts_AddMultipleAccounts_AllTestFixtureAccountsShouldBeAdded() {
+        assertEquals(myVolunteers.size() + myParkManagers.size(), myDatastore.getNumberOfAccounts());
+    }
+    
+    /**
+     * Tests to see if the number of parks is as expected.
+     * @author Walter Weeks
+     */
+    @Test
+    public void getNumberOfParks_AddMultipleParks_AllTestFixtureParksShouldBeAdded() {
+        assertEquals(myParks.size(), myDatastore.getNumberOfParks());
+    }
 
-	/**
-	 * Tests to see if the current number of pending jobs is as expected for the test fixture.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void getNumberOfJobs_AddMultipleJobs_AllJobsAdded() {
-		assertEquals(myJobs.size(), myDatastore.getNumberOfJobs());
-	}
-
-	/**
-	 * Tests to see if the number of accounts is as expected.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void getNumberOfAccounts_AddMultipleAccounts_AllTestFixtureAccountsShouldBeAdded() {
-		assertEquals(myVolunteers.size() + myParkManagers.size(), myDatastore.getNumberOfAccounts());
-	}
-
-	/**
-	 * Tests to see if the number of parks is as expected.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void getNumberOfParks_AddMultipleParks_AllTestFixtureParksShouldBeAdded() {
-		assertEquals(myParks.size(), myDatastore.getNumberOfParks());
-	}
-
-	/**
-	 * Tests to see if the Datastore#addJob(Job) works as expected for adding 1 pending job.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void addJob_AddingASingleJob_ShouldBeSizeOfJobsTextFixurePlus1() {
-		myCal.add(Calendar.DATE, 1); // 10 Days from today
-		Job newJob = new Job(myParks.get(0), "0600", "We will be building a green house",
-				"Building green house", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
-		myDatastore.addJob(newJob);
-		assertEquals(myJobs.size() + 1, myDatastore.getNumberOfJobs());
-	}
-	
-	/**
-	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns true if a particular day has exactly
-	 * the maximum number of allowed pending jobs.
-	 * NOTE: This was added for the Unit Testing 2 homework.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void hasMaxJobsAlreadyOnJobDate_AddingExactlyTheMaximumPendingJobsAllowedOnGivenDay_ShouldReturnTrue() {
-		myCal.add(Calendar.DATE, 1); // 10 Days from today
-		
-		for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT; i++) {
-			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
-	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
-		}
-		
-		Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
+    /**
+     * Tests to see if the Datastore#addJob(Job) works as expected for adding 1 pending job.
+     * @author Walter Weeks
+     */
+    @Test
+    public void addJob_AddingASingleJob_ShouldBeSizeOfJobsTextFixurePlus1() {
+        myCal.add(Calendar.DATE, 1); // 10 Days from today
+        Job newJob = new Job(myParks.get(0), "0600", "We will be building a green house",
+                "Building green house", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+        myDatastore.addJob(newJob);
+        assertEquals(myJobs.size() + 1, myDatastore.getNumberOfJobs());
+    }
+    
+    /**
+     * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns true if a particular day has exactly
+     * the maximum number of allowed pending jobs.
+     * NOTE: This was added for the Unit Testing 2 homework.
+     * @author Walter Weeks
+     */
+    @Test
+    public void hasMaxJobsAlreadyOnJobDate_MaximumPendingJobsAllowed_ShouldReturnTrue() {
+        myCal.add(Calendar.DATE, 1); // 10 Days from today
+        
+        for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT; i++) {
+            myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+                    "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+        }
+        
+        Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
                 "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
-		LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
-		assertTrue(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
-	}
-	
-	/**
-	 * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns false if a particular day has exactly
-	 * the maximum number of allowed pending jobs minus one, i.e., one more job can be placed on that day.
-	 * NOTE: This was added for the Unit Testing 2 homework.
-	 * @author Walter Weeks
-	 */
-	@Test
-	public void hasMaxJobsAlreadyOnJobDate_AddingTheMaximumPendingJobsAllowedOnGivenDayMinusOne_ShouldReturnFalse() {
-		myCal.add(Calendar.DATE, 1); // 10 Days from today
-		
-		for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT - 1; i++) {
-			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
-	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
-		}
-		
-		Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
+        LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
+        assertTrue(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
+        }
+    
+    /**
+     * Tests to see if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) returns false if a particular day has exactly
+     * the maximum number of allowed pending jobs minus one, i.e., one more job can be placed on that day.
+     * 
+     * @author Walter Weeks
+     */
+    @Test
+    public void hasMaxJobsAlreadyOnJobDate_MaximumPendingJobsAllowedMinusOne_ShouldReturnFalse() {
+        myCal.add(Calendar.DATE, 1); // 10 Days from today
+        
+        for (int i = 0; i < Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT - 1; i++) {
+            myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+                    "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+        }
+        
+        Job anotherJob = new Job(myParks.get(4), "1145", "We will be digging ditches.",
                 "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
-		LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
-		assertFalse(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
-	}
-
-
+        LocalDate startDate = LocalDate.of(anotherJob.getYear(), anotherJob.getMonth(), anotherJob.getDay());
+        assertFalse(myDatastore.hasMaxJobsAlreadyOnJobDate(startDate, anotherJob.getDuration()));
+    }
+    
     /**
      * Test to see if the default value of maximum number of pending jobs allowed by system is set properly.
      * @author Walter Weeks
      */
-	@Test
+    @Test
     public void getMaxPendingJobs_InitializeMaxPendingJobsToDefaultValue_ShouldBeDefaultValue() {
-	    assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT, myDatastore.getMaxPendingJobs());
+        assertEquals(Datastore.MAX_PENDING_JOBS_DEFAULT, myDatastore.getMaxPendingJobs());
     }
-
+    
     /**
      * Tests to see if max pending jobs can be changed to an expected value;
      * @author Walter Weeks
@@ -293,48 +291,47 @@ public class DatastoreTest {
 
     //***** Unit test(s) looking or thrown exceptions for improper data *****************************************************
 
-	/**
-	 * Tests for NullPointerException when adding a null job.
-	 * @author Walter Weeks
-	 */
-	@Test(expected = NullPointerException.class)
-	public void addJob_AddingNullJob_ExceptionThrown() {
-		myDatastore.addJob(null);
-	}
+    /**
+     * Tests for NullPointerException when adding a null job.
+     * @author Walter Weeks
+     */
+    @Test(expected = NullPointerException.class)
+    public void addJob_AddingNullJob_ExceptionThrown() {
+        myDatastore.addJob(null);
+    }
 
-	/**
-	 * Tests for NullPointerException when adding a null account.
-	 * @author Walter Weeks
-	 */
-	@Test(expected = NullPointerException.class)
-	public void addAccount_AddingNullAccount_ExceptionThrown() {
-		myDatastore.addAccount(null);
-	}
+    /**
+     * Tests for NullPointerException when adding a null account.
+     * @author Walter Weeks
+     */
+    @Test(expected = NullPointerException.class)
+    public void addAccount_AddingNullAccount_ExceptionThrown() {
+        myDatastore.addAccount(null);
+    }
 
-	/**
-	 * Tests for NullPointerException when adding a null park.
-	 * @author Walter Weeks
-	 */
-	@Test(expected = NullPointerException.class)
-	public void addPark_AddingANullPark_ExceptionThrown() {
-		myDatastore.addPark(null);
-	}
-
-	/**
-	 * Tests to see if the Datastore#addJob(Job) does not allow for adding more than the
-	 * maximum number of pending jobs on a given date.
-	 * NOTE: This was added for the Unit Testing 2 homework.
-	 * @author Walter Weeks
-	 */
-	@Test (expected = InvalidJobDurationException.class)
-	public void addJob_AddingMoreThanMaximumPendingJobsOnDate_ExpectsException() {
-		myCal.add(Calendar.DATE, 1); // 10 Days from today
-		
-		for (int i = 0; i <= myDatastore.getMaxPendingJobs(); i++) {
-			myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
-	                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
-		}
-	}
+    /**
+     * Tests for NullPointerException when adding a null park.
+     * @author Walter Weeks
+     */
+    @Test(expected = NullPointerException.class)
+    public void addPark_AddingANullPark_ExceptionThrown() {
+        myDatastore.addPark(null);
+    }
+    
+    /**
+     * Tests to see if the Datastore#addJob(Job) does not allow for adding more than the
+     * maximum number of pending jobs on a given date.
+     * @author Walter Weeks
+     */
+    @Test (expected = InvalidJobDurationException.class)
+    public void addJob_AddingMoreThanMaximumPendingJobsOnDate_ExpectsException() {
+        myCal.add(Calendar.DATE, 1); // 10 Days from today
+        
+        for (int i = 0; i <= myDatastore.getMaxPendingJobs(); i++) {
+            myDatastore.addJob(new Job(myParks.get(i % myDatastore.getNumberOfParks()), "1145", "We will be digging ditches.",
+                "Digging ditches", 1, myCal.get(Calendar.DAY_OF_MONTH), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR)));
+        }
+    }
 
     /**
      * Tests for IllegalArgrumentException when attempting to set the maximum number of pending jobs to 0.
@@ -343,6 +340,27 @@ public class DatastoreTest {
     @Test(expected = IllegalArgumentException.class)
     public void setMaxPendingJobs_SetMaxPendingJobsTo0_ExceptionExpected() {
         myDatastore.setMaxPendingJobs(0);
+    }
+    
+    /**
+     * Tests if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) throws an NullPointerException when
+     * passing a null start date value.
+     * @author Walter Weeks
+     */
+    @Test(expected = NullPointerException.class)
+    public void hasMaxJobsAlreadyOnJobDate_NullStartDate_ExpectedNullPointerException() {
+        myDatastore.hasMaxJobsAlreadyOnJobDate(null, 1);
+    }
+    
+    /**
+     * Tests if the Datastore#hasMaxJobsAlreadyOnJobDate(Job) throws an InvalidJobDurationException when
+     * passing a zero value for the duration.
+     * @author Walter Weeks
+     */
+    @Test(expected = InvalidJobDurationException.class)
+    public void hasMaxJobsAlreadyOnJobDate_ZeroDuration_ExpectedInvalidJobDurationException() {
+        myDatastore.hasMaxJobsAlreadyOnJobDate(LocalDate.of(myJobs.get(0).getYear(),
+                myJobs.get(0).getMonth(), myJobs.get(0).getDay()), 0);
     }
     
     /**

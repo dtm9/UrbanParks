@@ -16,11 +16,11 @@ import java.util.List;
  */
 public final class Datastore implements Serializable {
 
-	//***** Constant(s) ************************************************************************************************
+    //***** Constant(s) ************************************************************************************************
     /**Default serialVersionUID. This should not change.*/
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**The maximum number of pending jobs default value.*/
+    /**The maximum number of pending jobs default value.*/
     public static final int MAX_PENDING_JOBS_DEFAULT = 20;
 
     /**The maximum number of pending jobs on a calendar date default value.*/
@@ -105,23 +105,31 @@ public final class Datastore implements Serializable {
      * @param theDuration The number of days of the job.
      * @return True if the given start date to end date has the maximum number of pending jobs allowed;
      * false otherwise.
+     * @throws NullPointerException if theStateDate is null.
+     * @throws InvalidJobDurationException if theDuration is less than or equal to zero.
      */
     public boolean hasMaxJobsAlreadyOnJobDate(LocalDate theStartDate, int theDuration) {
-    	boolean result = false;
-    	
-    	List<Job> jobsOnDateList;
-    	LocalDate currentDate = theStartDate;
-    	
-    	for (int i = 0; i < theDuration; i++) {
-    		jobsOnDateList = getJobsByDate(currentDate.getDayOfMonth(), currentDate.getMonthValue(), currentDate.getYear());
-    		if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) {
+        if (theStartDate == null) {
+            throw new NullPointerException("theStartDate cannot be null.");
+        }
+        if (theDuration <= 0) {
+            throw new InvalidJobDurationException("theDuration must be greater than 0.");
+        }
+        boolean result = false;
+        
+        List<Job> jobsOnDateList;
+        LocalDate currentDate = theStartDate;
+        
+        for (int i = 0; i < theDuration; i++) {
+            jobsOnDateList = getJobsByDate(currentDate.getDayOfMonth(), currentDate.getMonthValue(), currentDate.getYear());
+            if (jobsOnDateList.size() >= MAX_PENDING_JOBS_PER_DAY_DEFAULT) {
                 result = true;
                 break;
             }
-    		currentDate = currentDate.plusDays(1);
-		}
-    	
-    	return result;
+            currentDate = currentDate.plusDays(1);
+        }
+        
+        return result;
     }
 
     

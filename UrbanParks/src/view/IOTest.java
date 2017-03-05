@@ -53,7 +53,8 @@ public class IOTest {
     testDatastore = new Datastore();
     Calendar myCal = Calendar.getInstance();
     myCal.setTime(new Date());
-    myCal.add(Calendar.DAY_OF_MONTH, 2); //two days from today
+    myCal.add(Calendar.DAY_OF_MONTH, 5); //five days from today
+    
 
     testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
     testDatastore.addAccount(testPM1);
@@ -75,24 +76,24 @@ public class IOTest {
 
 	//testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
     testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1,
-            myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+            myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob1);
 	
 	
 	//testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
 	testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob2);
 	
 	myCal.add(Calendar.DAY_OF_MONTH, 1);
 	//testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);
 	testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob3);
 	
 	//testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
 	testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH), myCal.get(Calendar.YEAR));
+	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob4);
 	
 	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes");

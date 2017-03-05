@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * The datastore for Urban Parks. This class contains data used by the organization such as Parks, Jobs, etc.
  *
- * @author Walter Weeks (ww3@uw.edu)
- * @version 1.0 (2017 Feb 3)
+ * @author Walter Weeks
+ * @version 1.0 (2017 Mar 5)
  */
 public final class Datastore implements Serializable {
 
@@ -70,7 +70,7 @@ public final class Datastore implements Serializable {
      * Adds a new pending job to the list, if it does not exceed the maximum allowed or if it is not already in
      * the list.
      *
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      * @param theJob the job to add to the pending jobs list.
      * @throw NullPointerException if theJob is null.
      * @throw InvalidJobDurationException if the number of jobs is already at maximum capacity.
@@ -101,6 +101,7 @@ public final class Datastore implements Serializable {
      * Determines whether or not a job date conflicts with the maximum number of pending jobs on a given 
      * day. This method checks each day in its day range, i.e., the job's "duration."
      * 
+     * @author Walter Weeks
      * @param theStartDate The start dating of the job,
      * @param theDuration The number of days of the job.
      * @return True if the given start date to end date has the maximum number of pending jobs allowed;

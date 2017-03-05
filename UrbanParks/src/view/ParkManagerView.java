@@ -16,15 +16,21 @@ import model.Park;
 import model.ParkManager;
 
 /**
- * Object that runs the user interaface for a Park Manager user. 
- * Launch with the public launchGUI() method.
+ * Object that runs the user interface for a Park Manager user. 
+ * Launched with the public launchGUI() method.
  * @author Dylan Miller
  * @author Gardner Gomes
  */
 public class ParkManagerView extends AbstractView {
+    
+    //***** Constant(s) ************************************************************************************************
+    
     public static final int TEMP_MAX_JOBS = 20;
     /**@deprecated*/
     public static final int MONTH_BUFFER = 1;
+    
+    //***** Field(s) ***************************************************************************************************
+    
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
     private Scanner myScanner = new Scanner(System.in);
@@ -32,7 +38,14 @@ public class ParkManagerView extends AbstractView {
     private static ZoneId myZone;
     private static Datastore myDatastore;
     
+    //**** Constructor(s) **********************************************************************************************
     
+    /**
+     * Constructor for the ParkManagerView.
+     * 
+     * @author Gardner Gomes
+     * @param theAccount
+     */
     public ParkManagerView(AbstractAccount theAccount) {
         super();
         myZone = ZoneId.of("America/Los_Angeles");
@@ -41,7 +54,14 @@ public class ParkManagerView extends AbstractView {
         myManager = (ParkManager) theAccount;
     }
 
-    /*-----------------------------------------------------------------------------------------------------------------------------*/
+    //**** Accessor/Mutator Method(s) **********************************************************************************
+    
+    /**
+     * Launches the user interface for the park manager.
+     * 
+     * @author Gardner Gomes
+     * @param theDatastore
+     */
     @Override
     public Datastore launchGUI(Datastore theDatastore) {
         myDatastore = theDatastore;
@@ -49,8 +69,10 @@ public class ParkManagerView extends AbstractView {
         userChoice();
         return myDatastore;
     }
+    
     /**
-     * presents the user with a choice of what to do next.
+     * Presents the user with a choice of what to do next.
+     * @author Gardner Gomes
      */
     private void userChoice() {
         mySB.append("\n1. Submit Job\n");
@@ -75,6 +97,7 @@ public class ParkManagerView extends AbstractView {
 
     /**
      * Helper Method to check if max Jobs are already created.
+     * @author Gardner Gomes
      */
     public void checkMaxJobs(Datastore theDatastore) {
         if (theDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
@@ -82,10 +105,11 @@ public class ParkManagerView extends AbstractView {
             this.userChoice();
         }
     }
-    /*-----------------------------------------------------------------------------------------------------------------------------*/
-
+    
+    
     /**
      * Submit a Job element for the UI.
+     * @author Gardner Gomes
      */
     private void submitJob() {
         Job myJob = new Job();
@@ -110,11 +134,16 @@ public class ParkManagerView extends AbstractView {
         }
         System.out.println("Job submitted. You can view it in your Jobs.");
         userChoice();
-
     }
 
+    /**
+     * Park manager sets the duration of the job in days.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller
+     */
     Job addDuration(Job theJob) {
-        System.out.print("Please set the Duration for this job(in days): ");
+        System.out.print("Please set the Duration for this job (in days): ");
         try {
             theJob.setDuration(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -123,9 +152,15 @@ public class ParkManagerView extends AbstractView {
         }
         return theJob;
     }
-
+    
+    /**
+     * Park manager sets additional notes for the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addNotes(Job theJob) {
-        System.out.print("Please add any aditional notes here: ");
+        System.out.print("Please add any additional notes here: ");
         try {
             theJob.setNotes(myScanner.nextLine());
         } catch (Exception e) {
@@ -134,8 +169,10 @@ public class ParkManagerView extends AbstractView {
         }
         return theJob;
     }
+    
     /**
-     * 
+     * Park manager sets the maximum number of volunteers for a job.
+     * @author Gardner Gomes
      * @param theJob
      * @return
      * @deprecated
@@ -150,9 +187,15 @@ public class ParkManagerView extends AbstractView {
         }
         return theJob;
     }
-
+    
+    /**
+     * Park manager sets the time for the job.
+     * @author Garder Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addTime(Job theJob) {
-        System.out.print("Please set the Time of this Job(ie. 12:30): ");
+        System.out.print("Please set the Time of this Job (e.g., 12:30): ");
         try {
             theJob.setTime(myScanner.nextLine());
         } catch (Exception e) {
@@ -162,8 +205,14 @@ public class ParkManagerView extends AbstractView {
         return theJob;
     }
 
+    /**
+     * Park manager sets the year of the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addYear(Job theJob) {
-        System.out.print("Please set the Year of this Job(ie.2017): ");
+        System.out.print("Please set the Year of this Job (e.g., 2017): ");
         try {
             theJob.setYear(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -174,8 +223,14 @@ public class ParkManagerView extends AbstractView {
 
     }
 
+    /**
+     * Park manager sets the day of the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addDay(Job theJob) {
-        System.out.print("Please set the Day of this Job(1-31): ");
+        System.out.print("Please set the Day of this Job (1-31): ");
         try {
             theJob.setDay(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -185,8 +240,14 @@ public class ParkManagerView extends AbstractView {
         return theJob;
     }
 
+    /**
+     * Park manager sets the month of the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addMonth(Job theJob) {
-        System.out.print("Please set the Month of this Job(1-12): ");
+        System.out.print("Please set the Month of this Job (1-12): ");
         int monthChoice = Integer.parseInt(myScanner.nextLine());
         try {
 
@@ -198,8 +259,14 @@ public class ParkManagerView extends AbstractView {
         return theJob;
     }
 
+    /**
+     * Park manager sets a description of the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addDescription(Job theJob) {
-        System.out.print("Please type out a description of the Job: ");
+        System.out.print("Please type out a Description of the Job: ");
         try {
             theJob.setDescription(myScanner.nextLine());
         } catch (Exception e) {
@@ -209,6 +276,12 @@ public class ParkManagerView extends AbstractView {
         return theJob;
     }
 
+    /**
+     * Park manager sets a name for the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addName(Job theJob) {
         System.out.print("Please set the Name of the Job: ");
         try {
@@ -220,6 +293,12 @@ public class ParkManagerView extends AbstractView {
         return theJob;
     }
 
+    /**
+     * Park manager sets the park for the job.
+     * @author Gardner Gomes
+     * @param theJob
+     * @return theJob back to caller.
+     */
     Job addPark(Job theJob) {
         List<Park> theParks = myDatastore.getAllParks();
         Iterator<Park> itr = theParks.iterator();
@@ -234,6 +313,7 @@ public class ParkManagerView extends AbstractView {
 
     /**
      * View Jobs elemt for UI
+     * @author Gardner Gomes
      * @deprecated
      */
     private void ViewJobs() { 
@@ -300,7 +380,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     /**
-     * 
+     * @author Gardner Gomes
      * @param theJob
      * @deprecated
      */
@@ -312,7 +392,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     /**
-     * 
+     * @author Gardner Gomes
      * @param theJob
      * @deprecated
      */
@@ -344,6 +424,7 @@ public class ParkManagerView extends AbstractView {
     }
 
     /**
+     * @author Gardner Gomes
      * @deprecated
      * @param theJob
      */

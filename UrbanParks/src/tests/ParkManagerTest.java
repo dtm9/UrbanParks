@@ -35,16 +35,16 @@ public class ParkManagerTest {
 
 	//***** Test fixture(s), setUp(), etc. *****************************************************************************
 
-	/**Park manager account test fixture.*/
+	/** Park manager account test fixture. */
     private ParkManager validParkManagerAccount;
     
-    /**Park test fixture.*/
+    /** Park test fixture. */
     private Park validPark;
     
-    /**Calendar test fixture.*/
+    /** Calendar test fixture. */
     private Calendar myCal;
     
-    /**Test datastore test fixture.*/
+    /** Test datastore test fixture. */
     private Datastore testDatastore;
     
     /**
@@ -89,7 +89,7 @@ public class ParkManagerTest {
 
     /**
      * Tests for equality comparing two separate objects with the same data.
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      */
     @Test
     public void equals_CreateComparedObjectFromSameSources_ShouldReturnTrue() {
@@ -99,7 +99,7 @@ public class ParkManagerTest {
 
     /**
      * Tests for inequality comparing two separate objects with only the username field different.
-     * @author Walter Weeks (ww3@uw.edu)
+     * @author Walter Weeks
      */
     @Test
     public void equals_CreateComparedObjectFromDifferentSources_ShouldReturnFalse() {

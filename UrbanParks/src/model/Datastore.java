@@ -63,9 +63,9 @@ public final class Datastore implements Serializable {
         myPreviousJobs = new ArrayList<>();
         myMaxPendingJobs = MAX_PENDING_JOBS_DEFAULT;
     }
-
+    
     //**** Accessor/Mutator Method(s) **********************************************************************************
-
+    
     /**
      * Adds a new pending job to the list, if it does not exceed the maximum allowed or if it is not already in
      * the list.
@@ -86,12 +86,12 @@ public final class Datastore implements Serializable {
         if (!isJobWithinMaxFutureDate(theJob)) {
             throw new IllegalStateException("System will only accept jobs within " + MAX_FUTURE_JOB_START_DATE + " days from today.");
         }
-
+        
         if (hasMaxJobsAlreadyOnJobDate(LocalDate.of(theJob.getYear(), theJob.getMonth(), theJob.getDay()), theJob.getDuration())) {
             throw new InvalidJobDurationException("System cannot have more than " +
                     MAX_PENDING_JOBS_PER_DAY_DEFAULT + " jobs per day."); 
         }
-
+        
         if (!myPendingJobs.contains(theJob)) {
            myPendingJobs.add(theJob);
         }
@@ -105,7 +105,7 @@ public final class Datastore implements Serializable {
      * @param theDuration The number of days of the job.
      * @return True if the given start date to end date has the maximum number of pending jobs allowed;
      * false otherwise.
-     * @throws NullPointerException if theStateDate is null.
+     * @throws NullPointerException if theStartDate is null.
      * @throws InvalidJobDurationException if theDuration is less than or equal to zero.
      */
     public boolean hasMaxJobsAlreadyOnJobDate(LocalDate theStartDate, int theDuration) {
@@ -174,7 +174,7 @@ public final class Datastore implements Serializable {
      */
     public List<Job> getJobsByDate(final int theDay, final int theMonth, final int theYear) {
         List<Job> result = new ArrayList<>();
-
+        
         Iterator<Job> itr = myPendingJobs.iterator();
         while (itr.hasNext()) {
             Job currentJob = itr.next();
@@ -184,10 +184,10 @@ public final class Datastore implements Serializable {
                 result.add(currentJob);
             }
         }
-
+        
         return result;
     }
-
+    
     /**
      * Moves a currently pending job to the previous jobs list, if it exists. Otherwise this
      * method does nothing.
@@ -200,7 +200,7 @@ public final class Datastore implements Serializable {
         if (theJob == null) {
             throw new NullPointerException("theJob cannot be null.");
         }
-
+        
         // Iterate over the entire pending jobs list in search of the job in question: O(n) runtime.
         Iterator<Job> itr = myPendingJobs.iterator();
         boolean found = false;
@@ -213,7 +213,7 @@ public final class Datastore implements Serializable {
             }
         }
     }
-
+    
     /**
      * Gets the list of previous jobs.
      *
@@ -223,7 +223,7 @@ public final class Datastore implements Serializable {
     public List<Job> getPreviousJobs() {
         return myPreviousJobs;
     }
-
+    
     /**
      * Adds a park to the list of parks.
      *
@@ -239,7 +239,7 @@ public final class Datastore implements Serializable {
             myParks.add(thePark);
         }
     }
-
+    
     /**
      * Getter for the current number of pending jobs in the list.
      *
@@ -249,7 +249,7 @@ public final class Datastore implements Serializable {
     public int getNumberOfJobs() {
         return myPendingJobs.size();
     }
-
+    
     /**
      * Getter for the current number of previous jobs.
      *
@@ -259,7 +259,7 @@ public final class Datastore implements Serializable {
     public int getNumberOfPreviousJobs() {
         return myPreviousJobs.size();
     }
-
+    
     /**
      * Adds an account to the list of accounts.
      *
@@ -274,7 +274,7 @@ public final class Datastore implements Serializable {
             myAccounts.add(theAccount);
         }
     }
-
+    
     /**
      * Get the number of accounts in the Urban Parks system.
      *
@@ -284,7 +284,7 @@ public final class Datastore implements Serializable {
     public int getNumberOfAccounts() {
         return myAccounts.size();
     }
-
+    
     /**
      * Get the number of parks in the Urban Parks system.
      *

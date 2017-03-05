@@ -136,9 +136,10 @@ public class VolunteerView extends AbstractView {
 	private void listJobsInPark(Park selectedPark, List<Job> parkJobList){
 		super.displayHeader(myVolunteer, myDay);
 		mySB.append("Which job do you want to sign up for?\n");
-		mySB.append("\n----------------------------------------------------------\n\n");
-		mySB.append("\nDate          Park               Job Time    Duration     Job Description");
-		mySB.append("\n-----------------------------------------------------------------------\n\n");
+		mySB.append("-----------------------------------------------------------------\n\n");
+		
+		mySB.append("\n[x]  Date\tPark\t\tJob Time\tDuration\tJob Description");
+		mySB.append("\n-------------------------------------------------------------------------------\n\n");
 		int count = 0;
 		Iterator<Job> itr=parkJobList.iterator();
 		if(parkJobList.size() == 0) mySB.append("There are no jobs to sign up for\n"); // Changed because parkJobList can never be NULL
@@ -154,13 +155,17 @@ public class VolunteerView extends AbstractView {
 				mySB.append(count);
 				mySB.append(". ");
 				mySB.append(currentJob.getMonth()+"/"+currentJob.getDay()+"/"+currentJob.getYear());
-				mySB.append("    ");
+				//mySB.append("    ");
+				mySB.append("\t");
 				mySB.append(currentJob.getPark().getName());
-				mySB.append("     ");
+				//mySB.append("     ");
+				mySB.append("\t");
 				mySB.append(currentJob.getTime());
-				mySB.append("         ");
+				//mySB.append("         ");
+				mySB.append("\t\t");
 				mySB.append(currentJob.getDuration());
-				mySB.append("            ");
+				//mySB.append("            ");
+				mySB.append("\t");
 				mySB.append(currentJob.getDescription());
 				mySB.append("\n");
 				mySB.append("\n");

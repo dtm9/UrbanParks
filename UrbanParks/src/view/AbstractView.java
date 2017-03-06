@@ -9,31 +9,40 @@ import model.Datastore;
 
 /**
  * @author Dylan Miller
- *
+ * @author Walter Weeks
  */
 public abstract class AbstractView {
+    
+    StringBuilder mySB = new StringBuilder();
   
+    public AbstractView() { }
   
-  public AbstractView() {
-  }
+    /** All view objects must use this signature to run the GUI. */
+    public abstract Datastore launchGUI(Datastore theDatastore);
   
-  /**All view objects must use this signature to run the GUI.*/
-  public abstract Datastore launchGUI(Datastore theDatastore);
-  
-  /**
-   * Displays the header for the views.
-   * @param theAccount
-   * @param theDay
-   */
-  public void displayHeader(AbstractAccount theAccount, LocalDate theDay) { 
-      System.out.print("\neUrbanParks: the Volunteer organizer for Park Districts nationwide\n\n");
-      System.out.print(theAccount.getRealName());
-      System.out.print(" logged in as Urban Parks " + theAccount.AccountType() + "\n");
-      System.out.print(theDay.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
-      System.out.print(" ");
-      System.out.print(theDay.getDayOfMonth());
-      System.out.print(", ");
-      System.out.print(theDay.getYear());
-      System.out.print(".\n-----------------------------------------------------------------\n");
-  }
+    /**
+     * Displays the header for the views.
+     * @param theAccount
+     * @param theDay
+     */
+    public void displayHeader(AbstractAccount theAccount, LocalDate theDay) { 
+        mySB.delete(0, mySB.length());
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Urban Parks | ");
+        mySB.append(theDay.getMonthValue());
+        mySB.append("/");
+        mySB.append(theDay.getDayOfMonth());
+        mySB.append("/");
+        mySB.append(theDay.getYear());
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Welcome ");
+        mySB.append(theAccount.getRealName());
+        mySB.append(" (");
+        mySB.append(theAccount.AccountType());
+        mySB.append(')');
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("-----------------------------------------------------------------");
+        mySB.append(Main.SB_LINE_BREAK);
+        System.out.print(mySB.toString());
+    }
 }

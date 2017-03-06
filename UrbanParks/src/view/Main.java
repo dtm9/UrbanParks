@@ -18,21 +18,24 @@ import model.Volunteer;
 /**
  * Class to launch the application. Stores the mainline.
  * @author Dylan Miller
+ * @author Walter Weeks
  */
 public class Main {
+    
+    //***** Constant(s) ************************************************************************************************
+    
+    /** OS-independent string to add a line break in string builder. Used throughout the view package. */
+    public static final String SB_LINE_BREAK = System.getProperty("line.separator");
 
     //***** Field(s) ***************************************************************************************************
-
-    /**Static reference to the datastore in memory.*/
+    
+    /** Static reference to the datastore in memory. */
     private static Datastore datastore;
 
-    /**String builder for printing any text needed to console.*/
+    /** String builder for printing any text needed to console. */
     private static StringBuilder mySB = new StringBuilder();
 
-    /**OS-independent string to add a line break in string builder.*/
-    private static final String SB_LINE_BREAK = System.getProperty("line.separator");
-
-    /**Scanner object for any user input that may be required for log in.*/
+    /**Scanner object for any user input that may be required for log in. */
     private static Scanner myScanner = new Scanner(System.in);
 
     //***** Constructor(s) *********************************************************************************************
@@ -46,7 +49,6 @@ public class Main {
     //***** Static method(s) *******************************************************************************************
 
     public static void main(final String[] args) {
-
         boolean done = false;
         load();
         while (!done) {
@@ -54,7 +56,6 @@ public class Main {
             mySB.delete(0, mySB.capacity());
             save();
         }
-        mySB.append(SB_LINE_BREAK);
         System.out.print(mySB.toString());
     }
 
@@ -95,6 +96,10 @@ public class Main {
                 done = false;
                 break;
             case 2: //exit
+                mySB.delete(0, mySB.capacity());
+                mySB.append("Exited program...");
+                mySB.append(SB_LINE_BREAK);
+                System.out.println(mySB.toString());
                 done = true;
                 break;
             default: //wrong input
@@ -110,7 +115,11 @@ public class Main {
      * @author Dylan Miller
      */
     private static String scanUsername() {
+        Main.clear();
         myScanner.nextLine();
+        mySB.append(SB_LINE_BREAK);
+        mySB.append("Log In");
+        mySB.append(SB_LINE_BREAK);
         //get the username
         mySB.append("Email: ");
         System.out.print(mySB.toString());
@@ -143,6 +152,7 @@ public class Main {
     /**
      * Helper method to test the log-in screen display.
      * @author Dylan Miller
+     * @author Walter Weeks
      */
     private static void printHeader() {
         mySB.append(SB_LINE_BREAK);
@@ -153,17 +163,15 @@ public class Main {
         mySB.append(SB_LINE_BREAK);
         mySB.append("----------------------------------------------------------");
         mySB.append(SB_LINE_BREAK);
-        mySB.append(SB_LINE_BREAK);
 
-        mySB.append("Make a selection:");
         mySB.append(SB_LINE_BREAK);
-        mySB.append("1. Log in");
+        mySB.append("[1] Log In");
         mySB.append(SB_LINE_BREAK);
-        mySB.append("2. Exit");
+        mySB.append("[2] Exit");
         mySB.append(SB_LINE_BREAK);
-
+        mySB.append(SB_LINE_BREAK);
         System.out.print(mySB.toString());
-        System.out.print("Selection: ");
+        System.out.print("Enter a command: ");
         mySB.delete(0, mySB.capacity());
     }
 
@@ -247,5 +255,22 @@ public class Main {
      */
     List<Park> getAllParks() {
         return datastore.getAllParks();
+    }
+    
+    /**
+     * Clears the console window. Note that this will not work in the Eclipse console window.
+     */
+    public static void clear() {
+        try {
+            if( System.getProperty( "os.name" ).startsWith( "Window" ) ) {
+                Runtime.getRuntime().exec("cls");
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException e) {
+            for(int i = 0; i < 1000; i++) {
+                System.out.println();
+            }
+        }
     }
 }

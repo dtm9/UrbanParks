@@ -16,9 +16,8 @@ import model.Park;
 import model.ParkManager;
 import model.Volunteer;
 /**
- * tests the state of a Job with Max Volunteers and one Job Without max volunteers.
- * @author VG Gnome
- *
+ * Tests the state of a Job with Max Volunteers and one Job Without max volunteers.
+ * @author Gardner Gomes
  */
 public class JobWithMaxVolunteersStateTest {
     public final static int MAX_VOLUNTEERS = 10;

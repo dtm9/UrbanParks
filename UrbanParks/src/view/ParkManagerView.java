@@ -16,10 +16,11 @@ import model.Park;
 import model.ParkManager;
 
 /**
- * Object that runs the user interface for a Park Manager user. 
+ * Object that runs the user interface for a ParkManager user. 
  * Launched with the public launchGUI() method.
  * @author Dylan Miller
  * @author Gardner Gomes
+ * @author Walter Weeks
  */
 public class ParkManagerView extends AbstractView {
     
@@ -75,18 +76,22 @@ public class ParkManagerView extends AbstractView {
      * @author Gardner Gomes
      */
     private void userChoice() {
-        mySB.append("\n1. Submit Job\n");
-        mySB.append("2. Exit eUrbanParks\n");
-        mySB.append("\nWhat would you like to do?: ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("[1] Submit Job");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("[2] Exit Urban Parks");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();
         switch (theChoice) {
-        case 1:
+        case 1: // submit a job
             checkMaxJobs(myDatastore);
             submitJob();
             break;
-        case 2:
+        case 2: // log out
+            System.out.print("Logged out..." + Main.SB_LINE_BREAK);
             break;
         case 3:
             ViewJobs();
@@ -129,7 +134,17 @@ public class ParkManagerView extends AbstractView {
         try {
             myDatastore.addJob(myJob);
         } catch (Exception e){
-            System.out.println("Adding the Job failed, try again\n");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print("ERROR: Adding the Job failed, please try again.");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print("Check the values you entered. Remember, the maximum number of Jobs ");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print("per day for the volunteer system is " + Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT);
+            System.out.print(" (with a total of " + Datastore.MAX_PENDING_JOBS_DEFAULT + ")");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(" and a maximum of " + Datastore.MAX_FUTURE_JOB_START_DATE + " days "
+                    + "in the future.");
+            System.out.print(Main.SB_LINE_BREAK);
             submitJob();
         }
         System.out.println("Job submitted. You can view it in your Jobs.");
@@ -195,7 +210,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addTime(Job theJob) {
-        System.out.print("Please set the Time of this Job (e.g., 12:30): ");
+        System.out.print("Please set the Time of this Job in 24-hour format (e.g., 13:30): ");
         try {
             theJob.setTime(myScanner.nextLine());
         } catch (Exception e) {
@@ -344,7 +359,9 @@ public class ParkManagerView extends AbstractView {
                 mySB.append("\n");
             }
         }
-        mySB.append("\n\nPlease choose a job you want to view: "); 
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Please choose a job you want to view: "); 
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         int theChoice = myScanner.nextInt();
@@ -376,7 +393,6 @@ public class ParkManagerView extends AbstractView {
                 }
             }
         }
-
     }
 
     /**
@@ -399,26 +415,33 @@ public class ParkManagerView extends AbstractView {
     private void showJobInformation(Job theJob) {
         mySB.append("Name: ");
         mySB.append(theJob.getName());
-        mySB.append("\nDescription: ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Description: ");
         mySB.append(theJob.getDescription());
-        mySB.append("\nDate(Day/Month/year): ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Date(Day/Month/year): ");
         mySB.append(theJob.getDay());
         mySB.append("/");
         mySB.append(theJob.getMonth());
         mySB.append("/");
         mySB.append(theJob.getYear());
-        mySB.append("\nTime: ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Time: ");
         mySB.append(theJob.getTime());
-        mySB.append("\nDurration for the Job: ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Durration for the Job: ");
         mySB.append(theJob.getDuration());
-        mySB.append("\nMinumum Light Grade Volunteers(0 or More): ");
-        mySB.append("\nMinumum Medium Grade Volunteers(0 or More): ");
-        mySB.append("\nMinumum Heavy Grade Volunteers(0 or More): ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Minumum Light Grade Volunteers(0 or More): ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Minumum Medium Grade Volunteers(0 or More): ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Minumum Heavy Grade Volunteers(0 or More): ");
 //        mySB.append("\nMaximum Volunteers(0 or More): "); 
 //        mySB.append(theJob.getMaxVolunteers());
         mySB.append("\nAdditional Notes: ");
         mySB.append(theJob.getNotes());
-        mySB.append("\n");
+        mySB.append(Main.SB_LINE_BREAK);
         System.out.println(mySB.toString());
         mySB.delete(0, mySB.capacity());
     }

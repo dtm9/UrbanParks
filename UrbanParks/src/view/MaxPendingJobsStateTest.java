@@ -17,7 +17,8 @@ import model.Park;
 import model.ParkManager;
 /**
  * This creates a state of the datastore to test if the max jobs has been created. 
- * @author VG Gnome 
+ * @author Gardner Gomes
+ * @author Dylan Miller 
  *
  */
 public class MaxPendingJobsStateTest {

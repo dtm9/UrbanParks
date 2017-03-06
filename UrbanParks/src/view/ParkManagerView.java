@@ -119,8 +119,11 @@ public class ParkManagerView extends AbstractView {
     private void submitJob() {
         Job myJob = new Job();
         super.displayHeader(myManager, myDay);
-        System.out.println("Submit a Job for " + myManager.getRealName());
-        System.out.print("-----------------------------------------------------------------\n\n");
+        System.out.print("Submit a Job for " + myManager.getRealName());
+        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print("----------------------------------------------------------");
+        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print(Main.SB_LINE_BREAK);
         myJob = addPark(myJob);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
@@ -439,7 +442,8 @@ public class ParkManagerView extends AbstractView {
         mySB.append("Minumum Heavy Grade Volunteers(0 or More): ");
 //        mySB.append("\nMaximum Volunteers(0 or More): "); 
 //        mySB.append(theJob.getMaxVolunteers());
-        mySB.append("\nAdditional Notes: ");
+        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append("Additional Notes: ");
         mySB.append(theJob.getNotes());
         mySB.append(Main.SB_LINE_BREAK);
         System.out.println(mySB.toString());
@@ -453,7 +457,9 @@ public class ParkManagerView extends AbstractView {
      */
     private void showVolunteers(Job theJob) {
         if (!theJob.getVolunteers().isEmpty()) {
-            System.out.print("\nVolunteers for this Job.\n");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print("Volunteers for this Job.");
+            System.out.print(Main.SB_LINE_BREAK);
             List<String> myVolunteers = theJob.getVolunteers();
             Iterator<String> itr = myVolunteers.iterator();
             int count = 1;
@@ -465,7 +471,9 @@ public class ParkManagerView extends AbstractView {
                 mySB.delete(0, mySB.capacity());
             }
         } else {
-            System.out.println("There are no Volunteers signed up.\n");
+            System.out.print("There are no Volunteers signed up.");
+            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.SB_LINE_BREAK);
         }
     }
 

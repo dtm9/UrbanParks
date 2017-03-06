@@ -100,7 +100,7 @@ public class VolunteerView extends AbstractView {
 
         mySB.append("Which park do you want to volunteer for?");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("-----------------------------------------------------------------");
+        mySB.append("----------------------------------------------------------");
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(Main.SB_LINE_BREAK);
         //using main datastore instead of local copy
@@ -266,7 +266,8 @@ public class VolunteerView extends AbstractView {
             mySB.append(Main.SB_LINE_BREAK);
             mySB.append("You have already signed up for a job on this day.");
             mySB.append(Main.SB_LINE_BREAK);
-            mySB.append("\nEnter 1 to return to main menu");
+            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append("Enter 1 to return to main menu");
             mySB.append(Main.SB_LINE_BREAK);
         }
         System.out.print(mySB.toString());
@@ -349,7 +350,8 @@ public class VolunteerView extends AbstractView {
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append("[1] Back");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("[2] Exit\n");
+        mySB.append("[2] Exit");
+        mySB.append(Main.SB_LINE_BREAK);
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         System.out.print(Main.SB_LINE_BREAK);

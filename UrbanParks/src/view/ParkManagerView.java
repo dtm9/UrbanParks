@@ -93,6 +93,8 @@ public class ParkManagerView extends AbstractView {
         case 1: // submit a job
             if (!checkMaxJobs(myDatastore)) {
                 submitJob(true);
+            } else {
+                mainMenu();
             }
             break;
         case 2: // log out

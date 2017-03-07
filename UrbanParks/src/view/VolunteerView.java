@@ -288,14 +288,11 @@ public class VolunteerView extends AbstractView {
             mySB.append(Main.LINE_BREAK);
             mySB.append("Are you sure you want to volunteer for this job? (Y/n) ");
         } else {
-            super.displayHeader(myVolunteer, myDay);
-            mySB.append("You can not sign up for this job: ");
             mySB.append(Main.LINE_BREAK);
-            mySB.append("You have already signed up for a job on this day.");
+            mySB.append("Sorry, but you have already signed up for a job on this day.");
             mySB.append(Main.LINE_BREAK);
             mySB.append(Main.LINE_BREAK);
-            mySB.append("Enter 1 to return to Main Menu");
-            mySB.append(Main.LINE_BREAK);
+            mySB.append("Enter 1 to return to Main Menu: ");
         }
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());

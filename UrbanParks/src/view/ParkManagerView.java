@@ -136,7 +136,6 @@ public class ParkManagerView extends AbstractView {
         myJob = addYear(myJob);
         myJob = addTime(myJob);
         myJob = addDuration(myJob);
-        //myJob = addVolunteerMax(myJob); Deprecated.
         myJob = addNotes(myJob);
         try {
             myDatastore.addJob(myJob);
@@ -156,8 +155,6 @@ public class ParkManagerView extends AbstractView {
         }
         System.out.print(Main.SB_LINE_BREAK);
         System.out.print("Job successfully submitted for " + myPark.getName() + "!");
-        System.out.print(Main.SB_LINE_BREAK);
-        System.out.print("A confirmation email will be sent to: " + myManager.getUsername());
         System.out.print(Main.SB_LINE_BREAK);
         userChoice();
     }
@@ -332,9 +329,9 @@ public class ParkManagerView extends AbstractView {
             Park tempPark = (Park) itr.next();
             if (tempPark.getManager().equals(myManager)) {
                 theJob.setPark(tempPark);
+                myPark = theJob.getPark();
             }
         }
-        myPark = theJob.getPark();
         return theJob;
     }
 

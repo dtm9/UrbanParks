@@ -17,22 +17,23 @@ import model.ParkManager;
 /**
  * Basic test cases for the Park class.
  *
- * @author Walter Weeks (ww3@uw.edu)
+ * @author Walter Weeks
+ * @author Peter Park
  */
 public class ParkTest {
 
-    // ***** Test fixture(s) and setUp() *******************************************************************************
+    //***** Test fixture(s) and setUp() ********************************************************************************
 
-    /**The park manager test fixture.*/
+    /** The park manager test fixture. */
     private ParkManager myManager;
 
-    /**The park test fixture.*/
+    /** The park test fixture. */
     private Park myPark;
     
-    /**The job test fixture.*/
+    /** The job test fixture. */
     private Job myJob;
     
-    /**Test Datastore test fixture.*/
+    /** Test Datastore test fixture. */
     private Datastore myDatastore;
     
     /**

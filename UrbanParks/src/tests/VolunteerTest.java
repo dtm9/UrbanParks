@@ -25,15 +25,15 @@ import model.Volunteer;
  */
 public class VolunteerTest {
 
-    //***** Constants **************************************************************************************************
+    //***** Constant(s) ************************************************************************************************
 
-    /**Example username.*/
+    /** Example username. */
     private static final String GOOD_EMAIL = "joe@yahoo.com";
 
-    /**10 digit phone number that meets our phone REGEX validation.*/
+    /** 10 digit phone number that meets our phone REGEX validation. */
     private static final String GOOD_PHONE = "5551112222";
 
-    /**There is no REGEX for real names, it just needs to not be blank.*/
+    /** There is no REGEX for real names, it just needs to not be blank. */
     private static final String GOOD_NAME = "Joe Smith";
 
     //***** Test fixture(s), setUp(), etc. *****************************************************************************

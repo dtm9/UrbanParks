@@ -92,7 +92,7 @@ public class ParkManagerView extends AbstractView {
         switch (theChoice) {
         case 1: // submit a job
             checkMaxJobs(myDatastore);
-            submitJob();
+            submitJob(true);
             break;
         case 2: // log out
             System.out.print("Logged out..." + Main.LINE_BREAK);
@@ -117,13 +117,18 @@ public class ParkManagerView extends AbstractView {
     /**
      * Submit a Job element for the UI.
      * @author Gardner Gomes
+     * @author Walter Weeks
+     * @param isFirstTime flag that indicated whether or not this is the first time 
+     * entering this method per submission. This fixes a Scanner bug when resubmitting 
+     * after a park manager inputs an invalid Job entry, e.g., past the maximum number of
+     * days in the future, etc.
      */
-    private void submitJob() {
+    private void submitJob(final boolean isFirstTime) {
         Job myJob = new Job();
         myJob = addPark(myJob);
         super.displayHeader(myManager, myDay);
         displaySubmitAJobHeader(myPark);
-        myJob = addName(myJob);
+        myJob = addName(myJob, isFirstTime);
         myJob = addDescription(myJob);
         myJob = addMonth(myJob);
         myJob = addDay(myJob);
@@ -145,7 +150,7 @@ public class ParkManagerView extends AbstractView {
             System.out.print(" and a maximum of " + Datastore.MAX_FUTURE_JOB_START_DATE + " days "
                     + "in the future.");
             System.out.print(Main.LINE_BREAK);
-            submitJob();
+            submitJob(false);
         }
         System.out.print(Main.LINE_BREAK);
         System.out.print("Job successfully submitted for " + myPark.getName() + "!");
@@ -301,7 +306,7 @@ public class ParkManagerView extends AbstractView {
      * @param theJob
      * @return theJob back to caller.
      */
-    Job addDescription(Job theJob) {
+    Job addDescription(final Job theJob) {
         System.out.print("Enter the Description of the Job: ");
         try {
             theJob.setDescription(myScanner.nextLine());
@@ -318,13 +323,15 @@ public class ParkManagerView extends AbstractView {
      * @param theJob
      * @return theJob back to caller.
      */
-    Job addName(Job theJob) {
+    Job addName(final Job theJob, final boolean isFirstTime) {
         System.out.print("Enter the Name of the Job: ");
         try {
-            myScanner.nextLine();
+            if (isFirstTime) {
+                myScanner.nextLine();
+            }
             theJob.setName(myScanner.nextLine());
         } catch (Exception e) {
-            addName(theJob);
+            addName(theJob, false);
         }
         return theJob;
     }

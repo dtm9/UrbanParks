@@ -75,6 +75,10 @@ public class ParkManagerView extends AbstractView {
      * @author Gardner Gomes
      */
     private void userChoice() {
+        mySB.append("Main Menu");
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(DASHED_LINE);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(Main.LINE_BREAK);
         mySB.append("[1] Submit Job");
         mySB.append(Main.LINE_BREAK);
@@ -120,12 +124,7 @@ public class ParkManagerView extends AbstractView {
         Job myJob = new Job();
         myJob = addPark(myJob);
         super.displayHeader(myManager, myDay);
-        System.out.print("Submit a Job for " + myManager.getRealName());
-        System.out.print(" at " + myPark.getName() + " in " + myPark.getCity());
-        System.out.print(Main.LINE_BREAK);
-        System.out.print(DASHED_LINE);
-        System.out.print(Main.LINE_BREAK);
-        System.out.print(Main.LINE_BREAK);
+        displaySubmitAJobHeader(myPark);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
         myJob = addMonth(myJob);
@@ -154,6 +153,23 @@ public class ParkManagerView extends AbstractView {
         System.out.print("Job successfully submitted for " + myPark.getName() + "!");
         System.out.print(Main.LINE_BREAK);
         userChoice();
+    }
+    
+    /**
+     * Helper method that displays the header for "Submit a Job" selection.
+     * @author Walter Weeks
+     * @param thePark
+     */
+    private void displaySubmitAJobHeader(final Park thePark) {
+        System.out.print("Main Menu > Submit a Job");
+        System.out.print(Main.LINE_BREAK);
+        System.out.print(DASHED_LINE);
+        System.out.print(Main.LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
+        System.out.print("Submit a Job for " + myManager.getRealName());
+        System.out.print(" at " + thePark.getName() + " in " + thePark.getCity());
+        System.out.print(Main.LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
     }
 
     /**

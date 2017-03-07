@@ -167,7 +167,7 @@ public class Main {
         mySB.append(LINE_BREAK);
         mySB.append("[1] Log In");
         mySB.append(LINE_BREAK);
-        mySB.append("[2] Exit");
+        mySB.append("[2] Exit Program");
         mySB.append(LINE_BREAK);
         mySB.append(LINE_BREAK);
         System.out.print(mySB.toString());

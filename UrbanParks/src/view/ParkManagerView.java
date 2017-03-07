@@ -66,15 +66,15 @@ public class ParkManagerView extends AbstractView {
     public Datastore launchGUI(Datastore theDatastore) {
         myDatastore = theDatastore;
         super.displayHeader(myManager, myDay);
-        userChoice();
+        mainMenu();
         return myDatastore;
     }
     
     /**
-     * Presents the user with a choice of what to do next.
+     * Creates and displays the main menu for the ParkManager.
      * @author Gardner Gomes
      */
-    private void userChoice() {
+    private void mainMenu() {
         mySB.append("Main Menu");
         mySB.append(Main.LINE_BREAK);
         mySB.append(DASHED_LINE);
@@ -101,7 +101,6 @@ public class ParkManagerView extends AbstractView {
             ViewJobs();
             break;
         }
-        
     }
 
     /**
@@ -111,10 +110,9 @@ public class ParkManagerView extends AbstractView {
     private void checkMaxJobs(Datastore theDatastore) {
         if (theDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
-            this.userChoice();
+            this.mainMenu();
         }
     }
-    
     
     /**
      * Submit a Job element for the UI.
@@ -152,7 +150,9 @@ public class ParkManagerView extends AbstractView {
         System.out.print(Main.LINE_BREAK);
         System.out.print("Job successfully submitted for " + myPark.getName() + "!");
         System.out.print(Main.LINE_BREAK);
-        userChoice();
+        System.out.print(Main.LINE_BREAK);
+        displayHeader(myManager, myDay);
+        mainMenu();
     }
     
     /**
@@ -426,7 +426,7 @@ public class ParkManagerView extends AbstractView {
         super.displayHeader(myManager, myDay);
         showJobInformation(theJob);
         showVolunteers(theJob);
-        userChoice();
+        mainMenu();
     }
 
     /**

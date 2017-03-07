@@ -75,7 +75,7 @@ public class VolunteerView extends AbstractView {
         return myDatastore;
     }
     /**
-     * Creates the main menu for the Volunteer
+     * Creates and displays the main menu for the Volunteer.
      */
     private void mainMenu(){
         super.displayHeader(myVolunteer, myDay);

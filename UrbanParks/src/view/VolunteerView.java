@@ -34,6 +34,8 @@ public class VolunteerView extends AbstractView {
     public static final String DASHED_LINE_FOR_JOB_LISTING = 
             "-------------------------------------------------------------------------------";
     
+    public static final String JOB_LABELS = "Date\t\tPark\t\tTime\tDays\tJob Description";
+    
     static final int MIN_DATE_AWAY_MINUS_ONE = 1;
     
     //***** Field(s) ***************************************************************************************************
@@ -164,7 +166,8 @@ public class VolunteerView extends AbstractView {
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("[x] Date\tPark\t\tTime\tDays\tJob Description");
+        mySB.append("[x] ");
+        mySB.append(JOB_LABELS);
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);
@@ -186,16 +189,16 @@ public class VolunteerView extends AbstractView {
                 mySB.append("] ");
                 mySB.append(currentJob.getMonth()+"/"+currentJob.getDay()+"/"+currentJob.getYear());
                 //mySB.append("    ");
-                mySB.append("\t");
+                mySB.append("\t\t");
                 mySB.append(currentJob.getPark().getName());
                 //mySB.append("     ");
-                mySB.append("\t");
+                mySB.append('\t');
                 mySB.append(currentJob.getTime());
                 //mySB.append("         ");
-                mySB.append("\t");
+                mySB.append('\t');
                 mySB.append(currentJob.getDuration());
                 //mySB.append("         ");
-                mySB.append("\t");
+                mySB.append('\t');
                 mySB.append(currentJob.getDescription());
                 mySB.append(Main.SB_LINE_BREAK);
             }
@@ -288,7 +291,6 @@ public class VolunteerView extends AbstractView {
             System.out.print(Main.SB_LINE_BREAK);
             System.out.print("Success: You have signed up for this Job!");
             System.out.print(Main.SB_LINE_BREAK);
-            System.out.print("A confirmation email will be sent to: ");
             System.out.print(myVolunteer.getUsername());
             System.out.print(Main.SB_LINE_BREAK);
         } else {
@@ -326,7 +328,7 @@ public class VolunteerView extends AbstractView {
         mySB.append("Jobs currently volunteering for: ");
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("Date\t\tPark\t\tTime\tDays\tJob Description");
+        mySB.append(JOB_LABELS);
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);

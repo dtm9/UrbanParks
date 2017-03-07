@@ -96,7 +96,7 @@ public class IOTest {
 	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
 	testDatastore.addJob(testJob4);
 	
-	testVolunteer1 = new Volunteer("NotAProfessionalEmail@gmail.com", "5559998888", "Gardner Gomes");
+	testVolunteer1 = new Volunteer("gardnergomes@gmail.com", "5559998888", "Gardner Gomes");
 	testDatastore.addAccount(testVolunteer1);
 	testJob1.setVolunteers(testVolunteer1.getRealName());
 	

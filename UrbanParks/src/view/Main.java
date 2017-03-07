@@ -24,8 +24,8 @@ public class Main {
     
     //***** Constant(s) ************************************************************************************************
     
-    /** OS-independent string to add a line break in string builder. Used throughout the view package. */
-    public static final String SB_LINE_BREAK = System.getProperty("line.separator");
+    /** OS-independent string to add a line break. Used throughout the view package. */
+    public static final String LINE_BREAK = System.getProperty("line.separator");
 
     //***** Field(s) ***************************************************************************************************
     
@@ -85,10 +85,10 @@ public class Main {
                     datastore = theView.launchGUI(datastore);
                 } catch (NullPointerException e) {
                     mySB.delete(0, mySB.capacity());
-                    mySB.append(SB_LINE_BREAK);
+                    mySB.append(LINE_BREAK);
                     mySB.append(e.getMessage());
-                    mySB.append(SB_LINE_BREAK);
-                    mySB.append(SB_LINE_BREAK);
+                    mySB.append(LINE_BREAK);
+                    mySB.append(LINE_BREAK);
                     System.out.print(mySB.toString());
                     mySB.delete(0, mySB.capacity());
                 }
@@ -98,7 +98,7 @@ public class Main {
             case 2: //exit
                 mySB.delete(0, mySB.capacity());
                 mySB.append("Exited program...");
-                mySB.append(SB_LINE_BREAK);
+                mySB.append(LINE_BREAK);
                 System.out.println(mySB.toString());
                 done = true;
                 break;
@@ -117,9 +117,9 @@ public class Main {
     private static String scanUsername() {
         Main.clear();
         myScanner.nextLine();
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("Log In");
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         //get the username
         mySB.append("Email: ");
         System.out.print(mySB.toString());
@@ -155,21 +155,21 @@ public class Main {
      * @author Walter Weeks
      */
     private static void printHeader() {
-        mySB.append(SB_LINE_BREAK);
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("-----------------------------------------------------------------");
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("Welcome to Urban Parks ");
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("-----------------------------------------------------------------");
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
 
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("[1] Log In");
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
         mySB.append("[2] Exit");
-        mySB.append(SB_LINE_BREAK);
-        mySB.append(SB_LINE_BREAK);
+        mySB.append(LINE_BREAK);
+        mySB.append(LINE_BREAK);
         System.out.print(mySB.toString());
         System.out.print("Enter a command: ");
         mySB.delete(0, mySB.capacity());

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view;
 
 import java.time.LocalDate;
@@ -27,6 +24,7 @@ public class ParkManagerView extends AbstractView {
     //***** Constant(s) ************************************************************************************************
     
     public static final int TEMP_MAX_JOBS = 20;
+    
     /**@deprecated*/
     public static final int MONTH_BUFFER = 1;
     
@@ -44,7 +42,6 @@ public class ParkManagerView extends AbstractView {
     
     /**
      * Constructor for the ParkManagerView.
-     * 
      * @author Gardner Gomes
      * @param theAccount
      */
@@ -78,12 +75,12 @@ public class ParkManagerView extends AbstractView {
      * @author Gardner Gomes
      */
     private void userChoice() {
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[1] Submit Job");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[2] Exit Urban Parks");
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -94,7 +91,7 @@ public class ParkManagerView extends AbstractView {
             submitJob();
             break;
         case 2: // log out
-            System.out.print("Logged out..." + Main.SB_LINE_BREAK);
+            System.out.print("Logged out..." + Main.LINE_BREAK);
             break;
         case 3:
             ViewJobs();
@@ -125,10 +122,10 @@ public class ParkManagerView extends AbstractView {
         super.displayHeader(myManager, myDay);
         System.out.print("Submit a Job for " + myManager.getRealName());
         System.out.print(" at " + myPark.getName() + " in " + myPark.getCity());
-        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
         System.out.print(DASHED_LINE);
-        System.out.print(Main.SB_LINE_BREAK);
-        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
         myJob = addMonth(myJob);
@@ -140,22 +137,22 @@ public class ParkManagerView extends AbstractView {
         try {
             myDatastore.addJob(myJob);
         } catch (Exception e){
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("ERROR: Adding the Job failed, please try again.");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("Check the values you entered. Remember, the maximum number of Jobs ");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("per day for the volunteer system is " + Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT);
             System.out.print(" (with a total of " + Datastore.MAX_PENDING_JOBS_DEFAULT + ")");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print(" and a maximum of " + Datastore.MAX_FUTURE_JOB_START_DATE + " days "
                     + "in the future.");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             submitJob();
         }
-        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
         System.out.print("Job successfully submitted for " + myPark.getName() + "!");
-        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
         userChoice();
     }
 
@@ -368,8 +365,8 @@ public class ParkManagerView extends AbstractView {
                 mySB.append("\n");
             }
         }
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Please choose a job you want to view: "); 
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -424,34 +421,34 @@ public class ParkManagerView extends AbstractView {
     private void showJobInformation(Job theJob) {
         mySB.append("Name: ");
         mySB.append(theJob.getName());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Description: ");
         mySB.append(theJob.getDescription());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Date(Day/Month/year): ");
         mySB.append(theJob.getDay());
         mySB.append("/");
         mySB.append(theJob.getMonth());
         mySB.append("/");
         mySB.append(theJob.getYear());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Time: ");
         mySB.append(theJob.getTime());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Durration for the Job: ");
         mySB.append(theJob.getDuration());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Minumum Light Grade Volunteers(0 or More): ");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Minumum Medium Grade Volunteers(0 or More): ");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Minumum Heavy Grade Volunteers(0 or More): ");
 //        mySB.append("\nMaximum Volunteers(0 or More): "); 
 //        mySB.append(theJob.getMaxVolunteers());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Additional Notes: ");
         mySB.append(theJob.getNotes());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         System.out.println(mySB.toString());
         mySB.delete(0, mySB.capacity());
     }
@@ -463,9 +460,9 @@ public class ParkManagerView extends AbstractView {
      */
     private void showVolunteers(Job theJob) {
         if (!theJob.getVolunteers().isEmpty()) {
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("Volunteers for this Job.");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             List<String> myVolunteers = theJob.getVolunteers();
             Iterator<String> itr = myVolunteers.iterator();
             int count = 1;
@@ -478,8 +475,8 @@ public class ParkManagerView extends AbstractView {
             }
         } else {
             System.out.print("There are no Volunteers signed up.");
-            System.out.print(Main.SB_LINE_BREAK);
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
         }
     }
 

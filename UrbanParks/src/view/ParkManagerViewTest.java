@@ -19,9 +19,12 @@ import org.junit.Before;
  * @author Dylan Miller
  */
 public class ParkManagerViewTest {
-	private ParkManager testParkManager;
-	private ParkManagerView testParkManagerView;
-	private Datastore testDatastore;
+    
+    //***** Test fixture(s), setUp(), etc. *****************************************************************************
+    
+    private ParkManager testParkManager;
+    private ParkManagerView testParkManagerView;
+    private Datastore testDatastore;
     private ParkManager testPM1;
     private Job testJob1;
     private Job testJob2;
@@ -72,20 +75,19 @@ public class ParkManagerViewTest {
     private Volunteer testVolunteer1;
     private Job testJob30;
     private Job testJob31;
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		testDatastore = new Datastore();
-		
-		testPM1 = new ParkManager("batman@tacomaparks.com", "5551112222", "Dylan Miller");
-		testParkManagerView = new ParkManagerView(testPM1);
-		
-		
-		testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
-	    testDatastore.addAccount(testVolunteer1);
-	    testVolunteer2 = new Volunteer("Sinefield@gmail.com", "5559998887", "Jerry Sienfield");
+    
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+        testDatastore = new Datastore();
+        
+        testPM1 = new ParkManager("batman@tacomaparks.com", "5551112222", "Dylan Miller");
+        testParkManagerView = new ParkManagerView(testPM1);
+        testVolunteer1 = new Volunteer("GardnerGomes@gmail.com", "5559998888", "Gardner Gomes");
+        testDatastore.addAccount(testVolunteer1);
+        testVolunteer2 = new Volunteer("Sinefield@gmail.com", "5559998887", "Jerry Sienfield");
         testDatastore.addAccount(testVolunteer2);
         testVolunteer3 = new Volunteer("ShelGod@gmail.com", "5559997588", "Sheldon Garret");
         testDatastore.addAccount(testVolunteer3);
@@ -108,31 +110,30 @@ public class ParkManagerViewTest {
         testVolunteer12 = new Volunteer("MonInc@gmail.com", "5559693222", "Mike Wazowski");
         testDatastore.addAccount(testVolunteer12);
         
-	    testDatastore.addAccount(testPM1);
-	    testPark1 = new Park(testPM1, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
-	    testDatastore.addPark(testPark1);
-	    /*JOBS------------------------------------------------------------------------------------------------------*/
-		testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Recycling", 1, 13, 2 ,2017);
-	    testDatastore.addJob(testJob1);
-	    testJob1.setMaxVolunteers(20);
-	    testJob1.setVolunteers(testVolunteer1.getRealName());
-	    testJob1.setVolunteers(testVolunteer2.getRealName());
-	    testJob1.setVolunteers(testVolunteer3.getRealName());
-	    testJob1.setVolunteers(testVolunteer4.getRealName());
-	    testJob1.setVolunteers(testVolunteer5.getRealName());
-	    testJob1.setVolunteers(testVolunteer6.getRealName());
-	    testJob1.setVolunteers(testVolunteer7.getRealName());
-	    testJob1.setVolunteers(testVolunteer8.getRealName());
-	    testJob1.setVolunteers(testVolunteer9.getRealName());
-	    testJob1.setVolunteers(testVolunteer10.getRealName());
-	    testJob1.setVolunteers(testVolunteer11.getRealName());
-	    testJob1.setVolunteers(testVolunteer12.getRealName());
-	    
-	    
-	    testJob2 = new Job(testPark1, "09:00", "Paint over graphiti.","Painting", 1, 14, 2 , 2017);
-	    testDatastore.addJob(testJob2);
-	    testJob2.setMaxVolunteers(20);
-	    testJob2.setVolunteers(testVolunteer1.getRealName());
+        testDatastore.addAccount(testPM1);
+        testPark1 = new Park(testPM1, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
+        testDatastore.addPark(testPark1);
+        /*JOBS------------------------------------------------------------------------------------------------------*/
+        testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Recycling", 1, 13, 2 ,2017);
+        testDatastore.addJob(testJob1);
+        testJob1.setMaxVolunteers(20);
+        testJob1.setVolunteers(testVolunteer1.getRealName());
+        testJob1.setVolunteers(testVolunteer2.getRealName());
+        testJob1.setVolunteers(testVolunteer3.getRealName());
+        testJob1.setVolunteers(testVolunteer4.getRealName());
+        testJob1.setVolunteers(testVolunteer5.getRealName());
+        testJob1.setVolunteers(testVolunteer6.getRealName());
+        testJob1.setVolunteers(testVolunteer7.getRealName());
+        testJob1.setVolunteers(testVolunteer8.getRealName());
+        testJob1.setVolunteers(testVolunteer9.getRealName());
+        testJob1.setVolunteers(testVolunteer10.getRealName());
+        testJob1.setVolunteers(testVolunteer11.getRealName());
+        testJob1.setVolunteers(testVolunteer12.getRealName());
+        
+        testJob2 = new Job(testPark1, "09:00", "Paint over graphiti.","Painting", 1, 14, 2 , 2017);
+        testDatastore.addJob(testJob2);
+        testJob2.setMaxVolunteers(20);
+        testJob2.setVolunteers(testVolunteer1.getRealName());
         testJob2.setVolunteers(testVolunteer2.getRealName());
         testJob2.setVolunteers(testVolunteer3.getRealName());
         testJob2.setVolunteers(testVolunteer4.getRealName());
@@ -145,11 +146,11 @@ public class ParkManagerViewTest {
         testJob2.setVolunteers(testVolunteer11.getRealName());
         testJob2.setVolunteers(testVolunteer12.getRealName());
         
-	    testJob3 = new Job(testPark1, "11:00", "Feed the ducks.","Feeding", 1,  15, 2, 2017);
-	    testDatastore.addJob(testJob3);
-	    testJob4 = new Job(testPark1, "14:00", "Mow grass.","Mowing", 1, 16, 2, 2017);
-	    testDatastore.addJob(testJob4);
-	    testJob5 = new Job(testPark1, "10:00", "Cleaning up leaves.","Raking", 1, 17, 2 ,2017);
+        testJob3 = new Job(testPark1, "11:00", "Feed the ducks.","Feeding", 1,  15, 2, 2017);
+        testDatastore.addJob(testJob3);
+        testJob4 = new Job(testPark1, "14:00", "Mow grass.","Mowing", 1, 16, 2, 2017);
+        testDatastore.addJob(testJob4);
+        testJob5 = new Job(testPark1, "10:00", "Cleaning up leaves.","Raking", 1, 17, 2 ,2017);
         testDatastore.addJob(testJob5);
         testJob6 = new Job(testPark1, "10:00", "Cutting the Grass.","Mowing", 1, 18, 2 ,2017);
         testDatastore.addJob(testJob6);
@@ -200,7 +201,6 @@ public class ParkManagerViewTest {
 //        testJob29 = new Job(testPark1, "10:00", "Cutting the Lawn.","Mowing", 1, 13, 3 ,2017);
 //        testDatastore.addJob(testJob29);
         
-        
         testPastJob1 = new Job(testPark1, "10:00", "Volunteers to not only taste wine but pour it too.","Wine tasting", 1, 8, 1 ,2017);
         testDatastore.addJob(testPastJob1);
         testDatastore.removeJob(testJob1);
@@ -232,13 +232,14 @@ public class ParkManagerViewTest {
           } catch(IOException e) {
             e.printStackTrace();
           }
-		
-	} 
-	// TODO Test for 31 Jobs
-	//TODO test 3 Jobs 1 Day Conflict
-	//TODO Max 30 VOlunteers pear Job
-	//TODO test Job more than 1 month in future 
-	//TODO VIEW Volunteers for past and present Jobs.
-	//TODO no Job Longer Than 2 Days.
-
+    } 
+    
+    //***** Unit test(s) ***********************************************************************************************
+    
+    // TODO Test for 31 Jobs
+    //TODO test 3 Jobs 1 Day Conflict
+    //TODO Max 30 VOlunteers pear Job
+    //TODO test Job more than 1 month in future 
+    //TODO VIEW Volunteers for past and present Jobs.
+    //TODO no Job Longer Than 2 Days.
 }

@@ -80,14 +80,14 @@ public class VolunteerView extends AbstractView {
     private void mainMenu(){
         super.displayHeader(myVolunteer, myDay);
         int theChoice;
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[1] Volunteer for jobs");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[2] View My Jobs");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[3] Exit");
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -101,7 +101,7 @@ public class VolunteerView extends AbstractView {
                 viewJobs();
                 break;
             case 3: // exit
-                System.out.print("Logged out..." + Main.SB_LINE_BREAK);
+                System.out.print("Logged out..." + Main.LINE_BREAK);
                 break;
         }
     }
@@ -113,10 +113,10 @@ public class VolunteerView extends AbstractView {
         super.displayHeader(myVolunteer, myDay);
 
         mySB.append("Which park do you want to volunteer for?");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(DASHED_LINE);
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         //using main datastore instead of local copy
         List<Park> parkList = myDatastore.getAllParks();
         Iterator<Park> itr = parkList.iterator();
@@ -130,14 +130,14 @@ public class VolunteerView extends AbstractView {
             mySB.append(currentPark.getName());
             mySB.append(" in ");
             mySB.append(currentPark.getCity());
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
         }
         count ++;
         mySB.append('[');
         mySB.append(count);
         mySB.append("] Back to main menu");
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -161,20 +161,20 @@ public class VolunteerView extends AbstractView {
      */
     private void listJobsInPark(Park selectedPark, List<Job> parkJobList){
         super.displayHeader(myVolunteer, myDay);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Which job do you want to sign up for?");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[x] ");
         mySB.append(JOB_LABELS);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         int count = 0;
         Iterator<Job> itr=parkJobList.iterator();
         if(parkJobList.size() == 0) mySB.append("There are no jobs to sign up for"); // Changed because parkJobList can never be NULL
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         List<Job> legitJobs = new ArrayList<Job>();
         //placeholder in array
         Job notARealJob = new Job();
@@ -200,15 +200,15 @@ public class VolunteerView extends AbstractView {
                 //mySB.append("         ");
                 mySB.append('\t');
                 mySB.append(currentJob.getDescription());
-                mySB.append(Main.SB_LINE_BREAK);
+                mySB.append(Main.LINE_BREAK);
             }
         }
         count ++;
         mySB.append('[');
         mySB.append(count);
         mySB.append("] Back to main menu");
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -260,43 +260,43 @@ public class VolunteerView extends AbstractView {
         if (!sameDayFlag) { 
             super.displayHeader(myVolunteer, myDay);
             mySB.append("You are signing up for this job: ");
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append(printJob.getName());
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append(printJob.getDescription());
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append("Date: ");
             mySB.append(printJob.getMonth());
             mySB.append("/");
             mySB.append(printJob.getDay());
             mySB.append("/");
             mySB.append(printJob.getYear());
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append("Are you sure you want to volunteer for this job? (Y/n) ");
         } else {
             super.displayHeader(myVolunteer, myDay);
             mySB.append("You can not sign up for this job: ");
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append("You have already signed up for a job on this day.");
-            mySB.append(Main.SB_LINE_BREAK);
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
             mySB.append("Enter 1 to return to main menu");
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
         }
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
         String confirmChoice = myScanner.next();
         if (confirmChoice.equals("Y") && !sameDayFlag) {
             printJob.setVolunteers(myVolunteer.getUsername());
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("Success: You have signed up for this Job!");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print(myVolunteer.getUsername());
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
         } else {
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
             System.out.print("You did not sign up for this Job. Returning to main menu...");
-            System.out.print(Main.SB_LINE_BREAK);
+            System.out.print(Main.LINE_BREAK);
         }
         mainMenu();
     }
@@ -324,14 +324,14 @@ public class VolunteerView extends AbstractView {
      */
     private void viewJobs(){
         super.displayHeader(myVolunteer, myDay);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Jobs currently volunteering for: ");
-        mySB.append(Main.SB_LINE_BREAK);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(JOB_LABELS);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append(DASHED_LINE_FOR_JOB_LISTING);
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
         Iterator<Job> itr = volunteerJobs.iterator();
         while( itr.hasNext()){
@@ -350,17 +350,17 @@ public class VolunteerView extends AbstractView {
             mySB.append('\t');
             mySB.append(currentJob.getDescription());
             mySB.append('\t');
-            mySB.append(Main.SB_LINE_BREAK);
-            mySB.append(Main.SB_LINE_BREAK);
-            mySB.append(Main.SB_LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
+            mySB.append(Main.LINE_BREAK);
         }	
         mySB.append("[1] Back");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("[2] Exit");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         System.out.print(mySB.toString());
         
-        System.out.print(Main.SB_LINE_BREAK); 
+        System.out.print(Main.LINE_BREAK); 
         System.out.print("Enter a command: ");
         int theChoice = myScanner.nextInt();
 
@@ -370,7 +370,7 @@ public class VolunteerView extends AbstractView {
                 break;
             case 2:
                 System.out.print("Logged out...");
-                System.out.print(Main.SB_LINE_BREAK);
+                System.out.print(Main.LINE_BREAK);
                 break;
         }
     }

@@ -15,7 +15,8 @@ import java.util.Objects;
  */
 public class Job implements Serializable {
 
-    //***** Constant(s)
+    //***** Constant(s) ************************************************************************************************
+    
     /** Default serialVersionUID for serialization. */
     public static final long serialVersionUID = 1L;
     public static final int MAX_DURATION = 3;

@@ -37,22 +37,22 @@ public abstract class AbstractView {
      */
     public void displayHeader(AbstractAccount theAccount, LocalDate theDay) { 
         mySB.delete(0, mySB.length());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Urban Parks | ");
         mySB.append(theDay.getMonthValue());
         mySB.append("/");
         mySB.append(theDay.getDayOfMonth());
         mySB.append("/");
         mySB.append(theDay.getYear());
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("Welcome ");
         mySB.append(theAccount.getRealName());
         mySB.append(" (");
         mySB.append(theAccount.AccountType());
         mySB.append(')');
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         mySB.append("-----------------------------------------------------------------");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.LINE_BREAK);
         System.out.print(mySB.toString());
     }
 }

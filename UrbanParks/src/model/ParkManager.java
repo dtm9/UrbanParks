@@ -15,10 +15,14 @@ import java.util.Objects;
  */
 public class ParkManager extends AbstractAccount implements Serializable {
 
+    //***** Constant(s) ************************************************************************************************
+    
     /** Default serialVersionUID for serialization. */
     private static final long serialVersionUID = 1L;
     private static final String ACCOUNT_TYPE = "Park Manager";
 
+    //**** Constructor(s) **********************************************************************************************
+    
     /**
      * Creates an Park Manager user. Moderate permissions
      * @param theUsername email address used for login.
@@ -31,12 +35,11 @@ public class ParkManager extends AbstractAccount implements Serializable {
         super(theUsername, thePhone, theRealName);
     }
 
-  //***** Overridden method(s) *****************************************************************************************
+    //***** Overridden method(s) *****************************************************************************************
 
     /**
      * Computes the hash code for this method. Remember, this method is required to maintain Java's equals
      * "contract."
-     *
      * @author Walter Weeks
      * @return  The hash code representing this object.
      */
@@ -48,7 +51,6 @@ public class ParkManager extends AbstractAccount implements Serializable {
     /**
      * Equals operation comparing two ParkManagers together. Note that user names on the Urban Parks
      * system must be unique.
-     *
      * @author Walter Weeks
      * @param theObj The other object we are comparing.
      * @return True if the ParkManager objects are equal, i.e., unique username, false otherwise.
@@ -97,6 +99,7 @@ public class ParkManager extends AbstractAccount implements Serializable {
         }
         return result;
     }
+    
     /**
      * returns a string of what kind of account this is.
      */

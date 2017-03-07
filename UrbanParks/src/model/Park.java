@@ -113,7 +113,7 @@ public final class Park implements Serializable {
     public US getState() {
         return myState;
     }
-	
+
     /**
      * Getter for the park's ZIP Code.
      *

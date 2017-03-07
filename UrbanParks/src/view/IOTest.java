@@ -30,7 +30,9 @@ import model.Volunteer;
  * @author Dylan Miller
  */
 public class IOTest {
-
+    
+    //***** Test fixture(s), setUp(), etc. *****************************************************************************
+    
     Datastore testDatastore;
     ParkManager testPM1;
     ParkManager testPM2;
@@ -50,103 +52,103 @@ public class IOTest {
     */
     @Before
     public void setUp() throws Exception {
-    testDatastore = new Datastore();
-    Calendar myCal = Calendar.getInstance();
-    myCal.setTime(new Date());
-    myCal.add(Calendar.DAY_OF_MONTH, 5); //five days from today
+        testDatastore = new Datastore();
+        Calendar myCal = Calendar.getInstance();
+        myCal.setTime(new Date());
+        myCal.add(Calendar.DAY_OF_MONTH, 5); //five days from today
+        
+        
+        testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
+        testDatastore.addAccount(testPM1);
+        
+        testPM2 = new ParkManager("wweeks@tacomaparks.com", "5553334444", "Walter Weeks");
+        testDatastore.addAccount(testPM2);
+        
+        testPM3 = new ParkManager("eyoung@tacomaparks.com", "5555556666", "Ethan Young");
+        testDatastore.addAccount(testPM3);
     
-
-    testPM1 = new ParkManager("dmiller@tacomaparks.com", "5551112222", "Dylan Miller");
-    testDatastore.addAccount(testPM1);
+        testPark1 = new Park(testPM1, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
+        testDatastore.addPark(testPark1);
+        
+        testPark2 = new Park(testPM2, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98408");
+        testDatastore.addPark(testPark2);
+        
+        testPark3 = new Park(testPM3, "Wright Park", "501 S I St", "Tacoma", "WA", "98408");
+        testDatastore.addPark(testPark3);
     
-    testPM2 = new ParkManager("wweeks@tacomaparks.com", "5553334444", "Walter Weeks");
-    testDatastore.addAccount(testPM2);
-    
-    testPM3 = new ParkManager("eyoung@tacomaparks.com", "5555556666", "Ethan Young");
-    testDatastore.addAccount(testPM3);
-
-    testPark1 = new Park(testPM1, "Franklin Park", "1201 S Puget Sound Ave", "Tacoma", "WA", "98408");
-    testDatastore.addPark(testPark1);
-    
-    testPark2 = new Park(testPM2, "Wapato Park", "6500 S Sheridan Ave", "Tacoma", "WA", "98408");
-    testDatastore.addPark(testPark2);
-    
-    testPark3 = new Park(testPM3, "Wright Park", "501 S I St", "Tacoma", "WA", "98408");
-    testDatastore.addPark(testPark3);
-
-	//testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
-    testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1,
-            myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
-	testDatastore.addJob(testJob1);
-	
-	
-	//testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
-	testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
-	testDatastore.addJob(testJob2);
-	
-	myCal.add(Calendar.DAY_OF_MONTH, 1);
-	//testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);
-	testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
-	testDatastore.addJob(testJob3);
-	
-	//testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
-	testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1,
-	                   myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
-	testDatastore.addJob(testJob4);
-	
-	testVolunteer1 = new Volunteer("gardnergomes@gmail.com", "5559998888", "Gardner Gomes");
-	testDatastore.addAccount(testVolunteer1);
-	testJob1.setVolunteers(testVolunteer1.getRealName());
-	
-	testVolunteer2 = new Volunteer("AncientAliens@gmail.com", "5559998888", "Giorgio A. Tsoukalos");
-	testDatastore.addAccount(testVolunteer2);
-	
-	//write out the test datastore as the same filename that main loads.
-	try {
-  	  FileOutputStream outfile = new FileOutputStream("datastore.bin");
-  	  ObjectOutputStream out = new ObjectOutputStream(outfile);
-  	  out.writeObject(testDatastore);
-  	  out.close();
-  	  outfile.close();
-    } catch(IOException e) {
-      e.printStackTrace();
+        //testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1, 18, 2 ,2017);
+        testJob1 = new Job(testPark1, "10:00", "Empty all trash and recycling bins.","Raking", 1,
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
+        testDatastore.addJob(testJob1);
+        
+        
+        //testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1, 26, 2 , 2017);
+        testJob2 = new Job(testPark3, "09:00", "Paint over graphiti.","Painting", 1,
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
+        testDatastore.addJob(testJob2);
+        
+        myCal.add(Calendar.DAY_OF_MONTH, 1);
+        //testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,  28, 2, 2017);
+        testJob3 = new Job(testPark3, "11:00", "Feed the ducks.","Feeding", 1,
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
+        testDatastore.addJob(testJob3);
+        
+        //testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1, 28, 2, 2017);
+        testJob4 = new Job(testPark3, "14:00", "Mow grass.","Mowing", 1,
+                myCal.get(Calendar.DATE), myCal.get(Calendar.MONTH)+1, myCal.get(Calendar.YEAR));
+        testDatastore.addJob(testJob4);
+        
+        testVolunteer1 = new Volunteer("gardnergomes@gmail.com", "5559998888", "Gardner Gomes");
+        testDatastore.addAccount(testVolunteer1);
+        testJob1.setVolunteers(testVolunteer1.getRealName());
+        
+        testVolunteer2 = new Volunteer("AncientAliens@gmail.com", "5559998888", "Giorgio A. Tsoukalos");
+        testDatastore.addAccount(testVolunteer2);
+        
+        //write out the test datastore as the same filename that main loads.
+        try {
+            FileOutputStream outfile = new FileOutputStream("datastore.bin");
+            ObjectOutputStream out = new ObjectOutputStream(outfile);
+            out.writeObject(testDatastore);
+            out.close();
+            outfile.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        Main.load();
     }
-	
-	Main.load();
-  }
 
-  @Test
-  public final void save_DefaultState_NoExceptionsExpected() {
-    Main.save();
-  }
+    //***** Unit test(s) ***********************************************************************************************
+    
+    @Test
+    public final void save_DefaultState_NoExceptionsExpected() {
+        Main.save();
+    }
+    
+    @Test
+    public final void load_DefaultState_NoExceptionsExpected() {
+        Main.load();
+    }
   
-  @Test
-  public final void load_DefaultState_NoExceptionsExpected() {
-    Main.load();
-  }
-  
-  @Test
-  public final void load_DefaultState_DataIntegrityPreserved() {
-
-    Main.load();
-    Main testMainObj = new Main();
-    
-    //users
-    List<AbstractAccount> testAccounts = testDatastore.getAllAccounts();
-    List<AbstractAccount> loadedAccounts = testMainObj.getAllAccounts();
-    if (!testAccounts.equals(loadedAccounts)) fail("Loaded account list does not match original account list!");
-    
-    //jobs
-    List<Job> testJobs = testDatastore.getPendingJobs();
-    List<Job> loadedJobs = testMainObj.getAllJobs();
-    if (!testJobs.equals(loadedJobs)) fail("Loaded job list does not match original job list!");
-    
-    //parks
-    List<Park> testParks = testDatastore.getAllParks();
-    List<Park> loadedParks = testMainObj.getAllParks();
-    if (!testParks.equals(loadedParks)) fail("Loaded park list does not match original park list!");
-  }
-
+    @Test
+    public final void load_DefaultState_DataIntegrityPreserved() {
+        Main.load();
+        Main testMainObj = new Main();
+        
+        //users
+        List<AbstractAccount> testAccounts = testDatastore.getAllAccounts();
+        List<AbstractAccount> loadedAccounts = testMainObj.getAllAccounts();
+        if (!testAccounts.equals(loadedAccounts)) fail("Loaded account list does not match original account list!");
+        
+        //jobs
+        List<Job> testJobs = testDatastore.getPendingJobs();
+        List<Job> loadedJobs = testMainObj.getAllJobs();
+        if (!testJobs.equals(loadedJobs)) fail("Loaded job list does not match original job list!");
+        
+        //parks
+        List<Park> testParks = testDatastore.getAllParks();
+        List<Park> loadedParks = testMainObj.getAllParks();
+        if (!testParks.equals(loadedParks)) fail("Loaded park list does not match original park list!");
+    }
 }

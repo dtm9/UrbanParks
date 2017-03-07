@@ -22,6 +22,9 @@ import model.ParkManager;
  *
  */
 public class MaxPendingJobsStateTest {
+    
+    //***** Test fixture(s), setUp(), etc. *****************************************************************************
+    
     public int NUMBER_OF_JOBS = 19;
     public int YEAR;
     public int MONTH;
@@ -73,7 +76,9 @@ public class MaxPendingJobsStateTest {
           }
 
     }
-
+    
+    //***** Unit test(s) ***********************************************************************************************
+    
     @Test
     public void test() {
         assertTrue("Datastore ready to test MaxPendingJobsState", true);

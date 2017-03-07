@@ -27,16 +27,16 @@ public class VolunteerTest {
 
     //***** Constants **************************************************************************************************
 
-	/**Example username.*/
-	private static final String GOOD_EMAIL = "joe@yahoo.com";
+    /**Example username.*/
+    private static final String GOOD_EMAIL = "joe@yahoo.com";
 
-	/**10 digit phone number that meets our phone REGEX validation.*/
-	private static final String GOOD_PHONE = "5551112222";
+    /**10 digit phone number that meets our phone REGEX validation.*/
+    private static final String GOOD_PHONE = "5551112222";
 
-	/**There is no REGEX for real names, it just needs to not be blank.*/
-	private static final String GOOD_NAME = "Joe Smith";
+    /**There is no REGEX for real names, it just needs to not be blank.*/
+    private static final String GOOD_NAME = "Joe Smith";
 
-	//***** Test fixture(s), setUp(), etc. *****************************************************************************
+    //***** Test fixture(s), setUp(), etc. *****************************************************************************
 
     /**Volunteer account test fixture.*/
     private Volunteer myValidVolunteerAccount;
@@ -55,7 +55,7 @@ public class VolunteerTest {
     
     @Rule
     public final ExpectedException exception = ExpectedException.none();
-	
+    
     /**
      * Sets up the test fixture.
      * @author Walter Weeks

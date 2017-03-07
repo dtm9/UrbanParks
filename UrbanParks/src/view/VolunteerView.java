@@ -85,7 +85,7 @@ public class VolunteerView extends AbstractView {
         mySB.append(Main.LINE_BREAK);
         mySB.append("[2] View My Jobs");
         mySB.append(Main.LINE_BREAK);
-        mySB.append("[3] Exit");
+        mySB.append("[3] Exit Urban Parks");
         mySB.append(Main.LINE_BREAK);
         mySB.append(Main.LINE_BREAK);
         mySB.append("Enter a command: ");
@@ -291,8 +291,6 @@ public class VolunteerView extends AbstractView {
             System.out.print(Main.LINE_BREAK);
             System.out.print("Success: You have signed up for this Job!");
             System.out.print(Main.LINE_BREAK);
-            System.out.print(myVolunteer.getUsername());
-            System.out.print(Main.LINE_BREAK);
         } else {
             System.out.print(Main.LINE_BREAK);
             System.out.print("You did not sign up for this Job. Returning to main menu...");
@@ -325,7 +323,7 @@ public class VolunteerView extends AbstractView {
     private void viewJobs(){
         super.displayHeader(myVolunteer, myDay);
         mySB.append(Main.LINE_BREAK);
-        mySB.append("Jobs currently volunteering for: ");
+        mySB.append("Currently volunteering for Job(s): ");
         mySB.append(Main.LINE_BREAK);
         mySB.append(Main.LINE_BREAK);
         mySB.append(JOB_LABELS);
@@ -334,7 +332,11 @@ public class VolunteerView extends AbstractView {
         mySB.append(Main.LINE_BREAK);
         List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
         Iterator<Job> itr = volunteerJobs.iterator();
-        while( itr.hasNext()){
+        if (!itr.hasNext()) {
+            mySB.append("You are not volunteering for any Jobs.");
+            mySB.append(Main.LINE_BREAK);
+        }
+        while (itr.hasNext()){
             Job currentJob = itr.next();
             mySB.append(currentJob.getDay());
             mySB.append("/");
@@ -353,19 +355,21 @@ public class VolunteerView extends AbstractView {
             mySB.append(Main.LINE_BREAK);
             mySB.append(Main.LINE_BREAK);
             mySB.append(Main.LINE_BREAK);
-        }	
-        mySB.append("[1] Back");
+        }
         mySB.append(Main.LINE_BREAK);
-        mySB.append("[2] Exit");
+        mySB.append("[1] Back to main menu");
+        mySB.append(Main.LINE_BREAK);
+        mySB.append("[2] Exit Urban Parks");
         mySB.append(Main.LINE_BREAK);
         System.out.print(mySB.toString());
         
         System.out.print(Main.LINE_BREAK); 
         System.out.print("Enter a command: ");
         int theChoice = myScanner.nextInt();
-
+        
         switch (theChoice) {
             case 1:
+                mySB.delete(0, mySB.length());
                 mainMenu();
                 break;
             case 2:

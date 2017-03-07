@@ -163,7 +163,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller
      */
     Job addDuration(Job theJob) {
-        System.out.print("Please set the Duration for this job (in days): ");
+        System.out.print("Enter the Duration for this job (in days): ");
         try {
             theJob.setDuration(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -180,7 +180,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addNotes(Job theJob) {
-        System.out.print("Please add any additional notes here: ");
+        System.out.print("Enter additional notes: ");
         try {
             theJob.setNotes(myScanner.nextLine());
         } catch (Exception e) {
@@ -198,7 +198,7 @@ public class ParkManagerView extends AbstractView {
      * @deprecated
      */
     Job addVolunteerMax(Job theJob) {
-        System.out.print("Please set the maximum number of Volunteers: ");
+        System.out.print("Enter the maximum number of Volunteers: ");
         try {
             theJob.setMaxVolunteers(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -215,7 +215,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addTime(Job theJob) {
-        System.out.print("Please set the Time of this Job in 24-hour format (e.g., 13:30): ");
+        System.out.print("Enter the Time of this Job in 24-hour format (e.g., 13:30): ");
         try {
             theJob.setTime(myScanner.nextLine());
         } catch (Exception e) {
@@ -232,7 +232,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addYear(Job theJob) {
-        System.out.print("Please set the Year of this Job (e.g., 2017): ");
+        System.out.print("Enter the Year of this Job (e.g., 2017): ");
         try {
             theJob.setYear(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -250,7 +250,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addDay(Job theJob) {
-        System.out.print("Please set the Day of this Job (1-31): ");
+        System.out.print("Enter the Day of this Job (1-31): ");
         try {
             theJob.setDay(Integer.parseInt(myScanner.nextLine()));
         } catch (Exception e) {
@@ -267,7 +267,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addMonth(Job theJob) {
-        System.out.print("Please set the Month of this Job (1-12): ");
+        System.out.print("Enter the Month of this Job (1-12): ");
         int monthChoice = Integer.parseInt(myScanner.nextLine());
         try {
 
@@ -286,7 +286,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addDescription(Job theJob) {
-        System.out.print("Please type out a Description of the Job: ");
+        System.out.print("Enter the Description of the Job: ");
         try {
             theJob.setDescription(myScanner.nextLine());
         } catch (Exception e) {
@@ -303,7 +303,7 @@ public class ParkManagerView extends AbstractView {
      * @return theJob back to caller.
      */
     Job addName(Job theJob) {
-        System.out.print("Please set the Name of the Job: ");
+        System.out.print("Enter the Name of the Job: ");
         try {
             myScanner.nextLine();
             theJob.setName(myScanner.nextLine());

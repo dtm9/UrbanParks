@@ -127,7 +127,7 @@ public class ParkManagerView extends AbstractView {
         Job myJob = new Job();
         myJob = addPark(myJob);
         super.displayHeader(myManager, myDay);
-        displaySubmitAJobHeader(myPark);
+        displaySubmitJobHeader(myPark);
         myJob = addName(myJob, isFirstTime);
         myJob = addDescription(myJob);
         myJob = addMonth(myJob);
@@ -139,17 +139,7 @@ public class ParkManagerView extends AbstractView {
         try {
             myDatastore.addJob(myJob);
         } catch (Exception e){
-            System.out.print(Main.LINE_BREAK);
-            System.out.print("ERROR: Adding the Job failed, please try again.");
-            System.out.print(Main.LINE_BREAK);
-            System.out.print("Check the values you entered. Remember, the maximum number of Jobs ");
-            System.out.print(Main.LINE_BREAK);
-            System.out.print("per day for the volunteer system is " + Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT);
-            System.out.print(" (with a total of " + Datastore.MAX_PENDING_JOBS_DEFAULT + ")");
-            System.out.print(Main.LINE_BREAK);
-            System.out.print(" and a maximum of " + Datastore.MAX_FUTURE_JOB_START_DATE + " days "
-                    + "in the future.");
-            System.out.print(Main.LINE_BREAK);
+            displaySubmitJobError();
             submitJob(false);
         }
         System.out.print(Main.LINE_BREAK);
@@ -165,7 +155,7 @@ public class ParkManagerView extends AbstractView {
      * @author Walter Weeks
      * @param thePark
      */
-    private void displaySubmitAJobHeader(final Park thePark) {
+    private void displaySubmitJobHeader(final Park thePark) {
         System.out.print("Main Menu > Submit a Job");
         System.out.print(Main.LINE_BREAK);
         System.out.print(DASHED_LINE);
@@ -174,6 +164,23 @@ public class ParkManagerView extends AbstractView {
         System.out.print("Submit a Job for " + myManager.getRealName());
         System.out.print(" at " + thePark.getName() + " in " + thePark.getCity());
         System.out.print(Main.LINE_BREAK);
+        System.out.print(Main.LINE_BREAK);
+    }
+    
+    /**
+     * Helper method that displays an error message for "Submit a Job" selection
+     * @author Walter Weeks
+     */
+    private void displaySubmitJobError() {
+        System.out.print(Main.LINE_BREAK);
+        System.out.print("ERROR: Adding the Job failed, please try again.");
+        System.out.print(Main.LINE_BREAK);
+        System.out.print("Check the values you entered. Remember, the maximum number of Jobs ");
+        System.out.print(Main.LINE_BREAK);
+        System.out.print("per day for the volunteer system is " + Datastore.MAX_PENDING_JOBS_PER_DAY_DEFAULT);
+        System.out.print(" (with a total of " + Datastore.MAX_PENDING_JOBS_DEFAULT + ")");
+        System.out.print(Main.LINE_BREAK);
+        System.out.print("and a maximum of " + Datastore.MAX_FUTURE_JOB_START_DATE + " days in the future.");
         System.out.print(Main.LINE_BREAK);
     }
 

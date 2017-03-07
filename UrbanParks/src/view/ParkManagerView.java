@@ -34,6 +34,7 @@ public class ParkManagerView extends AbstractView {
     
     private StringBuilder mySB = new StringBuilder();
     private final ParkManager myManager;
+    private Park myPark;
     private Scanner myScanner = new Scanner(System.in);
     private static LocalDate myDay;
     private static ZoneId myZone;
@@ -52,6 +53,7 @@ public class ParkManagerView extends AbstractView {
         myZone = ZoneId.of("America/Los_Angeles");
         myDay = LocalDate.now(myZone);
         myDatastore = null;
+        myPark = null;
         myManager = (ParkManager) theAccount;
     }
 
@@ -119,13 +121,14 @@ public class ParkManagerView extends AbstractView {
      */
     private void submitJob() {
         Job myJob = new Job();
+        myJob = addPark(myJob);
         super.displayHeader(myManager, myDay);
         System.out.print("Submit a Job for " + myManager.getRealName());
+        System.out.print(" at " + myPark.getName() + " in " + myPark.getCity());
         System.out.print(Main.SB_LINE_BREAK);
         System.out.print("-----------------------------------------------------------------");
         System.out.print(Main.SB_LINE_BREAK);
         System.out.print(Main.SB_LINE_BREAK);
-        myJob = addPark(myJob);
         myJob = addName(myJob);
         myJob = addDescription(myJob);
         myJob = addMonth(myJob);
@@ -151,7 +154,11 @@ public class ParkManagerView extends AbstractView {
             System.out.print(Main.SB_LINE_BREAK);
             submitJob();
         }
-        System.out.println("Job submitted. You can view it in your Jobs.");
+        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print("Job successfully submitted for " + myPark.getName() + "!");
+        System.out.print(Main.SB_LINE_BREAK);
+        System.out.print("A confirmation email will be sent to: " + myManager.getUsername());
+        System.out.print(Main.SB_LINE_BREAK);
         userChoice();
     }
 
@@ -327,6 +334,7 @@ public class ParkManagerView extends AbstractView {
                 theJob.setPark(tempPark);
             }
         }
+        myPark = theJob.getPark();
         return theJob;
     }
 

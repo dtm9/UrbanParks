@@ -186,6 +186,4 @@ public class VolunteerTest {
       List<Job> jobsByVolunteer = myValidVolunteerAccount.getJobsByVolunteer(testDatastore);
       assertEquals(1, jobsByVolunteer.size());
     }
-    
-    //TODO some rainy-day scenarios for getJobsByVolunteer() for the input domains. Shoudn't be many since it takes no args except datastore.
 }

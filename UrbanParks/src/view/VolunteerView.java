@@ -280,9 +280,9 @@ public class VolunteerView extends AbstractView {
             mySB.append(printJob.getDescription());
             mySB.append(Main.LINE_BREAK);
             mySB.append("Date: ");
-            mySB.append(printJob.getMonth());
-            mySB.append("/");
             mySB.append(printJob.getDay());
+            mySB.append("/");
+            mySB.append(printJob.getMonth());
             mySB.append("/");
             mySB.append(printJob.getYear());
             mySB.append(Main.LINE_BREAK);
@@ -350,9 +350,9 @@ public class VolunteerView extends AbstractView {
         }
         while (itr.hasNext()){
             Job currentJob = itr.next();
-            mySB.append(currentJob.getDay());
-            mySB.append("/");
             mySB.append(currentJob.getMonth());
+            mySB.append("/");
+            mySB.append(currentJob.getDay());
             mySB.append("/");
             mySB.append(currentJob.getYear());
             mySB.append('\t');

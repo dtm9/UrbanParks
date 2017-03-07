@@ -91,11 +91,13 @@ public class ParkManagerView extends AbstractView {
         int theChoice = myScanner.nextInt();
         switch (theChoice) {
         case 1: // submit a job
-            checkMaxJobs(myDatastore);
-            submitJob(true);
+            if (!checkMaxJobs(myDatastore)) {
+                submitJob(true);
+            }
             break;
         case 2: // log out
             System.out.print("Logged out..." + Main.LINE_BREAK);
+            mySB.delete(0, mySB.capacity());
             break;
         case 3:
             ViewJobs();
@@ -107,11 +109,12 @@ public class ParkManagerView extends AbstractView {
      * Helper Method to check if max Jobs are already created.
      * @author Gardner Gomes
      */
-    private void checkMaxJobs(Datastore theDatastore) {
+    private boolean checkMaxJobs(Datastore theDatastore) {
         if (theDatastore.getNumberOfJobs() == TEMP_MAX_JOBS) {
             System.out.println("Max Number of Jobs reached. Please choose a different selection.");
-            this.mainMenu();
+            return true;
         }
+        return false;
     }
     
     /**

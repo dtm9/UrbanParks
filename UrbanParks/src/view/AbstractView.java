@@ -13,10 +13,20 @@ import model.Datastore;
  */
 public abstract class AbstractView {
     
-    StringBuilder mySB = new StringBuilder();
+    //***** Constant(s) ************************************************************************************************
+   
+    public static final String DASHED_LINE = "-----------------------------------------------------------------";
+    
+    //***** Field(s) ***************************************************************************************************
+    
+    private StringBuilder mySB = new StringBuilder();
   
+    //***** Constructor(s) *********************************************************************************************
+    
     public AbstractView() { }
-  
+    
+    //***** Method(s) **************************************************************************************************
+    
     /** All view objects must use this signature to run the GUI. */
     public abstract Datastore launchGUI(Datastore theDatastore);
   

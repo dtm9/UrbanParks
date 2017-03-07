@@ -126,7 +126,7 @@ public class ParkManagerView extends AbstractView {
         System.out.print("Submit a Job for " + myManager.getRealName());
         System.out.print(" at " + myPark.getName() + " in " + myPark.getCity());
         System.out.print(Main.SB_LINE_BREAK);
-        System.out.print("-----------------------------------------------------------------");
+        System.out.print(DASHED_LINE);
         System.out.print(Main.SB_LINE_BREAK);
         System.out.print(Main.SB_LINE_BREAK);
         myJob = addName(myJob);

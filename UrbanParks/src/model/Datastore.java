@@ -17,16 +17,17 @@ import java.util.List;
 public final class Datastore implements Serializable {
 
     //***** Constant(s) ************************************************************************************************
-    /**Default serialVersionUID. This should not change.*/
+    
+    /** Default serialVersionUID. This should not change. */
     private static final long serialVersionUID = 1L;
 
-    /**The maximum number of pending jobs default value.*/
+    /** The maximum number of pending jobs default value. */
     public static final int MAX_PENDING_JOBS_DEFAULT = 20;
 
-    /**The maximum number of pending jobs on a calendar date default value.*/
+    /** The maximum number of pending jobs on a calendar date default value. */
     public static final int MAX_PENDING_JOBS_PER_DAY_DEFAULT = 4;
     
-    /**The maximum number of days in the future a job can be created.*/
+    /** The maximum number of days in the future a job can be created. */
     public static final int MAX_FUTURE_JOB_START_DATE = 75;
 
     //***** Field(s) ***************************************************************************************************

@@ -29,14 +29,24 @@ import model.Volunteer;
  */
 public class VolunteerView extends AbstractView {
 
+    //***** Constant(s) ************************************************************************************************
+    
+    public static final String DASHED_LINE_FOR_JOB_LISTING = 
+            "-------------------------------------------------------------------------------";
+    
     static final int MIN_DATE_AWAY_MINUS_ONE = 1;
+    
+    //***** Field(s) ***************************************************************************************************
+    
     private Volunteer myVolunteer;
     private static Datastore myDatastore;
     private Scanner myScanner = new Scanner(System.in);
     private StringBuilder mySB;
     private static LocalDate myDay;
     private static ZoneId myZone;
-
+    
+    //**** Constructor(s) **********************************************************************************************
+    
     /**
      * Constructor That instantiates the Volunteer view
      * @param theAccount
@@ -50,9 +60,11 @@ public class VolunteerView extends AbstractView {
         myDay = LocalDate.now(myZone);
 
     }
+    
+    //**** Accessor/Mutator Method(s) **********************************************************************************
+    
     /**
      * Launches the GUI
-     * 
      */
     @Override
     public Datastore launchGUI(Datastore theDatastore) {
@@ -100,7 +112,7 @@ public class VolunteerView extends AbstractView {
 
         mySB.append("Which park do you want to volunteer for?");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("----------------------------------------------------------");
+        mySB.append(DASHED_LINE);
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(Main.SB_LINE_BREAK);
         //using main datastore instead of local copy
@@ -138,8 +150,6 @@ public class VolunteerView extends AbstractView {
             // List<Job> parkJobList = myDatastore.getJobsByPark(selectedPark);
             listJobsInPark(selectedPark, parkJobList);
         }
-
-
     }
 
     /**
@@ -152,11 +162,11 @@ public class VolunteerView extends AbstractView {
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append("Which job do you want to sign up for?");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("-------------------------------------------------------------------------------");
+        mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append("[x] Date\tPark\t\tTime\tDays\tJob Description");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("-------------------------------------------------------------------------------");
+        mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);
         int count = 0;
         Iterator<Job> itr=parkJobList.iterator();
@@ -304,10 +314,7 @@ public class VolunteerView extends AbstractView {
                 sameDayFlag=true;
             }
         }
-
-
         return sameDayFlag;
-
     }
     
     /**
@@ -319,10 +326,9 @@ public class VolunteerView extends AbstractView {
         mySB.append("Jobs currently volunteering for: ");
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("Date         Park            Job Time    Duration     Job Description");
+        mySB.append("Date\t\tPark\t\tTime\tDays\tJob Description");
         mySB.append(Main.SB_LINE_BREAK);
-        mySB.append("-----------------------------------------------------------------------");
-        mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(DASHED_LINE_FOR_JOB_LISTING);
         mySB.append(Main.SB_LINE_BREAK);
         List<Job> volunteerJobs = myVolunteer.getJobsByVolunteer(myDatastore);
         Iterator<Job> itr = volunteerJobs.iterator();
@@ -333,28 +339,25 @@ public class VolunteerView extends AbstractView {
             mySB.append(currentJob.getMonth());
             mySB.append("/");
             mySB.append(currentJob.getYear());
-            mySB.append("   ");
+            mySB.append('\t');
             mySB.append(currentJob.getPark().getName());
-            mySB.append("       ");
+            mySB.append('\t');
             mySB.append(currentJob.getTime());
-            mySB.append("         ");
+            mySB.append('\t');
             mySB.append(currentJob.getDuration());
-            mySB.append("          ");
+            mySB.append('\t');
             mySB.append(currentJob.getDescription());
-            mySB.append("     ");
+            mySB.append('\t');
             mySB.append(Main.SB_LINE_BREAK);
             mySB.append(Main.SB_LINE_BREAK);
             mySB.append(Main.SB_LINE_BREAK);
         }	
-        mySB.append("What would you like to do?");
-        mySB.append(Main.SB_LINE_BREAK);
         mySB.append("[1] Back");
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append("[2] Exit");
         mySB.append(Main.SB_LINE_BREAK);
         System.out.print(mySB.toString());
-        mySB.delete(0, mySB.capacity());
-        System.out.print(Main.SB_LINE_BREAK);
+        
         System.out.print(Main.SB_LINE_BREAK); 
         System.out.print("Enter a command: ");
         int theChoice = myScanner.nextInt();
@@ -364,8 +367,9 @@ public class VolunteerView extends AbstractView {
                 mainMenu();
                 break;
             case 2:
+                System.out.print("Logged out...");
+                System.out.print(Main.SB_LINE_BREAK);
                 break;
-                
         }
     }
 }

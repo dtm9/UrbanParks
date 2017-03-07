@@ -157,11 +157,11 @@ public class Main {
     private static void printHeader() {
         mySB.append(SB_LINE_BREAK);
         mySB.append(SB_LINE_BREAK);
-        mySB.append("----------------------------------------------------------");
+        mySB.append("-----------------------------------------------------------------");
         mySB.append(SB_LINE_BREAK);
         mySB.append("Welcome to Urban Parks ");
         mySB.append(SB_LINE_BREAK);
-        mySB.append("----------------------------------------------------------");
+        mySB.append("-----------------------------------------------------------------");
         mySB.append(SB_LINE_BREAK);
 
         mySB.append(SB_LINE_BREAK);

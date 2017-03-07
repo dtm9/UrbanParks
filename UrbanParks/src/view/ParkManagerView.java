@@ -81,6 +81,7 @@ public class ParkManagerView extends AbstractView {
         mySB.append(Main.SB_LINE_BREAK);
         mySB.append("[2] Exit Urban Parks");
         mySB.append(Main.SB_LINE_BREAK);
+        mySB.append(Main.SB_LINE_BREAK);
         mySB.append("Enter a command: ");
         System.out.print(mySB.toString());
         mySB.delete(0, mySB.capacity());
@@ -121,7 +122,7 @@ public class ParkManagerView extends AbstractView {
         super.displayHeader(myManager, myDay);
         System.out.print("Submit a Job for " + myManager.getRealName());
         System.out.print(Main.SB_LINE_BREAK);
-        System.out.print("----------------------------------------------------------");
+        System.out.print("-----------------------------------------------------------------");
         System.out.print(Main.SB_LINE_BREAK);
         System.out.print(Main.SB_LINE_BREAK);
         myJob = addPark(myJob);
